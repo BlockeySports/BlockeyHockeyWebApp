@@ -1,2 +1,12 @@
-<h1 class="text-4xl">{{ this.name }}</h1>
-<h2 class="text-2xl"> {{ this.uuid }}</h2>
+<div class="p-10">
+    <h1 class="text-4xl">{{ this.name }}</h1>
+    <h2 class="text-2xl"> {{ this.uuid }}</h2>
+
+    <form (submit)="search(username.value)" action="" class="flex flex-row space-x-2 mt-10">
+        <input type="text" placeholder="Minecraft username"
+               class="my-auto"
+               #username>
+        <button type="submit"
+                class="flex bg-green-400 p-2 rounded text-white my-auto">Search</button>
+    </form>
+</div>
