@@ -22,9 +22,9 @@ export class TestComponent implements OnInit {
         this.name = this.getUsernameFromAddress();
         this.playerService.getPlayerInfo(this.name).subscribe(
             (data) => {
-                if (data.name && data.id) {
-                    this.name = data.name;
-                    this.uuid = data.id;
+                if (data.uuid && data.username) {
+                    this.name = data.username;
+                    this.uuid = data.uuid;
                 }
                 console.log(data);
             },

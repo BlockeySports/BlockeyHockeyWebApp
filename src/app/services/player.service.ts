@@ -12,8 +12,7 @@ export class PlayerService {
         private http: HttpClient
     ) { }
 
-    getPlayerInfo(uuid: string): Observable<Player> {
-        return this.http.get<Player>(`https://www.mc-heads.net/minecraft/profile/${uuid}`);
+    getPlayerInfo(username: string): Observable<Player> {
+        return this.http.get<Player>(`https://api.ashcon.app/mojang/v2/user/${username}`);
     }
-
 }

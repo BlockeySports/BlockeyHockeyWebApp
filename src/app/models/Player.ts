@@ -1,13 +1,28 @@
 // tslint:disable: variable-name
 export class Player {
-    id?: string;
-    name?: string;
-    name_history?: {
-        name?: string,
-        changedToAt: number;
+    uuid?: string;
+    username?: string;
+    username_history?: {
+        username?: string,
+        changed_at?: Date | null;
     }[];
-    properties?: {
-        name?: string,
-        value?: string;
-    }[];
+    textures?: {
+        slim?: boolean,
+        custom?: boolean,
+        skin: {
+            url?: string,
+            data?: string,
+        },
+        cape?: {
+            url?: string | null,
+            data?: string | null,
+        },
+        raw?: {
+            value?: string,
+            signature?: string,
+        },
+    };
+    legacy?: boolean | null;
+    demo?: boolean | null;
+    created_at?: Date | null;
 }
