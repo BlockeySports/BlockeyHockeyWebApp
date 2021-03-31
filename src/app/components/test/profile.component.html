@@ -1,0 +1,14 @@
+<div class="p-10 font-sans">
+    <!-- Player username -->
+    <h1 class="text-4.5xl font-semibold">{{ this.name }}</h1>
+    <!-- Player profile picture (Minecraft head) -->
+    <div class="my-3 bg-gray-100 rounded-lg shadow-lg w-50 h-50"
+         [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+    <!-- Last seen and where -->
+    <div>
+        <span>Last seen&nbsp;</span>
+        <span class="font-semibold">1 hour ago&nbsp;</span>
+        <span>on&nbsp;</span>
+        <span class="font-semibold">Server 1</span>
+    </div>
+</div>
