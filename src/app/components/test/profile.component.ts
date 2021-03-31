@@ -19,6 +19,12 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
 
+        this.playerService.getGreeting('Jake').subscribe(
+            (data) => {
+                console.log(data);
+            }
+        );
+
         this.name = this.getUsernameFromAddress();
         this.playerService.getPlayerInfo(this.name).subscribe(
             (data) => {
