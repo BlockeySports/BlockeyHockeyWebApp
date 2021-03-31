@@ -12,12 +12,18 @@ export class ProfileComponent implements OnInit {
     public uuid = '';
     public profilePicture = '';
 
+    public hours = 0;
+    public server = 0;
+
     constructor(
         private router: Router,
         private playerService: PlayerService
     ) { }
 
     ngOnInit(): void {
+
+        this.hours = Math.floor(Math.random() * 15) + 1;
+        this.server = Math.floor(Math.random() * 8) + 1;
 
         this.playerService.getGreeting('Jake').subscribe(
             (data) => {
