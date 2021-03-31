@@ -16,7 +16,7 @@ export class PlayerService {
         return this.http.get<Player>(`https://api.ashcon.app/mojang/v2/user/${username}`);
     }
 
-    getGreeting(name: string): Observable<any> {
-        return this.http.get<any>(`http://localhost:8080/greeting?name=${name}`);
-    }
+    // getGreeting(name: string): Observable<any> {
+    //     return this.http.get<any>(`http://localhost:8080/greeting?name=${name}`);
+    // }
 }

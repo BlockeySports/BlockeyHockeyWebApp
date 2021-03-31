@@ -25,11 +25,11 @@ export class ProfileComponent implements OnInit {
         this.hours = Math.floor(Math.random() * 15) + 1;
         this.server = Math.floor(Math.random() * 8) + 1;
 
-        this.playerService.getGreeting('Jake').subscribe(
-            (data) => {
-                console.log(data);
-            }
-        );
+        // this.playerService.getGreeting('Jake').subscribe(
+        //     (data) => {
+        //         console.log(data);
+        //     }
+        // );
 
         this.name = this.getUsernameFromAddress();
         this.playerService.getPlayerInfo(this.name).subscribe(
@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit {
                     this.uuid = data.uuid;
                     this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.uuid}/260`;
                 }
-                console.log(data);
             },
             (error) => {
                 console.log(error);
