@@ -1,0 +1,34 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Member } from '../models/Member';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class MemberService {
+
+    resource = '/rest/member';
+    url = '';
+
+    constructor(
+        private http: HttpClient
+    ) {
+        if (location.origin.includes('localhost')) {
+            this.url = `http://localhost:8080${this.resource}`;
+        } else {
+            this.url = `http://api.minecrafthockey.com${this.resource}`;
+        }
+
+        console.log(this.url);
+    }
+
+    /**
+     * Get a Member from the database by username
+     */
+    public getMemberByUsername(name: string): Observable<Member> {
+        const params = new HttpParams()
+            .set('name', name);
+        return this.http.get<Member>(this.url, { params });
+    }
+}

@@ -20,7 +20,9 @@
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
     "@ngneat/tailwind": "^6.0.3",
+    "ngx-tippy-wrapper": "^2.1.0",
     "rxjs": "~6.6.0",
+    "timeago.js": "^4.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
