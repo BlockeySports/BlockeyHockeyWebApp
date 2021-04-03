@@ -7,11 +7,12 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 // Components
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './components/test/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TimeAgoPipe } from './pipes/timeago.pipe';
     AppComponent,
     ProfileComponent,
     HomeComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

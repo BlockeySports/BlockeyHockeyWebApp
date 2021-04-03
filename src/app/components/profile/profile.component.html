@@ -1,0 +1,77 @@
+<div class="w-full mx-auto mt-5 font-sans text-gray-900 md:w-7/12">
+    <!-- Player username -->
+    <h1 class="text-4.5xl font-semibold text-gold-500">{{ this.member.username }}</h1>
+
+    <!-- Roles -->
+    <div class="flex flex-row mb-2 space-x-2">
+        <div class="px-2 text-base text-white rounded shadow-sm bg-gold-500 w-max">Administrator</div>
+        <div class="px-2 text-base text-white bg-red-700 rounded shadow-sm w-max">Senior Moderator</div>
+        <div class="px-2 text-base text-white bg-red-500 rounded shadow-sm w-max">Moderator</div>
+        <div class="px-2 text-base text-white bg-red-400 rounded shadow-sm w-max">Junior Moderator</div>
+        <div class="px-2 text-base text-white bg-blue-500 rounded shadow-sm w-max">Helper</div>
+    </div>
+
+    <div class="flex flex-row justify-between">
+        <!-- Player profile picture (Minecraft head) -->
+        <div class="flex my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg w-50 h-50"
+             [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+        <!-- Brief Stats -->
+        <div class="flex flex-row py-6 my-3 text-2xl font-semibold bg-gray-100 rounded-md shadow-md space-x-36 px-14 ring-1 ring-gray-200">
+            <div class="flex flex-col space-y-5">
+                <div class="table space-x-3">
+                    <span class="text-3xl">45</span>
+                    <span class="text-gray-400">goals</span>
+                </div>
+                <div class="table space-x-3">
+                    <span class="text-3xl">20</span>
+                    <span class="text-gray-400">assists</span>
+                </div>
+                <div class="table space-x-3">
+                    <span class="text-3xl">65</span>
+                    <span class="text-gray-400">points</span>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-5">
+                <div class="table space-x-3 ">
+                    <span class="text-3xl">13</span>
+                    <span class="text-gray-400">wins</span>
+                </div>
+                <div class="table space-x-3 ">
+                    <span class="text-3xl">3</span>
+                    <span class="text-gray-400">losses</span>
+                </div>
+                <div class="table space-x-3 ">
+                    <span class="text-3xl">4.33</span>
+                    <span class="text-gray-400">WL</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="grid grid-cols-2 py-10 space-x-20 text-2xl font-semibold bg-gray-100 rounded-md shadow-md px-14">
+            <div class="flex flex-row mx-auto space-x-3">
+                <span class="text-3xl">45</span>
+                <span class="text-gray-400">goals</span>
+            </div>
+            <div class="flex flex-row mx-auto space-x-3">
+                <span class="text-3xl">20</span>
+                <span class="text-gray-400">assists</span>
+            </div>
+            <div class="flex flex-row mx-auto space-x-3">
+                <span class="text-3xl">65</span>
+                <span class="text-gray-400">points</span>
+            </div>
+            <div class="flex flex-row mx-auto space-x-3">
+                <span class="text-3xl">13</span>
+                <span class="text-gray-400">wins</span>
+            </div>
+        </div> -->
+    </div>
+    <!-- Last seen and where -->
+    <div>
+        <span>Last seen&nbsp;</span>
+        <span class="font-semibold cursor-pointer"
+              ngxTippy
+              tippyName="last-online-date">{{ this.member.lastOnline | timeago }}&nbsp;</span>
+        <span>on&nbsp;</span>
+        <span class="font-semibold">Server {{ this.server }}</span>
+    </div>
+</div>
