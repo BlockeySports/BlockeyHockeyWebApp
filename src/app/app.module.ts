@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Components
 import { AppComponent } from './app.component';
@@ -21,13 +23,15 @@ import { HeaderComponent } from './components/header/header.component';
     ProfileComponent,
     HomeComponent,
     TimeAgoPipe,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxTippyModule
+    NgxTippyModule,
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.server = Math.floor(Math.random() * 8) + 1;
 
         this.member.username = this.getUsernameFromAddress();
+        this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
 
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
             (data) => {
@@ -49,6 +50,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(data);
             },
             (error) => {
+                this.setTippyDateLastOnline();
                 console.log(error);
             }
         );
@@ -70,7 +72,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     private setTippyDateLastOnline(): void {
         let lastOnline: any = this.member.lastOnline;
-        lastOnline = formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US');
+        lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
         this.tippyService.setContent('last-online-date', lastOnline);
     }
 

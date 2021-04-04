@@ -1,62 +1,78 @@
 <div class="h-full dark:bg-black-600">
     <app-header></app-header>
-    <div class="w-full pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 md:w-7/12">
+    <div class="w-full px-4 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 md:w-7/12 md:px-0">
         <!-- Player username -->
-        <h1 class="text-4.5xl font-semibold text-gold-500">{{ this.member.username }}</h1>
+        <h1 class="text-4.5xl font-semibold text-gold-500 text-center md:text-left">{{ this.member.username }}</h1>
 
         <!-- Roles -->
-        <div class="flex flex-row mb-2 space-x-2">
-            <div class="px-2 text-base text-white rounded shadow-sm bg-gold-500 w-max">Administrator</div>
-            <div class="px-2 text-base text-white bg-red-700 rounded shadow-sm w-max">Senior Moderator</div>
-            <div class="px-2 text-base text-white bg-red-600 rounded shadow-sm w-max">Moderator</div>
-            <div class="px-2 text-base text-white bg-red-400 rounded shadow-sm w-max">Junior Moderator</div>
-            <div class="px-2 text-base text-white bg-blue-400 rounded shadow-sm w-max">Helper</div>
+        <div class="flex flex-row flex-wrap items-end justify-center mb-2 space-y-3 md:justify-start whitespace-nowrap">
+            <div class="flex-initial h-full px-2 mr-2 text-base text-white rounded shadow-sm bg-gold-500 w-max">Administrator</div>
+            <div class="flex-initial px-2 mr-2 text-base text-white bg-red-700 rounded shadow-sm w-max">Senior Moderator</div>
+            <div class="flex-initial px-2 mr-2 text-base text-white bg-red-600 rounded shadow-sm w-max">Moderator</div>
+            <div class="flex-initial px-2 mr-2 text-base text-white bg-red-400 rounded shadow-sm w-max">Junior Moderator</div>
+            <div class="flex-initial px-2 mr-2 text-base text-white bg-blue-400 rounded shadow-sm w-max">Helper</div>
         </div>
 
-        <div class="flex flex-row justify-between">
+        <div class="flex flex-col justify-between md:flex-row">
             <!-- Player profile picture (Minecraft head) -->
-            <div class="flex my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg dark:bg-black-700 w-50 h-50"
+            <div class="flex mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg dark:bg-black-700 w-52 h-52 md:mx-0"
                  [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+            <!-- Mobile: Last seen and where -->
+            <div class="flex justify-center mb-3 md:mb-5 md:hidden">
+                <span>Last seen&nbsp;</span>
+                <span class="font-semibold cursor-pointer"
+                      ngxTippy
+                      tippyName="last-online-date">{{ this.member.lastOnline | timeago }}&nbsp;</span>
+                <span>on&nbsp;</span>
+                <span class="font-semibold">Server {{ this.server }}</span>
+            </div>
             <!-- Brief Stats -->
-            <div class="flex flex-row py-6 my-3 text-2xl font-semibold bg-gray-100 rounded-md shadow-md dark:bg-black-500 space-x-36 px-14 ring-1 ring-gray-200 dark:ring-black">
-                <div class="flex flex-col space-y-5">
-                    <div class="table space-x-3">
-                        <span class="text-3xl">45</span>
+            <div class="flex flex-col py-4 my-3 space-y-2 text-xl font-semibold bg-gray-100 rounded-md shadow-md md:py-6 sm:flex-row dark:bg-black-500 md:space-x-36 px-14 ring-1 ring-gray-200 dark:ring-black md:space-y-0">
+                <div class="flex flex-col space-y-2 md:space-y-5">
+                    <div class="table mx-auto space-x-3 md:mx-0">
+                        <span class="text-2xl md:text-3xl">45</span>
                         <span class="text-gray-400 dark:text-gray-300">goals</span>
                     </div>
-                    <div class="table space-x-3">
-                        <span class="text-3xl">20</span>
+                    <div class="table mx-auto space-x-3 md:mx-0">
+                        <span class="text-2xl md:text-3xl">20</span>
                         <span class="text-gray-400 dark:text-gray-300">assists</span>
                     </div>
-                    <div class="table space-x-3">
-                        <span class="text-3xl">65</span>
+                    <div class="table mx-auto space-x-3 md:mx-0">
+                        <span class="text-2xl md:text-3xl">65</span>
                         <span class="text-gray-400 dark:text-gray-300">points</span>
                     </div>
                 </div>
-                <div class="flex flex-col space-y-5">
-                    <div class="table space-x-3 ">
-                        <span class="text-3xl">13</span>
+                <div class="flex flex-col space-y-2 md:space-y-5">
+                    <div class="table mx-auto space-x-3 md:mx-0 ">
+                        <span class="text-2xl md:text-3xl">13</span>
                         <span class="text-gray-400 dark:text-gray-300">wins</span>
                     </div>
-                    <div class="table space-x-3 ">
-                        <span class="text-3xl">3</span>
+                    <div class="table mx-auto space-x-3 md:mx-0 ">
+                        <span class="text-2xl md:text-3xl">3</span>
                         <span class="text-gray-400 dark:text-gray-300">losses</span>
                     </div>
-                    <div class="table space-x-3 ">
-                        <span class="text-3xl">4.33</span>
+                    <div class="table mx-auto space-x-3 md:mx-0 ">
+                        <span class="text-2xl md:text-3xl">4.33</span>
                         <span class="text-gray-400 dark:text-gray-300">WL</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Last seen and where -->
-        <div>
+        <!-- Desktop: Last seen and where -->
+        <div class="hidden mb-5 md:flex">
             <span>Last seen&nbsp;</span>
             <span class="font-semibold cursor-pointer"
                   ngxTippy
                   tippyName="last-online-date">{{ this.member.lastOnline | timeago }}&nbsp;</span>
             <span>on&nbsp;</span>
             <span class="font-semibold">Server {{ this.server }}</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex-row flex-wrap hidden space-x-5 border-b md:flex border-black-300 dark:border-gray-100">
+            <div class="px-5 py-1 bg-black border-b-2 rounded-t-lg dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100">STATS</div>
+            <div class="px-5 py-1">TROPHIES</div>
+            <div class="px-5 py-1">INFRACTIONS</div>
         </div>
     </div>
 </div>
