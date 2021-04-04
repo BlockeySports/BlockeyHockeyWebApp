@@ -7,6 +7,9 @@ import * as timeago from 'timeago.js';
 export class TimeAgoPipe implements PipeTransform {
 
   transform(date: any): string {
+    if (date === undefined) {
+      return 'never';
+    }
     return timeago.format(new Date(date));
   }
 }
