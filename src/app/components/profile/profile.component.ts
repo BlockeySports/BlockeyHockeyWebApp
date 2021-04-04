@@ -7,6 +7,7 @@ import { PlayerService } from 'src/app/services/player.service';
 
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private router: Router,
         private tippyService: NgxTippyService,
         private playerService: PlayerService,
-        private memberService: MemberService
+        private memberService: MemberService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
             (data) => {
                 this.member = data;
+                this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
                 this.setTippyDateLastOnline();
                 console.log(data);
             },
