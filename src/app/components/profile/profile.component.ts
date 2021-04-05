@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.member.roles = [
             {
                 name: 'Administrator',
-                color: '#f7b738'
+                color: '#F7A738'
             },
             // {
             //     name: 'Senior Moderator',
@@ -107,7 +107,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
             //     color: '#60A5FA'
             // },
             {
-                name: 'Developer',
+                name: 'Dev',
                 color: '#59dd3b'
             }
         ];
