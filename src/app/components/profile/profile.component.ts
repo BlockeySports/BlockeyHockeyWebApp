@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.member.username = this.getUsernameFromAddress();
         this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
 
+        // tslint:disable: deprecation
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
             (data) => {
                 // set the member
