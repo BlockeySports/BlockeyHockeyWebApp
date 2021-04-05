@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
     HomeComponent,
     TimeAgoPipe,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
