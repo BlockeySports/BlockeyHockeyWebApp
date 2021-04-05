@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public member: Member = {
         username: '',
-        og: true
     };
 
     public usernameColor = '#FFFFFF';
@@ -55,11 +54,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
                 // set the last online tooltip date
                 this.setTippyDateLastOnline();
-                console.log(data);
+                // console.log(data);
             },
             (error) => {
                 // set the last online tooltip date
                 this.setTippyDateLastOnline();
+                // add temp roles
+                this.addRoles();
+                // set username color
+                this.usernameColor = this.member.roles[0].color;
                 console.log(error);
             }
         );
