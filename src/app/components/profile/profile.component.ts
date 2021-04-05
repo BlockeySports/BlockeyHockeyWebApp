@@ -8,7 +8,6 @@ import { PlayerService } from 'src/app/services/player.service';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { Role } from 'src/app/models/Role';
 
 @Component({
     selector: 'app-profile',
@@ -20,9 +19,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
         username: '',
         og: true,
         roles: [
+            // {
+            //     name: 'Administrator',
+            //     color: '#f7b738'
+            // },
             {
-                name: 'Administrator',
-                color: '#f7b738'
+                name: 'Rank #1',
+                color: '#10b981'
             },
             // {
             //     name: 'Senior Moderator',
@@ -40,10 +43,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
             //     name: 'Helper',
             //     color: '#60A5FA'
             // },
-            {
-                name: 'Developer',
-                color: '#59dd3b'
-            }
+            // {
+            //     name: 'Developer',
+            //     color: '#59dd3b'
+            // }
         ]
     };
     public profilePicture = '';
@@ -64,7 +67,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        this.hours = Math.floor(Math.random() * 15) + 1;
         this.server = Math.floor(Math.random() * 8) + 1;
 
         this.member.username = this.getUsernameFromAddress();

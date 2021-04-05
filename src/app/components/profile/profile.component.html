@@ -2,17 +2,19 @@
     <app-header></app-header>
     <div class="w-full px-4 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 sm:w-11/12 xl:w-7/12 md:px-0">
         <!-- Player username -->
-        <h1 class="text-4.5xl font-semibold text-center md:text-left"
-            [ngStyle]="{'color' : this.member.roles[0].color}">{{ this.member.username }}</h1>
+        <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+            [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1>
 
         <!-- START: Roles & Ranks Bar -->
         <div class="flex flex-row flex-wrap items-end justify-center mb-2 space-y-3 md:justify-start whitespace-nowrap">
             <!-- Roles -->
             <div *ngFor="let role of this.member.roles"
                  class="flex-initial h-full px-2 mr-2 text-base text-white rounded shadow-sm select-none w-max"
-                 [ngStyle]="{'background-color': role.color}">{{ role.name }}</div>
+                 [ngStyle]="{'background-color': role?.color || '#FFFFFF'}">{{ role.name }}</div>
             <!-- OG Heart -->
-            <div *ngIf="this.member.og" class="text-red-500 select-none">&#9829;</div>
+            <div *ngIf="this.member.og" class="flex text-red-500 select-none">
+                <span ngxTippy="OG Player">&#9829;</span>
+            </div>
         </div>
         <!-- END: Roles & Ranks Bar -->
 
@@ -31,7 +33,7 @@
             </div>
             <!-- Brief Stats -->
             <div class="flex flex-col py-4 my-3 space-y-2 text-xl font-semibold bg-gray-100 rounded-md shadow-md md:py-6 sm:flex-row dark:bg-black-500 md:space-x-14 2xl:space-x-36 px-14 ring-1 ring-gray-200 dark:ring-black md:space-y-0">
-                <div class="flex flex-col space-x-5 space-y-2 md:space-y-5">
+                <div class="flex flex-col space-y-2 md:space-y-5">
                     <div class="table mx-auto space-x-3 md:mx-0">
                         <span class="text-2xl md:text-3xl">45</span>
                         <span class="text-gray-400 dark:text-gray-300">goals</span>
@@ -73,9 +75,9 @@
 
         <!-- Tabs -->
         <div class="flex-row flex-wrap hidden text-sm border-b md:flex border-black-300 dark:border-gray-100">
-            <div class="px-5 py-1 bg-black border-b-2 rounded-t-lg dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100">STATS</div>
-            <div class="px-5 py-1">TROPHIES</div>
-            <div class="px-5 py-1">INFRACTIONS</div>
+            <div class="px-5 py-1 bg-black border-b-2 rounded-t-lg cursor-pointer dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100">STATS</div>
+            <div class="px-5 py-1 transition-all rounded-t-lg cursor-pointer hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-100 hover:border-black-300">TROPHIES</div>
+            <div class="px-5 py-1 transition-all rounded-t-lg cursor-pointer hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-100 hover:border-black-300">INFRACTIONS</div>
         </div>
     </div>
 </div>
