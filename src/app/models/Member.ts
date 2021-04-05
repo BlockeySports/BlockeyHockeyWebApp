@@ -1,3 +1,5 @@
+import { Role } from './Role';
+
 export class Member {
     uuid?: string;
     username?: string;
@@ -7,4 +9,6 @@ export class Member {
     lastOnline?: Date;
     timePlayed?: number;
     millisAtJoin?: number;
+    roles?: Role[];
+    og?: boolean;
 }

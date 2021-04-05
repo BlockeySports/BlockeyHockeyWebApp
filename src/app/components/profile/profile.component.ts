@@ -8,6 +8,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { Role } from 'src/app/models/Role';
 
 @Component({
     selector: 'app-profile',
@@ -16,7 +17,34 @@ import { Title } from '@angular/platform-browser';
 export class ProfileComponent implements OnInit, OnDestroy {
 
     public member: Member = {
-        username: ''
+        username: '',
+        og: true,
+        roles: [
+            {
+                name: 'Administrator',
+                color: '#f7b738'
+            },
+            // {
+            //     name: 'Senior Moderator',
+            //     color: '#B91C1C'
+            // },
+            // {
+            //     name: 'Moderator',
+            //     color: '#DC2626'
+            // },
+            // {
+            //     name: 'Junior Moderator',
+            //     color: '#F87171'
+            // },
+            // {
+            //     name: 'Helper',
+            //     color: '#60A5FA'
+            // },
+            {
+                name: 'Developer',
+                color: '#59dd3b'
+            }
+        ]
     };
     public profilePicture = '';
 
