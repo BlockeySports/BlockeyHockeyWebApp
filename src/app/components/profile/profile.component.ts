@@ -19,14 +19,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
         username: '',
         og: true,
         roles: [
-            // {
-            //     name: 'Administrator',
-            //     color: '#f7b738'
-            // },
             {
-                name: 'Rank #1',
-                color: '#10b981'
+                name: 'Administrator',
+                color: '#f7b738'
             },
+            // {
+            //     name: 'Rank #1',
+            //     color: '#10b981'
+            // },
             // {
             //     name: 'Senior Moderator',
             //     color: '#B91C1C'
