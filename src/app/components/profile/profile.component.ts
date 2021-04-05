@@ -17,41 +17,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public member: Member = {
         username: '',
-        og: true,
-        roles: [
-            {
-                name: 'Administrator',
-                color: '#f7b738'
-            },
-            // {
-            //     name: 'Rank #1',
-            //     color: '#10b981'
-            // },
-            // {
-            //     name: 'Senior Moderator',
-            //     color: '#B91C1C'
-            // },
-            // {
-            //     name: 'Moderator',
-            //     color: '#DC2626'
-            // },
-            // {
-            //     name: 'Junior Moderator',
-            //     color: '#F87171'
-            // },
-            // {
-            //     name: 'Helper',
-            //     color: '#60A5FA'
-            // },
-            // {
-            //     name: 'Developer',
-            //     color: '#59dd3b'
-            // }
-        ]
+        og: true
     };
+
+    public usernameColor = '#FFFFFF';
     public profilePicture = '';
 
-    public hours = 0;
     public server = 0;
 
     // Subs
@@ -74,12 +45,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
             (data) => {
+                // set the member
                 this.member = data;
+                // add temp roles
+                this.addRoles();
+                // set username color
+                this.usernameColor = this.member.roles[0].color;
+                // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
+                // set the last online tooltip date
                 this.setTippyDateLastOnline();
                 console.log(data);
             },
             (error) => {
+                // set the last online tooltip date
                 this.setTippyDateLastOnline();
                 console.log(error);
             }
@@ -98,6 +77,36 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(error);
             }
         );
+    }
+
+    private addRoles(): void {
+        this.member.og = true;
+        this.member.roles = [
+            {
+                name: 'Administrator',
+                color: '#f7b738'
+            },
+            // {
+            //     name: 'Senior Moderator',
+            //     color: '#B91C1C'
+            // },
+            // {
+            //     name: 'Moderator',
+            //     color: '#DC2626'
+            // },
+            // {
+            //     name: 'Junior Moderator',
+            //     color: '#F87171'
+            // },
+            // {
+            //     name: 'Helper',
+            //     color: '#60A5FA'
+            // },
+            {
+                name: 'Developer',
+                color: '#59dd3b'
+            }
+        ];
     }
 
     private setTippyDateLastOnline(): void {

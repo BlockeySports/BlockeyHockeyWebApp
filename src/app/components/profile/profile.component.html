@@ -5,7 +5,7 @@
         <!-- <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
             [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
         <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left"
-            [ngStyle]="{'color' : this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1>
+            [ngStyle]="{'color' : this.usernameColor}">{{ this.member.username }}</h1>
 
         <!-- START: Roles & Ranks Bar -->
         <div class="flex flex-row flex-wrap items-end justify-center mb-2 space-y-3 md:justify-start whitespace-nowrap">
