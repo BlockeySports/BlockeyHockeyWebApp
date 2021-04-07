@@ -1,8 +1,8 @@
 <div class="w-screen h-1.5 bg-gray-300 dark:bg-black"></div>
 <div class="bg-gray-100 shadow-lg dark:bg-black-700 dark:text-gray-50">
     <div class="w-full px-4 py-2 mx-auto md:px-0 md:w-7/12">
-        <div class="flex flex-row">
-            <div class="flex flex-row text-black cursor-pointer dark:text-white"
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row"
                  (click)="navigateHome()">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="inline w-8 h-8 my-auto mr-3 fill-current dark:inline">
@@ -12,10 +12,15 @@
                 </span>
                 <span class="overflow-scroll text-lg font-semibold md:overflow-hidden md:mr-16 md:text-2xl whitespace-nowrap">Blockey Hockey Network</span>
             </div>
-            <!-- <div class="flex-row hidden space-x-5 md:flex">
-                <span class="my-auto">Home</span>
-                <span class="my-auto">About</span>
-            </div> -->
+            <div class="inline w-6 h-6 my-auto cursor-pointer select-none fill-current hover:text-purple-600 dark:hover:text-yellow-300"
+                 (click)="toggleDarkMode()">
+                <svg class="hidden dark:inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457.32 457.32">
+                    <path d="M228.66 112.692c-63.945 0-115.968 52.022-115.968 115.967s52.023 115.968 115.968 115.968 115.968-52.023 115.968-115.968-52.023-115.967-115.968-115.967zM401.429 228.66l42.467-57.07a15 15 0 0 0 2.232-13.59c-1.503-4.624-5.153-8.233-9.794-9.683l-67.901-21.209.811-71.132a15 15 0 0 0-19.797-14.384l-67.399 22.753-41.153-58.023a15 15 0 0 0-24.47 0l-41.154 58.024-67.4-22.753a15 15 0 0 0-19.797 14.384l.812 71.132-67.901 21.209a15 15 0 0 0-9.793 9.683c-1.503 4.624-.671 9.689 2.232 13.59l42.467 57.07-42.467 57.07a15 15 0 0 0 7.561 23.273l67.901 21.208-.812 71.132a15 15 0 0 0 6.182 12.307c3.934 2.857 9.007 3.632 13.615 2.077l67.4-22.753 41.154 58.024a15 15 0 0 0 24.47 0l41.154-58.024 67.399 22.753a15 15 0 0 0 19.797-14.383l-.811-71.133 67.901-21.208c4.641-1.45 8.291-5.059 9.794-9.683a15 15 0 0 0-2.232-13.59l-42.468-57.071zM228.66 374.627c-80.487 0-145.968-65.481-145.968-145.968S148.173 82.692 228.66 82.692s145.968 65.48 145.968 145.967-65.481 145.968-145.968 145.968z" />
+                </svg>
+                <svg class="inline dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+                    <path d="M29.567 29.934c-7.237 0-13.104-5.938-13.104-13.26 0-5.835 3.73-10.779 8.905-12.553-1.51-.458-3.109-.707-4.767-.707-9.142 0-16.552 7.498-16.552 16.75s7.41 16.75 16.552 16.75c5.999 0 11.254-3.231 14.156-8.066-1.592.697-3.346 1.086-5.191 1.086z" />
+                </svg>
+            </div>
         </div>
     </div>
 </div>

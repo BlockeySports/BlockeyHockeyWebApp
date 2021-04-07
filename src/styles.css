@@ -2,7 +2,7 @@
 
 @import 'tippy.js/dist/tippy.css';
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';

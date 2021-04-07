@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
 
 // Components
 import { AppComponent } from './app.component';
@@ -16,7 +17,6 @@ import { HomeComponent } from './components/home/home.component';
 import { TimeAgoPipe } from './pipes/timeago.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     NgxTippyModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxPrettyCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
