@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
 
+// Services
+import { CookieService } from 'ngx-cookie-service';
+
 // Components
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -36,7 +39,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatTabsModule,
     NgxPrettyCheckboxModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
