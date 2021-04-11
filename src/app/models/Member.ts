@@ -3,10 +3,10 @@ import { Role } from './Role';
 export class Member {
     uuid?: string;
     username?: string;
-    dateJoined?: string;
+    dateJoined?: string | Date;
     joinPosition?: number;
-    isOnline?: boolean;
-    lastOnline?: Date;
+    online?: boolean;
+    lastOnline?: string | Date;
     timePlayed?: number;
     millisAtJoin?: number;
     roles?: Role[];

@@ -30,7 +30,7 @@
                 <span>Last seen&nbsp;</span>
                 <span class="font-semibold cursor-pointer"
                       ngxTippy
-                      tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.isOnline }}&nbsp;</span>
+                      tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
                 <span>on&nbsp;</span>
                 <span class="font-semibold">Server {{ this.server }}</span>
             </div>
@@ -69,11 +69,11 @@
         <!-- Desktop: Last seen and where -->
         <div class="hidden mb-5 md:flex">
             <div class="w-2 h-2 my-auto mr-1 rounded-full shadow-md"
-                 [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
-            <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                 [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
+            <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
             <span class="font-semibold cursor-default"
                   ngxTippy
-                  tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.isOnline }}&nbsp;</span>
+                  tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
             <span>on&nbsp;</span>
             <span class="font-semibold">Server {{ this.server }}</span>
         </div>

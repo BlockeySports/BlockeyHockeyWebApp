@@ -53,6 +53,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.usernameColor = this.member.roles[0].color;
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
+                // convert date to local date
+                this.member.lastOnline = new Date(this.member.lastOnline);
                 // set the last online tooltip date
                 this.setTippyDateLastOnline();
                 console.log(data);
