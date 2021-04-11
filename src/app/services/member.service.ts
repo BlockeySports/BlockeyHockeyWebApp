@@ -8,7 +8,7 @@ import { Member } from '../models/Member';
 })
 export class MemberService {
 
-    resource = '/rest/member';
+    resource = '/rest/v1/member';
     url = '';
 
     constructor(
@@ -26,9 +26,9 @@ export class MemberService {
     /**
      * Get a Member from the database by username
      */
-    public getMemberByUsername(name: string): Observable<Member> {
+    public getMemberByUsername(username: string): Observable<Member> {
         const params = new HttpParams()
-            .set('name', name);
+            .set('username', username);
         return this.http.get<Member>(this.url, { params });
     }
 }

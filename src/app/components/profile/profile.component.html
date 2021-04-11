@@ -24,12 +24,13 @@
             <!-- Player profile picture (Minecraft head) -->
             <div class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg dark:bg-black-700 w-52 h-52 md:mx-0"
                  [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+            <!-- TODO: reduce duplicated code into 1 location -->
             <!-- Mobile: Last seen and where -->
             <div class="flex justify-center mb-3 md:mb-5 md:hidden">
                 <span>Last seen&nbsp;</span>
                 <span class="font-semibold cursor-pointer"
                       ngxTippy
-                      tippyName="last-online-date">{{ this.member.lastOnline | timeago }}&nbsp;</span>
+                      tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.isOnline }}&nbsp;</span>
                 <span>on&nbsp;</span>
                 <span class="font-semibold">Server {{ this.server }}</span>
             </div>
@@ -67,10 +68,11 @@
         </div>
         <!-- Desktop: Last seen and where -->
         <div class="hidden mb-5 md:flex">
-            <span>Last seen&nbsp;</span>
-            <span class="font-semibold cursor-pointer"
+            <div *ngIf="this.member.isOnline" class="w-2 h-2 my-auto mr-1 bg-green-500 rounded-full shadow-md"></div>
+            <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
+            <span class="font-semibold"
                   ngxTippy
-                  tippyName="last-online-date">{{ this.member.lastOnline | timeago }}&nbsp;</span>
+                  tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.isOnline }}&nbsp;</span>
             <span>on&nbsp;</span>
             <span class="font-semibold">Server {{ this.server }}</span>
         </div>
