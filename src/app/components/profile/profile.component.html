@@ -68,9 +68,10 @@
         </div>
         <!-- Desktop: Last seen and where -->
         <div class="hidden mb-5 md:flex">
-            <div *ngIf="this.member.isOnline" class="w-2 h-2 my-auto mr-1 bg-green-500 rounded-full shadow-md"></div>
+            <div class="w-2 h-2 my-auto mr-1 rounded-full shadow-md"
+                 [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
             <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
-            <span class="font-semibold"
+            <span class="font-semibold cursor-default"
                   ngxTippy
                   tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.isOnline }}&nbsp;</span>
             <span>on&nbsp;</span>
