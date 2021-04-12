@@ -14,8 +14,8 @@
                  class="flex-initial px-2 mt-1 mr-2.5 text-base text-white rounded shadow-sm select-none w-max"
                  [ngStyle]="{'background-color': role?.color || '#FFFFFF'}">{{ role.name }}</div>
             <!-- OG Heart -->
-            <div *ngIf="this.member.og" class="flex my-auto mt-1 text-red-600 select-none">
-                <span ngxTippy="OG Player">&#9829;</span>
+            <div *ngIf="this.member.og" class="flex my-auto mt-0.5 text-xl text-red-600 select-none">
+                <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
             </div>
         </div>
         <!-- END: Roles & Ranks Bar -->
