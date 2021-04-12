@@ -19,10 +19,7 @@ export class MemberService {
         } else {
             this.url = `https://api.minecrafthockey.com${this.resource}`;
         }
-
-        // this.url = `https://api.minecrafthockey.com${this.resource}`;
-
-        console.log(this.url);
+        // console.log(this.url);
     }
 
     /**
