@@ -57,13 +57,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.member.lastOnline = new Date(this.member.lastOnline);
                 this.member.dateJoined = new Date(this.member.dateJoined);
                 // set the last online tooltip date
-                this.setTippyDateLastOnline();
+                this.setTippyOnlineStatus();
                 // console.log(data);
 
             },
             (error) => {
                 // set the last online tooltip date
-                this.setTippyDateLastOnline();
+                this.setTippyOnlineStatus();
                 // add temp roles
                 this.addRoles();
                 // set username color
@@ -117,10 +117,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         ];
     }
 
-    private setTippyDateLastOnline(): void {
+    private setTippyOnlineStatus(): void {
         let lastOnline: any = this.member.lastOnline;
         lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
         this.tippyService.setContent('last-online-date', lastOnline);
+        this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
     }
 
     getUsernameFromAddress(): string {
