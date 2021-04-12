@@ -43,6 +43,9 @@ module.exports = {
             },
             minWidth: {
                 '36': '9rem'
+            },
+            margin: {
+                '4.5': '1.125rem'
             }
         },
     },

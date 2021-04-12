@@ -1,6 +1,6 @@
 <div class="h-full dark:bg-black-600">
     <app-header></app-header>
-    <div class="w-full px-4 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 sm:w-11/12 xl:w-7/12 md:px-0">
+    <div class="w-full px-5 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 sm:w-11/12 xl:w-7/12 md:px-0">
         <!-- Player username -->
         <!-- <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
             [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
@@ -21,72 +21,73 @@
         <!-- END: Roles & Ranks Bar -->
 
         <div class="flex flex-col justify-between md:flex-row">
-            <!-- Player profile picture (Minecraft head) -->
-            <div class="flex flex-none w-64 h-64 mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none dark:bg-black-700 md:mx-0"
-                 [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
-            <!-- TODO: reduce duplicated code into 1 location -->
-            <!-- Mobile: Last seen and where -->
-            <div class="flex justify-center mb-3 md:mb-5 md:hidden">
-                <span>Last seen&nbsp;</span>
-                <span class="font-semibold cursor-pointer"
-                      ngxTippy
-                      tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
-                <span>on&nbsp;</span>
-                <span class="font-semibold">Server {{ this.server }}</span>
+
+            <div class="flex flex-col">
+                <!-- START: Player Profile Picture (Minecraft Head) -->
+                <div class="flex flex-none w-64 h-64 mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none dark:bg-black-700 md:mx-0"
+                     [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+                <!-- END: Player Profile Picture (Minecraft Head) -->
+
+                <!-- START: Online Status -->
+                <div class="flex justify-center whitespace-nowrap">
+                    <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
+                         ngxTippy
+                         tippyName="online-status"
+                         [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
+                    <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                    <span class="font-semibold cursor-default"
+                          ngxTippy
+                          tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
+                    <span>on&nbsp;</span>
+                    <span class="font-semibold">Server {{ this.server }}</span>
+                </div>
+                <!-- END: Online Status -->
             </div>
-            <!-- Brief Stats -->
-            <div class="flex flex-col py-4 my-3 space-y-2 text-xl font-semibold bg-gray-100 rounded-md shadow-md md:py-6 sm:flex-row dark:bg-black-500 md:space-x-14 2xl:space-x-36 px-14 ring-1 ring-gray-200 dark:ring-black md:space-y-0">
-                <div class="flex flex-col space-y-2 md:space-y-5">
+
+            <!-- START: Stats Summary Box -->
+            <div class="flex justify-center w-full px-16 py-8 mx-auto my-5 text-2xl font-semibold bg-gray-100 rounded-md shadow-md md:mt-6 md:mb-12 md:mx-0 dark:bg-black-500 dark:ring-black ring-1 ring-gray-200 md:w-max">
+                <div class="grid grid-flow-col grid-rows-6 my-auto md:grid-rows-3 gap-x-28 gap-y-5">
                     <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-2xl md:text-3xl">45</span>
+                        <span class="text-4xl">45</span>
                         <span class="text-gray-400 dark:text-gray-300">goals</span>
                     </div>
                     <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-2xl md:text-3xl">20</span>
+                        <span class="text-4xl">20</span>
                         <span class="text-gray-400 dark:text-gray-300">assists</span>
                     </div>
                     <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-2xl md:text-3xl">65</span>
+                        <span class="text-4xl">65</span>
                         <span class="text-gray-400 dark:text-gray-300">points</span>
                     </div>
-                </div>
-                <div class="flex flex-col space-y-2 md:space-y-5">
                     <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-2xl md:text-3xl">13</span>
+                        <span class="text-4xl">13</span>
                         <span class="text-gray-400 dark:text-gray-300">wins</span>
                     </div>
                     <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-2xl md:text-3xl">3</span>
+                        <span class="text-4xl">3</span>
                         <span class="text-gray-400 dark:text-gray-300">losses</span>
                     </div>
                     <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-2xl md:text-3xl">4.33</span>
+                        <span class="text-4xl">4.33</span>
                         <span class="text-gray-400 dark:text-gray-300">WL</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Desktop: Last seen and where -->
-        <div class="hidden text-lg md:flex">
-            <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
-                 ngxTippy
-                 tippyName="online-status"
-                 [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
-            <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
-            <span class="font-semibold cursor-default"
-                  ngxTippy
-                  tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
-            <span>on&nbsp;</span>
-            <span class="font-semibold">Server {{ this.server }}</span>
+            <!-- END: Stats Summary Box -->
         </div>
 
-        <!-- Tabs -->
+
+        <!-- START: Tabs -->
         <div class="flex-row flex-wrap hidden border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
             <div class="px-5 py-1 text-center bg-black border-b-2 rounded-t-lg cursor-pointer min-w-36 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100">STATS</div>
             <div class="px-5 py-1 text-center rounded-t-lg cursor-pointer hover:border-b-2 hover:bg-black min-w-36 dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200">TROPHIES</div>
             <div class="px-5 py-1 text-center rounded-t-lg cursor-pointer hover:border-b-2 hover:bg-black min-w-36 dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200">INFRACTIONS</div>
         </div>
+        <!-- END: Tabs -->
+
+        <!-- START: Tabs Content -->
         <span class="flex mt-5">Still working on this part of the site.</span>
+        <!-- END: Tabs Content -->
     </div>
 
     <!-- START: Footer -->
