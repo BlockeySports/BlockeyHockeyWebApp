@@ -76,8 +76,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.playerService.getPlayerInfo(this.member.username).subscribe(
             (data) => {
                 if (data.uuid) {
-                    // name = data.username;
-                    // this.uuid = data.uuid;
                     this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${data.uuid}/260`;
                 }
             },
