@@ -1,14 +1,13 @@
 import { Role } from './Role';
 
 export class Member {
-    uuid?: string;
-    username?: string;
-    dateJoined?: Date;
-    joinPosition?: number;
-    online?: boolean;
-    lastOnline?: Date;
-    timePlayed?: number;
-    millisAtJoin?: number;
-    roles?: Role[];
-    og?: boolean;
+    uuid?: string;              // the UUID of the Minecraft player
+    username?: string;          // the Minecraft player's username
+    dateJoined?: Date;          // the date on which this player first joined the server
+    joinPosition?: number;      // the position that they joined in
+    online?: boolean;           // true if the player is online the server
+    lastOnline?: Date;          // the date on which this player was last seen on the server
+    timePlayed?: number;        // the number of milliseconds this player has played on the server
+    roles?: Role[];             // the roles and ranks this player has
+    og?: boolean;               // true if this player is an OG player
 }
