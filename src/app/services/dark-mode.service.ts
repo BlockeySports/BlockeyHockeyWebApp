@@ -17,7 +17,7 @@ export class DarkModeService {
 
         // toggle the value of the 'dark' cookie
         const isDark: boolean = this.cookieService.get('dark') === 'true';
-        this.cookieService.set('dark', String(!isDark));
+        this.cookieService.set('dark', String(!isDark), { expires: 25000000, path: '/' });
     }
 
     public set(): void {
