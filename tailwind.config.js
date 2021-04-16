@@ -52,8 +52,13 @@ module.exports = {
     variants: {
         extend: {
             display: ['dark'],
-            borderWidth: ['hover'],
+            borderWidth: ['hover']
         },
+        scrollbar: ['dark'],
     },
-    plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/forms'), require('@tailwindcss/line-clamp'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/line-clamp'),
+        require('tailwind-scrollbar')],
 };
