@@ -125,9 +125,12 @@
 
             <!-- START: Tabs Content -->
             <div class="hidden md:flex">
-                <app-stats *ngIf="this.content === 'stats'"></app-stats>
-                <app-trophies *ngIf="this.content === 'trophies'"></app-trophies>
-                <app-infractions *ngIf="this.content === 'infractions'"></app-infractions>
+                <app-stats *ngIf="this.content === 'stats'"
+                           class="w-full"></app-stats>
+                <app-trophies *ngIf="this.content === 'trophies'"
+                              class="w-full"></app-trophies>
+                <app-infractions *ngIf="this.content === 'infractions'"
+                                 class="w-full"></app-infractions>
             </div>
             <!-- END: Tabs Content -->
         </div>
