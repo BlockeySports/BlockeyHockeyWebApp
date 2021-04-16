@@ -24,6 +24,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public server = 0;
 
+    // which content to display (i.e. stats, trophies, infractions)
+    // show stats content by default
+    public content = 'stats';
+
     // Subs
     private memberSub?: Subscription;
 
@@ -113,6 +117,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 color: '#59dd3b'
             }
         ];
+    }
+
+    public changeContent(content: string): void {
+        this.content = content;
     }
 
     private setTippyOnlineStatus(): void {

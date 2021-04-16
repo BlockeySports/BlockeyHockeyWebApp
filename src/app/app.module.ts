@@ -15,11 +15,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { StatsComponent } from './components/profile/stats/stats.component';
+import { InfractionsComponent } from './components/profile/infractions/infractions.component';
+import { TrophiesComponent } from './components/profile/trophies/trophies.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { FooterComponent } from './components/footer/footer.component';
     TimeAgoPipe,
     HeaderComponent,
     FooterComponent,
+    StatsComponent,
+    InfractionsComponent,
+    TrophiesComponent,
   ],
   imports: [
     BrowserModule,
