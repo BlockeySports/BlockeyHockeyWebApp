@@ -8,6 +8,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { RoleService } from 'src/app/services/role.service';
 
 // tslint:disable: deprecation
 @Component({
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     // Subs
     private memberSub?: Subscription;
+    private roleSub?: Subscription;
 
     constructor(
         private router: Router,
@@ -38,7 +40,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private tippyService: NgxTippyService,
         private playerService: PlayerService,
         private memberService: MemberService,
-        private titleService: Title
+        private titleService: Title,
+        private roleService: RoleService
     ) { }
 
     ngOnInit(): void {
@@ -58,8 +61,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.member = data;
                 // add temp roles
                 this.addRoles();
-                // set username color
-                this.usernameColor = this.member.roles[0].color;
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
                 // convert dates to javascript dates
@@ -95,35 +96,51 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     private addRoles(): void {
-        this.member.og = true;
-        this.member.roles = [
-            {
-                name: 'Administrator',
-                color: '#F7A738'
+        // this.member.og = true;
+        this.roleSub = this.roleService.getAllRoles().subscribe(
+            (data) => {
+                this.member.roles = data;
+                // set username color
+                this.usernameColor = this.member.roles[0].background;
             },
-            // {
-            //     name: 'Senior Moderator',
-            //     color: '#B91C1C'
-            // },
-            // {
-            //     name: 'Moderator',
-            //     color: '#DC2626'
-            // },
-            // {
-            //     name: 'Junior Moderator',
-            //     color: '#F87171'
-            // },
-            // {
-            //     name: 'Helper',
-            //     color: '#60A5FA'
-            // },
-            {
-                name: 'Dev',
-                color: '#59dd3b'
+            (error) => {
+                console.log(error);
             }
-        ];
+        );
+
+        // this.member.roles = [
+        //     {
+        //         name: 'Administrator',
+        //         color: '#F7A738'
+        //     },
+        //     // {
+        //     //     name: 'Senior Moderator',
+        //     //     color: '#B91C1C'
+        //     // },
+        //     // {
+        //     //     name: 'Moderator',
+        //     //     color: '#DC2626'
+        //     // },
+        //     // {
+        //     //     name: 'Junior Moderator',
+        //     //     color: '#F87171'
+        //     // },
+        //     // {
+        //     //     name: 'Helper',
+        //     //     color: '#60A5FA'
+        //     // },
+        //     {
+        //         name: 'Dev',
+        //         color: '#59dd3b'
+        //     }
+        // ];
     }
 
+    /**
+     * This method simply adds a fragment onto the url when switching between content on the page.
+     * That allows the page to be reloaded and the user may remain on the same content the left off on.
+     * This also is good for bookmarking the page in a specific view.
+     */
     public changeContent(content: string): void {
         this.content = content;
         this.router.navigate(
@@ -162,5 +179,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.memberSub) { this.memberSub.unsubscribe(); }
+        if (this.roleSub) { this.roleSub.unsubscribe(); }
     }
 }

@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Member } from '../models/Member';
+import { Role } from '../models/Role';
 
 @Injectable({
     providedIn: 'root',
 })
-export class MemberService {
+export class RoleService {
 
-    resource = '/rest/v1/member';
+    resource = '/rest/v1/roles';
     url = '';
 
     constructor(
@@ -24,11 +25,9 @@ export class MemberService {
     }
 
     /**
-     * Get a Member from the database by username
+     * Get all existing roles.
      */
-    public getMemberByUsername(username: string): Observable<Member> {
-        const params = new HttpParams()
-            .set('username', username);
-        return this.http.get<Member>(this.url, { params });
+    public getAllRoles(): Observable<Role[]> {
+        return this.http.get<Role[]>(this.url);
     }
 }

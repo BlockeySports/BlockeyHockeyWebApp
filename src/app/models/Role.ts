@@ -5,4 +5,5 @@ export class Role {
     background?: string;        // the background color of the pill
     color?: string;             // the color of the text
     rank?: number;              // the role's priority ranking (highest = 1)
+    active?: boolean;           // true if the role is active; false if role is no longer in-use
 }

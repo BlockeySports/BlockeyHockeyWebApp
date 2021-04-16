@@ -12,8 +12,8 @@
             <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
                 <!-- Roles -->
                 <div *ngFor="let role of this.member.roles"
-                     class="flex-initial px-2 mt-1 mr-2.5 text-base text-white rounded shadow-sm select-none w-max"
-                     [ngStyle]="{'background-color': role?.color || '#FFFFFF'}">{{ role.name }}</div>
+                     class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
+                     [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
                 <!-- OG Heart -->
                 <div *ngIf="this.member.og" class="flex my-auto text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
