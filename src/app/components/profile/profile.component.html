@@ -1,134 +1,149 @@
 <div class="h-full dark:bg-black-600">
-    <app-header></app-header>
-    <div class="w-full px-5 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 sm:w-11/12 xl:w-7/12 md:px-0">
-        <!-- Player username -->
-        <!-- <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+    <main>
+        <app-header></app-header>
+        <div class="w-full px-5 pt-5 mx-auto font-sans text-black-600 dark:text-gray-50 dark:bg-black-600 sm:w-11/12 xl:w-7/12 md:px-0">
+            <!-- Player username -->
+            <!-- <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
             [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
-        <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left"
-            [ngStyle]="{'color' : this.usernameColor}">{{ this.member.username }}</h1>
+            <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left"
+                [ngStyle]="{'color' : this.usernameColor}">{{ this.member.username }}</h1>
 
-        <!-- START: Roles & Ranks Bar -->
-        <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
-            <!-- Roles -->
-            <div *ngFor="let role of this.member.roles"
-                 class="flex-initial px-2 mt-1 mr-2.5 text-base text-white rounded shadow-sm select-none w-max"
-                 [ngStyle]="{'background-color': role?.color || '#FFFFFF'}">{{ role.name }}</div>
-            <!-- OG Heart -->
-            <div *ngIf="this.member.og" class="flex my-auto text-xl text-red-600 select-none">
-                <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
-            </div>
-        </div>
-        <!-- END: Roles & Ranks Bar -->
-
-        <div class="flex flex-col justify-between md:flex-row">
-
-            <div class="flex flex-col">
-                <!-- START: Player Profile Picture (Minecraft Head) -->
-                <div class="flex flex-none w-64 h-64 mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none dark:bg-black-700 md:mx-0"
-                     [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
-                <!-- END: Player Profile Picture (Minecraft Head) -->
-
-                <!-- START: Online Status -->
-                <div class="flex justify-center whitespace-nowrap">
-                    <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
-                         ngxTippy
-                         tippyName="online-status"
-                         [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
-                    <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
-                    <span class="font-semibold cursor-default"
-                          ngxTippy
-                          tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
-                    <span>on&nbsp;</span>
-                    <span class="font-semibold">Server {{ this.server }}</span>
-                </div>
-                <!-- END: Online Status -->
-            </div>
-
-            <!-- START: Stats Summary Box -->
-            <div class="flex justify-center w-full px-16 py-5 mx-auto my-5 text-2xl font-semibold bg-gray-100 rounded-md shadow-md md:py-8 md:mt-6 md:mb-12 md:mx-0 dark:bg-black-500 dark:ring-black ring-1 ring-gray-200 md:w-max">
-                <div class="grid grid-flow-col grid-rows-6 my-auto md:grid-rows-3 gap-x-28 gap-y-3 md:gap-y-5">
-                    <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-3xl md:text-4xl">0</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Goals">goals</span>
-                    </div>
-                    <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-3xl md:text-4xl">0</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Assists">assists</span>
-                    </div>
-                    <div class="table mx-auto space-x-3 md:mx-0">
-                        <span class="text-3xl md:text-4xl">0</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Points">points</span>
-                    </div>
-                    <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-3xl md:text-4xl">0</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Wins">wins</span>
-                    </div>
-                    <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-3xl md:text-4xl">0</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Losses">losses</span>
-                    </div>
-                    <div class="table mx-auto space-x-3 md:mx-0 ">
-                        <span class="text-3xl md:text-4xl">0.00</span>
-                        <span class="text-gray-400 dark:text-gray-300"
-                              ngxTippy="Total Win-Lose Ratio">WL</span>
-                    </div>
+            <!-- START: Roles & Ranks Bar -->
+            <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
+                <!-- Roles -->
+                <div *ngFor="let role of this.member.roles"
+                     class="flex-initial px-2 mt-1 mr-2.5 text-base text-white rounded shadow-sm select-none w-max"
+                     [ngStyle]="{'background-color': role?.color || '#FFFFFF'}">{{ role.name }}</div>
+                <!-- OG Heart -->
+                <div *ngIf="this.member.og" class="flex my-auto text-xl text-red-600 select-none">
+                    <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
                 </div>
             </div>
-            <!-- END: Stats Summary Box -->
+            <!-- END: Roles & Ranks Bar -->
+
+            <div class="flex flex-col justify-between md:flex-row">
+
+                <div class="flex flex-col">
+                    <!-- START: Player Profile Picture (Minecraft Head) -->
+                    <div class="flex flex-none w-64 h-64 mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none dark:bg-black-700 md:mx-0"
+                         [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+                    <!-- END: Player Profile Picture (Minecraft Head) -->
+
+                    <!-- START: Online Status -->
+                    <div class="flex justify-center whitespace-nowrap">
+                        <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
+                             ngxTippy
+                             tippyName="online-status"
+                             [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
+                        <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                        <span class="font-semibold cursor-default"
+                              ngxTippy
+                              tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
+                        <span>on&nbsp;</span>
+                        <span class="font-semibold">Server {{ this.server }}</span>
+                    </div>
+                    <!-- END: Online Status -->
+                </div>
+
+                <!-- START: Stats Summary Box -->
+                <div class="flex justify-center w-full px-16 py-5 mx-auto my-5 text-2xl font-semibold bg-gray-100 rounded-md shadow-md md:py-8 md:mt-6 md:mb-12 md:mx-0 dark:bg-black-500 dark:ring-black ring-1 ring-gray-200 md:w-max">
+                    <div class="grid grid-flow-col grid-rows-6 my-auto md:grid-rows-3 gap-x-28 gap-y-3 md:gap-y-5">
+                        <div class="table mx-auto space-x-3 md:mx-0">
+                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Goals">goals</span>
+                        </div>
+                        <div class="table mx-auto space-x-3 md:mx-0">
+                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Assists">assists</span>
+                        </div>
+                        <div class="table mx-auto space-x-3 md:mx-0">
+                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Points">points</span>
+                        </div>
+                        <div class="table mx-auto space-x-3 md:mx-0 ">
+                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Wins">wins</span>
+                        </div>
+                        <div class="table mx-auto space-x-3 md:mx-0 ">
+                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Losses">losses</span>
+                        </div>
+                        <div class="table mx-auto space-x-3 md:mx-0 ">
+                            <span class="text-3xl md:text-4xl">0.00</span>
+                            <span class="text-gray-400 dark:text-gray-300"
+                                  ngxTippy="Total Win-Lose Ratio">WL</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Stats Summary Box -->
+            </div>
+
+            <!-- START: Tabs -->
+            <div class="flex-row flex-wrap hidden mb-12 border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
+                <!-- START: Stats Tab -->
+                <div id="stat-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
+                     (click)="changeContent('stats')"
+                     tabindex="0"
+                     [ngClass]="this.content === 'stats' 
+                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
+                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
+                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
+                    <span>STATISTICS</span>
+                </div>
+                <!-- END: Stats Tab -->
+
+                <!-- START: Trophies Tab -->
+                <div id="trophies-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
+                     (click)="changeContent('trophies')"
+                     tabindex="0"
+                     [ngClass]="this.content === 'trophies' 
+                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
+                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
+                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
+                    <span>TROPHIES</span>
+                </div>
+                <!-- END: Trophies Tab -->
+
+                <!-- START: Infractions Tab -->
+                <div id="infractions-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
+                     (click)="changeContent('infractions')"
+                     tabindex="0"
+                     [ngClass]="this.content === 'infractions' 
+                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
+                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
+                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
+                    <span>INFRACTIONS</span>
+                </div>
+                <!-- END: Infractions Tab -->
+            </div>
+            <!-- END: Tabs -->
+
+            <!-- START: Tabs Content -->
+            <div class="hidden md:flex">
+                <app-stats *ngIf="this.content === 'stats'"></app-stats>
+                <app-trophies *ngIf="this.content === 'trophies'"></app-trophies>
+                <app-infractions *ngIf="this.content === 'infractions'"></app-infractions>
+            </div>
+            <!-- END: Tabs Content -->
         </div>
-
-        <!-- START: Tabs -->
-        <div class="flex-row flex-wrap hidden mb-12 border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
-            <!-- START: Stats Tab -->
-            <div id="stat-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                 (click)="changeContent('stats')"
-                 tabindex="0"
-                 [ngClass]="this.content === 'stats' 
-                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
-                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
-                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                <span>STATISTICS</span>
-            </div>
-            <!-- END: Stats Tab -->
-
-            <!-- START: Trophies Tab -->
-            <div id="trophies-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                 (click)="changeContent('trophies')"
-                 tabindex="0"
-                 [ngClass]="this.content === 'trophies' 
-                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
-                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
-                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                <span>TROPHIES</span>
-            </div>
-            <!-- END: Trophies Tab -->
-
-            <!-- START: Infractions Tab -->
-            <div id="infractions-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                 (click)="changeContent('infractions')"
-                 tabindex="0"
-                 [ngClass]="this.content === 'infractions' 
-                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
-                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
-                                   focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                <span>INFRACTIONS</span>
-            </div>
-            <!-- END: Infractions Tab -->
-        </div>
-        <!-- END: Tabs -->
-
-        <!-- START: Tabs Content -->
-        <app-stats *ngIf="this.content === 'stats'"></app-stats>
-        <app-trophies *ngIf="this.content === 'trophies'"></app-trophies>
-        <app-infractions *ngIf="this.content === 'infractions'"></app-infractions>
-        <!-- END: Tabs Content -->
-    </div>
+    </main>
 
     <!-- START: Footer -->
     <app-footer></app-footer>
+    <!-- END: Footer -->
 </div>
+
+<style>
+    main {
+        min-height: calc(100vh - 16.5625rem);
+    }
+
+    app-footer {
+        height: 16.5625rem;
+    }
+</style>
