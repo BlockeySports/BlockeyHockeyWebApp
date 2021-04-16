@@ -9,6 +9,7 @@ import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
+// tslint:disable: deprecation
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html'
