@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/Member';
 import { MemberService } from 'src/app/services/member.service';
@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private tippyService: NgxTippyService,
         private playerService: PlayerService,
         private memberService: MemberService,
@@ -42,6 +43,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
 
         this.server = Math.floor(Math.random() * 8) + 1;
+
+        // set the content if specified in the url
+        this.route.fragment.subscribe(data => this.content = data ?? 'stats');
 
         this.member.username = this.getUsernameFromAddress();
         this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
@@ -121,6 +125,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public changeContent(content: string): void {
         this.content = content;
+        this.router.navigate(
+            [],
+            {
+                relativeTo: this.route,
+                fragment: content
+
+            });
     }
 
     private setTippyOnlineStatus(): void {
