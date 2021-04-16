@@ -84,7 +84,7 @@
             </div>
 
             <!-- START: Tabs -->
-            <div class="flex-row flex-wrap hidden mb-12 border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
+            <div class="flex-row flex-wrap hidden border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
                 <!-- START: Stats Tab -->
                 <div id="stat-tab" class="px-5 py-1 text-center transition-colors rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
                      (click)="changeContent('stats')"
@@ -126,7 +126,7 @@
             <!-- START: Tabs Content -->
             <div class="hidden md:flex">
                 <app-stats *ngIf="this.content === 'stats'"
-                           class="w-full"></app-stats>
+                           class="w-full mt-10"></app-stats>
                 <app-trophies *ngIf="this.content === 'trophies'"
                               class="w-full"></app-trophies>
                 <app-infractions *ngIf="this.content === 'infractions'"
@@ -143,10 +143,10 @@
 
 <style>
     main {
-        min-height: calc(100vh - 16.5625rem);
+        min-height: calc(100vh - 19.0625rem);
     }
 
     app-footer {
-        height: 16.5625rem;
+        height: 19.0625rem;
     }
 </style>
