@@ -134,6 +134,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
             });
     }
 
+    /**
+     * Set the tooltips for the online/offline indicator and the last seen date
+     */
     private setTippyOnlineStatus(): void {
         let lastOnline: any = this.member.lastOnline;
         lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
@@ -141,10 +144,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
     }
 
-    getUsernameFromAddress(): string {
+    /**
+     * Get the username from the url address
+     * occurring after the last slash and before an fragments.
+     */
+    private getUsernameFromAddress(): string {
         const url = window.location.href;
         const lastSlash = url.lastIndexOf('/');
-        return url.substr(lastSlash + 1);
+        // in case a fragment exists in url, only take everything before that
+        return url.substr(lastSlash + 1).split('#')[0];
     }
 
     search(name: string): void {
