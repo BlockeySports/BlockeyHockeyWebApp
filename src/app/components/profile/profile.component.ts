@@ -59,13 +59,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
             (data) => {
                 // set the member
                 this.member = data;
-                // add temp roles
-                this.addRoles();
+                // set the username color
+                this.usernameColor = this.member.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
-                // convert dates to javascript dates
-                this.member.lastOnline = new Date(this.member.lastOnline);
-                this.member.dateJoined = new Date(this.member.dateJoined);
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
                 // console.log(data);
@@ -74,10 +71,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             (error) => {
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
-                // add temp roles
-                this.addRoles();
-                // set username color
-                this.usernameColor = this.member.roles[0].color;
                 console.log(error);
             }
         );
@@ -93,47 +86,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(error);
             }
         );
-    }
-
-    private addRoles(): void {
-        // this.member.og = true;
-        this.roleSub = this.roleService.getAllRoles().subscribe(
-            (data) => {
-                this.member.roles = data;
-                // set username color
-                this.usernameColor = this.member.roles[0].background;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-
-        // this.member.roles = [
-        //     {
-        //         name: 'Administrator',
-        //         color: '#F7A738'
-        //     },
-        //     // {
-        //     //     name: 'Senior Moderator',
-        //     //     color: '#B91C1C'
-        //     // },
-        //     // {
-        //     //     name: 'Moderator',
-        //     //     color: '#DC2626'
-        //     // },
-        //     // {
-        //     //     name: 'Junior Moderator',
-        //     //     color: '#F87171'
-        //     // },
-        //     // {
-        //     //     name: 'Helper',
-        //     //     color: '#60A5FA'
-        //     // },
-        //     {
-        //         name: 'Dev',
-        //         color: '#59dd3b'
-        //     }
-        // ];
     }
 
     /**
