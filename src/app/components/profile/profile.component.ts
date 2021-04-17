@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.route.fragment.subscribe(data => this.content = data ?? 'stats');
 
         this.member.username = this.getUsernameFromAddress();
-        this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
+        this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
 
         // tslint:disable: deprecation
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 // set the username color
                 this.usernameColor = this.member.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
                 // set the browser tab title
-                this.titleService.setTitle(this.member.username + ' \u2014 Blockey Hockey Network');
+                this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
                 // console.log(data);
