@@ -130,7 +130,11 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          }
         }
       }
     }
