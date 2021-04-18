@@ -11,9 +11,9 @@ export class DarkModeService {
     ) { }
 
     public toggle(): void {
-        // toggle 'dark' class on body element
-        const body = document.getElementById('body');
-        body.classList.toggle('dark');
+        // toggle 'dark' class on html element
+        const html = document.getElementById('html');
+        html.classList.toggle('dark');
 
         // toggle the value of the 'dark' cookie
         const isDark: boolean = this.cookieService.get('dark') === 'true';
@@ -21,15 +21,15 @@ export class DarkModeService {
     }
 
     public set(): void {
-        // get body element
-        const body = document.getElementById('body');
+        // get html element
+        const html = document.getElementById('html');
 
         // set body element dark class based on cookie value
         const isDark: boolean = this.cookieService.get('dark') === 'true';
         if (isDark) {
-            body.classList.add('dark');
+            html.classList.add('dark');
         } else {
-            body.classList.remove('dark');
+            html.classList.remove('dark');
         }
     }
 }
