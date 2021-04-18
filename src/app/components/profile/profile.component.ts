@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         username: '',
     };
 
-    public usernameColor = '#FFFFFF';
+    public usernameColor = 'currentColor';
     public profilePicture = '';
 
     public server = 0;
@@ -69,6 +69,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
             },
             (error) => {
+                // set the username color
+                this.usernameColor = 'currentColor';
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
                 console.log(error);
