@@ -40,8 +40,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private tippyService: NgxTippyService,
         private playerService: PlayerService,
         private memberService: MemberService,
-        private titleService: Title,
-        private roleService: RoleService
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -65,7 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
-                // console.log(data);
+                console.log(data);
 
             },
             (error) => {
@@ -101,7 +100,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
             [],
             {
                 relativeTo: this.route,
-                fragment: content
+                fragment: content || null
 
             });
     }

@@ -4,17 +4,17 @@
     <!-- START: General Stats -->
     <div id="general-stats" class="grid grid-cols-4 gap-x-16 lg:text-xl">
         <div class="table mx-auto space-x-3 md:mx-0">
-            <span class="text-3xl font-semibold lg:text-4xl">0</span>
+            <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.dateJoined | daysSince }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="First joined on Jan 1, 1970">days since first seen</span>
         </div>
         <div class="table mx-auto space-x-3 md:mx-0">
-            <span class="text-3xl font-semibold lg:text-4xl">0.5</span>
+            <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.timePlayed | hours | round : 2 }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="Hours Played">hours played</span>
         </div>
         <div class="table mx-auto space-x-3 md:mx-0">
-            <span class="text-3xl font-semibold lg:text-4xl">1</span>
+            <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.joinPosition ? this.member.joinPosition : 0 }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="Join Position">join position</span>
         </div>
