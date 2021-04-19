@@ -12,7 +12,8 @@ module.exports = {
                 '4.5xl': '2.625rem'
             },
             spacing: {
-                '50': '12.5rem'
+                '50': '12.5rem',
+                '65': '16.25rem'
             },
             colors: {
                 'black': {
