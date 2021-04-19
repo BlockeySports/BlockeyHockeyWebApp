@@ -11,7 +11,7 @@ export class DaysSincePipe implements PipeTransform {
     }
     const oneDay = 1000 * 60 * 60 * 24;
     const diff = new Date().getTime() - new Date(date).getTime();
-    return Math.floor(diff / oneDay);
+    const days = Math.floor(diff / oneDay);
+    return days > 0 ? days : 0;
   }
-
 }
