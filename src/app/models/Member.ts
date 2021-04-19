@@ -1,3 +1,4 @@
+import { Punishment } from './Punishment';
 import { Role } from './Role';
 
 export class Member {
@@ -10,4 +11,5 @@ export class Member {
     timePlayed?: number;        // the number of milliseconds this player has played on the server
     roles?: Role[];             // the roles and ranks this player has
     og?: boolean;               // true if this player is an OG player
+    punishments?: Punishment[]; // the list of punishments this member has
 }
