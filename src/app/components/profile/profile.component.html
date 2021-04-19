@@ -31,7 +31,7 @@
 
                 <div class="flex flex-col">
                     <!-- START: Player Profile Picture (Minecraft Head) -->
-                    <div class="flex flex-none w-64 h-64 mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none dark:bg-black-700 md:mx-0"
+                    <div class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none w-65 h-65 dark:bg-black-700 md:mx-0"
                          [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
                     <!-- END: Player Profile Picture (Minecraft Head) -->
 
@@ -131,13 +131,13 @@
 
             <!-- START: Tabs Content -->
             <div class="hidden md:flex">
-                <app-stats *ngIf="this.content === 'stats'"
+                <app-stats [ngClass]="this.content === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
                            class="w-full mt-10"></app-stats>
-                <app-trophies *ngIf="this.content === 'trophies'"
+                <app-trophies [ngClass]="this.content === 'trophies' ? 'block' : 'hidden'"
                               [trophies]="this.member"
                               class="w-full"></app-trophies>
-                <app-infractions *ngIf="this.content === 'infractions'"
+                <app-infractions [ngClass]="this.content === 'infractions' ? 'block' : 'hidden'"
                                  [punishments]="this.member.punishments"
                                  class="w-full"></app-infractions>
             </div>
