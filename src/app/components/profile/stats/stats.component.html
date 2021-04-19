@@ -2,23 +2,24 @@
 
 <div class="flex flex-col space-y-8">
     <!-- START: General Stats -->
-    <div id="general-stats" class="grid grid-cols-4 gap-x-16 lg:text-xl">
-        <div class="table mx-auto space-x-3 md:mx-0">
+    <div id="general-stats" class="grid grid-cols-4 gap-x-28 lg:text-xl">
+        <div class="table mx-auto space-x-1.5 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.dateJoined | daysSince }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
-                  ngxTippy="First joined on Jan 1, 1970">days since first seen</span>
+                  ngxTippy
+                  tippyName="first-seen">days since first seen</span>
         </div>
-        <div class="table mx-auto space-x-3 md:mx-0">
-            <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.timePlayed | hours | round : 2 }}</span>
+        <div class="table mx-auto space-x-1.5 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.timePlayed | hours | round : 1 }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="Hours Played">hours played</span>
         </div>
-        <div class="table mx-auto space-x-3 md:mx-0">
+        <div class="table mx-auto space-x-1.5 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.joinPosition ? this.member.joinPosition : 0 }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="Join Position">join position</span>
         </div>
-        <div class="table mx-auto space-x-3 md:mx-0">
+        <div class="table mx-auto space-x-1.5 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">0</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
                   ngxTippy="Biscuits (coins)">biscuits</span>
@@ -31,8 +32,8 @@
 
     <!-- START: Total Stats -->
     <div id="total-stats" class="flex flex-col space-y-6">
-        <span class="text-3xl font-semibold lg:text-4xl">Total Blockey Hockey</span>
-        <div class="grid grid-cols-4 text-lg lg:text-2xl gap-y-5 gap-x-16">
+        <span class="pb-3 text-3xl font-semibold border-b border-black-50 lg:text-4xl w-max">Total Blockey Hockey</span>
+        <div class="grid grid-cols-4 text-lg lg:text-2xl gap-y-5 gap-x-28">
             <div class="table mx-auto space-x-3 md:mx-0">
                 <span class="text-3xl font-semibold lg:text-4xl">0</span>
                 <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"

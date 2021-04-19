@@ -31,8 +31,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public content = 'stats';
 
     // Subs
-    private memberSub?: Subscription;
-    private roleSub?: Subscription;
+    private playerSub: Subscription;
+    private memberSub: Subscription;
+    private titleSub: Subscription;
+    private tippySub: Subscription;
 
     constructor(
         private router: Router,
@@ -113,6 +115,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
         this.tippyService.setContent('last-online-date', lastOnline);
         this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
+
+        const content = this.member.dateJoined ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
+        this.tippyService.setContent('first-seen', content);
     }
 
     /**
@@ -132,6 +137,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.memberSub) { this.memberSub.unsubscribe(); }
-        if (this.roleSub) { this.roleSub.unsubscribe(); }
+        if (this.playerSub) { this.playerSub.unsubscribe(); }
+        if (this.titleSub) { this.titleSub.unsubscribe(); }
+        if (this.tippySub) { this.tippySub.unsubscribe(); }
     }
 }
