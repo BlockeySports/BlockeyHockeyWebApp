@@ -23,6 +23,9 @@ import { TrophiesComponent } from './components/profile/trophies/trophies.compon
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
+import { RoundPipe } from './pipes/round.pipe';
+import { HoursPipe } from './pipes/hours.pipe';
+import { DaysSincePipe } from './pipes/days-since.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { TimeAgoPipe } from './pipes/timeago.pipe';
     StatsComponent,
     InfractionsComponent,
     TrophiesComponent,
+    RoundPipe,
+    HoursPipe,
+    DaysSincePipe,
   ],
   imports: [
     BrowserModule,
