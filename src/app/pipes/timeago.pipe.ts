@@ -6,11 +6,11 @@ import * as timeago from 'timeago.js';
 })
 export class TimeAgoPipe implements PipeTransform {
 
-  transform(date: any, isOnline: boolean): string {
+  transform(date: any, isOnline?: boolean): string {
     if (date === undefined) {
       return 'never';
     }
-    let duration: string = timeago.format(new Date(date));
+    let duration = timeago.format(new Date(date));
     if (isOnline) {
       duration = duration.replace(' ago', '');
     }

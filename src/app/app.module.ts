@@ -7,6 +7,7 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
+import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
 
 // Services
 import { CookieService } from 'ngx-cookie-service';
@@ -26,6 +27,8 @@ import { TimeAgoPipe } from './pipes/timeago.pipe';
 import { RoundPipe } from './pipes/round.pipe';
 import { HoursPipe } from './pipes/hours.pipe';
 import { DaysSincePipe } from './pipes/days-since.pipe';
+import { UsernamePipe } from './pipes/username.pipe';
+import { LengthPipe } from './pipes/length.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { DaysSincePipe } from './pipes/days-since.pipe';
     RoundPipe,
     HoursPipe,
     DaysSincePipe,
+    UsernamePipe,
+    LengthPipe
   ],
   imports: [
     BrowserModule,
@@ -49,9 +54,10 @@ import { DaysSincePipe } from './pipes/days-since.pipe';
     NgxTippyModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    NgxPrettyCheckboxModule
+    NgxPrettyCheckboxModule,
+    GridAllModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
