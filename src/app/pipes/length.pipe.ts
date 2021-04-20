@@ -7,7 +7,6 @@ import * as timeago from 'timeago.js';
 export class LengthPipe implements PipeTransform {
 
   transform(length: number, date: Date): string {
-    console.log(length + ' --- ' + date);
     if (length < 0) {
       return 'Forever';
     }
