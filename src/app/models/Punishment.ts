@@ -1,9 +1,9 @@
 export class Punishment {
     id?: string;
-    playerUuid?: string;
+    punished?: string;
     type?: string;
     reason?: string;
-    issuerUuid?: string;
+    punisher?: string;
     date?: Date;
     length?: number;
 }

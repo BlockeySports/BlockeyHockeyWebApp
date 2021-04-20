@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import '../node_modules/@syncfusion/ej2-angular-grids/styles/material-dark.css';
 
 @import 'tippy.js/dist/tippy.css';
-
-/* @import '../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css'; */
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
