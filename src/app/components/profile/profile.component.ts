@@ -8,7 +8,6 @@ import { PlayerService } from 'src/app/services/player.service';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { RoleService } from 'src/app/services/role.service';
 
 // tslint:disable: deprecation
 @Component({
