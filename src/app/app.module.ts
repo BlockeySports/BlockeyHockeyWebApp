@@ -29,6 +29,7 @@ import { HoursPipe } from './pipes/hours.pipe';
 import { DaysSincePipe } from './pipes/days-since.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
+import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LengthPipe } from './pipes/length.pipe';
     HoursPipe,
     DaysSincePipe,
     UsernamePipe,
-    LengthPipe
+    LengthPipe,
+    PunishmentTypePipe
   ],
   imports: [
     BrowserModule,
