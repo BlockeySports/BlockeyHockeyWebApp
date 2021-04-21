@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.changeTab(this.tab !== 'stats' ? this.tab : '');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
-                // console.log(data);
+                console.log(data);
 
             },
             (error) => {

@@ -1,9 +1,11 @@
+import { Member } from './Member';
+
 export class Punishment {
     id?: string;
-    punished?: string;
+    punished?: Member;
     type?: string;
     reason?: string;
-    punisher?: string;
+    punisher?: Member;
     date?: Date;
     length?: number;
 }

@@ -11,7 +11,11 @@
     <tbody>
         <tr *ngFor="let punishment of this.punishments">
             <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
-                style="width: 18.34%;">{{ punishment.punisher }}</td>
+                style="width: 18.34%;"
+                [ngStyle]="{color: punishment.punisher.roles[0].background}">
+                <span class="w-max hover:underline cursor-pointer"
+                      (click)="navigateToProfile(punishment.punisher.username)">{{ punishment.punisher.username }}</span>
+            </td>
             <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
                 style="width: 35%;">{{ punishment.reason }}</td>
             <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 capitalize"
