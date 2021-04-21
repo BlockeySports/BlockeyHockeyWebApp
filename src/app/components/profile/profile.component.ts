@@ -19,7 +19,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public member: Member = {
         username: '',
         hockeyStatistics: [
-            { goals: 0, primaryAssists: 0, secondaryAssists: 0, wins: 0, losses: 0 }
+            {
+                goals: 0, primaryAssists: 0, secondaryAssists: 0, wins: 0, losses: 0, goalsAgainst: 0,
+                overtimeWins: 0, overtimeLosses: 0, forfeitWins: 0, forfeitLosses: 0
+            }
         ]
     };
 
@@ -42,7 +45,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private tippyService: NgxTippyService,
-        private playerService: PlayerService,
         private memberService: MemberService,
         private titleService: Title
     ) { }
@@ -113,6 +115,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
     }
 
+    /**
+     * Calculate the win-lose ratio
+     */
+    public calculateWinLoseRatio(wins: number, losses: number): number {
+        if (wins === undefined || losses === undefined) { return 0; }
+        if (losses === 0) { return wins; }
+        return wins / losses;
+    }
     /**
      * Get the username from the url address
      * occurring after the last slash and before an fragments.

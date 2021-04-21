@@ -80,7 +80,7 @@
                                   ngxTippy="Total Losses">losses</span>
                         </div>
                         <div class="table space-x-3 md:mx-0 ">
-                            <span class="text-3xl md:text-4xl">{{ 0 | number: '1.2-2' }}</span>
+                            <span class="text-3xl md:text-4xl">{{ this.calculateWinLoseRatio(this.member?.hockeyStatistics[0]?.wins, this.member?.hockeyStatistics[0]?.losses) || 0 | number: '1.2-2' }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Win-Lose Ratio">WL</span>
                         </div>

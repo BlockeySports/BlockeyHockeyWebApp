@@ -28,4 +28,13 @@ export class StatsComponent implements OnInit, AfterViewInit {
             }, 500
         );
     }
+
+    /**
+     * Calculate the win-lose ratio
+     */
+    public calculateWinLoseRatio(wins: number, losses: number): number {
+        if (wins === undefined || losses === undefined) { return 0; }
+        if (losses === 0) { return wins; }
+        return wins / losses;
+    }
 }
