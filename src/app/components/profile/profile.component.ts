@@ -61,6 +61,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.member = data;
                 // set the username color
                 this.usernameColor = this.member.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
+                // set member profile picture
+                this.profilePicture = `https://minotar.net/helm/${this.member.uuid}/260.png`;
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
                 // set the last online tooltip date
@@ -73,18 +75,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.usernameColor = 'currentColor';
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
-                console.log(error);
-            }
-        );
-
-
-        this.playerService.getPlayerInfo(this.member.username).subscribe(
-            (data) => {
-                if (data.uuid) {
-                    this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${data.uuid}/260`;
-                }
-            },
-            (error) => {
                 console.log(error);
             }
         );
