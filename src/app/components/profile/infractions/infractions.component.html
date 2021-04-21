@@ -2,23 +2,23 @@
 <span *ngIf="this.punishments?.length === 0" class="flex mx-auto w-max">You've been good! No punishments to display.</span>
 <table *ngIf="this.punishments?.length > 0" class="w-full shadow-md">
     <thead>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-700 text-sm">Issued By</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-700 text-sm">Reason</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-700 text-sm">Type</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-700 text-sm">Length</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-700 text-sm">Date</th>
+        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Issued By</th>
+        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Reason</th>
+        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Type</th>
+        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Length</th>
+        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Date</th>
     </thead>
     <tbody>
         <tr *ngFor="let punishment of this.punishments">
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-600"
-                style="width: 18.34%;">{{ punishment.punisher | player }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-600"
+            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
+                style="width: 18.34%;">{{ punishment.punisher }}</td>
+            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
                 style="width: 35%;">{{ punishment.reason }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-600 capitalize"
+            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 capitalize"
                 style="width: 13.33%;">{{ punishment.type | punishmentType }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-600"
+            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
                 style="width: 13.33%;">{{ punishment.length | length : punishment.date }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-600"
+            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
                 style="width: 20%;">{{ punishment.date | date : 'MMM d, y, h:mm a' }}</td>
         </tr>
     </tbody>
