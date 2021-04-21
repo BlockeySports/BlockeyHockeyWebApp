@@ -1,3 +1,4 @@
+import { HockeyStatistic } from './HockeyStatistic';
 import { Punishment } from './Punishment';
 import { Role } from './Role';
 
@@ -12,4 +13,5 @@ export class Member {
     roles?: Role[];             // the roles and ranks this player has
     og?: boolean;               // true if this player is an OG player
     punishments?: Punishment[]; // the list of punishments this member has
+    hockeyStatistics?: HockeyStatistic[];
 }
