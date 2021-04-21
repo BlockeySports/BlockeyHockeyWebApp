@@ -52,6 +52,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.route.fragment.subscribe(data => this.content = data ?? 'stats');
 
         this.member.username = this.getUsernameFromAddress();
+        // set initial profile picture from username search for (may be changed in subscribe success)
+        this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.username}`;
+        // set the initial tab title
         this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
 
         // tslint:disable: deprecation
@@ -61,10 +64,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.member = data;
                 // set the username color
                 this.usernameColor = this.member.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
-                // set member profile picture
-                this.profilePicture = `https://minotar.net/helm/${this.member.uuid}/260.png`;
+                // set member profile picture from uuid
+                this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.uuid}`;
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
+                // fix username capitalization in url
+                this.changeContent(null);
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
                 console.log(data);
@@ -88,7 +93,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public changeContent(content: string): void {
         this.content = content;
         this.router.navigate(
-            [],
+            [`/u/${this.member.username}`],
             {
                 relativeTo: this.route,
                 fragment: content || null
