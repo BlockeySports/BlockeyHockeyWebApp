@@ -55,27 +55,27 @@
                 <div class="flex justify-center w-full px-16 py-5 mx-auto my-5 text-2xl font-semibold bg-gray-100 rounded-md shadow-md md:py-8 md:mt-6 md:mb-12 md:mx-0 dark:bg-black-600 dark:ring-black ring-1 ring-gray-200 md:w-max">
                     <div class="grid grid-flow-col grid-rows-3 my-auto gap-x-10 md:gap-x-28 gap-y-3 md:gap-y-5">
                         <div class="table space-x-3 md:mx-0">
-                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-3xl md:text-4xl">{{ this.member?.hockeyStatistics[0]?.goals || 0 }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Goals">goals</span>
                         </div>
                         <div class="table space-x-3 md:mx-0">
-                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-3xl md:text-4xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists || 0 }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Assists">assists</span>
                         </div>
                         <div class="table space-x-3 md:mx-0">
-                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-3xl md:text-4xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists + this.member?.hockeyStatistics[0]?.wins || 0 }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Points">points</span>
                         </div>
                         <div class="table space-x-3 md:mx-0 ">
-                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-3xl md:text-4xl">{{ this.member?.hockeyStatistics[0]?.wins || 0 }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Wins">wins</span>
                         </div>
                         <div class="table space-x-3 md:mx-0 ">
-                            <span class="text-3xl md:text-4xl">0</span>
+                            <span class="text-3xl md:text-4xl">{{ this.member?.hockeyStatistics[0]?.losses || 0 }}</span>
                             <span class="text-gray-400 dark:text-gray-300"
                                   ngxTippy="Total Losses">losses</span>
                         </div>
@@ -93,9 +93,9 @@
             <div class="flex-row flex-wrap hidden border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
                 <!-- START: Stats Tab -->
                 <div id="stat-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                     (click)="changeContent('')"
+                     (click)="changeTab('')"
                      tabindex="0"
-                     [ngClass]="this.content === 'stats' 
+                     [ngClass]="this.tab === 'stats' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
@@ -105,9 +105,9 @@
 
                 <!-- START: Trophies Tab -->
                 <div id="trophies-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                     (click)="changeContent('trophies')"
+                     (click)="changeTab('trophies')"
                      tabindex="0"
-                     [ngClass]="this.content === 'trophies' 
+                     [ngClass]="this.tab === 'trophies' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
@@ -117,9 +117,9 @@
 
                 <!-- START: Infractions Tab -->
                 <div id="infractions-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                     (click)="changeContent('infractions')"
+                     (click)="changeTab('infractions')"
                      tabindex="0"
-                     [ngClass]="this.content === 'infractions' 
+                     [ngClass]="this.tab === 'infractions' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
@@ -131,13 +131,13 @@
 
             <!-- START: Tabs Content -->
             <div class="hidden md:flex">
-                <app-stats [ngClass]="this.content === 'stats' ? 'block' : 'hidden'"
+                <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
                            class="w-full mt-10"></app-stats>
-                <app-trophies [ngClass]="this.content === 'trophies' ? 'block' : 'hidden'"
+                <app-trophies [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
                               [trophies]="this.member"
                               class="w-full mt-10"></app-trophies>
-                <app-infractions [ngClass]="this.content === 'infractions' ? 'block' : 'hidden'"
+                <app-infractions [ngClass]="this.tab === 'infractions' ? 'block' : 'hidden'"
                                  [punishments]="this.member.punishments"
                                  class="w-full mt-10"></app-infractions>
             </div>

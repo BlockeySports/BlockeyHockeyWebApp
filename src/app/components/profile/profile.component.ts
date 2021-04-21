@@ -18,6 +18,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public member: Member = {
         username: '',
+        hockeyStatistics: [
+            { goals: 0, primaryAssists: 0, secondaryAssists: 0, wins: 0, losses: 0 }
+        ]
     };
 
     public usernameColor = 'currentColor';
@@ -27,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     // which content to display (i.e. stats, trophies, infractions)
     // show stats content by default
-    public content = 'stats';
+    public tab = 'stats';
 
     // Subs
     private playerSub: Subscription;
@@ -49,7 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.server = Math.floor(Math.random() * 8) + 1;
 
         // set the content if specified in the url
-        this.route.fragment.subscribe(data => this.content = data ?? 'stats');
+        this.route.fragment.subscribe(data => this.tab = data ?? 'stats').unsubscribe();
 
         this.member.username = this.getUsernameFromAddress();
         // set initial profile picture from username search for (may be changed in subscribe success)
@@ -69,10 +72,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
                 // fix username capitalization in url
-                this.changeContent(null);
+                this.changeTab(this.tab !== 'stats' ? this.tab : '');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
-                console.log(data);
+                // console.log(data);
 
             },
             (error) => {
@@ -86,18 +89,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * This method simply adds a fragment onto the url when switching between content on the page.
-     * That allows the page to be reloaded and the user may remain on the same content the left off on.
+     * This method simply adds a fragment onto the url when switching between tab on the page.
+     * That allows the page to be reloaded and the user may remain on the same tab the left off on.
      * This also is good for bookmarking the page in a specific view.
      */
-    public changeContent(content: string): void {
-        this.content = content;
+    public changeTab(tab: string): void {
+        this.tab = tab || 'stats';      // default tab is stats
         this.router.navigate(
             [`/u/${this.member.username}`],
             {
                 relativeTo: this.route,
-                fragment: content || null
-
+                fragment: tab || null
             });
     }
 
@@ -109,9 +111,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
         this.tippyService.setContent('last-online-date', lastOnline);
         this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
-
-        const content = this.member.dateJoined ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
-        this.tippyService.setContent('first-seen', content);
     }
 
     /**
