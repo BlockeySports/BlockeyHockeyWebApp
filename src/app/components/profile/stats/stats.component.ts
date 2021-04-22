@@ -25,7 +25,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
                     ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
                     : 'N/A';
                 this.tippyService.setContent('first-seen', content);
-            }, 500
+            }, 1000
         );
     }
 
