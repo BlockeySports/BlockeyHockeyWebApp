@@ -1,6 +1,60 @@
-<span *ngIf="!this.punishments" class="flex mx-auto w-max">There might be a problem displaying punishments.</span>
-<span *ngIf="this.punishments?.length === 0" class="flex mx-auto w-max">You've been good! No punishments to display.</span>
-<table *ngIf="this.punishments?.length > 0" class="w-full shadow-md">
+<!-- <span *ngIf="!this.member.punishments" class="flex mx-auto w-max">{{ this.punishmentsText }}</span> -->
+
+<span *ngIf="this.isLoading" class="flex flex-row space-x-3 items-center mx-auto w-max">
+    <svg *ngIf="this.isLoading || true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 fill-current">
+        <g transform="translate(80 50)">
+            <circle r="6">
+                <animateTransform attributeName="transform" type="scale" begin="-0.9408602150537634s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.9408602150537634s" />
+            </circle>
+        </g>
+        <g transform="rotate(45 -50.355 121.569)">
+            <circle r="6" fill-opacity=".875">
+                <animateTransform attributeName="transform" type="scale" begin="-0.8064516129032258s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.8064516129032258s" />
+            </circle>
+        </g>
+        <g transform="rotate(90 -15 65)">
+            <circle r="6" fill-opacity=".75">
+                <animateTransform attributeName="transform" type="scale" begin="-0.6720430107526881s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.6720430107526881s" />
+            </circle>
+        </g>
+        <g transform="rotate(135 -.355 41.569)">
+            <circle r="6" fill-opacity=".625">
+                <animateTransform attributeName="transform" type="scale" begin="-0.5376344086021505s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.5376344086021505s" />
+            </circle>
+        </g>
+        <g transform="rotate(180 10 25)">
+            <circle r="6" fill-opacity=".5">
+                <animateTransform attributeName="transform" type="scale" begin="-0.4032258064516129s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.4032258064516129s" />
+            </circle>
+        </g>
+        <g transform="rotate(-135 20.355 8.431)">
+            <circle r="6" fill-opacity=".375">
+                <animateTransform attributeName="transform" type="scale" begin="-0.26881720430107525s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.26881720430107525s" />
+            </circle>
+        </g>
+        <g transform="rotate(-90 35 -15)">
+            <circle r="6" fill-opacity=".25">
+                <animateTransform attributeName="transform" type="scale" begin="-0.13440860215053763s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.13440860215053763s" />
+            </circle>
+        </g>
+        <g transform="rotate(-45 70.355 -71.569)">
+            <circle r="6" fill-opacity=".125">
+                <animateTransform attributeName="transform" type="scale" begin="0s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="0s" />
+            </circle>
+        </g>
+    </svg>
+    <span>Loading punishments. The longer this takes, the worse you\'ve been!</span>
+</span>
+<span *ngIf="this.member.punishments?.length === 0" class="flex mx-auto w-max">You've been good! No punishments to display.</span>
+<table *ngIf="this.member.punishments?.length > 0" class="w-full shadow-md">
     <thead>
         <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Issued By</th>
         <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Reason</th>
@@ -9,10 +63,10 @@
         <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800 text-sm">Date</th>
     </thead>
     <tbody>
-        <tr *ngFor="let punishment of this.punishments">
+        <tr *ngFor="let punishment of this.member.punishments">
             <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
                 style="width: 18.34%;"
-                [ngStyle]="{color: punishment.punisher.roles[0].background}">
+                [ngStyle]="{ color: punishment.punisher.roles[0].background }">
                 <span class="w-max hover:underline cursor-pointer"
                       (click)="navigateToProfile(punishment.punisher.username)">{{ punishment.punisher.username }}</span>
             </td>

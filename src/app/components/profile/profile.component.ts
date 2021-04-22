@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/Member';
 import { MemberService } from 'src/app/services/member.service';
-import { PlayerService } from 'src/app/services/player.service';
 
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';

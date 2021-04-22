@@ -138,7 +138,7 @@
                               [trophies]="this.member"
                               class="w-full mt-10"></app-trophies>
                 <app-infractions [ngClass]="this.tab === 'infractions' ? 'block' : 'hidden'"
-                                 [punishments]="this.member.punishments"
+                                 [member]="this.member"
                                  class="w-full mt-10"></app-infractions>
             </div>
             <!-- END: Tabs Content -->
