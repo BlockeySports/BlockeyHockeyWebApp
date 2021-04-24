@@ -32,7 +32,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
                         : 'N/A';
                     this.tippyService.setContent('first-seen', content);
                 } catch (error) {
-                    this.isError = true;
+                    console.log(error);
                 }
             }, 1000
         );
@@ -40,11 +40,11 @@ export class StatsComponent implements OnInit, AfterViewInit {
         setTimeout(
             () => {
                 if (!this.member.hockeyStatistics[0].description) {
-                    this.isLoading = false;
                     this.isError = true;
                     this.statisticsText = 'There might be a problem displaying your hockey statistics. Check back later.';
                 }
-            }, 4000
+                this.isLoading = false;
+            }, 5000
         );
     }
 

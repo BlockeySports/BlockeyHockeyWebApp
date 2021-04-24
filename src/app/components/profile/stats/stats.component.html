@@ -2,7 +2,7 @@
 
 <div class="flex flex-col space-y-8">
     <!-- START: General Stats -->
-    <div *ngIf="!this.isLoading && !this.isError" id="general-stats" class="grid grid-cols-4 gap-x-28 lg:text-xl">
+    <div *ngIf="(!this.isLoading && !this.isError) || this.member.hockeyStatistics[0].description" id="general-stats" class="grid grid-cols-4 gap-x-28 lg:text-xl">
         <div class="table mx-auto space-x-1.5 md:space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ this.member.dateJoined | daysSince }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
@@ -28,7 +28,7 @@
     </div>
     <!-- END: General Stats -->
 
-    <hr *ngIf="!this.isLoading && !this.isError">
+    <hr *ngIf="(!this.isLoading && !this.isError) || this.member.hockeyStatistics[0].description">
 
     <span *ngIf="!this.member.hockeyStatistics 
                     || this.member?.hockeyStatistics?.length === 0
@@ -87,7 +87,7 @@
     </span>
 
     <!-- START: Total Stats -->
-    <div *ngIf="!this.isLoading && !this.isError" class="flex flex-col space-y-20">
+    <div *ngIf="(!this.isLoading && !this.isError) || this.member.hockeyStatistics[0].description" class="flex flex-col space-y-20">
         <div *ngFor="let stat of this.member.hockeyStatistics" class="flex flex-col space-y-6">
             <span class="pb-3 text-3xl font-semibold border-b border-black-50 lg:text-4xl w-max">{{ stat.description }}</span>
             <div class="grid grid-cols-4 text-lg lg:text-2xl gap-y-5 gap-x-28">
