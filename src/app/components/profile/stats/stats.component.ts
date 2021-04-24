@@ -11,6 +11,10 @@ export class StatsComponent implements OnInit, AfterViewInit {
 
     @Input() member: Member;
 
+    public isLoading = true;
+    public isError = false;
+    public statisticsText = 'Hang tight while we load your statistics.';
+
     constructor(
         private tippyService: NgxTippyService
     ) { }
@@ -19,13 +23,28 @@ export class StatsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        // tippy
         setTimeout(
             () => {
-                const content = this.member.dateJoined
-                    ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
-                    : 'N/A';
-                this.tippyService.setContent('first-seen', content);
+                try {
+                    const content = this.member.dateJoined
+                        ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
+                        : 'N/A';
+                    this.tippyService.setContent('first-seen', content);
+                } catch (error) {
+                    this.isError = true;
+                }
             }, 1000
+        );
+        // statistics not loading
+        setTimeout(
+            () => {
+                if (!this.member.hockeyStatistics[0].description) {
+                    this.isLoading = false;
+                    this.isError = true;
+                    this.statisticsText = 'There might be a problem displaying your hockey statistics. Check back later.';
+                }
+            }, 4000
         );
     }
 
