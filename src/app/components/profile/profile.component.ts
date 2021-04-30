@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         ]
     };
 
+    public isError = false;
+
     public usernameColor = 'currentColor';
     public profilePicture = '';
 
@@ -80,6 +82,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
             },
             (error) => {
+                this.isError = true;
                 // set the username color
                 this.usernameColor = 'currentColor';
                 // set the last online tooltip date

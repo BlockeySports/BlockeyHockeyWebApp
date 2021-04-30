@@ -10,9 +10,9 @@ import { Member } from 'src/app/models/Member';
 export class StatsComponent implements OnInit, AfterViewInit {
 
     @Input() member: Member;
+    @Input() isError;
 
     public isLoading = true;
-    public isError = false;
     public statisticsText = 'Hang tight while we load your statistics.';
 
     constructor(
@@ -32,14 +32,18 @@ export class StatsComponent implements OnInit, AfterViewInit {
                         : 'N/A';
                     this.tippyService.setContent('first-seen', content);
                 } catch (error) {
-                    console.log(error);
+                    // ignore error
                 }
             }, 1000
         );
         // statistics not loading
         setTimeout(
             () => {
-                if (!this.member.hockeyStatistics[0].description) {
+                if (this.member?.hockeyStatistics?.length <= 1) {
+                    // member has no statistics
+                    this.isError = false;
+                    this.statisticsText = 'You don\'t appear to have any statistics yet. Hop on the server and play a game!';
+                } else if (!this.member?.hockeyStatistics[0]?.description) {
                     this.isError = true;
                     this.statisticsText = 'There might be a problem displaying your hockey statistics. Check back later.';
                 }

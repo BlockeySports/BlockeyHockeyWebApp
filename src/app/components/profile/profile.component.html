@@ -5,12 +5,12 @@
             <!-- Player username -->
             <!-- <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
             [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
-            <div class="flex flex-row space-x-4">
+            <div class="flex flex-row items-center space-x-4">
                 <h1 class="text-4.5xl w-max font-semibold mx-auto md:mx-0 md:text-left"
                     [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">{{ this.member.username }}</h1>
                 <!-- OG Heart -->
-                <div *ngIf="this.member.og && this.member.roles.length === 0" class="flex my-auto text-xl text-red-600 select-none">
-                    <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
+                <div *ngIf="this.member.og && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
+                    <span ngxTippy="OG Player">&#9829;</span>
                 </div>
             </div>
 
@@ -133,6 +133,7 @@
             <div class="hidden md:flex">
                 <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
+                           [isError]="this.isError"
                            class="w-full mt-10"></app-stats>
                 <app-trophies [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
                               [trophies]="this.member"
