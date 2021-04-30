@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.10",
     "@angular/router": "~11.2.10",
     "@ngneat/tailwind": "^6.0.3",
+    "dayjs": "^1.10.4",
     "ngx-cookie-service": "^11.0.2",
     "ngx-pretty-checkbox": "^1.2.1",
     "ngx-tippy-wrapper": "^2.1.0",
