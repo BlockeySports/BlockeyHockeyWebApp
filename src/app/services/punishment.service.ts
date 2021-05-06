@@ -18,7 +18,7 @@ export class PunishmentService {
         if (location.origin.includes('localhost')) {
             this.url = `http://localhost:8080${this.resource}`;
         } else {
-            this.url = `https://api.minecrafthockey.com${this.resource}`;
+            this.url = `https://api.blockeyhockey.net${this.resource}`;
         }
     }
 
