@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
 import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
+import { FormsModule } from '@angular/forms';
 
 // Services
 import { CookieService } from 'ngx-cookie-service';
@@ -54,6 +55,7 @@ import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
     AppRoutingModule,
     HttpClientModule,
     NgxTippyModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatTabsModule,
     NgxPrettyCheckboxModule,

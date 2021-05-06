@@ -8,6 +8,8 @@ import { DarkModeService } from 'src/app/services/dark-mode.service';
 })
 export class HeaderComponent implements OnInit {
 
+    public isLoading = false;
+
     constructor(
         private router: Router,
         private darkModeService: DarkModeService
@@ -30,4 +32,10 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
+    public navigateToProfile(username: string): void {
+        if (username) {
+            this.isLoading = true;
+            window.location.href = `/u/${username}`;
+        }
+    }
 }
