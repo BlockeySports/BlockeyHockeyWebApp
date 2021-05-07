@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     };
 
     public isError = false;
+    public errorMessage = '';
 
     public usernameColor = 'currentColor';
     public profilePicture = '';
@@ -83,6 +84,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
             },
             (error) => {
                 this.isError = true;
+                if (!error.ok) {
+                    // set statistics error message when failed to get profile.
+                    this.errorMessage = 'There was an error loading your statistics. Try again later.';
+                }
                 // set the username color
                 this.usernameColor = 'currentColor';
                 // set the last online tooltip date

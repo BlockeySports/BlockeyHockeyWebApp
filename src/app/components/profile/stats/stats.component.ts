@@ -11,15 +11,17 @@ export class StatsComponent implements OnInit, AfterViewInit {
 
     @Input() member: Member;
     @Input() isError;
+    @Input() statisticsText;
 
     public isLoading = true;
-    public statisticsText = 'Hang tight while we load your statistics.';
 
     constructor(
         private tippyService: NgxTippyService
     ) { }
 
     ngOnInit(): void {
+        // display loading text
+        this.statisticsText = 'Hang tight while we load your statistics.';
     }
 
     ngAfterViewInit(): void {
@@ -39,13 +41,13 @@ export class StatsComponent implements OnInit, AfterViewInit {
         // statistics not loading
         setTimeout(
             () => {
-                if (this.member?.hockeyStatistics?.length <= 1) {
+                if (this.member.hockeyStatistics.length === 0) {
                     // member has no statistics
                     this.isError = false;
                     this.statisticsText = 'You don\'t appear to have any statistics yet. Hop on the server and play a game!';
-                } else if (!this.member?.hockeyStatistics[0]?.description) {
+                } else if (this.member?.hockeyStatistics) {
                     this.isError = true;
-                    this.statisticsText = 'There might be a problem displaying your hockey statistics. Check back later.';
+                    this.statisticsText = 'There was an error loading your statistics. Try again later.';
                 }
                 this.isLoading = false;
             }, 5000

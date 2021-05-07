@@ -33,7 +33,7 @@
     <span *ngIf="!this.member.hockeyStatistics 
                             || this.member?.hockeyStatistics?.length === 0
                             || !this.member?.hockeyStatistics[0].description" class="flex flex-row space-x-3 items-center mx-auto w-max">
-        <svg *ngIf="this.isLoading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 fill-current">
+        <svg *ngIf="this.isLoading && !this.isError" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 fill-current">
             <g transform="translate(80 50)">
                 <circle r="6">
                     <animateTransform attributeName="transform" type="scale" begin="-0.9408602150537634s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />

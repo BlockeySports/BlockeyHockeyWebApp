@@ -134,6 +134,7 @@
                 <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
                            [isError]="this.isError"
+                           [statisticsText]="this.errorMessage"
                            class="w-full mt-10"></app-stats>
                 <app-trophies [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
                               [trophies]="this.member"
