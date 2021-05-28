@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     public server = 0;
 
-    // which content to display (i.e. stats, trophies, infractions)
+    // which content to display (i.e. stats, awards, infractions)
     // show stats content by default
     public tab = 'stats';
 

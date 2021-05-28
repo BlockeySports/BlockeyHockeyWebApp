@@ -103,17 +103,17 @@
                 </div>
                 <!-- END: Stats Tab -->
 
-                <!-- START: Trophies Tab -->
-                <div id="trophies-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
-                     (click)="changeTab('trophies')"
+                <!-- START: Awards Tab -->
+                <div id="awards-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
+                     (click)="changeTab('awards')"
                      tabindex="0"
-                     [ngClass]="this.tab === 'trophies' 
+                     [ngClass]="this.tab === 'awards' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                    <span>TROPHIES</span>
+                    <span>AWARDS</span>
                 </div>
-                <!-- END: Trophies Tab -->
+                <!-- END: Awards Tab -->
 
                 <!-- START: Infractions Tab -->
                 <div id="infractions-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-36 focus:outline-none"
@@ -136,9 +136,9 @@
                            [isError]="this.isError"
                            [statisticsText]="this.errorMessage"
                            class="w-full mt-10"></app-stats>
-                <app-trophies [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
-                              [trophies]="this.member"
-                              class="w-full mt-10"></app-trophies>
+                <app-awards [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
+                            [awards]="this.member"
+                            class="w-full mt-10"></app-awards>
                 <app-infractions [ngClass]="this.tab === 'infractions' ? 'block' : 'hidden'"
                                  [member]="this.member"
                                  class="w-full mt-10"></app-infractions>
