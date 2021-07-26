@@ -6,7 +6,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                'sans': ["'Noto Sans'", 'sans-serif']
+                // 'sans': ["'Noto Sans'", 'sans-serif']
+                'sans': ["'Fira Sans'", 'sans-serif']
             },
             colors: {
                 'black': {
@@ -32,5 +33,6 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
-        require('tailwind-scrollbar')],
+        require('tailwind-scrollbar'),
+        require('tailwindcss-textshadow')]
 };

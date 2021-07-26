@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
 import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { FormsModule } from '@angular/forms';
+import { MenuModule } from "headlessui-angular";
 
 // Services
 import { CookieService } from 'ngx-cookie-service';
@@ -32,6 +33,10 @@ import { DaysSincePipe } from './pipes/days-since.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
+import { RosterComponent } from './components/boxscore/roster/roster.component';
+import { TeamComponent } from './components/boxscore/team/team.component';
+import { RinkComponent } from './components/rink/rink.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,10 @@ import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
     UsernamePipe,
     LengthPipe,
     PunishmentTypePipe,
-    BoxScoreComponent
+    BoxScoreComponent,
+    RosterComponent,
+    TeamComponent,
+    RinkComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +67,11 @@ import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
     NgxTippyModule,
     FormsModule,
     BrowserAnimationsModule,
+    MenuModule,
     MatTabsModule,
     NgxPrettyCheckboxModule,
-    GridAllModule
+    GridAllModule,
+    ClipboardModule
   ],
   providers: [CookieService, FilterService],
   bootstrap: [AppComponent]
