@@ -141,6 +141,12 @@ SEE LICENSE IN license
 @syncfusion/ej2-splitbuttons
 SEE LICENSE IN license
 
+headlessui-angular
+MIT
+
+ngx-clipboard
+MIT
+
 ngx-cookie-service
 MIT
 
@@ -171,6 +177,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+ngx-window-token
+MIT
 
 rxjs
 Apache-2.0
