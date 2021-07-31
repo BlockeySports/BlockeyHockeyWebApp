@@ -5,10 +5,7 @@
     "start": "cross-env NODE_ENV=development TAILWIND_MODE=watch ng serve --open",
     "build": "ng build",
     "prod": "cross-env NODE_ENV=production ng build --prod",
-    "deploy": "ng deploy",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "deploy": "ng deploy"
   },
   "private": true,
   "dependencies": {
