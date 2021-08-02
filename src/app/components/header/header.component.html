@@ -1,12 +1,12 @@
 <div class="w-full h-1.5 bg-gray-300 dark:bg-black"></div>
-<div class="bg-gray-100 shadow-lg dark:bg-black-800 dark:text-gray-50">
-    <div class="w-full px-4 py-2 mx-auto md:px-0 sm:w-11/12 xl:w-7/12">
-        <div class="relative flex flex-row flex-wrap justify-between items-center">
+<div class="dark:bg-black-800 dark:text-gray-50 bg-gray-100 shadow-lg">
+    <div class="md:px-0 sm:w-11/12 xl:w-7/12 w-full px-4 py-2 mx-auto">
+        <div class="relative flex flex-row flex-wrap items-center justify-between">
             <div class="flex flex-row cursor-pointer"
                  (click)="navigateHome()">
                 <!-- START: Logo -->
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="inline w-8 h-8 my-auto mr-3 fill-current dark:inline">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="dark:inline inline w-8 h-8 my-auto mr-3 fill-current">
                         <path d="M403.5 456.1l26.8-49.2-49.1-93.9 44.7-22.4 31.3 62.6L484 304l-98.4-196.8C372.2 85 345.4 71.6 318.5 85l-40.2 13.4c-22.4 13.4-35.8 40.2-22.4 67.1l147.6 290.6zM300.7 138.6l35.8-17.9h4.5L403.5 246l-44.7 22.4-62.6-125.2c0-.1 0-4.6 4.5-4.6zM949.1 791.5H725.5L600.3 545.6l-26.8 49.2 107.3 214.6 13.4 26.8h254.9v44.7H680.8c-8.9 0-22.4-8.9-22.4-13.4L551.1 652.9l-26.8 49.2 89.4 183.3c8.9 22.4 40.2 40.2 62.6 40.2h268.3c22.4 0 44.7-17.9 44.7-44.7v-44.7c4.5-26.8-13.4-44.7-40.2-44.7z" />
                         <path d="M725.5 98.4l-35.8-17.9c-22.4-13.4-53.7-4.5-67.1 22.4L278.3 791.5H54.7c-22.4 0-44.7 17.9-44.7 44.7v44.7c0 26.8 22.4 44.7 44.7 44.7H323c26.8 0 53.7-17.9 62.6-40.2l357.7-719.9c13.5-26.9 4.5-53.7-17.8-67.1zM345.4 867.5c0 4.5-13.4 13.4-22.4 13.4H54.7v-44.7h250.4l13.4-26.8 263.8-523.2 44.7 22.4-281.6 558.9zm362.2-724.4L645 268.3 600.3 246l62.6-125.2s4.5-4.5 4.5 0l35.8 17.9c4.4-.1 4.4 4.4 4.4 4.4z" />
                     </svg>
@@ -14,7 +14,7 @@
                 <!-- END: Logo -->
 
                 <!-- START: Title -->
-                <span class="my-auto text-lg font-semibold md:overflow-hidden md:text-2xl whitespace-nowrap">
+                <span class="md:overflow-hidden md:text-2xl whitespace-nowrap my-auto text-lg font-semibold">
                     Blockey Hockey Network
                 </span>
                 <!-- END: Title -->
@@ -26,7 +26,7 @@
                     color: #5f5f5f;
                 }
             </style>
-            <div class="relative mr-10 md:mr-14 lg:mr-20 w-72 border-0 border-b fill-current border-gray-400 text-black dark:text-gray-200 flex items-center">
+            <div class="md:mr-14 lg:mr-20 w-72 dark:text-gray-200 relative flex items-center mr-10 text-black border-0 border-b border-gray-400 fill-current">
                 <!-- START: Input Field -->
                 <input #playerSearch type="text"
                        placeholder="Search for player"
@@ -36,7 +36,7 @@
                 <!-- END: Input Field -->
 
                 <!-- START: Search Icon -->
-                <svg *ngIf="!this.isLoading" class="absolute right-3 h-4 w-4 cursor-pointer hover:text-red-500 focus:text-red-500 focus:outline-none transition-colors duration-100"
+                <svg *ngIf="!this.isLoading" class="right-3 hover:text-red-500 focus:text-red-500 focus:outline-none absolute w-4 h-4 transition-colors duration-100 cursor-pointer"
                      tabindex="0"
                      (keyup.enter)="navigateToProfile(playerSearch.value)"
                      (click)="navigateToProfile(playerSearch.value)"
@@ -47,7 +47,7 @@
 
                 <!-- START: Loading Spinner -->
                 <svg *ngIf="this.isLoading"
-                     class="absolute right-3 h-6 w-6 fill-current"
+                     class="right-3 absolute w-6 h-6 fill-current"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block">
                     <g transform="translate(80 50)">
                         <circle r="6">
@@ -103,14 +103,14 @@
             <!-- END: Search Player Box -->
 
             <!-- START: Dark Mode Toggle Button -->
-            <div class="inline absolute right-0 top-0.5 my-auto cursor-pointer select-none fill-current w-7 h-7 hover:text-purple-600 dark:hover:text-yellow-300 transition-colors duration-100"
+            <div class="top-1.5 w-7 h-7 hover:text-purple-600 dark:hover:text-yellow-300 absolute right-0 inline my-auto transition-colors duration-100 cursor-pointer select-none fill-current"
                  (click)="toggleDarkMode()">
-                <svg class="hidden dark:inline outline-none focus:text-yellow-300"
+                <svg class="dark:inline focus:text-yellow-300 hidden outline-none"
                      tabindex="0"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457.32 457.32">
                     <path d="M228.66 112.692c-63.945 0-115.968 52.022-115.968 115.967s52.023 115.968 115.968 115.968 115.968-52.023 115.968-115.968-52.023-115.967-115.968-115.967zM401.429 228.66l42.467-57.07a15 15 0 0 0 2.232-13.59c-1.503-4.624-5.153-8.233-9.794-9.683l-67.901-21.209.811-71.132a15 15 0 0 0-19.797-14.384l-67.399 22.753-41.153-58.023a15 15 0 0 0-24.47 0l-41.154 58.024-67.4-22.753a15 15 0 0 0-19.797 14.384l.812 71.132-67.901 21.209a15 15 0 0 0-9.793 9.683c-1.503 4.624-.671 9.689 2.232 13.59l42.467 57.07-42.467 57.07a15 15 0 0 0 7.561 23.273l67.901 21.208-.812 71.132a15 15 0 0 0 6.182 12.307c3.934 2.857 9.007 3.632 13.615 2.077l67.4-22.753 41.154 58.024a15 15 0 0 0 24.47 0l41.154-58.024 67.399 22.753a15 15 0 0 0 19.797-14.383l-.811-71.133 67.901-21.208c4.641-1.45 8.291-5.059 9.794-9.683a15 15 0 0 0-2.232-13.59l-42.468-57.071zM228.66 374.627c-80.487 0-145.968-65.481-145.968-145.968S148.173 82.692 228.66 82.692s145.968 65.48 145.968 145.967-65.481 145.968-145.968 145.968z" />
                 </svg>
-                <svg class="inline dark:hidden outline-none focus:text-purple-600"
+                <svg class="dark:hidden focus:text-purple-600 inline outline-none"
                      tabindex="0"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
                     <path d="M29.567 29.934c-7.237 0-13.104-5.938-13.104-13.26 0-5.835 3.73-10.779 8.905-12.553-1.51-.458-3.109-.707-4.767-.707-9.142 0-16.552 7.498-16.552 16.75s7.41 16.75 16.552 16.75c5.999 0 11.254-3.231 14.156-8.066-1.592.697-3.346 1.086-5.191 1.086z" />
