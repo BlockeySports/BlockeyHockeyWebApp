@@ -1,0 +1,26 @@
+<table class="w-max flex flex-col mt-5 shadow-md select-none">
+    <thead class="bg-black-50 w-max border-black-800 flex flex-row items-center font-bold text-white border-2">
+        <th class="border-r-2 border-black-800 w-[3.5rem] text-center">POS.</th>
+        <th class="border-r-2 border-black-800 w-[3.5rem] text-center">NO.</th>
+        <th class="w-[18rem] text-center">PLAYERS <span *ngIf="this.players.length > 0">({{ this.players.length }})</span></th>
+    </thead>
+    <tbody class="border-black-800 max-h-[11.47rem] scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 scrollbar-thin flex flex-col overflow-y-scroll font-medium border-b-2 border-l-2 border-r-2">
+        <tr *ngFor="let player of this.players; let i = index"
+            class="hover:bg-gray-200 flex flex-row"
+            [ngClass]="i%2 === 0 ? 'bg-gray-50' : 'bg-gray-100'">
+            <td class="border-r-2 border-gray-600 w-[3.5rem] text-center">F</td>
+            <td class="border-r-2 border-gray-600 w-[3.5rem] text-center">0</td>
+            <td class="w-[18rem] text-center cursor-pointer hover:font-bold"
+                (click)="navigateToProfile(player.username)">{{ player.username }}</td>
+        </tr>
+        <div *ngIf="this.players.length < 7">
+            <tr *ngFor="let i of [].constructor(7 - this.players.length); let j = index"
+                class="flex flex-row"
+                [ngClass]="j%2 !== 0 ? 'bg-gray-50' : 'bg-gray-100'">
+                <td class="border-r-2 border-gray-600 w-[3.5rem] text-center">&nbsp;</td>
+                <td class="border-r-2 border-gray-600 w-[3.5rem] text-center">&nbsp;</td>
+                <td class="w-[18rem] text-center">&nbsp;</td>
+            </tr>
+        </div>
+    </tbody>
+</table>

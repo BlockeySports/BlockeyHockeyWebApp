@@ -1,1 +1,63 @@
-<p>boxscore works!</p>
+<div class="dark:bg-black-700 h-full p-20">
+    <!-- START: Team Names -->
+    <div class="flex flex-row justify-between">
+        <!-- <div class="w-[25.25rem] flex flex-row items-end justify-between">
+            <p class="text-lg">AWAY</p>
+            <div class="border-b-2 min-w-[21rem] border-black text-[2rem] pb-0.5 font-medium text-shadow-md text-[#ff6d01]">San Francisco Flight</div>
+        </div> -->
+        <app-team [isVisitor]="true"></app-team>
+        <!-- <div class="w-[25.25rem] flex flex-row items-end justify-between">
+            <p class="text-lg">HOME</p>
+            <div class="border-b-2 min-w-[21rem] border-black text-[2rem] pb-0.5 font-medium text-shadow-md text-[#6bb8c9]">Hollywood Hattricks</div>
+        </div> -->
+        <app-team [isVisitor]="false"></app-team>
+    </div>
+    <!-- END: Team Names -->
+
+    <div class="flex flex-row items-start justify-between">
+        <!-- START: Visitor Players -->
+        <app-roster [players]="this.rosterAway"></app-roster>
+        <!-- END: Visitor Players -->
+
+        <!-- START: Home Roster -->
+        <div class="flex flex-col space-y-5 tracking-wider">
+            <app-roster [players]="this.rosterHome"></app-roster>
+
+            <table class="w-max flex flex-col mt-5 shadow-md">
+                <thead class="bg-black-50 w-max border-black-800 flex flex-row items-center font-bold tracking-wide text-white border-2">
+                    <th class="w-[25rem] text-center py-0.5 tracking-wider">GOALKEEPING STATISTICS</th>
+                </thead>
+                <tbody class="border-black-800 flex flex-col font-medium border-b-2 border-l-2 border-r-2">
+                    <tr class="flex flex-row">
+                        <!-- <div class="w-12 h-full text-center border">NO.</div> -->
+                        <div class="flex flex-col w-12">
+                            <div class="w-full text-center border">NO.</div>
+                            <div class="w-full text-center border">PER.</div>
+                        </div>
+                        <div class="w-44 flex flex-col border">
+                            <div class="w-full text-center">SHOTS FACED</div>
+                            <div class="flex flex-row justify-between">
+                                <div class="w-full text-center border">1</div>
+                                <div class="w-full text-center border">2</div>
+                                <div class="w-full text-center border">3</div>
+                                <div class="w-full px-2 text-center border">OT</div>
+                                <div class="w-full px-2 text-center border">Total</div>
+                            </div>
+                        </div>
+                        <div class="w-44 flex flex-col border">
+                            <div class="w-full text-center">SAVES</div>
+                            <div class="flex flex-row justify-between">
+                                <div class="w-full text-center border">1</div>
+                                <div class="w-full text-center border">2</div>
+                                <div class="w-full text-center border">3</div>
+                                <div class="w-full px-2 text-center border">OT</div>
+                                <div class="w-full px-2 text-center border">Total</div>
+                            </div>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END: Home Roster -->
+    </div>
+</div>
