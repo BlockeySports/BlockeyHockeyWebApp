@@ -45,8 +45,8 @@
                         <span class="font-semibold cursor-default"
                               ngxTippy
                               tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
-                        <span>on&nbsp;</span>
-                        <span class="font-semibold">Server {{ this.server }}</span>
+                        <!-- <span>on&nbsp;</span>
+                        <span class="font-semibold">Server {{ this.server }}</span> -->
                     </div>
                     <!-- END: Online Status -->
                 </div>
@@ -69,17 +69,17 @@
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Points">points</span>
                         </div>
-                        <div class="md:mx-0  table space-x-3">
+                        <div class="md:mx-0 table space-x-3">
                             <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.wins || 0 }}</span>
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Wins">wins</span>
                         </div>
-                        <div class="md:mx-0  table space-x-3">
+                        <div class="md:mx-0 table space-x-3">
                             <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.losses || 0 }}</span>
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Losses">losses</span>
                         </div>
-                        <div class="md:mx-0  table space-x-3">
+                        <div class="md:mx-0 table space-x-3">
                             <span class="md:text-4xl text-3xl">{{ this.calculateWinLoseRatio(this.member?.hockeyStatistics[0]?.wins, this.member?.hockeyStatistics[0]?.losses) || 0 | number: '1.2-2' }}</span>
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Win-Lose Ratio">WL</span>
