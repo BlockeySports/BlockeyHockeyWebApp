@@ -1,4 +1,4 @@
-<span class="flex flex-row space-x-3 items-center mx-auto w-max">
+<span class="w-max flex flex-row items-center mx-auto space-x-3">
     <svg *ngIf="this.isLoading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 fill-current">
         <g transform="translate(80 50)">
             <circle r="6">
@@ -53,29 +53,29 @@
 </span>
 <table *ngIf="this.member.punishments?.length > 0" class="w-full shadow-md">
     <thead>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800">Issued By</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800">Reason</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800">Type</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800">Length</th>
-        <th class="text-left p-2 border dark:border-gray-300 border-black-400 bg-gray-100 dark:bg-black-800">Date</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Issued By</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Reason</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Type</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Length</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Issued Date</th>
     </thead>
     <tbody>
         <tr *ngFor="let punishment of this.member.punishments">
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
-                style="width: 18.34%;"
+            <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                style="width: 15%; max-width: 15%;"
                 [ngStyle]="{ color: punishment.punisher.roles[0].background }">
                 <span class="w-max hover:underline cursor-pointer"
                       (click)="navigateToProfile(punishment.punisher.username)">{{ punishment.punisher.username }}</span>
             </td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
-                style="width: 35%;">{{ punishment.reason }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 capitalize"
-                style="width: 13.33%;"
+            <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                style="width: 41%; min-width: 35%;">{{ punishment.reason }}</td>
+            <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 capitalize border"
+                style="width: 15%;"
                 [ngStyle]="{ color: getPunishmentColor(punishment.type) }">{{ punishment.type | punishmentType }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
-                style="width: 13.33%;">{{ punishment.length | length : punishment.date }}</td>
-            <td class="p-2 border dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700"
-                style="width: 20%;">{{ punishment.date | date : 'MMM d, y, h:mm a' }}</td>
+            <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                style="width: 12%;">{{ punishment.length | length }}</td>
+            <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                style="width: 17%; min-width: 15%;">{{ punishment.date | date : 'MMM d, y, h:mm a' }}</td>
         </tr>
     </tbody>
 </table>
