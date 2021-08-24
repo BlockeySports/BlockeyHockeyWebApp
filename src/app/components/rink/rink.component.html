@@ -112,15 +112,15 @@
                 <br>
                 <!-- START: Faceoffs -->
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoffs&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" neutral="true" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord + 22 }},{{ yCoord }},{{ zCoord + 8 }}" neutral="false" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" neutral="true" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" neutral="true" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" neutral="false" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord + 22 }},{{ yCoord }},{{ zCoord - 8 }}" neutral="false" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" neutral="true" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord -7 }},{{ yCoord }},{{ zCoord - 8 }}" neutral="true" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" neutral="false" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" zone="neutral" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord + 22 }},{{ yCoord }},{{ zCoord + 8 }}" zone="away" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="home" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord + 22 }},{{ yCoord }},{{ zCoord - 8 }}" zone="away" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord -7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="home" /&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/faceoffs&gt;</span>
                 <!-- END: Faceoffs -->
                 <br>
@@ -130,6 +130,14 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{ xCoord - 29 }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;</span>
                 <!-- END: Goals -->
+                <br>
+                <!-- START: Zones -->
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;zones&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 33 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;neutral side="neutral" min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/zones&gt;</span>
+                <!-- END: Zones -->
                 <br>
                 <!-- START: Lines -->
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lines&gt;</span>
