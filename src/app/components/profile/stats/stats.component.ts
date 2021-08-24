@@ -25,19 +25,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        // tippy
-        setTimeout(
-            () => {
-                try {
-                    const content = this.member.dateJoined
-                        ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
-                        : 'N/A';
-                    this.tippyService.setContent('first-seen', content);
-                } catch (error) {
-                    // ignore error
-                }
-            }, 1000
-        );
+        this.updateFirstJoinedDate(1);
         // statistics not loading
         setTimeout(
             () => {
@@ -50,7 +38,28 @@ export class StatsComponent implements OnInit, AfterViewInit {
                     this.statisticsText = 'There was an error loading your statistics. Try again later.';
                 }
                 this.isLoading = false;
+                // attempt to update join date again
+                this.updateFirstJoinedDate(0.5);
             }, 5000
+        );
+    }
+
+    /**
+     * Update the tippy message that displays the date of the player's first join.
+     * @param seconds The number of seconds to wait before updating.
+     */
+    private updateFirstJoinedDate(seconds: number): void {
+        setTimeout(
+            () => {
+                try {
+                    const content = this.member.dateJoined
+                        ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
+                        : 'N/A';
+                    this.tippyService.setContent('first-seen', content);
+                } catch (error) {
+                    // swallow error
+                }
+            }, (seconds * 1000)
         );
     }
 
