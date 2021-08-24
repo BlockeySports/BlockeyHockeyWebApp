@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Member } from '../models/Member';
 import { Punishment } from '../models/Punishment';
 
 @Injectable({
@@ -23,11 +22,18 @@ export class PunishmentService {
     }
 
     /**
-     * Get a Punishments of a Member
+     * Get all valid punishments for a member.
      */
     public getMemberPunishments(uuid: string): Observable<Punishment[]> {
         const params = new HttpParams()
             .set('uuid', uuid);
         return this.http.get<Punishment[]>(this.url, { params });
+    }
+
+    /**
+     * Get all valid punishments for all members.
+     */
+    public getPunishments(): Observable<Punishment[]> {
+        return this.http.get<Punishment[]>(this.url);
     }
 }

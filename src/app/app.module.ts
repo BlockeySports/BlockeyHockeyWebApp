@@ -22,6 +22,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { StatsComponent } from './components/profile/stats/stats.component';
 import { InfractionsComponent } from './components/profile/infractions/infractions.component';
+import { InfractionsListComponent } from './components/infractions-list/infractions-list.component';
 import { AwardsComponent } from './components/profile/awards/awards.component';
 import { BoxScoreComponent } from './components/boxscore/boxscore.component';
 
@@ -58,7 +59,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     BoxScoreComponent,
     RosterComponent,
     TeamComponent,
-    RinkComponent
+    RinkComponent,
+    InfractionsListComponent
   ],
   imports: [
     BrowserModule,
