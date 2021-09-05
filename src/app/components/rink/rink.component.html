@@ -49,7 +49,7 @@
             <div class="flex flex-col">
                 <label for="rink-icon" class="dark:text-gray-200 w-max ml-1"
                        ngxTippy="Minecraft item displayed in rinks menu">Rink Icon</label>
-                <input id="rink-icon" type="text" placeholder="wooden_pickaxe"
+                <input id="rink-icon" type="text" placeholder="blue_concrete"
                        [(ngModel)]="this.icon"
                        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
             </div>
@@ -109,6 +109,7 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-horn&gt;home&lt;/goal-horn&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;overtime&gt;enabled&lt;/overtime&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;crowd&gt;enabled&lt;/crowd&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;game-style&gt;arcade&lt;/game-style&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/settings&gt;</span>
                 <!-- END: Settings -->
                 <br>
@@ -150,8 +151,21 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;</span>
                 <!-- END: Goals -->
                 <br>
+                <!-- START: Goal Lights -->
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-lights&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/away&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/home&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goal-lights&gt;</span>
+                <!-- END: Goal Lights -->
+                <br>
                 <!-- START: Zones -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;zones&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;zones&gt;<span class="text-gray-500">&nbsp;&lt;!-- Include the blue line in regions --&gt;</span></span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 33 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;neutral side="neutral" min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
