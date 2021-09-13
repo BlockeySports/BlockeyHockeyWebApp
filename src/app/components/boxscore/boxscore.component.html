@@ -56,7 +56,7 @@
                             <p class="px-3">OFFICIAL</p>
                         </div>
                         <div class="border-black-800 w-full border-r">
-                            <p class="px-3">{{ this.boxScore.officials[0] }}</p>
+                            <p *ngIf="!this.pending && this.boxScore?.officials.length > 0" class="px-3">{{ this.boxScore?.officials[0] }}</p>
                         </div>
                     </div>
                     <!-- END: Official -->
@@ -66,7 +66,8 @@
                             <p class="px-3">GAME NO.</p>
                         </div>
                         <div class="border-black-800 w-full border-r">
-                            <p class="px-3">{{ getBoxScoreGameNumber() }}</p>
+                            <p *ngIf="this.boxScore?.isSeries" class="px-3">{{ getBoxScoreGameNumber() }}</p>
+                            <p *ngIf="!this.pending && !this.boxScore?.isSeries" class="px-3 text-gray-700">Not Series</p>
                         </div>
                     </div>
                     <!-- END: Series Round and Game Number -->
