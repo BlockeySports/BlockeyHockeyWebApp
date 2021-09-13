@@ -4,7 +4,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development TAILWIND_MODE=watch ng serve --open",
     "build": "ng build",
-    "prod": "cross-env NODE_ENV=production ng build --prod",
+    "prod": "cross-env NODE_ENV=production ng build --configuration production",
     "deploy": "ng deploy"
   },
   "private": true,
@@ -30,7 +30,7 @@
     "rxjs": "~6.6.0",
     "timeago.js": "^4.0.2",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^11.1.1",
