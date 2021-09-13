@@ -1,7 +1,9 @@
+const mode = process.env.TAILWIND_MODE ? 'jit' : 'aot';
+
 module.exports = {
-    mode: 'jit',
+    mode: mode,
     prefix: '',
-    purge: ["./src/**/*.{html,ts}"],
+    purge: ['./src/**/*.{html,ts}'],
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
@@ -27,7 +29,11 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            display: ['dark'],
+            borderWidth: ['hover']
+        },
+        scrollbar: ['dark'],
     },
     plugins: [
         require('@tailwindcss/aspect-ratio'),

@@ -11,6 +11,7 @@ import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from 'headlessui-angular';
 import { ClipboardModule } from 'ngx-clipboard';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 // Services
 import { CookieService } from 'ngx-cookie-service';
@@ -39,6 +40,9 @@ import { DaysSincePipe } from './pipes/days-since.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
+
+// Font Awesome Icons
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
   declarations: [
@@ -75,9 +79,16 @@ import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
     MatTabsModule,
     NgxPrettyCheckboxModule,
     GridAllModule,
-    ClipboardModule
+    ClipboardModule,
+    FontAwesomeModule
   ],
   providers: [CookieService, FilterService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faYoutube);
+  }
+
+}
