@@ -41,7 +41,11 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": {
+                "styles": {
+                  "inlineCritical": false
+                }
+              },
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
@@ -60,6 +64,14 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
