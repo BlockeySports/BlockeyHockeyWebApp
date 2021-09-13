@@ -8,7 +8,6 @@ import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
-// tslint:disable: deprecation
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html'
@@ -31,13 +30,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public usernameColor = 'currentColor';
     public profilePicture = '';
 
-    public server = 0;
-
     // which content to display (i.e. stats, awards, infractions)
     // show stats content by default
     public tab = 'stats';
 
-    // Subs
+    // subs
     private playerSub: Subscription;
     private memberSub: Subscription;
     private titleSub: Subscription;
@@ -52,21 +49,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-
-        this.server = Math.floor(Math.random() * 8) + 1;
-
         // set the content if specified in the url
         this.route.fragment.subscribe(data => this.tab = data ?? 'stats').unsubscribe();
-
+        // get the username from the url
         this.member.username = this.getUsernameFromAddress();
         // set initial profile picture from username search for (may be changed in subscribe success)
         this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.username}`;
         // set the initial tab title
         this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
-
-        // tslint:disable: deprecation
+        // subscribe to member data
         this.memberSub = this.memberService.getMemberByUsername(this.member.username).subscribe(
-            (data) => {
+            (data: Member) => {
                 // set the member
                 this.member = data;
                 // set the username color
@@ -130,6 +123,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         if (losses === 0) { return wins; }
         return wins / losses;
     }
+
     /**
      * Get the username from the url address
      * occurring after the last slash and before an fragments.

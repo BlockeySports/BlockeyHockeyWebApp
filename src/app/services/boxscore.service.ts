@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Member } from '../models/Member';
+import { BoxScore } from '../models/BoxScore';
 
 @Injectable({
     providedIn: 'root',
 })
-export class MemberService {
+export class BoxScoreService {
 
-    resource = '/rest/v1/member';
+    resource = '/rest/v1/boxscore';
     url = '';
 
     constructor(
@@ -19,16 +19,14 @@ export class MemberService {
         } else {
             this.url = `https://api.blockeyhockey.net${this.resource}`;
         }
-        // this.url = `https://api.blockeyhockey.net${this.resource}`;
-        // console.log(this.url);
     }
 
     /**
-     * Get a Member from the database by username.
+     * Get a box score record from the database by its uuid.
      */
-    public getMemberByUsername(username: string): Observable<Member> {
+    public getBoxScore(uuid: string): Observable<BoxScore> {
         const params = new HttpParams()
-            .set('username', username);
-        return this.http.get<Member>(this.url, { params });
+            .set('uuid', uuid);
+        return this.http.get<BoxScore>(this.url, { params });
     }
 }

@@ -5,6 +5,8 @@ import { Role } from './Role';
 export class Member {
     uuid?: string;              // the UUID of the Minecraft player
     username?: string;          // the Minecraft player's username
+    number?: number;            // the member's jersey number
+    position?: string;          // the hockey ice position
     dateJoined?: Date;          // the date on which this player first joined the server
     joinPosition?: number;      // the position that they joined in
     online?: boolean;           // true if the player is online the server

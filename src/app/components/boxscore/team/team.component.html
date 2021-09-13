@@ -3,7 +3,13 @@
     <div hlMenu>
         <button hlMenuButton
                 class="focus:outline-none relative flex items-center w-[22rem] h-12 border-b-2 border-black">
-            <p class="text-shadow-md font-medium text-[1.9rem]">{{ team.location + ' ' + team.name }}</p>
+            <p class="text-shadow-md font-medium text-[1.9rem]">
+                <span *ngIf="this.team?.location !== null"
+                      [style.color]="getTeamColor()">{{ this.team.location }}</span>
+                <span *ngIf="this.team?.location !== null && this.team?.name !== null">&nbsp;</span>
+                <span *ngIf="this.team?.name !== null"
+                      [style.color]="getTeamColor()">{{ this.team.name }}</span>
+            </p>
             <svg class="text-black-600 absolute right-0.5 w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"

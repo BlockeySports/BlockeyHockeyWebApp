@@ -9,7 +9,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
 import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { FormsModule } from '@angular/forms';
-import { MenuModule } from "headlessui-angular";
+import { MenuModule } from 'headlessui-angular';
+import { ClipboardModule } from 'ngx-clipboard';
 
 // Services
 import { CookieService } from 'ngx-cookie-service';
@@ -25,19 +26,19 @@ import { InfractionsComponent } from './components/profile/infractions/infractio
 import { InfractionsListComponent } from './components/infractions-list/infractions-list.component';
 import { AwardsComponent } from './components/profile/awards/awards.component';
 import { BoxScoreComponent } from './components/boxscore/boxscore.component';
+import { RosterComponent } from './components/boxscore/roster/roster.component';
+import { TeamComponent } from './components/boxscore/team/team.component';
+import { RinkComponent } from './components/rink/rink.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
 import { RoundPipe } from './pipes/round.pipe';
 import { HoursPipe } from './pipes/hours.pipe';
+import { MinutesPipe } from './pipes/minutes.pipe';
 import { DaysSincePipe } from './pipes/days-since.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
-import { RosterComponent } from './components/boxscore/roster/roster.component';
-import { TeamComponent } from './components/boxscore/team/team.component';
-import { RinkComponent } from './components/rink/rink.component';
-import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     AwardsComponent,
     RoundPipe,
     HoursPipe,
+    MinutesPipe,
     DaysSincePipe,
     UsernamePipe,
     LengthPipe,

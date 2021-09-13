@@ -1,27 +1,142 @@
 <div class="dark:bg-black-700 h-full p-20">
     <!-- START: Team Names -->
     <div class="flex flex-row justify-between">
-        <!-- <div class="w-[25.25rem] flex flex-row items-end justify-between">
-            <p class="text-lg">AWAY</p>
-            <div class="border-b-2 min-w-[21rem] border-black text-[2rem] pb-0.5 font-medium text-shadow-md text-[#ff6d01]">San Francisco Flight</div>
-        </div> -->
-        <app-team [isVisitor]="true"></app-team>
-        <!-- <div class="w-[25.25rem] flex flex-row items-end justify-between">
-            <p class="text-lg">HOME</p>
-            <div class="border-b-2 min-w-[21rem] border-black text-[2rem] pb-0.5 font-medium text-shadow-md text-[#6bb8c9]">Hollywood Hattricks</div>
-        </div> -->
-        <app-team [isVisitor]="false"></app-team>
+        <app-team [isVisitor]="true" [team]="this.boxScore.awayTeam"></app-team>
+        <app-team [isVisitor]="false" [team]="this.boxScore.homeTeam"></app-team>
     </div>
     <!-- END: Team Names -->
 
     <div class="flex flex-row items-start justify-between">
         <!-- START: Visitor Players -->
-        <app-roster [players]="this.rosterAway"></app-roster>
+        <app-roster [players]="this.boxScore.awayPlayers"></app-roster>
         <!-- END: Visitor Players -->
+
+        <!-- START: Box Score Information -->
+        <div class="border-black-800 mx-36 w-full border">
+            <div class="border-black-800 w-full mx-auto text-4xl font-semibold bg-gray-300 border-b">
+                <p class="w-max py-2 mx-auto">BOX SCORE INFORMATION</p>
+            </div>
+            <!-- START: Details -->
+            <div class="grid grid-cols-2 text-[1.08rem]">
+                <!-- START: Column One -->
+                <div class="flex flex-col">
+                    <!-- START: Game Date -->
+                    <div class="bg-gray-50 flex flex-row">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">DATE</p>
+                        </div>
+                        <div class="border-black-800 w-full border-r">
+                            <p class="px-3">{{ getBoxScoreDate() }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Game Date -->
+                    <!-- START: Rink -->
+                    <div class="flex flex-row bg-gray-100">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">RINK</p>
+                        </div>
+                        <div class="border-black-800 w-full border-r">
+                            <p class="px-3">{{ this.boxScore.rink }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Rink -->
+                    <!-- START: League -->
+                    <div class="bg-gray-50 flex flex-row">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">LEAGUE</p>
+                        </div>
+                        <div class="border-black-800 w-full border-r">
+                            <p class="px-3">Blockey Pro</p>
+                        </div>
+                    </div>
+                    <!-- END: League -->
+                    <!-- START: Official -->
+                    <div class="flex flex-row bg-gray-100">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">OFFICIAL</p>
+                        </div>
+                        <div class="border-black-800 w-full border-r">
+                            <p class="px-3">{{ this.boxScore.officials[0] }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Official -->
+                    <!-- START: Series Round and Game Number -->
+                    <div class="flex flex-row bg-gray-100">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">GAME NO.</p>
+                        </div>
+                        <div class="border-black-800 w-full border-r">
+                            <p class="px-3">{{ getBoxScoreGameNumber() }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Series Round and Game Number -->
+                </div>
+                <!-- END: Column One -->
+
+                <!-- START: Column Two -->
+                <div class="flex flex-col">
+                    <!-- START: Game Time -->
+                    <div class="bg-gray-50 flex flex-row">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">START TIME</p>
+                        </div>
+                        <div class="w-full">
+                            <p class="px-3">{{ getBoxScoreTime() }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Game Time -->
+                    <!-- START: Duration -->
+                    <div class="flex flex-row bg-gray-100">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">DURATION</p>
+                        </div>
+                        <div class="w-full">
+                            <p class="px-3">{{ this.boxScore.duration | minutes }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Duration -->
+                    <!-- START: Season -->
+                    <div class="flex flex-row bg-gray-100">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">SEASON</p>
+                        </div>
+                        <div class="w-full">
+                            <p class="px-3">Season 1</p>
+                        </div>
+                    </div>
+                    <!-- END: Season -->
+                    <!-- START: Scorer -->
+                    <div class="bg-gray-50 flex flex-row">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">SCORER</p>
+                        </div>
+                        <div class="w-full">
+                            <p class="px-3">{{ this.boxScore.scorer }}</p>
+                        </div>
+                    </div>
+                    <!-- END: Scorer -->
+                    <!-- START: Round and Game Number -->
+                    <div class="bg-gray-50 flex flex-row">
+                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
+                            <p class="px-3">LINK</p>
+                        </div>
+                        <div class="w-full">
+                            <a [href]="getBoxScoreStreamLink()"
+                               class="whitespace-nowrap hover:text-red-700 px-3 text-red-400"
+                               target="_blank">{{ this.pending ? '' : 'Game Playback' }}</a>
+                        </div>
+                    </div>
+                    <!-- END: Round and Game Number -->
+                </div>
+                <!-- END: Column Two -->
+            </div>
+            <!-- END: Details -->
+        </div>
+        <!-- END: Box Score Information -->
 
         <!-- START: Home Roster -->
         <div class="flex flex-col space-y-5 tracking-wider">
-            <app-roster [players]="this.rosterHome"></app-roster>
+            <app-roster [players]="this.boxScore.homePlayers"></app-roster>
 
             <table class="w-max flex flex-col mt-5 shadow-md">
                 <thead class="bg-black-50 w-max border-black-800 flex flex-row items-center font-bold tracking-wide text-white border-2">

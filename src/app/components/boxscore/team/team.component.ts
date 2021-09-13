@@ -19,7 +19,7 @@ import { HockeyTeam } from 'src/app/models/HockeyTeam';
 })
 export class TeamComponent implements OnInit {
 
-    public team: HockeyTeam = {     // the selected hockey team
+    @Input() public team: HockeyTeam = {     // the selected hockey team
         name: '', location: ''
     };
     @Input() public isVisitor = false;
@@ -50,6 +50,16 @@ export class TeamComponent implements OnInit {
      */
     public setTeam(team: HockeyTeam): void {
         this.team = team;
+    }
+
+    /**
+     * Get team color.  If white, use black.
+     * @param team The team to get the color for.
+     * @returns the team color
+     */
+    public getTeamColor(): string {
+        if (this.team.color === '#FFFFFF') { return '#000000'; }
+        return this.team.color;
     }
 
 }

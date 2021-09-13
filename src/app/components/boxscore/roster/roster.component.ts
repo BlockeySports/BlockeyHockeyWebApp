@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Member } from 'src/app/models/Member';
+import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
 
 @Component({
     selector: 'app-roster',
@@ -7,7 +7,7 @@ import { Member } from 'src/app/models/Member';
 })
 export class RosterComponent implements OnInit {
 
-    @Input() players: Member[];
+    @Input() players: BoxScorePlayer[];
 
     constructor() { }
 
