@@ -13,7 +13,7 @@
 
         <!-- START: Box Score Information -->
         <div class="border-black-800 mx-36 w-full border">
-            <div class="border-black-800 w-full mx-auto text-4xl font-semibold bg-gray-300 border-b">
+            <div class="border-black-800 text-shadow-md text-black-700 w-full mx-auto text-4xl font-semibold bg-gray-300 border-b">
                 <p class="w-max py-2 mx-auto">BOX SCORE INFORMATION</p>
             </div>
             <!-- START: Details -->
@@ -121,11 +121,11 @@
                         <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
                             <p class="px-3">LINK</p>
                         </div>
-                        <div class="w-full">
-                            <a [href]="getBoxScoreStreamLink()"
-                               class="whitespace-nowrap hover:text-red-700 px-3 text-red-400"
-                               target="_blank">{{ this.pending ? '' : 'Game Playback' }}</a>
-                        </div>
+                        <a [href]="getBoxScoreStreamLink()" target="_blank"
+                           class="whitespace-nowrap group flex flex-row items-center w-full space-x-1">
+                            <p class="group-hover:underline group-hover:text-red-700 pl-3 text-red-500">{{ this.pending ? '' : 'Broadcast' }}</p>
+                            <fa-icon *ngIf="!this.pending && this.boxScore?.streamLink" [icon]="['fab', 'youtube']" class="group-hover:text-red-700 flex my-auto text-red-600"></fa-icon>
+                        </a>
                     </div>
                     <!-- END: Round and Game Number -->
                 </div>
