@@ -71,7 +71,8 @@
         <section *ngIf="this.xCoord && this.yCoord && this.zCoord">
             <p class="dark:text-white text-black-800 flex justify-center mt-16 text-4xl font-semibold">Rink XML</p>
             <code #xml type="text" class="dark:bg-black-400 dark:text-white text-black-800 relative flex flex-col p-5 mx-auto w-[71.5rem] mt-5 text-left bg-gray-200 border-2 border-gray-200 rounded-lg shadow-md">
-                <button (click)="copyXML()" class="right-4 top-4 text-black-200 hover:bg-gray-400 active:bg-green-500 dark:active:bg-green-500 absolute p-2 dark:text-gray-100 transition-[background-color] duration-200 dark:bg-black-200 dark:hover:bg-black-500 bg-gray-300 rounded-md shadow-md">
+                <button id="copy-xml" (click)="copyXML()"
+                        class="right-4 top-4 text-black-200 hover:bg-gray-400 absolute p-2 dark:text-gray-100 transition-[background-color] duration-300 dark:bg-black-200 dark:hover:bg-black-500 bg-gray-300 rounded-md shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
                         <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
                         <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />

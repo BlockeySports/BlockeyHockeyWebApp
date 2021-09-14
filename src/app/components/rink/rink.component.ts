@@ -30,5 +30,11 @@ export class RinkComponent implements OnInit {
     public copyXML(): void {
         const xmlText = this.xml.nativeElement.innerText;
         this.clipboardService.copyFromContent(xmlText);
+        // turn copy xml button green
+        document.getElementById('copy-xml').classList.add('bg-green-400', 'dark:bg-green-500');
+        // remove copy xml button green after 2 second
+        setTimeout(() => {
+            document.getElementById('copy-xml').classList.remove('bg-green-400', 'dark:bg-green-500');
+        }, 2000);
     }
 }
