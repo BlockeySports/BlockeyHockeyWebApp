@@ -2,8 +2,8 @@
     <p class="mb-2 text-lg">{{ this.isVisitor ? 'AWAY' : 'HOME' }}</p>
     <div hlMenu>
         <button hlMenuButton
-                class="focus:outline-none relative flex items-center w-[22rem] h-12 border-b-2 border-black">
-            <p class="text-shadow-md font-medium text-[1.9rem]">
+                class="focus:outline-none relative flex items-center min-w-[22rem] w-max h-12 border-b-2 border-black">
+            <p class="text-shadow-md font-medium text-[1.9rem] whitespace-nowrap pr-8">
                 <span *ngIf="this.team?.location !== null"
                       [style.color]="getTeamColor()">{{ this.team.location }}</span>
                 <span *ngIf="this.team?.location !== null && this.team?.name !== null">&nbsp;</span>
@@ -19,11 +19,11 @@
 
         <div class="w-full mt-2 font-medium shadow-md">
             <ul *hlMenuItems @toggleAnimation
-                class="border-black-700 absolute w-[22rem] bg-white border rounded-sm items-end">
+                class="border-black-700 absolute min-w-[22rem] w-max bg-white border rounded-sm items-end">
                 <li *ngFor="let team of this.teams">
                     <div *hlMenuItem="let item"
                          [class]="item.active ? 'bg-gray-100 text-black-800' : 'text-black-300'"
-                         class="px-4 py-2 tracking-wider text-left capitalize cursor-pointer"
+                         class="whitespace-nowrap px-4 py-2 tracking-wider text-left capitalize cursor-pointer"
                          (click)="setTeam(team)">
                         {{ team.location + ' ' + team.name }}
                     </div>

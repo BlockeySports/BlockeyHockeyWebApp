@@ -36,7 +36,11 @@ export class TeamComponent implements OnInit {
         {
             location: 'San Francisco',
             name: 'Flight'
-        }
+        },
+        {
+            location: 'Long City Name',
+            name: 'Longer Team Name Woohoo'
+        },
     ];
 
     constructor() { }
