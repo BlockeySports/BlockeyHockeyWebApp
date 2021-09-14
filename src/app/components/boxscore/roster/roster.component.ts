@@ -9,9 +9,14 @@ export class RosterComponent implements OnInit {
 
     @Input() players: BoxScorePlayer[];
 
+    public maxVisiblePlayers = 8;
+
     constructor() { }
 
-    ngOnInit(): void {
+    ngOnInit(): void { }
+
+    public getMaxRosterHeight(): string {
+        return `${this.maxVisiblePlayers * 1.625 + 1.625}rem`;
     }
 
     public navigateToProfile(username: string): void {
