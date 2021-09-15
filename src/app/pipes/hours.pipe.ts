@@ -1,7 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Dayjs } from 'dayjs';
-import * as dayjs from 'dayjs';
-import * as duration from 'dayjs/plugin/duration';
 
 @Pipe({
   name: 'hours'

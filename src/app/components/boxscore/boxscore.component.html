@@ -1,179 +1,56 @@
-<div class="dark:bg-black-700 h-full p-20">
-    <!-- START: Team Names -->
-    <div class="flex flex-row justify-between">
-        <app-team [isVisitor]="true" [team]="this.boxScore.awayTeam"></app-team>
-        <app-team [isVisitor]="false" [team]="this.boxScore.homeTeam"></app-team>
-    </div>
-    <!-- END: Team Names -->
-
+<div class="dark:bg-black-700 flex flex-col h-full p-20 !pb-0 space-y-2.5">
+    <!-- START: Box Score Top -->
     <div class="flex flex-row items-start justify-between">
-        <!-- START: Visitor Players -->
-        <app-roster [players]="this.boxScore.awayPlayers"></app-roster>
-        <!-- END: Visitor Players -->
+        <!-- START: Away Team & Roster -->
+        <div class="flex flex-col space-y-5">
+            <!-- START: Away Team Name -->
+            <app-team [isVisitor]="true" [team]="this.boxScore.awayTeam"></app-team>
+            <!-- END: Away Team Name -->
 
-        <!-- START: Box Score Information -->
-        <div class="border-black-800 mx-36 w-full border">
-            <div class="border-black-800 text-shadow-md text-black-700 w-full mx-auto text-4xl font-semibold bg-gray-300 border-b">
-                <p class="w-max py-2 mx-auto">BOX SCORE INFORMATION</p>
-            </div>
-            <!-- START: Details -->
-            <div class="grid grid-cols-2 text-[1.08rem]">
-                <!-- START: Column One -->
-                <div class="flex flex-col">
-                    <!-- START: Game Date -->
-                    <div class="bg-gray-50 flex flex-row">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">DATE</p>
-                        </div>
-                        <div class="border-black-800 w-full border-r">
-                            <p class="px-3">{{ getBoxScoreDate() }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Game Date -->
-                    <!-- START: Rink -->
-                    <div class="flex flex-row bg-gray-100">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">RINK</p>
-                        </div>
-                        <div class="border-black-800 w-full border-r">
-                            <p class="px-3">{{ this.boxScore.rink }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Rink -->
-                    <!-- START: League -->
-                    <div class="bg-gray-50 flex flex-row">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">LEAGUE</p>
-                        </div>
-                        <div class="border-black-800 w-full border-r">
-                            <p class="px-3">Blockey Pro</p>
-                        </div>
-                    </div>
-                    <!-- END: League -->
-                    <!-- START: Official -->
-                    <div class="flex flex-row bg-gray-100">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">OFFICIAL</p>
-                        </div>
-                        <div class="border-black-800 w-full border-r">
-                            <p *ngIf="!this.pending && this.boxScore?.officials.length > 0" class="px-3">{{ this.boxScore?.officials[0] }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Official -->
-                    <!-- START: Series Round and Game Number -->
-                    <div class="flex flex-row bg-gray-100">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">GAME NO.</p>
-                        </div>
-                        <div class="border-black-800 w-full border-r">
-                            <p *ngIf="this.boxScore?.isSeries" class="px-3">{{ getBoxScoreGameNumber() }}</p>
-                            <p *ngIf="!this.pending && !this.boxScore?.isSeries" class="px-3 text-gray-700">Not Series</p>
-                        </div>
-                    </div>
-                    <!-- END: Series Round and Game Number -->
-                </div>
-                <!-- END: Column One -->
-
-                <!-- START: Column Two -->
-                <div class="flex flex-col">
-                    <!-- START: Game Time -->
-                    <div class="bg-gray-50 flex flex-row">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">START TIME</p>
-                        </div>
-                        <div class="w-full">
-                            <p class="px-3">{{ getBoxScoreTime() }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Game Time -->
-                    <!-- START: Duration -->
-                    <div class="flex flex-row bg-gray-100">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">DURATION</p>
-                        </div>
-                        <div class="w-full">
-                            <p class="px-3">{{ this.boxScore.duration | minutes }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Duration -->
-                    <!-- START: Season -->
-                    <div class="flex flex-row bg-gray-100">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">SEASON</p>
-                        </div>
-                        <div class="w-full">
-                            <p class="px-3">Season 1</p>
-                        </div>
-                    </div>
-                    <!-- END: Season -->
-                    <!-- START: Scorer -->
-                    <div class="bg-gray-50 flex flex-row">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">SCORER</p>
-                        </div>
-                        <div class="w-full">
-                            <p class="px-3">{{ this.boxScore.scorer }}</p>
-                        </div>
-                    </div>
-                    <!-- END: Scorer -->
-                    <!-- START: Round and Game Number -->
-                    <div class="bg-gray-50 flex flex-row">
-                        <div class="border-black-800 text-black-200 w-7/12 font-semibold text-right border-r">
-                            <p class="px-3">LINK</p>
-                        </div>
-                        <a [href]="getBoxScoreStreamLink()" target="_blank"
-                           class="whitespace-nowrap group flex flex-row items-center w-full space-x-1">
-                            <p class="group-hover:underline group-hover:text-red-700 pl-3 text-red-500">{{ this.pending ? '' : 'Broadcast' }}</p>
-                            <fa-icon *ngIf="!this.pending && this.boxScore?.streamLink" [icon]="['fab', 'youtube']" class="group-hover:text-red-700 flex my-auto text-red-600"></fa-icon>
-                        </a>
-                    </div>
-                    <!-- END: Round and Game Number -->
-                </div>
-                <!-- END: Column Two -->
-            </div>
-            <!-- END: Details -->
+            <!-- START: Visitor Players -->
+            <app-roster [boxScore]="this.boxScore" [players]="this.boxScore.awayPlayers"></app-roster>
+            <!-- END: Visitor Players -->
         </div>
-        <!-- END: Box Score Information -->
+        <!-- END: Away Team & Roster -->
 
-        <!-- START: Home Roster -->
-        <div class="flex flex-col space-y-5 tracking-wider">
-            <app-roster [players]="this.boxScore.homePlayers"></app-roster>
+        <!-- START: Information and Scoring Summary -->
+        <div class="mx-36 flex flex-col w-full mt-3"
+             [class]="this.boxScore?.isSeries ? 'h-[21.8rem]' : 'h-[20.25rem]'">
+            <!-- START: Box Score Information -->
+            <app-information [pending]="this.pending" [boxScore]="this.boxScore"
+                             class="w-full"></app-information>
+            <!-- END: Box Score Information -->
 
-            <table class="w-max flex flex-col mt-5 shadow-md">
-                <thead class="bg-black-50 w-max border-black-800 flex flex-row items-center font-bold tracking-wide text-white border-2">
-                    <th class="w-[25rem] text-center py-0.5 tracking-wider">GOALKEEPING STATISTICS</th>
-                </thead>
-                <tbody class="border-black-800 flex flex-col font-medium border-b-2 border-l-2 border-r-2">
-                    <tr class="flex flex-row">
-                        <!-- <div class="w-12 h-full text-center border">NO.</div> -->
-                        <div class="flex flex-col w-12">
-                            <div class="w-full text-center border">NO.</div>
-                            <div class="w-full text-center border">PER.</div>
-                        </div>
-                        <div class="w-44 flex flex-col border">
-                            <div class="w-full text-center">SHOTS FACED</div>
-                            <div class="flex flex-row justify-between">
-                                <div class="w-full text-center border">1</div>
-                                <div class="w-full text-center border">2</div>
-                                <div class="w-full text-center border">3</div>
-                                <div class="w-full px-2 text-center border">OT</div>
-                                <div class="w-full px-2 text-center border">Total</div>
-                            </div>
-                        </div>
-                        <div class="w-44 flex flex-col border">
-                            <div class="w-full text-center">SAVES</div>
-                            <div class="flex flex-row justify-between">
-                                <div class="w-full text-center border">1</div>
-                                <div class="w-full text-center border">2</div>
-                                <div class="w-full text-center border">3</div>
-                                <div class="w-full px-2 text-center border">OT</div>
-                                <div class="w-full px-2 text-center border">Total</div>
-                            </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- START: Scoring Summary -->
+            <app-scoring-summary [pending]="this.pending" [boxScore]="this.boxScore"
+                                 class="w-full mt-auto"></app-scoring-summary>
+            <!-- END: Scoring Summary -->
         </div>
-        <!-- END: Home Roster -->
+        <!-- END: Information and Scoring Summary -->
+
+        <!-- START: Home Team & Roster -->
+        <div class="flex flex-col space-y-5">
+            <!-- START: Home Team Name -->
+            <app-team [isVisitor]="false" [team]="this.boxScore.homeTeam"></app-team>
+            <!-- END: Home Team Name -->
+
+            <!-- START: Home Players -->
+            <app-roster [boxScore]="this.boxScore" [players]="this.boxScore.homePlayers"></app-roster>
+            <!-- END: Home Players -->
+        </div>
+        <!-- END: Home Team & Roster -->
     </div>
+    <!-- END: Box Score Top -->
+
+    <!-- START: Box Score Bottom -->
+    <div class="flex flex-row items-start justify-between">
+        <!-- START: Away Team Goals -->
+        <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="true"></app-goals>
+        <!-- END: Away Team Goals -->
+
+        <!-- START: Home Team Goals -->
+        <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="false"></app-goals>
+        <!-- END: Home Team Goals -->
+    </div>
+    <!-- END: Box Score Bottom -->
 </div>

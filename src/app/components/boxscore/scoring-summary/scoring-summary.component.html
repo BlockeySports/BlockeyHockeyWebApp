@@ -1,0 +1,47 @@
+<div class="border-black-800 border-2 shadow-md select-none">
+    <!-- START: Title -->
+    <div class="border-black-800 text-shadow-md text-black-700 w-full mx-auto text-2xl font-semibold bg-gray-300 border-b-2">
+        <p class="w-max mx-auto">SCORING SUMMARY</p>
+    </div>
+    <!-- END: Title -->
+    <!-- START: Details -->
+    <table class="w-full table-fixed">
+        <tr>
+            <th class="border-black-800 bg-black-50 text-white border-b-2 border-r"
+                ngxTippy="Teams that played this game">TEAMS</th>
+            <th class="border-black-800 bg-gray-300 border-b-2 border-r"
+                ngxTippy="First period">1</th>
+            <th class="border-black-800 bg-gray-300 border-b-2 border-r"
+                ngxTippy="Second period">2</th>
+            <th class="border-black-800 bg-gray-300 border-b-2 border-r"
+                ngxTippy="Third period">3</th>
+            <th class="border-black-800 bg-red-500/80 border-b-2 border-r"
+                ngxTippy="Overtime period(s)">OT</th>
+            <th class="border-black-800 bg-[#6bd369] border-b-2"
+                ngxTippy="Final score">FINAL</th>
+        </tr>
+        <tr>
+            <td class="border-black-800 border-r"
+                [style.background]="this.boxScore?.awayTeam?.color || 'white'"
+                [style.color]="getContrastingColor(this.boxScore?.awayTeam?.color) || 'black'"
+                [ngxTippy]="getFullTeamName(true) || 'Away Team'">
+                <p class="w-max mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
+            </td>
+            <td *ngFor="let i of [].constructor(4); let j = index"
+                class="border-black-800 bg-gray-50 text-center border-r">{{ getNumberOfGoals(true, j + 1) }}</td>
+            <td class="border-black-800 bg-gray-50 text-center">{{ getNumberOfGoals(true) }}</td>
+        </tr>
+        <tr>
+            <td class="border-black-800 border-r"
+                [style.background]="this.boxScore?.homeTeam?.color || '#494949'"
+                [style.color]="getContrastingColor(this.boxScore?.homeTeam?.color) || 'white'"
+                [ngxTippy]="getFullTeamName(false) || 'Home Team'">
+                <p class="w-max mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
+            </td>
+            <td *ngFor="let i of [].constructor(4); let j = index"
+                class="border-black-800 text-center bg-gray-100 border-r">{{ getNumberOfGoals(false, j + 1) }}</td>
+            <td class="border-black-800 text-center bg-gray-100">{{ getNumberOfGoals(false) }}</td>
+        </tr>
+    </table>
+    <!-- END: Details -->
+</div>

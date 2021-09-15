@@ -30,6 +30,7 @@ import { BoxScoreComponent } from './components/boxscore/boxscore.component';
 import { RosterComponent } from './components/boxscore/roster/roster.component';
 import { TeamComponent } from './components/boxscore/team/team.component';
 import { RinkComponent } from './components/rink/rink.component';
+import { InformationComponent } from './components/boxscore/information/information.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
@@ -40,9 +41,13 @@ import { DaysSincePipe } from './pipes/days-since.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
 
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { ScoringSummaryComponent } from './components/boxscore/scoring-summary/scoring-summary.component';
+import { GoalsComponent } from './components/boxscore/goals/goals.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +71,11 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
     RosterComponent,
     TeamComponent,
     RinkComponent,
-    InfractionsListComponent
+    InfractionsListComponent,
+    InformationComponent,
+    ScoringSummaryComponent,
+    GoalsComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
@@ -88,7 +97,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 export class AppModule {
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faYoutube);
+    library.addIcons(faYoutube, faExternalLinkAlt);
   }
 
 }

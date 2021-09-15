@@ -36,22 +36,12 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
                 this.pending = false;
                 // set tab title to team codes
                 document.title = this.boxScore.awayTeam.code + ' @ ' + this.boxScore.homeTeam.code + ' | ' + this.getBoxScoreDate();
+                console.log(this.boxScore);
             },
             (error) => {
                 console.log(error);
             }
         );
-    }
-
-    /**
-     * Get the box score uuid from the url address
-     * occurring after the last slash and before an fragments.
-     */
-    private getUuidFromAddress(): string {
-        const url = window.location.href;
-        const lastSlash = url.lastIndexOf('/');
-        // in case a fragment exists in url, only take everything before that
-        return url.substr(lastSlash + 1).split('#')[0];
     }
 
     /**
@@ -65,23 +55,14 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Get the box score time in a human-readable format.
+     * Get the box score uuid from the url address
+     * occurring after the last slash and before an fragments.
      */
-    public getBoxScoreTime(): string {
-        // if pending box score information, return empty string
-        if (this.pending) { return ''; }
-        dayjs.extend(localizedFormat);
-        return dayjs(this.boxScore.gameTime).format('LT');
-    }
-
-    public getBoxScoreGameNumber(): string {
-        if (this.pending || !this.boxScore.isSeries) { return ''; }
-        return 'Round ' + this.boxScore.roundNumber + ' Game ' + this.boxScore.gameNumber;
-    }
-
-    public getBoxScoreStreamLink(): string {
-        if (this.pending || this.boxScore?.streamLink === undefined) { return ''; }
-        return this.boxScore.streamLink;
+    private getUuidFromAddress(): string {
+        const url = window.location.href;
+        const lastSlash = url.lastIndexOf('/');
+        // in case a fragment exists in url, only take everything before that
+        return url.substr(lastSlash + 1).split('#')[0];
     }
 
     public ngOnDestroy(): void {

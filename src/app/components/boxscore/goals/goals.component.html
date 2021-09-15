@@ -1,0 +1,75 @@
+<table class="w-max flex flex-col mt-5 shadow-md select-none">
+    <div class="border-black-800 font-semibold text-center border-2 border-b-0"
+         [class]="this.isVisitor ? 'bg-gray-300 text-black-800' : 'bg-black-50 text-gray-50'">{{ this.isVisitor ? 'VISITING TEAM GOALS' : 'HOME TEAM GOALS' }}</div>
+    <thead class="w-max border-black-800 text-black-800 flex flex-row items-center font-bold bg-gray-100 border-2">
+        <th class="border-r-2 border-black-800 w-[3.5rem] text-center"
+            ngxTippy="The goal sequence">#</th>
+        <th class="border-r-2 border-black-800 w-[3.5rem] text-center"
+            ngxTippy="Period in which the goal was scored">PER</th>
+        <th class="border-r-2 border-black-800 w-[4.5rem] text-center"
+            ngxTippy="Time into the period when the goal was scored">TIME</th>
+        <th class="border-r-2 border-black-800 w-[12rem] text-center"
+            ngxTippy="The player credited for the goal">SCORER</th>
+        <th colspan="2" class="border-r-2 border-black-800 w-[24rem] text-center"
+            ngxTippy="Player(s) that assisted the goal scorer">ASSISTANT(S)</th>
+        <!-- <th class="border-r-2 border-black-800 w-[12rem] text-center">ASSISTANT</th> -->
+        <th class="border-black-800 w-[3.5rem] text-center"
+            ngxTippy="The type of goal (i.e. power play)">TYPE</th>
+    </thead>
+    <tbody class="border-black-800 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
+           [style.max-height]="getMaxGoalsHeight()">
+        <!-- START: Roster Players -->
+        <tr *ngFor="let goal of getGoals(); let i = index"
+            class="hover:bg-gray-200 flex flex-row"
+            [ngClass]="i%2 === 0 ? 'bg-gray-50' : 'bg-gray-100'">
+            <td class="border-r border-gray-600 w-[3.5rem] text-center">{{ i + 1 }}</td>
+            <td class="border-r border-gray-600 w-[3.5rem] text-center">{{ getGoalPeriod(goal) }}</td>
+            <td class="border-r border-gray-600 w-[4.5rem] text-center">{{ goal?.goalTime | duration }}</td>
+            <td class="border-r border-gray-600 w-[12rem] text-center cursor-pointer hover:font-semibold">
+                <a [href]="getProfileLink(goal.goalScorer.username)" target="_blank">{{ goal.goalScorer.username }}</a>
+            </td>
+            <td class="border-r border-gray-600 w-[12rem] hover:font-semibold text-center cursor-pointer">
+                <a [href]="getProfileLink(goal.primaryAssistant.username)" target="_blank">{{ goal.primaryAssistant.username }}</a>
+            </td>
+            <td class="border-r border-gray-600 w-[12rem] hover:font-semibold text-center cursor-pointer">
+                <a [href]="getProfileLink(goal.secondaryAssistant.username)" target="_blank">{{ goal.secondaryAssistant.username }}</a>
+            </td>
+            <td class="w-[3.5rem] text-center"
+                [ngClass]="{'text-black/25 font-semibold': !getGoalType(goal)}"
+                [ngxTippy]="getGoalTypeDescription(goal) || 'Even Strength Goal'">{{ getGoalType(goal) || '&ndash;' }}</td>
+        </tr>
+        <!-- END: Roster Players -->
+
+        <!-- START: Null Roster -->
+        <div *ngIf="getGoals() == null">
+            <tr *ngFor="let i of [].constructor(MAX_VISIBLE_GOALS); let j = index"
+                class="flex flex-row"
+                [ngClass]="j%2 === 0 ? 'bg-gray-50' : 'bg-gray-100'">
+                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[4.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="w-[3.5rem]">&nbsp;</td>
+            </tr>
+        </div>
+        <!-- END: Null Roster -->
+
+        <!-- START: Roster Filling -->
+        <div *ngIf="getGoals() != null && getGoals().length < MAX_VISIBLE_GOALS">
+            <tr *ngFor="let i of [].constructor(MAX_VISIBLE_GOALS - getGoals().length); let j = index"
+                class="flex flex-row"
+                [ngClass]="j%2 !== (getGoals().length%2 == 0 ? 1 : 0) ? 'bg-gray-50' : 'bg-gray-100'">
+                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[4.5rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="border-r border-gray-600 w-[12rem]">&nbsp;</td>
+                <td class="w-[3.5rem]">&nbsp;</td>
+            </tr>
+        </div>
+        <!-- END: Roster Filling -->
+    </tbody>
+</table>
