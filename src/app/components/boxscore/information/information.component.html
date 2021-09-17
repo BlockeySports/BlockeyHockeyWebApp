@@ -30,17 +30,20 @@
                 </div>
             </div>
             <!-- END: Rink -->
-            <!-- START: League -->
-            <div class="bg-gray-50 dark:bg-black-200 flex flex-row">
+            <!-- START: League/Tournament -->
+            <div *ngIf="this.boxScore.isLeaguePlay || this.boxScore.isTournamentPlay || this.pending" class="bg-gray-50 dark:bg-black-200 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
-                       ngxTippy="League or tournament name">LEAGUE</p>
+                    <p *ngIf="this.boxScore.isLeaguePlay || this.pending" class="w-max px-3 ml-auto"
+                       ngxTippy="League name">LEAGUE</p>
+                    <p *ngIf="this.boxScore.isTournamentPlay" class="w-max px-3 ml-auto"
+                       ngxTippy="Tournament name">TOURNEY</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p class="px-3">Blockey Pro</p>
+                    <p *ngIf="this.boxScore.isLeaguePlay || this.pending" class="px-3">{{ this.boxScore?.league }}</p>
+                    <p *ngIf="this.boxScore.isTournamentPlay" class="px-3">{{ this.boxScore?.tournament }}</p>
                 </div>
             </div>
-            <!-- END: League -->
+            <!-- END: League/Tournament -->
             <!-- START: Official -->
             <div class="dark:bg-black-300 flex flex-row bg-gray-100">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
@@ -94,10 +97,10 @@
             <div class="bg-gray-50 dark:bg-black-200 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto"
-                       ngxTippy="Season or tournament number">SEASON</p>
+                       ngxTippy="Season name or number">SEASON</p>
                 </div>
                 <div class="w-full">
-                    <p class="px-3">Season 1</p>
+                    <p *ngIf="this.boxScore.isLeaguePlay || this.pending" class="px-3">{{ this.boxScore.season }}</p>
                 </div>
             </div>
             <!-- END: Season -->

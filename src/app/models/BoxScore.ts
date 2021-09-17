@@ -14,6 +14,16 @@ export class BoxScore {
     homeTeam?: HockeyTeam;                              // the home team in the game
     duration?: number;                                  // the duration of the game in milliseconds (from faceoff drop to end)
 
+    isPreseason?: boolean;                              // true if the game is a pre-season game
+    isRegularSeason?: boolean;                          // true if the game is a regular season game
+    isPostseason?: boolean;                             // true if the game is a post-season game
+
+    isLeaguePlay?: boolean;                             // true if the game is a league game
+    isTournamentPlay?: boolean;                         // true if the game is a part of a tournament
+    league?: string;                                    // the name of the league the game is in
+    season?: string;                                    // the name of the season the game is in
+    tournament?: string;                                // the name of the tournament the game is in
+
     isSeries?: boolean;                                 // true if this game is a part of a series
     seriesID?: string;                                  // the id shared by all games in the same series
     gameNumber?: number;                                // the number of the game in a series (i.e. Game 7)
