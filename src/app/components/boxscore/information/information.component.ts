@@ -48,12 +48,12 @@ export class InformationComponent implements OnInit {
         // copy link to clipboard
         this.clipboardService.copyFromContent(this.boxScore.streamLink);
         // turn copy link button green
-        document.getElementById('copy-link').classList.add('text-green-500');
-        document.getElementById('copy-link').classList.remove('hover:text-yellow-500');
+        document.getElementById('copy-link').classList.add('!text-green-500');
+        document.getElementById('copy-link').classList.remove('hover:!text-yellow-500');
         // remove copy link button green after 2 second
         setTimeout(() => {
-            document.getElementById('copy-link').classList.remove('text-green-500');
-            document.getElementById('copy-link').classList.add('hover:text-yellow-500');
+            document.getElementById('copy-link').classList.remove('!text-green-500');
+            document.getElementById('copy-link').classList.add('hover:!text-yellow-500');
         }, 2000);
     }
 

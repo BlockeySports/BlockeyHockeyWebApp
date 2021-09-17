@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { BoxScore } from 'src/app/models/BoxScore';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -12,10 +13,14 @@ export class ScoringSummaryComponent implements OnInit {
     @Input() pending: boolean;
 
     constructor(
+        private tippyService: NgxTippyService,
         private colorService: ColorService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        // set the tooltips
+        this.setTeamNameTooltip();
+    }
 
     /**
      * Get the color that contrasts the background color.
@@ -75,20 +80,20 @@ export class ScoringSummaryComponent implements OnInit {
     /**
      * Get the full name of a team.
      */
-    public getFullTeamName(isAway: boolean): string {
-        // if pending still, return null
-        if (this.pending) { return null; }
-        // if away team
-        if (isAway) {
-            // return the full name of the away team
-            return this.boxScore?.awayTeam?.location + ' ' + this.boxScore?.awayTeam?.name;
-        }
-        // if home team
-        else {
-            // return the full name of the home team
-            return this.boxScore?.homeTeam?.location + ' ' + this.boxScore?.homeTeam?.name;
-        }
+    public setTeamNameTooltip(): void {
+        setInterval(() => {
+            // create the full name of the away team
+            let awayTooltip = (this.boxScore?.awayTeam?.location || '') + ' ' + (this.boxScore?.awayTeam?.name || '');
+            // if tooltip is empty, set to away team
+            if (!awayTooltip.replace(' ', '')) { awayTooltip = 'Away Team'; }
+            // set the tooltip
+            this.tippyService.setContent('away-team-tippy', awayTooltip);
+            // create the full name of the home team
+            let homeTooltip = (this.boxScore?.homeTeam?.location || '') + ' ' + (this.boxScore?.homeTeam?.name || '');
+            // if tooltip is empty, set to home team
+            if (!homeTooltip.replace(' ', '')) { homeTooltip = 'Home Team'; }
+            // set the tooltip
+            this.tippyService.setContent('home-team-tippy', homeTooltip);
+        }, 1000);
     }
-
-    //TODO: fix full name tippy above
 }

@@ -13,7 +13,8 @@ export class GoalsComponent implements OnInit {
     @Input() isVisitor: boolean;
     @Input() pending: boolean;
 
-    public MAX_VISIBLE_GOALS = 15;
+    public MAX_VISIBLE_GOALS = 13;
+    private LINE_HEIGHT = 1.71875;
 
     constructor(
         private tippyService: NgxTippyService
@@ -36,30 +37,30 @@ export class GoalsComponent implements OnInit {
      */
     public getGoalType(goal: BoxScoreGoal): string {
         let goalType = '';
-        if (goal.isPowerPlay) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
-            goalType += 'PP';
-        } else if (goal.isExtraAttacker) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
-            goalType += 'EA';
-        }
-
-        if (goal.isPenaltyKill) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
-            goalType += 'PK';
-        } else if (goal.isShortHanded) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
-            goalType += 'SH';
-        }
-
-        if (goal.isEmptyNet) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
-            goalType += 'EN';
-        }
-
         if (goal.isOwnGoal) {
-            if (goalType && goalType.length > 0) { goalType += '/'; }
             goalType += 'OWN';
+            if (goal.isEmptyNet) { goalType += '/EN'; }
+        } else {
+            if (goal.isPowerPlay) {
+                if (goalType && goalType.length > 0) { goalType += '/'; }
+                goalType += 'PP';
+            } else if (goal.isExtraAttacker) {
+                if (goalType && goalType.length > 0) { goalType += '/'; }
+                goalType += 'EA';
+            }
+
+            if (goal.isPenaltyKill) {
+                if (goalType && goalType.length > 0) { goalType += '/'; }
+                goalType += 'PK';
+            } else if (goal.isShortHanded) {
+                if (goalType && goalType.length > 0) { goalType += '/'; }
+                goalType += 'SH';
+            }
+
+            if (goal.isEmptyNet) {
+                if (goalType && goalType.length > 0) { goalType += '/'; }
+                goalType += 'EN';
+            }
         }
         return goalType;
     }
@@ -110,11 +111,22 @@ export class GoalsComponent implements OnInit {
         return (goal.period - 3) + 'OT';
     }
 
+    public getMaxVisibleGoals(): number {
+        return this.MAX_VISIBLE_GOALS - (this.boxScore.isSeries ? 1 : 0);
+    }
+
     public getMaxGoalsHeight(): string {
-        return `${this.MAX_VISIBLE_GOALS * 1.625 + 1.625}rem`;
+        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore.isSeries ? this.LINE_HEIGHT : 0)}rem`;
     }
 
     public getProfileLink(username: string): string {
         return window.location.origin + '/u/' + username;
+    }
+
+    public getDescription(): string {
+        if (this.isVisitor) {
+            return 'Goals scored by the visiting team';
+        }
+        return 'Goals scored by the home team';
     }
 }

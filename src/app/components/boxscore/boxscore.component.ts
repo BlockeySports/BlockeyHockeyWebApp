@@ -4,23 +4,31 @@ import { BoxScore } from 'src/app/models/BoxScore';
 import { BoxScoreService } from 'src/app/services/boxscore.service';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { TeamService } from 'src/app/services/team.service';
+import { HockeyTeam } from 'src/app/models/HockeyTeam';
 
 @Component({
     selector: 'app-boxscore',
-    templateUrl: './boxscore.component.html'
+    templateUrl: './boxscore.component.html',
+    styleUrls: ['./boxscore.component.css']
 })
 export class BoxScoreComponent implements OnInit, OnDestroy {
 
+    public isReadOnly = true;
     public pending = true;
     public boxScore: BoxScore = {
         uuid: '',
     };
 
+    public teams: HockeyTeam[];
+
     // subs
     public boxScoreSubscription: Subscription;
+    public teamSubscription: Subscription;
 
     constructor(
-        private boxScoreService: BoxScoreService
+        private boxScoreService: BoxScoreService,
+        private teamService: TeamService
     ) { }
 
     ngOnInit(): void {
@@ -35,8 +43,17 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
                 // no longer pending
                 this.pending = false;
                 // set tab title to team codes
-                document.title = this.boxScore.awayTeam.code + ' @ ' + this.boxScore.homeTeam.code + ' | ' + this.getBoxScoreDate();
+                document.title = this.boxScore?.awayTeam?.code + ' @ ' + this.boxScore?.homeTeam?.code + ' | ' + this.getBoxScoreDate();
                 console.log(this.boxScore);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        // subscribe to the team data
+        this.teamSubscription = this.teamService.getHockeyTeams().subscribe(
+            (data: HockeyTeam[]) => {
+                this.teams = data;
             },
             (error) => {
                 console.log(error);
@@ -67,5 +84,6 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         if (this.boxScoreSubscription) { this.boxScoreSubscription.unsubscribe(); }
+        if (this.teamSubscription) { this.teamSubscription.unsubscribe(); }
     }
 }

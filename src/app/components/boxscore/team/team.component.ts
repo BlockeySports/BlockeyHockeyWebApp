@@ -19,25 +19,12 @@ import { HockeyTeam } from 'src/app/models/HockeyTeam';
 })
 export class TeamComponent implements OnInit {
 
+    @Input() public isReadOnly: boolean;
     @Input() public team: HockeyTeam = {     // the selected hockey team
         name: '', location: ''
     };
     @Input() public isVisitor = false;
-
-    public teams: HockeyTeam[] = [
-        {
-            location: 'Hollywood',
-            name: 'Hattricks'
-        },
-        {
-            location: 'California',
-            name: 'Drought'
-        },
-        {
-            location: 'San Francisco',
-            name: 'Flight'
-        }
-    ];
+    @Input() public teams: HockeyTeam[] = []; // the list of all hockey teams from the database
 
     constructor() { }
 

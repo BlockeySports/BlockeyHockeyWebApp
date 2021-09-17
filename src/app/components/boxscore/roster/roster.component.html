@@ -1,21 +1,21 @@
-<table class="w-max flex flex-col mt-5 shadow-md select-none">
-    <thead class="bg-black-50 w-max border-black-800 flex flex-row items-center font-bold text-white border-2">
-        <th class="border-r-2 border-black-800 w-[3.5rem] text-center"
+<table class="w-max dark:text-white flex flex-col mt-5 shadow-md select-none">
+    <thead class="bg-black-50 dark:bg-black-600 w-max border-black-800 dark:border-black-50 flex flex-row items-center font-bold text-white border-2">
+        <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
             ngxTippy="Player's position">POS.</th>
-        <th class="border-r-2 border-black-800 w-[3.5rem] text-center"
+        <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
             ngxTippy="Player's jersey number">NO.</th>
         <th class="w-[18rem] text-center"
             ngxTippy="Player's username">PLAYERS <span *ngIf="this.players != null && this.players.length > 0">({{ this.players.length }})</span></th>
     </thead>
-    <tbody class="border-black-800 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 scrollbar-thin flex flex-col overflow-y-scroll font-medium border-b-2 border-l-2 border-r-2"
+    <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 scrollbar-thin flex flex-col overflow-y-scroll font-medium border-b-2 border-l-2 border-r-2"
            [style.max-height]="getMaxRosterHeight()">
         <!-- START: Roster Players -->
         <tr *ngFor="let player of this.players; let i = index"
-            class="hover:bg-gray-200 flex flex-row"
-            [ngClass]="i%2 === 0 ? 'bg-gray-50' : 'bg-gray-100'">
-            <td class="border-r border-gray-600 w-[3.5rem] text-center">{{ this.player.member.position }}</td>
-            <td class="border-r border-gray-600 w-[3.5rem] text-center">{{ this.player.member.number }}</td>
-            <td class="w-[18rem] text-center cursor-pointer hover:font-bold">
+            class="hover:bg-gray-200 dark:hover:bg-black-400 flex flex-row"
+            [ngClass]="i%2 === 0 ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ this.player.member.position }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ this.player.member.number }}</td>
+            <td class="w-[18rem] text-center hover:font-bold">
                 <a [href]="getProfileLink(player.member.username)" target="_blank">{{ player.member.username }}</a>
             </td>
         </tr>
@@ -25,9 +25,9 @@
         <div *ngIf="this.players == null">
             <tr *ngFor="let i of [].constructor(getMaxVisiblePlayers()); let j = index"
                 class="flex flex-row"
-                [ngClass]="j%2 === 0 ? 'bg-gray-50' : 'bg-gray-100'">
-                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
-                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                [ngClass]="j%2 === 0 ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+                <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="w-[18rem]">&nbsp;</td>
             </tr>
         </div>
@@ -37,9 +37,9 @@
         <div *ngIf="this.players != null && this.players.length < getMaxVisiblePlayers()">
             <tr *ngFor="let i of [].constructor(getMaxVisiblePlayers() - this.players.length); let j = index"
                 class="flex flex-row"
-                [ngClass]="j%2 !== (this.players.length%2 == 0 ? 1 : 0) ? 'bg-gray-50' : 'bg-gray-100'">
-                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
-                <td class="border-r border-gray-600 w-[3.5rem]">&nbsp;</td>
+                [ngClass]="j%2 !== (this.players.length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+                <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
+                <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="w-[18rem]">&nbsp;</td>
             </tr>
         </div>
