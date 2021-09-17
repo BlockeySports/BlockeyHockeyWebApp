@@ -26,6 +26,12 @@ module.exports = {
                     '900': '#030303'
                 },
             },
+            width: {
+                'fit': 'fit-content'
+            },
+            height: {
+                'fit': 'fit-content'
+            }
         },
     },
     variants: {

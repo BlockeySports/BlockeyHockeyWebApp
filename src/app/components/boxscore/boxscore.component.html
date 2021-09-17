@@ -1,6 +1,6 @@
-<app-header></app-header>
-<main class="dark:bg-black-700 h-full">
-    <div class="dark:bg-black-700 flex flex-col px-20 h-full space-y-2.5">
+<app-header class="fixed w-full"></app-header>
+<main class="dark:bg-black-700 min-h-screen pt-12">
+    <div class="dark:bg-black-700 flex flex-col px-20 h-fit space-y-2.5 w-fit">
         <!-- START: Box Score Top -->
         <div class="flex flex-row items-start justify-between mt-16">
             <!-- START: Away Team & Roster -->
@@ -45,7 +45,7 @@
         <!-- END: Box Score Top -->
 
         <!-- START: Box Score Bottom -->
-        <div class="flex flex-row items-start justify-between">
+        <div class="flex flex-row items-start justify-between gap-16">
             <!-- START: Away Team Goals -->
             <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="true"></app-goals>
             <!-- END: Away Team Goals -->
