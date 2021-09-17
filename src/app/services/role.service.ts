@@ -20,8 +20,6 @@ export class RoleService {
         } else {
             this.url = `https://api.blockeyhockey.net${this.resource}`;
         }
-        // this.url = `https://api.blockeyhockey.net${this.resource}`;
-        console.log(this.url);
     }
 
     /**
