@@ -6,11 +6,11 @@
             <!-- START: Away Team & Roster -->
             <div class="flex flex-col space-y-5">
                 <!-- START: Away Team Name -->
-                <app-team [isVisitor]="true" [team]="this.boxScore.awayTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
+                <app-team [isVisitor]="true" [team]="this.boxScore?.awayTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
                 <!-- END: Away Team Name -->
 
                 <!-- START: Visitor Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore.awayPlayers"></app-roster>
+                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore?.awayPlayers"></app-roster>
                 <!-- END: Visitor Players -->
             </div>
             <!-- END: Away Team & Roster -->
@@ -33,11 +33,11 @@
             <!-- START: Home Team & Roster -->
             <div class="flex flex-col space-y-5">
                 <!-- START: Home Team Name -->
-                <app-team [isVisitor]="false" [team]="this.boxScore.homeTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
+                <app-team [isVisitor]="false" [team]="this.boxScore?.homeTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
                 <!-- END: Home Team Name -->
 
                 <!-- START: Home Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore.homePlayers"></app-roster>
+                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore?.homePlayers"></app-roster>
                 <!-- END: Home Players -->
             </div>
             <!-- END: Home Team & Roster -->

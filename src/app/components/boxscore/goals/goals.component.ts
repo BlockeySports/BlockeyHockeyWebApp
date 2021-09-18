@@ -112,11 +112,11 @@ export class GoalsComponent implements OnInit {
     }
 
     public getMaxVisibleGoals(): number {
-        return this.MAX_VISIBLE_GOALS - (this.boxScore.isSeries ? 1 : 0);
+        return this.MAX_VISIBLE_GOALS - (this.boxScore?.isSeries ? 1 : 0);
     }
 
     public getMaxGoalsHeight(): string {
-        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore.isSeries ? this.LINE_HEIGHT : 0)}rem`;
+        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.isSeries ? this.LINE_HEIGHT : 0)}rem`;
     }
 
     public getProfileLink(username: string): string {

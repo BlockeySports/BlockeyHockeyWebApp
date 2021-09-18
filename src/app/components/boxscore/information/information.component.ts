@@ -24,7 +24,7 @@ export class InformationComponent implements OnInit {
      */
     public getBoxScoreDate(): string {
         // if pending box score information, return empty string
-        if (this.pending) { return ''; }
+        if (this.pending || !this.boxScore?.gameTime) { return ''; }
         dayjs.extend(localizedFormat);
         return dayjs(this.boxScore.gameTime).format('MMM D, YYYY');
     }
@@ -34,7 +34,7 @@ export class InformationComponent implements OnInit {
      */
     public getBoxScoreTime(): string {
         // if pending box score information, return empty string
-        if (this.pending) { return ''; }
+        if (this.pending || !this.boxScore?.gameTime) { return ''; }
         dayjs.extend(localizedFormat);
         return dayjs(this.boxScore.gameTime).format('LT');
     }

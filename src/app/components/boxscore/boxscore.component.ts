@@ -9,8 +9,7 @@ import { HockeyTeam } from 'src/app/models/HockeyTeam';
 
 @Component({
     selector: 'app-boxscore',
-    templateUrl: './boxscore.component.html',
-    styleUrls: ['./boxscore.component.css']
+    templateUrl: './boxscore.component.html'
 })
 export class BoxScoreComponent implements OnInit, OnDestroy {
 
@@ -43,10 +42,16 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
                 // no longer pending
                 this.pending = false;
                 // set tab title to team codes
-                document.title = this.boxScore?.awayTeam?.code + ' @ ' + this.boxScore?.homeTeam?.code + ' | ' + this.getBoxScoreDate();
+                if (data) {
+                    document.title = this.boxScore?.awayTeam?.code + ' @ ' + this.boxScore?.homeTeam?.code + ' | ' + this.getBoxScoreDate();
+                } else {
+                    document.title = 'Box Score Not Found';
+                }
                 console.log(this.boxScore);
             },
             (error) => {
+                // set tab title to error
+                document.title = 'Error Loading Box Score';
                 console.log(error);
             }
         );
@@ -66,7 +71,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
      */
     public getBoxScoreDate(): string {
         // if pending box score information, return empty string
-        if (this.pending) { return ''; }
+        if (this.pending || !this.boxScore?.gameTime) { return ''; }
         dayjs.extend(localizedFormat);
         return dayjs(this.boxScore.gameTime).format('MMM D, YYYY');
     }
