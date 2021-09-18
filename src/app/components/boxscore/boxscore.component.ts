@@ -17,7 +17,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
     public isReadOnly = true;
     public pending = true;
     public boxScore: BoxScore = {
-        uuid: '',
+        id: '',
     };
 
     public teams: HockeyTeam[];
@@ -33,11 +33,11 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // get the username from the url
-        this.boxScore.uuid = this.getUuidFromAddress();
+        this.boxScore.id = this.getUuidFromAddress();
         // set temporary tab title
         document.title = 'Loading Box Score...';
         // subscribe to the box score data
-        this.boxScoreSubscription = this.boxScoreService.getBoxScore(this.boxScore.uuid).subscribe(
+        this.boxScoreSubscription = this.boxScoreService.getBoxScore(this.boxScore.id).subscribe(
             (data: BoxScore) => {
                 this.boxScore = data;
                 // no longer pending

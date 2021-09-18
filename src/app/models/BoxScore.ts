@@ -4,7 +4,7 @@ import { BoxScoreShootoutAttempt } from './BoxScoreShootoutAttempt';
 import { HockeyTeam } from './HockeyTeam';
 
 export class BoxScore {
-    uuid?: string;                                      // the unique id for this box score
+    id?: string;                                        // the unique id for this box score
     streamLink?: string;                                // link to the livestream of the game (null if not streamed)
     gameTime?: Date;                                    // start time of the game
     rink?: string;                                      // the rink/arena the game was played at
