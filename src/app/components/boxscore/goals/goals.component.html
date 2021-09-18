@@ -1,8 +1,8 @@
 <table class="w-max dark:text-white flex flex-col my-5 shadow-md select-none">
     <div class="border-black-800 dark:border-black-50 font-semibold text-center border-2 border-b-0"
-         [class]="this.isVisitor ? 'bg-gray-300 dark:bg-white text-black-800' : 'bg-black-50 dark:bg-black-400 text-gray-50'"
+         [class]="this.isVisitor ? 'bg-gray-300 dark:bg-white text-black-800' : 'bg-black-50 dark:bg-black-500 text-gray-50'"
          [ngxTippy]="getDescription()">{{ this.isVisitor ? 'VISITING TEAM GOALS' : 'HOME TEAM GOALS' }}</div>
-    <thead class="w-max dark:text-white border-black-800 dark:border-black-50 text-black-800 dark:bg-black-200 flex flex-row items-center font-bold bg-gray-100 border-2">
+    <thead class="w-max dark:text-white border-black-800 dark:border-black-50 text-black-800 dark:bg-black-400 flex flex-row items-center font-bold bg-gray-100 border-2">
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
             ngxTippy="The goal sequence">#</th>
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
@@ -20,8 +20,7 @@
            [style.max-height]="getMaxGoalsHeight()">
         <!-- START: Roster Players -->
         <tr *ngFor="let goal of getGoals(); let i = index"
-            class="hover:bg-gray-200 flex flex-row"
-            [ngClass]="i%2 === 0 ? 'bg-gray-50 dark:bg-black-100' : 'bg-gray-100 dark:bg-black-200'">
+            class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ i + 1 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getGoalPeriod(goal) }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.goalTime | duration }}</td>
@@ -43,8 +42,7 @@
         <!-- START: Null Roster -->
         <div *ngIf="getGoals() == null">
             <tr *ngFor="let i of [].constructor(getMaxVisibleGoals()); let j = index"
-                class="flex flex-row"
-                [ngClass]="j%2 === 0 ? 'bg-gray-50 dark:bg-black-100' : 'bg-gray-100 dark:bg-black-200'">
+                class="odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem]">&nbsp;</td>
@@ -60,7 +58,7 @@
         <div *ngIf="getGoals() != null && getGoals().length < getMaxVisibleGoals()">
             <tr *ngFor="let i of [].constructor(getMaxVisibleGoals() - getGoals().length); let j = index"
                 class="flex flex-row"
-                [ngClass]="j%2 !== (getGoals().length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-100' : 'bg-gray-100 dark:bg-black-200'">
+                [ngClass]="j%2 !== (getGoals().length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem]">&nbsp;</td>

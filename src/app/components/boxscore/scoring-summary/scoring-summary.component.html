@@ -7,20 +7,20 @@
     <!-- START: Details -->
     <table class="w-full table-fixed">
         <tr>
-            <th class="border-black-800 dark:border-black-50 bg-black-50 dark:bg-black-500 text-white border-b-2 border-r-2"
+            <th class="border-black-800 dark:border-black-50 bg-black-50 dark:bg-black-600 text-white border-b-2 border-r-2"
                 ngxTippy="Teams that played this in game">TEAMS</th>
-            <th class="border-black-800 dark:border-black-50 dark:bg-black-400 bg-gray-300 border-b-2 border-r-2"
+            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-300 border-b-2 border-r-2"
                 ngxTippy="First period">1</th>
-            <th class="border-black-800 dark:border-black-50 dark:bg-black-400 bg-gray-300 border-b-2 border-r-2"
+            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-300 border-b-2 border-r-2"
                 ngxTippy="Second period">2</th>
-            <th class="border-black-800 dark:border-black-50 dark:bg-black-400 bg-gray-300 border-b-2 border-r-2"
+            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-300 border-b-2 border-r-2"
                 ngxTippy="Third period">3</th>
             <th class="border-black-800 dark:border-black-50 dark:text-black-800 bg-[#ef4444] border-b-2 border-r-2"
                 ngxTippy="Overtime period(s)">OT</th>
             <th class="border-black-800 dark:border-black-50 dark:text-black-800 bg-[#6bd369] border-b-2"
                 ngxTippy="Final score">FINAL</th>
         </tr>
-        <tr>
+        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
             <td class="border-black-800 dark:border-black-50 border-r"
                 [style.background]="this.boxScore?.awayTeam?.color || 'white'"
                 [style.color]="getContrastingColor(this.boxScore?.awayTeam?.color) || 'black'"
@@ -29,10 +29,10 @@
                 <p class="w-max mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
             </td>
             <td *ngFor="let i of [].constructor(4); let j = index"
-                class="border-black-800 dark:border-black-50 bg-gray-50 dark:bg-black-100 text-center border-r">{{ getNumberOfGoals(true, j + 1) }}</td>
-            <td class="border-black-800 dark:border-black-50 bg-gray-50 dark:bg-black-100 text-center">{{ getNumberOfGoals(true) }}</td>
+                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(true, j + 1) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(true) }}</td>
         </tr>
-        <tr>
+        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
             <td class="border-black-800 dark:border-black-50 border-r"
                 [style.background]="this.boxScore?.homeTeam?.color || '#494949'"
                 [style.color]="getContrastingColor(this.boxScore?.homeTeam?.color) || 'white'"
@@ -41,8 +41,8 @@
                 <p class="w-max mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
             </td>
             <td *ngFor="let i of [].constructor(4); let j = index"
-                class="border-black-800 dark:border-black-50 dark:bg-black-200 text-center bg-gray-100 border-r">{{ getNumberOfGoals(false, j + 1) }}</td>
-            <td class="border-black-800 dark:border-black-50 dark:bg-black-200 text-center bg-gray-100">{{ getNumberOfGoals(false) }}</td>
+                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(false, j + 1) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(false) }}</td>
         </tr>
     </table>
     <!-- END: Details -->

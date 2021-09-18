@@ -1,5 +1,5 @@
 <table class="w-max dark:text-white flex flex-col mt-5 shadow-md select-none">
-    <thead class="bg-black-50 dark:bg-black-600 w-max border-black-800 dark:border-black-50 flex flex-row items-center font-bold text-white border-2">
+    <thead class="bg-black-50 dark:bg-black-500 w-max border-black-800 dark:border-black-50 flex flex-row items-center font-bold text-white border-2">
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
             ngxTippy="Player's position">POS.</th>
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
@@ -11,8 +11,7 @@
            [style.max-height]="getMaxRosterHeight()">
         <!-- START: Roster Players -->
         <tr *ngFor="let player of this.players; let i = index"
-            class="hover:bg-gray-200 dark:hover:bg-black-400 flex flex-row"
-            [ngClass]="i%2 === 0 ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+            class="hover:bg-gray-200 dark:hover:bg-black-400 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ this.player.member.position }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ this.player.member.number }}</td>
             <td class="w-[18rem] text-center hover:font-bold">
@@ -24,8 +23,7 @@
         <!-- START: Null Roster -->
         <div *ngIf="this.players == null">
             <tr *ngFor="let i of [].constructor(getMaxVisiblePlayers()); let j = index"
-                class="flex flex-row"
-                [ngClass]="j%2 === 0 ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+                class="odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem]">&nbsp;</td>
                 <td class="w-[18rem]">&nbsp;</td>
