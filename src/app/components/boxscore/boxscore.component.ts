@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { TeamService } from 'src/app/services/team.service';
 import { HockeyTeam } from 'src/app/models/HockeyTeam';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
     selector: 'app-boxscore',
@@ -27,7 +28,8 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
 
     constructor(
         private boxScoreService: BoxScoreService,
-        private teamService: TeamService
+        private teamService: TeamService,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void {
@@ -67,13 +69,20 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * Get the date from the box score from the date service.
+     */
+    public getDate(): Date {
+        return this.dateService.getDate(this.boxScore.date);
+    }
+
+    /**
      * Get the box score date in a human-readable format.
      */
     public getBoxScoreDate(): string {
         // if pending box score information, return empty string
         if (this.pending || !this.boxScore?.date) { return ''; }
         dayjs.extend(localizedFormat);
-        return dayjs(this.boxScore.date).format('MMM D, YYYY');
+        return dayjs(this.getDate()).format('MMM D, YYYY');
     }
 
     /**

@@ -1,6 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/Member';
+import { Punishment } from 'src/app/models/Punishment';
+import { DateService } from 'src/app/services/date.service';
 import { PunishmentService } from 'src/app/services/punishment.service';
 
 @Component({
@@ -18,7 +21,8 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
     private punishmentSub: Subscription;
 
     constructor(
-        private punishmentService: PunishmentService
+        private punishmentService: PunishmentService,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void {
@@ -43,6 +47,16 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
                 }
             );
         }
+    }
+
+    /**
+     * Get the formatted date of a punishment.
+     * @returns the formatted punishment date
+     */
+    public getPunishmentDate(punishment: Punishment): string {
+        // get date from date service
+        const date = this.dateService.getDate(punishment.date);
+        return formatDate(date, 'MMM d, y, h:mm a', 'en-US');
     }
 
     public getPunishmentColor(type: string): string {

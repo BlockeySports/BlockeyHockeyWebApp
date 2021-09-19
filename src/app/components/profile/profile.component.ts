@@ -7,6 +7,7 @@ import { MemberService } from 'src/app/services/member.service';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
     selector: 'app-profile',
@@ -45,7 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private tippyService: NgxTippyService,
         private memberService: MemberService,
-        private titleService: Title
+        private titleService: Title,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void {
@@ -106,12 +108,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * Get the date that this member was last online.
+     * @param lastOnline the date that this member was last online
+     */
+    public getLastOnlineDate(): Date {
+        return this.dateService.getDate(this.member.lastOnline);
+    }
+
+    /**
      * Set the tooltips for the online/offline indicator and the last seen date
      */
     private setTippyOnlineStatus(): void {
-        let lastOnline: any = this.member.lastOnline;
-        lastOnline = lastOnline ? formatDate(new Date(lastOnline), 'MMM d, y, h:mm a', 'en-US') : 'N/A';
-        this.tippyService.setContent('last-online-date', lastOnline);
+        // get date using date service
+        const date = this.getLastOnlineDate();
+        // get formatted date as string
+        const formattedDate = date ? formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
+        this.tippyService.setContent('last-online-date', formattedDate);
         this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
     }
 

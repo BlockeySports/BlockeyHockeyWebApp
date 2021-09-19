@@ -90,7 +90,7 @@
                         <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
                             style="width: 12%;">{{ punishment.length | length }}</td>
                         <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                            style="width: 17%; min-width: 15%;">{{ punishment.date | date : 'MMM d, y, h:mm a' }}</td>
+                            style="width: 17%; min-width: 15%;">{{ getPunishmentDate(punishment) }}</td>
                     </tr>
                 </tbody>
             </table>

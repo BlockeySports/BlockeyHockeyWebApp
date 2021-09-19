@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
+import { ClipboardService } from 'ngx-clipboard';
+import { DateService } from 'src/app/services/date.service';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-import { ClipboardService } from 'ngx-clipboard';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 @Component({
     selector: 'app-information',
@@ -14,10 +17,18 @@ export class InformationComponent implements OnInit {
     @Input() pending: boolean;
 
     constructor(
-        private clipboardService: ClipboardService
+        private clipboardService: ClipboardService,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void { }
+
+    /**
+     * Get the date from the box score from the date service.
+     */
+    public getDate(): Date {
+        return this.dateService.getDate(this.boxScore.date);
+    }
 
     /**
      * Get the box score date in a human-readable format.
@@ -26,7 +37,7 @@ export class InformationComponent implements OnInit {
         // if pending box score information, return empty string
         if (this.pending || !this.boxScore?.date) { return ''; }
         dayjs.extend(localizedFormat);
-        return dayjs(this.boxScore.date).format('MMM D, YYYY');
+        return dayjs(this.getDate()).format('MMM D, YYYY');
     }
 
     /**
@@ -35,8 +46,10 @@ export class InformationComponent implements OnInit {
     public getBoxScoreTime(): string {
         // if pending box score information, return empty string
         if (this.pending || !this.boxScore?.date) { return ''; }
+        // extend the dayjs plugin to format the time
         dayjs.extend(localizedFormat);
-        return dayjs(this.boxScore.date).format('LT');
+        // return formatted date
+        return dayjs(this.getDate()).format('LT');
     }
 
     public getBoxScoreStreamLink(): string {

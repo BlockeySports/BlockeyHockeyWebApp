@@ -44,7 +44,7 @@
                         <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
                         <span class="font-semibold cursor-default"
                               ngxTippy
-                              tippyName="last-online-date">{{ this.member.lastOnline | timeago : this.member.online }}&nbsp;</span>
+                              tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.online }}&nbsp;</span>
                         <!-- <span>on&nbsp;</span>
                         <span class="font-semibold">Server {{ this.server }}</span> -->
                     </div>

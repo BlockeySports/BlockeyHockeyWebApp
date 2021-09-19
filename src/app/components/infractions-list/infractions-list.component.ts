@@ -3,7 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Punishment } from 'src/app/models/Punishment';
+import { DateService } from 'src/app/services/date.service';
 import { PunishmentService } from 'src/app/services/punishment.service';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-infractions-list',
@@ -20,7 +24,8 @@ export class InfractionsListComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private punishmentService: PunishmentService,
-        private titleService: Title
+        private titleService: Title,
+        private dateService: DateService
     ) { }
 
     // Subs
@@ -65,6 +70,16 @@ export class InfractionsListComponent implements OnInit, OnDestroy {
         } else {
             return 'currentColor';
         }
+    }
+
+    /**
+     * Get the formatted date of a punishment.
+     * @returns the formatted punishment date
+     */
+    public getPunishmentDate(punishment: Punishment): string {
+        // get date from date service
+        const date = this.dateService.getDate(punishment.date);
+        return formatDate(date, 'MMM d, y, h:mm a', 'en-US');
     }
 
     public navigateToProfile(username: string): void {

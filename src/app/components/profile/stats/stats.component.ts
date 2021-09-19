@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { Member } from 'src/app/models/Member';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
     selector: 'app-stats',
@@ -16,7 +17,8 @@ export class StatsComponent implements OnInit, AfterViewInit {
     public isLoading = true;
 
     constructor(
-        private tippyService: NgxTippyService
+        private tippyService: NgxTippyService,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void {
@@ -52,10 +54,11 @@ export class StatsComponent implements OnInit, AfterViewInit {
         setTimeout(
             () => {
                 try {
-                    const content = this.member.dateJoined
-                        ? 'First seen on ' + formatDate(this.member.dateJoined, 'MMM d, y, h:mm a', 'en-US')
+                    const date = this.dateService.getDate(this.member.dateJoined);
+                    const formattedDate = date
+                        ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US')
                         : 'N/A';
-                    this.tippyService.setContent('first-seen', content);
+                    this.tippyService.setContent('first-seen', formattedDate);
                 } catch (error) {
                     // swallow error
                 }
