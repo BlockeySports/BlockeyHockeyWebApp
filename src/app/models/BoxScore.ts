@@ -6,7 +6,7 @@ import { HockeyTeam } from './HockeyTeam';
 export class BoxScore {
     id?: string;                                        // the unique id for this box score
     streamLink?: string;                                // link to the livestream of the game (null if not streamed)
-    gameTime?: Date;                                    // start time of the game
+    date?: Date;                                        // start time of the game
     rink?: string;                                      // the rink/arena the game was played at
     scorer?: string;                                    // the member or AI that filled this box score out
     officials?: string[];                               // the official(s) or AI that officiated the game

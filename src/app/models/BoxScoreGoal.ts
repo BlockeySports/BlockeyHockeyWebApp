@@ -1,8 +1,8 @@
 import { Member } from './Member';
 
 export class BoxScoreGoal {
-    uuid?: string;
-    boxScore?: string;
+    id?: string;
+    boxScoreId?: string;
     sequence?: number;
     period?: number;
     goalTime?: number;

@@ -71,9 +71,9 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
      */
     public getBoxScoreDate(): string {
         // if pending box score information, return empty string
-        if (this.pending || !this.boxScore?.gameTime) { return ''; }
+        if (this.pending || !this.boxScore?.date) { return ''; }
         dayjs.extend(localizedFormat);
-        return dayjs(this.boxScore.gameTime).format('MMM D, YYYY');
+        return dayjs(this.boxScore.date).format('MMM D, YYYY');
     }
 
     /**

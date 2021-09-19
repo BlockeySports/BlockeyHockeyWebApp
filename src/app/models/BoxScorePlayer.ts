@@ -1,8 +1,9 @@
 import { Member } from './Member';
 
 export class BoxScorePlayer {
-    boxScore?: string;
+    boxScoreId?: string;
     member?: Member;
+    date?: Date;
     team?: string;
     isPlayed?: boolean;
 }
