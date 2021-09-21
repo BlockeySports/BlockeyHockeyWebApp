@@ -24,14 +24,17 @@
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ i + 1 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getGoalPeriod(goal) }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.goalTime | duration }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] text-center cursor-pointer hover:font-semibold">
-                <a [href]="getProfileLink(goal.goalScorer.username)" target="_blank">{{ goal.goalScorer.username }}</a>
+            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] text-center hover:font-semibold"
+                [class]="goal.goalScorer ? 'cursor-pointer' : 'cursor-default'">
+                <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal.goalScorer)" target="_blank">{{ goal?.goalScorer?.username }}</a>
             </td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center cursor-pointer">
-                <a [href]="getProfileLink(goal.primaryAssistant.username)" target="_blank">{{ goal.primaryAssistant.username }}</a>
+            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
+                [class]="goal.primaryAssistant ? 'cursor-pointer' : 'cursor-default'">
+                <a *ngIf="goal.primaryAssistant" [href]="getProfileLink(goal.primaryAssistant)" target="_blank">{{ goal?.primaryAssistant?.username }}</a>
             </td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center cursor-pointer">
-                <a [href]="getProfileLink(goal.secondaryAssistant.username)" target="_blank">{{ goal.secondaryAssistant.username }}</a>
+            <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
+                [class]="goal.secondaryAssistant ? 'cursor-pointer' : 'cursor-default'">
+                <a *ngIf="goal.secondaryAssistant" [href]="getProfileLink(goal.secondaryAssistant)" target="_blank">{{ goal?.secondaryAssistant?.username }}</a>
             </td>
             <td class="w-[4.5rem] text-center"
                 [ngClass]="{'text-black/25 dark:text-white/25 font-semibold': !getGoalType(goal)}"

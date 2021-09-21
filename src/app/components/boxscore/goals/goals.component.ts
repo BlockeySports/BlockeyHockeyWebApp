@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
 import { BoxScoreGoal } from 'src/app/models/BoxScoreGoal';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
+import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
+import { Member } from 'src/app/models/Member';
 
 @Component({
     selector: 'app-goals',
@@ -119,8 +121,8 @@ export class GoalsComponent implements OnInit {
         return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.isSeries ? this.LINE_HEIGHT : 0)}rem`;
     }
 
-    public getProfileLink(username: string): string {
-        return window.location.origin + '/u/' + username;
+    public getProfileLink(member: Member): string {
+        return window.location.origin + '/u/' + member.username;
     }
 
     public getDescription(): string {
