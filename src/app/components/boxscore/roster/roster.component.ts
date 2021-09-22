@@ -6,7 +6,7 @@ import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
     selector: 'app-roster',
     templateUrl: './roster.component.html'
 })
-export class RosterComponent implements OnInit, OnChanges {
+export class RosterComponent implements OnInit {
 
     @Input() boxScore: BoxScore;
     @Input() players: BoxScorePlayer[] = [];
@@ -16,22 +16,13 @@ export class RosterComponent implements OnInit, OnChanges {
     private MAX_VISIBLE_PLAYERS = 8;
     private LINE_HEIGHT = 1.71875;
 
-    constructor(
-        private cd: ChangeDetectorRef
-    ) { }
+    constructor() { }
 
     ngOnInit(): void { }
 
-    ngOnChanges(): void {
-        // if (this.players) {
-        //     this.createRoster();
-        // }
-    }
-
     /**
-     * Add all input players to the roster players.
-     * If there are players in the roster with the same member uuid and a different position,
-     * then make the position include both separated by a slash.
+     * Get the roster of players combining duplicate players with different positions.
+     * @returns roster of box score players
      */
     public getRoster(): Set<BoxScorePlayer> {
         const rosterPlayers: Map<string, BoxScorePlayer> = new Map<string, BoxScorePlayer>();
@@ -55,31 +46,6 @@ export class RosterComponent implements OnInit, OnChanges {
         return new Set(rosterPlayers.values());
     }
 
-    // public createRoster(): void {
-    //     console.log('create roster called');
-    //     // define roster players
-    //     // const rosterPlayers: Map<string, BoxScorePlayer> = new Map<string, BoxScorePlayer>();
-    //     // for each player
-    //     this.players.forEach(player => {
-    //         // console.log(rosterPlayers);
-    //         // if player is already in roster
-    //         if (this.rosterPlayers.has(player.member.uuid)) {
-    //             // then check if the position differs
-    //             if (player.position !== this.rosterPlayers.get(player.member.uuid).position) {
-    //                 // if so, change position to include both separated by a slash
-    //                 // this.rosterPlayers.get(player.member.uuid).position = `${this.rosterPlayers.get(player.member.uuid).position}/${player.position}`;
-
-    //                 // Promise.resolve().then(() => { this.rosterPlayers.get(player.member.uuid).position += `/${player.position}`; });
-    //                 this.rosterPlayers.get(player.member.uuid).position += `/${player.position}`;
-
-    //             }
-    //         } else {
-    //             // Promise.resolve().then(() => { this.rosterPlayers.set(player.member.uuid, player); });
-    //             this.rosterPlayers.set(player.member.uuid, player);
-    //         }
-    //     });
-    // }
-
     public getMaxVisiblePlayers(): number {
         return this.MAX_VISIBLE_PLAYERS + (this.boxScore?.isSeries ? 1 : 0);
     }
@@ -91,5 +57,4 @@ export class RosterComponent implements OnInit, OnChanges {
     public getProfileLink(username: string): string {
         return window.location.origin + '/u/' + username;
     }
-
 }
