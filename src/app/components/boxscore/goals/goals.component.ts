@@ -110,6 +110,7 @@ export class GoalsComponent implements OnInit {
      */
     public getGoalPeriod(goal: BoxScoreGoal): string {
         if (goal.period < 4) { return goal.period.toString(); }
+        if (goal.period === 4) { return 'OT'; }
         return (goal.period - 3) + 'OT';
     }
 
