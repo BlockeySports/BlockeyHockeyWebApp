@@ -42,8 +42,9 @@ export class RosterComponent implements OnInit {
                 rosterPlayers.set(player.member.uuid, player);
             }
         });
-        // return the roster players
-        return new Set(rosterPlayers.values());
+        // sort rosterPlayers alphabetically by username
+        const sortedRosterPlayers = Array.from(rosterPlayers.values()).sort((a, b) => a.member.username.localeCompare(b.member.username));
+        return new Set<BoxScorePlayer>(sortedRosterPlayers);
     }
 
     public getMaxVisiblePlayers(): number {
