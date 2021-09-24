@@ -1,6 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-@import '../node_modules/@syncfusion/ej2-angular-grids/styles/material-dark.css';
 @import 'tippy.js/dist/tippy.css';
+
+@layer base {
+    .layout {
+        max-width: 72rem; /* 1100px */
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
