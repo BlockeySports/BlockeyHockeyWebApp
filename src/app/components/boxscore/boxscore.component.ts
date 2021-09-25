@@ -35,6 +35,8 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // get the username from the url
         this.boxScore.id = this.getUuidFromAddress();
+        // if id is null, return
+        if (!this.boxScore.id) { return; }
         // set temporary tab title
         document.title = 'Loading Box Score...';
         // subscribe to the box score data
@@ -90,10 +92,12 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
      * occurring after the last slash and before an fragments.
      */
     private getUuidFromAddress(): string {
-        const url = window.location.href;
-        const lastSlash = url.lastIndexOf('/');
-        // in case a fragment exists in url, only take everything before that
-        return url.substr(lastSlash + 1).split('#')[0];
+        // get the 13 character code after the word 'boxscore' or 'b' in the url
+        const uuid = window.location.href?.split('b/')[1]?.split('#')[0];
+        // if the uuid is not 13 characters, return null
+        if (!uuid || uuid.length !== 13) { return null; }
+        // return the uuid
+        return uuid;
     }
 
     public ngOnDestroy(): void {

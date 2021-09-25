@@ -11,3 +11,8 @@
         margin-right: auto;
     }
 }
+
+main {
+    padding-top: 63px;  /* height of header */
+    min-height: 100vh;
+}

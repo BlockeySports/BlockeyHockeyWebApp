@@ -31,6 +31,8 @@ import { RosterComponent } from './components/boxscore/roster/roster.component';
 import { TeamComponent } from './components/boxscore/team/team.component';
 import { RinkComponent } from './components/rink/rink.component';
 import { InformationComponent } from './components/boxscore/information/information.component';
+import { ScoringSummaryComponent } from './components/boxscore/scoring-summary/scoring-summary.component';
+import { GoalsComponent } from './components/boxscore/goals/goals.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
@@ -45,9 +47,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { ScoringSummaryComponent } from './components/boxscore/scoring-summary/scoring-summary.component';
-import { GoalsComponent } from './components/boxscore/goals/goals.component';
+import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -97,7 +97,7 @@ import { GoalsComponent } from './components/boxscore/goals/goals.component';
 export class AppModule {
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faYoutube, faExternalLinkAlt);
+    library.addIcons(faYoutube, faExternalLinkAlt, faCaretRight);
   }
 
 }

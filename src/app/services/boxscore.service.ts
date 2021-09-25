@@ -22,7 +22,7 @@ export class BoxScoreService {
     }
 
     /**
-     * Get a box score record from the database by its uuid.
+     * Get a box score record from the database by its unique id.
      */
     public getBoxScore(id: string): Observable<BoxScore> {
         const params = new HttpParams()
