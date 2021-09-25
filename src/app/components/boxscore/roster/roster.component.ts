@@ -47,6 +47,17 @@ export class RosterComponent implements OnInit {
         return new Set<BoxScorePlayer>(sortedRosterPlayers);
     }
 
+    /**
+     * Format position to put 'G' last is player is a goaltender and another position.
+     * @returns formatted position
+     */
+    public formatPosition(position: string): string {
+        if (position.includes('G/')) {
+            return position.replace('G/', '').concat('/G');
+        }
+        return position;
+    }
+
     public getMaxVisiblePlayers(): number {
         return this.MAX_VISIBLE_PLAYERS + (this.boxScore?.isSeries ? 1 : 0);
     }
