@@ -8,7 +8,7 @@ import { BoxScore } from '../models/BoxScore';
 })
 export class BoxScoreService {
 
-    resource = '/rest/v1/boxscore';
+    resource = '/rest/v1/';
     url = '';
 
     constructor(
@@ -27,6 +27,13 @@ export class BoxScoreService {
     public getBoxScore(id: string): Observable<BoxScore> {
         const params = new HttpParams()
             .set('id', id);
-        return this.http.get<BoxScore>(this.url, { params });
+        return this.http.get<BoxScore>(this.url.concat('boxscore'), { params });
+    }
+
+    /**
+     * Get all box score records from the database.
+     */
+    public getBoxScores(): Observable<BoxScore[]> {
+        return this.http.get<BoxScore[]>(this.url.concat('boxscores'));
     }
 }

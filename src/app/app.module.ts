@@ -33,6 +33,7 @@ import { RinkComponent } from './components/rink/rink.component';
 import { InformationComponent } from './components/boxscore/information/information.component';
 import { ScoringSummaryComponent } from './components/boxscore/scoring-summary/scoring-summary.component';
 import { GoalsComponent } from './components/boxscore/goals/goals.component';
+import { ScoresComponent } from './components/scores/scores.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
@@ -75,7 +76,8 @@ import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ico
     InformationComponent,
     ScoringSummaryComponent,
     GoalsComponent,
-    DurationPipe
+    DurationPipe,
+    ScoresComponent
   ],
   imports: [
     BrowserModule,

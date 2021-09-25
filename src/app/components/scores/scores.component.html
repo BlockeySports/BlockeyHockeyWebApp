@@ -1,0 +1,119 @@
+<app-header></app-header>
+<main class="dark:bg-black-700">
+    <!-- START: Title -->
+    <h1 class="w-max dark:text-white mx-auto my-8 text-4xl font-semibold">Recent Games</h1>
+    <!-- END: Title -->
+
+    <!-- START: Mini Box Scores -->
+    <div class="layout mx-auto">
+        <div class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
+            <!-- START: Mini Box Score -->
+            <a *ngFor="let boxScore of this.boxScores"
+               [href]="getBoxScoreLink(boxScore)" target="_blank"
+               class="border-black-800 dark:border-black-50 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content]">
+                <!-- START: League, Date, Result -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full bg-gray-300 border-b">
+                    <p class="border-black-800 dark:border-black-50 w-[20%] text-center border-r p-0.5">{{ boxScore.league || 'Arcade' }}</p>
+                    <p class="border-black-800 dark:border-black-50 w-[60%] text-center border-r font-semibold p-0.5">
+                        {{ getDate(boxScore) }}
+                        <!-- Friday, September 24, 2021, 5:00 PM -->
+                    </p>
+                    <p class="w-[20%] text-center p-0.5">{{ getResult(boxScore) }}</p>
+                </div>
+                <!-- END: League, Date, Result -->
+
+                <!-- START: Team Names -->
+                <div class="border-black-800 dark:border-black-50 bg-gray-50 flex flex-row w-full font-semibold border-b">
+                    <p class="border-black-800 dark:border-black-50 w-full text-center border-r p-0.5 text-shadow-sm"
+                       [style.background]="this.boxScore?.awayTeam?.color || 'white'"
+                       [style.color]="getContrastingColor(this.boxScore?.awayTeam?.color) || 'black'">
+                        {{ boxScore.awayTeam.location + ' ' + boxScore.awayTeam.name }}
+                    </p>
+                    <p class="border-black-800 dark:border-black-50 dark:bg-black-400 dark:text-white w-[20%] flex text-center border-r p-0.5">
+                        <span class="mx-auto my-auto">&#64;</span>
+                    </p>
+                    <p class="border-black-800 dark:border-black-50 w-full text-center bg-[#6a7287] p-0.5 text-shadow-sm"
+                       [style.background]="this.boxScore?.homeTeam?.color || 'white'"
+                       [style.color]="getContrastingColor(this.boxScore?.homeTeam?.color) || 'black'">
+                        {{ boxScore.homeTeam.location + ' ' + boxScore.homeTeam.name }}
+                    </p>
+                </div>
+                <!-- END: Team Names -->
+
+                <!-- START: Scoring Summary Title -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full font-semibold bg-[#c0c4ca] border-b">
+                    <p class="border-black-800 dark:border-black-50 w-full text-center p-0.5 text-shadow-sm">Scoring Summary</p>
+                </div>
+                <!-- END: Scoring Summary Title -->
+
+                <!-- START: Scoring Summary -->
+                <div class="border-black-800 dark:border-black-50 flex flex-row">
+                    <div class="w-[7%] sm:w-[20%] dark:bg-black-300"></div>
+                    <table class="border-black-800 dark:border-black-50 dark:text-white w-full border-l border-r table-fixed select-none">
+                        <tr>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-600 bg-gray-300 border-b border-r"
+                                ngxTippy="Teams that played this in game">TEAMS</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="First period">1</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Second period">2</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Third period">3</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Overtime period(s)">OT</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b"
+                                ngxTippy="Final score">FINAL</th>
+                        </tr>
+                        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
+                            <td class="border-black-800 dark:border-black-50 relative flex border-r"
+                                [style.background]="this.boxScore?.awayTeam?.color || 'white'"
+                                [style.color]="getContrastingColor(this.boxScore?.awayTeam?.color) || 'black'"
+                                [ngxTippy]="setTeamNameTooltip(boxScore, true)">
+                                <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
+                                <fa-icon *ngIf="getNumberOfGoals(boxScore, true) > getNumberOfGoals(boxScore, false)"
+                                         [icon]="['fas', 'caret-right']" size="lg"
+                                         class="-left-4 absolute text-blue-600"></fa-icon>
+                            </td>
+                            <td *ngFor="let i of [].constructor(4); let j = index"
+                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(boxScore, true, j + 1) }}</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(boxScore, true) }}</td>
+                        </tr>
+                        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
+                            <td class="border-black-800 dark:border-black-50 relative flex border-r"
+                                [style.background]="this.boxScore?.homeTeam?.color || 'white'"
+                                [style.color]="getContrastingColor(this.boxScore?.homeTeam?.color) || 'black'"
+                                [ngxTippy]="setTeamNameTooltip(boxScore, false)">
+                                <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
+                                <fa-icon *ngIf="getNumberOfGoals(boxScore, false) > getNumberOfGoals(boxScore, true)"
+                                         [icon]="['fas', 'caret-right']" size="lg"
+                                         class="-left-4 absolute text-blue-600"></fa-icon>
+                            </td>
+                            <td *ngFor="let i of [].constructor(4); let j = index"
+                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(boxScore, false, j + 1) }}</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(boxScore, false) }}</td>
+                        </tr>
+                    </table>
+                    <div class="w-[7%] sm:w-[20%] dark:bg-black-300"></div>
+                </div>
+                <!-- END: Scoring Summary -->
+
+                <!-- START: Stream Link -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-400 flex flex-row w-full text-sm bg-gray-100 border-t min-h-[25px]">
+                    <a *ngIf="boxScore.streamLink" [href]="boxScore.streamLink" target="_blank"
+                       class="group w-max flex flex-row items-center mx-auto space-x-1 p-0.5">
+                        <fa-icon [icon]="['fab', 'youtube']"
+                                 class="group-hover:text-red-700 sm:flex hidden my-auto text-red-600"></fa-icon>
+                        <p class="group-hover:underline text-red-500/80 group-hover:text-red-700 flex flex-row items-start space-x-1">
+                            <span>{{ boxScore.streamLink }}</span>
+                            <fa-icon [icon]="['fas', 'external-link-alt']" size="xs"
+                                     class="sm:flex text-red-500/50 sm:text-sm hidden mb-auto text-xs"></fa-icon>
+                        </p>
+                    </a>
+                </div>
+                <!-- END: Stream Link -->
+            </a>
+            <!-- END: Mini Box Score -->
+        </div>
+    </div>
+    <!-- END: Mini Box Scores -->
+</main>
