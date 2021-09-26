@@ -9,11 +9,11 @@ export class Member {
     position?: string;          // the hockey ice position
     dateJoined?: Date;          // the date on which this player first joined the server
     joinPosition?: number;      // the position that they joined in
-    online?: boolean;           // true if the player is online the server
+    isOnline?: boolean;         // true if the player is online the server
     lastOnline?: Date;          // the date on which this player was last seen on the server
     timePlayed?: number;        // the number of milliseconds this player has played on the server
     roles?: Role[];             // the roles and ranks this player has
-    og?: boolean;               // true if this player is an OG player
+    isOg?: boolean;             // true if this player is an OG player
     punishments?: Punishment[]; // the list of punishments this member has
     hockeyStatistics?: HockeyStatistic[];
 }

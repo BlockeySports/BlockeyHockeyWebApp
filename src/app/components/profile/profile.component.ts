@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         // get formatted date as string
         const formattedDate = date ? formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
         this.tippyService.setContent('last-online-date', formattedDate);
-        this.tippyService.setContent('online-status', this.member.online ? 'Online' : 'Offline');
+        this.tippyService.setContent('online-status', this.member.isOnline ? 'Online' : 'Offline');
     }
 
     /**

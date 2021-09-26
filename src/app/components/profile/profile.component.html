@@ -9,7 +9,7 @@
                 <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left"
                     [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">{{ this.member.username }}</h1>
                 <!-- OG Heart -->
-                <div *ngIf="this.member.og && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
+                <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player">&#9829;</span>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                      class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
                      [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
                 <!-- OG Heart -->
-                <div *ngIf="this.member.og && this.member.roles.length > 0" class="flex my-auto text-xl text-red-600 select-none">
+                <div *ngIf="this.member.isOg && this.member.roles.length > 0" class="flex my-auto text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
                 </div>
             </div>
@@ -40,11 +40,11 @@
                         <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
                              ngxTippy
                              tippyName="online-status"
-                             [ngClass]="this.member.online ? 'bg-green-500' : 'bg-red-600'"></div>
-                        <span>{{ this.member.online ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                             [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
+                        <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
                         <span class="font-semibold cursor-default"
                               ngxTippy
-                              tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.online }}&nbsp;</span>
+                              tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.isOnline }}&nbsp;</span>
                         <!-- <span>on&nbsp;</span>
                         <span class="font-semibold">Server {{ this.server }}</span> -->
                     </div>
