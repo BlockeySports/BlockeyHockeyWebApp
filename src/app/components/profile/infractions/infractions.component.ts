@@ -25,13 +25,9 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private punishmentService: PunishmentService,
         private dateService: DateService
-    ) {
+    ) { }
 
-    }
-
-    ngOnInit(): void {
-
-    }
+    ngOnInit(): void { }
 
     ngOnChanges(): void {
         if (this.member.uuid) {
@@ -59,26 +55,6 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
      * @returns the formatted punishment date
      */
     public getPunishmentDate(punishment: Punishment): string {
-        dayjs.extend(updateLocale);
-        // update locale to custom locale
-        dayjs.updateLocale('en', {
-            relativeTime: {
-                // relative time format strings, keep %s %d as the same
-                future: 'in %s', // e.g. in 2 hours, %s been replaced with 2hours
-                past: '%s ago',
-                s: 'a few seconds',
-                m: '1 minute',
-                mm: '%d minutes',
-                h: '1 hour',
-                hh: '%d hours', // e.g. 2 hours, %d been replaced with 2
-                d: '1 day',
-                dd: '%d days',
-                M: '1 month',
-                MM: '%d months',
-                y: '1 year',
-                yy: '%d years'
-            }
-        });
         // get date from date service
         const date = this.dateService.getDate(punishment.date);
         return formatDate(date, 'MMM d, yyyy, h:mm a', 'en-US');
