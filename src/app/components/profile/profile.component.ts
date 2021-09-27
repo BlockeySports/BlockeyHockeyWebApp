@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.uuid}`;
                 // set the browser tab title
                 this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
-                // fix username capitalization in url
+                // change the tab to the fragment in the url
                 this.changeTab(this.tab !== 'stats' ? this.tab : '');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
@@ -99,34 +99,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
             (playerStatistics: PlayerStatistic[]) => {
                 this.playerStatistics = playerStatistics;
-                console.log(playerStatistics);
-                // filter out duplicates by box score id
-                const numGames = playerStatistics.filter((stat, i, arr) => {
-                    return arr.findIndex(t => t.boxScoreId === stat.boxScoreId) === i;
-                }).length;
-                console.log('numGames', numGames);
-                const numGoals = playerStatistics.filter(stat => stat.goalScorer === this.member.uuid).length;
-                console.log('numGoals', numGoals);
-                // get num of primary assists
-                const numPrimaryAssists = playerStatistics.filter(stat => stat.primaryAssistant === this.member.uuid).length;
-                console.log('numPrimaryAssists', numPrimaryAssists);
-                // get num of secondary assists
-                const numSecondaryAssists = playerStatistics.filter(stat => stat.secondaryAssistant === this.member.uuid).length;
-                console.log('numSecondaryAssists', numSecondaryAssists);
-                // get num of own goals
-                const numOwnGoals = playerStatistics.filter(stat => stat.ownGoalScorer === this.member.uuid).length;
-                console.log('numOwnGoals', numOwnGoals);
-                // get num of wins
-                const numWins = playerStatistics.filter(stat => stat.team?.toLowerCase() === stat.winningTeam?.toLowerCase()).length;
-                console.log('numWins', numWins);
-                // get num of loses
-                const numLoses = playerStatistics.filter(stat => stat.team?.toLowerCase() !== stat.winningTeam?.toLowerCase()).length;
-                console.log('numLoses', numLoses);
-                // get ot goals
-                const numOtGoals = playerStatistics.filter(stat =>
-                    stat.period > 3 && stat.goalScorer === this.member.uuid
-                ).length;
-                console.log('numOtGoals', numOtGoals);
             },
             (error) => {
                 console.log(error);

@@ -45,11 +45,11 @@ import { UsernamePipe } from './pipes/username.pipe';
 import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
 import { DurationPipe } from './pipes/duration.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
   declarations: [
