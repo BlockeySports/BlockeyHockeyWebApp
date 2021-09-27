@@ -97,7 +97,7 @@ export class StatsComponent implements OnInit {
         return this.stats.filter((stat, i, arr) => {
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
-            // unique box score
+            // exclude duplicate box score id
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId) === i;
             if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isUniqueBoxScore;
@@ -119,19 +119,21 @@ export class StatsComponent implements OnInit {
      * @returns the number of wins
      */
     public getNumberOfWins(seasonType: string): number {
-        return this.stats.filter((stat) => {
+        return this.stats.filter((stat, i, arr) => {
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
-            // unique box score
-            const isOnWinningTeam = stat.team?.toLowerCase() === stat.winningTeam?.toLowerCase();
+            // is on winning team and game has a winner
+            const isOnWinningTeam = stat.team?.toLowerCase() === stat.winningTeam?.toLowerCase() && !!stat.winningTeam;
+            // exclude duplicate box score id and team
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isOnWinningTeam;
+                return stat.isRegularSeason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isOnWinningTeam;
+                return stat.isPostseason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isOnWinningTeam;
+                return stat.isPreseason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -144,22 +146,36 @@ export class StatsComponent implements OnInit {
      * @returns the number of losses
      */
     public getNumberOfLosses(seasonType: string): number {
-        return this.stats.filter((stat) => {
+        return this.stats.filter((stat, i, arr) => {
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
-            // unique box score
-            const isOnLosingTeam = stat.team?.toLowerCase() !== stat.winningTeam?.toLowerCase();
+            // is on losing team and game has a winner
+            const isOnLosingTeam = stat.team?.toLowerCase() !== stat.winningTeam?.toLowerCase() && !!stat.winningTeam;
+            // exclude duplicate box score id and team
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isOnLosingTeam;
+                return stat.isRegularSeason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isOnLosingTeam;
+                return stat.isPostseason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isOnLosingTeam;
+                return stat.isPreseason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
             }
             return false;
         }).length;
+    }
+
+    /**
+     * Get the number of draws given a season type.
+     * Also takes into account the season that is being viewed.
+     * @param seasonType The season type.
+     * @returns the number of draws
+     */
+    public getNumberOfDraws(seasonType: string): number {
+        let draws = this.getNumberOfGamesPlayed(seasonType) - (this.getNumberOfWins(seasonType) + this.getNumberOfLosses(seasonType));
+        if (draws < 0) draws = 0;
+        return draws;
     }
 
     /**

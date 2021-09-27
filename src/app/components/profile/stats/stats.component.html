@@ -61,21 +61,98 @@
             <div *ngFor="let seasonType of this.seasonTypes">
                 <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b">{{ seasonType + ' Statistics' | capitalize }}</span>
                 <div class="lg:text-2xl gap-y-8 gap-x-28 grid grid-cols-4 mx-6 mt-8 text-lg">
+                    <!-- START: Games Played -->
                     <div class="md:mx-0 table mx-auto space-x-3">
                         <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfGamesPlayed(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Games Played">games played</span>
                     </div>
+                    <!-- END: Games Played -->
+
+                    <!-- START: Wins -->
                     <div class="md:mx-0 table mx-auto space-x-3">
                         <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfWins(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Total Wins">wins</span>
                     </div>
+                    <!-- END: Wins -->
+
+                    <!-- START: Losses -->
                     <div class="md:mx-0 table mx-auto space-x-3">
                         <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfLosses(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Total Losses">losses</span>
                     </div>
+                    <!-- END: Losses -->
+
+                    <!-- START: Draws -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfDraws(seasonType) || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Total Draws">draws</span>
+                    </div>
+                    <!-- END: Draws -->
+
+                    <!-- START: Goals -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfGoals(seasonType) || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Goals">goals</span>
+                    </div>
+                    <!-- END: Goals -->
+
+                    <!-- START: Assists -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfAssists(seasonType) || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Assists">assists</span>
+                    </div>
+                    <!-- END: Assists -->
+
+                    <!-- START: Points -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfPoints(seasonType) || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Points">points</span>
+                    </div>
+                    <!-- END: Points -->
+
+                    <!-- START: Overtime Goals -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfOvertimeGoals(seasonType) || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Overtime Goals">OT goals</span>
+                    </div>
+                    <!-- END: Overtime Goals -->
+
+                    <!-- START: Shots Taken -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Shots Taken">shots</span>
+                    </div>
+                    <!-- END: Shots Taken -->
+
+                    <!-- START: Plus-Minus -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | signed }}</span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Plus-Minus">+/-</span>
+                    </div>
+                    <!-- END: Plus-Minus -->
+
+                    <!-- START: Average Time on Ice -->
+                    <div class="md:mx-0 table mx-auto space-x-3">
+                        <span class="lg:text-4xl items-end space-x-0.5 text-3xl font-semibold">
+                            <span>{{ 0 || 0 | number }}</span>
+                            <span class="lg:text-2xl text-xl">m</span>
+                        </span>
+                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                              ngxTippy="Average Time on Ice (minutes)">TOI</span>
+                    </div>
+                    <!-- END: Average Time on Ice -->
+
+                    <!-- START: Win-Lose Ratio -->
                     <div class="md:mx-0 table mx-auto space-x-3">
                         <span class="lg:text-4xl text-3xl font-semibold">
                             {{ this.calculateWinLoseRatio(getNumberOfWins(seasonType), getNumberOfLosses(seasonType)) || 0 | number: '1.2-2' }}
@@ -83,161 +160,11 @@
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Win-Lose Ratio">WL</span>
                     </div>
-                    <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfGoals(seasonType) || 0 | number }}</span>
-                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                              ngxTippy="Goals">goals</span>
-                    </div>
-                    <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfAssists(seasonType) || 0 | number }}</span>
-                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                              ngxTippy="Assists">assists</span>
-                    </div>
-                    <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfPoints(seasonType) || 0 | number }}</span>
-                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                              ngxTippy="Points">points</span>
-                    </div>
-                    <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfOvertimeGoals(seasonType) || 0 | number }}</span>
-                        <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                              ngxTippy="Goals Against">OT goals</span>
-                    </div>
+                    <!-- END: Win-Lose Ratio -->
                 </div>
             </div>
         </div>
         <!-- END: Statistics -->
     </div>
     <!-- END: Specific Stats -->
-
-
-
-    <!-- <hr *ngIf="(!this.isLoading && !this.isError) || this.member?.hockeyStatistics[0]?.description">
-
-    <span *ngIf="!this.member.hockeyStatistics 
-                            || this.member?.hockeyStatistics?.length === 0
-                            || !this.member?.hockeyStatistics[0].description" class="w-max flex flex-row items-center mx-auto space-x-3">
-        <svg *ngIf="this.isLoading && !this.isError" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 fill-current">
-            <g transform="translate(80 50)">
-                <circle r="6">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.9408602150537634s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.9408602150537634s" />
-                </circle>
-            </g>
-            <g transform="rotate(45 -50.355 121.569)">
-                <circle r="6" fill-opacity=".875">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.8064516129032258s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.8064516129032258s" />
-                </circle>
-            </g>
-            <g transform="rotate(90 -15 65)">
-                <circle r="6" fill-opacity=".75">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.6720430107526881s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.6720430107526881s" />
-                </circle>
-            </g>
-            <g transform="rotate(135 -.355 41.569)">
-                <circle r="6" fill-opacity=".625">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.5376344086021505s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.5376344086021505s" />
-                </circle>
-            </g>
-            <g transform="rotate(180 10 25)">
-                <circle r="6" fill-opacity=".5">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.4032258064516129s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.4032258064516129s" />
-                </circle>
-            </g>
-            <g transform="rotate(-135 20.355 8.431)">
-                <circle r="6" fill-opacity=".375">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.26881720430107525s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.26881720430107525s" />
-                </circle>
-            </g>
-            <g transform="rotate(-90 35 -15)">
-                <circle r="6" fill-opacity=".25">
-                    <animateTransform attributeName="transform" type="scale" begin="-0.13440860215053763s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.13440860215053763s" />
-                </circle>
-            </g>
-            <g transform="rotate(-45 70.355 -71.569)">
-                <circle r="6" fill-opacity=".125">
-                    <animateTransform attributeName="transform" type="scale" begin="0s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                    <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="0s" />
-                </circle>
-            </g>
-        </svg>
-        <span>{{ this.statisticsText }}</span>
-    </span> -->
-
-
-    <!-- START: Total Stats -->
-    <!-- <div *ngIf="(!this.isLoading && !this.isError) || this.member?.hockeyStatistics[0]?.description" class="flex flex-col space-y-20">
-        <div *ngFor="let stat of this.member.hockeyStatistics" class="flex flex-col space-y-6">
-            <span class="border-black-50 lg:text-4xl w-max pb-3 text-3xl font-semibold border-b">{{ stat.description }}</span>
-            <div class="lg:text-2xl gap-y-5 gap-x-28 grid grid-cols-4 text-lg">
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.gamesPlayed || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Games Played">games played</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.wins || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Total Wins">wins</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.losses || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Total Losses">losses</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ this.calculateWinLoseRatio(stat.wins, stat.losses) || 0 | number: '1.2-2' }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Win-Lose Ratio">WL</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.goals || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Goals">goals</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.goalsAgainst || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Goals Against">goals against</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.primaryAssists + stat.secondaryAssists || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Assists">assists</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.primaryAssists + stat.secondaryAssists + stat.goals || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Points">points</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.overtimeWins || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Overtime Wins">OT wins</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.overtimeLosses || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Overtime Losses">OT losses</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.forfeitWins || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Forfeit Wins">FFT wins</span>
-                </div>
-                <div class="md:mx-0 table mx-auto space-x-3">
-                    <span class="lg:text-4xl text-3xl font-semibold">{{ stat.forfeitLosses || 0 | number }}</span>
-                    <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                          ngxTippy="Forfeit Losses">forfeits</span>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- END: Total Stats -->
 </div>

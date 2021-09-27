@@ -46,6 +46,7 @@ import { LengthPipe } from './pipes/length.pipe';
 import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
 import { DurationPipe } from './pipes/duration.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { SignedPipe } from './pipes/signed.pipe';
 
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -79,7 +80,8 @@ import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ico
     GoalsComponent,
     DurationPipe,
     ScoresComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    SignedPipe
   ],
   imports: [
     BrowserModule,
