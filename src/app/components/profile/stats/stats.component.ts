@@ -95,18 +95,20 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfGamesPlayed(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // exclude duplicate box score id
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId) === i;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isUniqueBoxScore;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isUniqueBoxScore;
+                return stat.isPostseason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isUniqueBoxScore;
+                return stat.isPreseason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -120,6 +122,8 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfWins(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // is on winning team and game has a winner
@@ -127,13 +131,13 @@ export class StatsComponent implements OnInit {
             // exclude duplicate box score id and team
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
+                return stat.isPostseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isOnWinningTeam && isUniqueBoxScore;
+                return stat.isPreseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -147,6 +151,8 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfLosses(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // is on losing team and game has a winner
@@ -154,13 +160,13 @@ export class StatsComponent implements OnInit {
             // exclude duplicate box score id and team
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
+                return stat.isPostseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isOnLosingTeam && isUniqueBoxScore;
+                return stat.isPreseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -186,18 +192,20 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfGoals(seasonType: string): number {
         return this.stats.filter((stat) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isGoalScorer = stat.goalScorer === this.member.uuid;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isGoalScorer;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isGoalScorer;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isGoalScorer;
+                return stat.isPostseason && isSameSeason && isSameLeague && isGoalScorer;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isGoalScorer;
+                return stat.isPreseason && isSameSeason && isSameLeague && isGoalScorer;
             }
             return false;
         }).length;
@@ -220,18 +228,20 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfAssists(seasonType: string): number {
         return this.stats.filter((stat) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isAssistant = stat.primaryAssistant === this.member.uuid || stat.secondaryAssistant === this.member.uuid;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isAssistant;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isAssistant;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isAssistant;
+                return stat.isPostseason && isSameSeason && isSameLeague && isAssistant;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isAssistant;
+                return stat.isPreseason && isSameSeason && isSameLeague && isAssistant;
             }
             return false;
         }).length;
@@ -255,18 +265,20 @@ export class StatsComponent implements OnInit {
      */
     public getNumberOfOvertimeGoals(seasonType: string): number {
         return this.stats.filter((stat) => {
+            // true if league is same as tab league
+            const isSameLeague = stat.league === this.leagueTab;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isOvertimeGoalScorer = stat.goalScorer === this.member.uuid && stat.period > 3;
             if (seasonType === 'regular_season') {
-                return stat.isRegularSeason && isSameSeason && isOvertimeGoalScorer;
+                return stat.isRegularSeason && isSameSeason && isSameLeague && isOvertimeGoalScorer;
             }
             else if (seasonType === 'postseason') {
-                return stat.isPostseason && isSameSeason && isOvertimeGoalScorer;
+                return stat.isPostseason && isSameSeason && isSameLeague && isOvertimeGoalScorer;
             }
             else if (seasonType === 'preseason') {
-                return stat.isPreseason && isSameSeason && isOvertimeGoalScorer;
+                return stat.isPreseason && isSameSeason && isSameLeague && isOvertimeGoalScorer;
             }
             return false;
         }).length;
