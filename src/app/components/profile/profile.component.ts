@@ -8,6 +8,8 @@ import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { formatDate } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { DateService } from 'src/app/services/date.service';
+import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
+import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 
 @Component({
     selector: 'app-profile',
@@ -16,14 +18,9 @@ import { DateService } from 'src/app/services/date.service';
 export class ProfileComponent implements OnInit, OnDestroy {
 
     public member: Member = {
-        username: '',
-        hockeyStatistics: [
-            {
-                goals: 0, primaryAssists: 0, secondaryAssists: 0, wins: 0, losses: 0, goalsAgainst: 0,
-                overtimeWins: 0, overtimeLosses: 0, forfeitWins: 0, forfeitLosses: 0
-            }
-        ]
+        username: ''
     };
+    public playerStatistics: PlayerStatistic[] = [];
 
     public isError = false;
     public errorMessage = '';
@@ -46,6 +43,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private tippyService: NgxTippyService,
         private memberService: MemberService,
+        private playerStatisticService: PlayerStatisticService,
         private titleService: Title,
         private dateService: DateService
     ) { }
@@ -74,6 +72,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.changeTab(this.tab !== 'stats' ? this.tab : '');
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
+                // get player statistics
+                this.getPlayerStatistics();
                 // console.log(data);
 
             },
@@ -87,6 +87,48 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.usernameColor = 'currentColor';
                 // set the last online tooltip date
                 this.setTippyOnlineStatus();
+                console.log(error);
+            }
+        );
+    }
+
+    /**
+     * Get the player statistics.
+     */
+    private getPlayerStatistics(): void {
+        this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
+            (playerStatistics: PlayerStatistic[]) => {
+                this.playerStatistics = playerStatistics;
+                console.log(playerStatistics);
+                // filter out duplicates by box score id
+                const numGames = playerStatistics.filter((stat, i, arr) => {
+                    return arr.findIndex(t => t.boxScoreId === stat.boxScoreId) === i;
+                }).length;
+                console.log('numGames', numGames);
+                const numGoals = playerStatistics.filter(stat => stat.goalScorer === this.member.uuid).length;
+                console.log('numGoals', numGoals);
+                // get num of primary assists
+                const numPrimaryAssists = playerStatistics.filter(stat => stat.primaryAssistant === this.member.uuid).length;
+                console.log('numPrimaryAssists', numPrimaryAssists);
+                // get num of secondary assists
+                const numSecondaryAssists = playerStatistics.filter(stat => stat.secondaryAssistant === this.member.uuid).length;
+                console.log('numSecondaryAssists', numSecondaryAssists);
+                // get num of own goals
+                const numOwnGoals = playerStatistics.filter(stat => stat.ownGoalScorer === this.member.uuid).length;
+                console.log('numOwnGoals', numOwnGoals);
+                // get num of wins
+                const numWins = playerStatistics.filter(stat => stat.team?.toLowerCase() === stat.winningTeam?.toLowerCase()).length;
+                console.log('numWins', numWins);
+                // get num of loses
+                const numLoses = playerStatistics.filter(stat => stat.team?.toLowerCase() !== stat.winningTeam?.toLowerCase()).length;
+                console.log('numLoses', numLoses);
+                // get ot goals
+                const numOtGoals = playerStatistics.filter(stat =>
+                    stat.period > 3 && stat.goalScorer === this.member.uuid
+                ).length;
+                console.log('numOtGoals', numOtGoals);
+            },
+            (error) => {
                 console.log(error);
             }
         );

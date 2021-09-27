@@ -55,32 +55,32 @@
                 <div class="md:py-8 md:mt-6 md:mb-12 md:mx-0 dark:bg-black-600 dark:ring-black ring-1 ring-gray-200 md:w-max flex justify-center w-full px-16 py-5 mx-auto my-5 text-2xl font-semibold bg-gray-100 rounded-md shadow-md">
                     <div class="gap-x-10 md:gap-x-28 gap-y-3 md:gap-y-5 grid grid-flow-col grid-rows-3 my-auto">
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.goals || 0 }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.goals || 0 }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Goals">goals</span>
                         </div>
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists || 0 }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists || 0 }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Assists">assists</span>
                         </div>
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists + this.member?.hockeyStatistics[0]?.wins || 0 }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.primaryAssists + this.member?.hockeyStatistics[0]?.secondaryAssists + this.member?.hockeyStatistics[0]?.wins || 0 }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Points">points</span>
                         </div>
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.wins || 0 }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.wins || 0 }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Wins">wins</span>
                         </div>
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.losses || 0 }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.member?.hockeyStatistics[0]?.losses || 0 }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Losses">losses</span>
                         </div>
                         <div class="md:mx-0 table space-x-3">
-                            <span class="md:text-4xl text-3xl">{{ this.calculateWinLoseRatio(this.member?.hockeyStatistics[0]?.wins, this.member?.hockeyStatistics[0]?.losses) || 0 | number: '1.2-2' }}</span>
+                            <!-- <span class="md:text-4xl text-3xl">{{ this.calculateWinLoseRatio(this.member?.hockeyStatistics[0]?.wins, this.member?.hockeyStatistics[0]?.losses) || 0 | number: '1.2-2' }}</span> -->
                             <span class="dark:text-gray-300 text-gray-400"
                                   ngxTippy="Total Win-Lose Ratio">WL</span>
                         </div>
@@ -133,6 +133,7 @@
             <div class="md:flex hidden">
                 <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
+                           [stats]="this.playerStatistics"
                            [isError]="this.isError"
                            [statisticsText]="this.errorMessage"
                            class="w-full mt-10"></app-stats>

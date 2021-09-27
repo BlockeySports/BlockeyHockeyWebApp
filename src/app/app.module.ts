@@ -49,6 +49,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ico
     ScoringSummaryComponent,
     GoalsComponent,
     DurationPipe,
-    ScoresComponent
+    ScoresComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

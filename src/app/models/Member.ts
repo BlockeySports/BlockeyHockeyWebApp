@@ -15,5 +15,4 @@ export class Member {
     roles?: Role[];             // the roles and ranks this player has
     isOg?: boolean;             // true if this player is an OG player
     punishments?: Punishment[]; // the list of punishments this member has
-    hockeyStatistics?: HockeyStatistic[];
 }
