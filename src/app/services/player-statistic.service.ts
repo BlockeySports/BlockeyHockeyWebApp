@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Member } from '../models/Member';
+import { PlayerGamePlayed } from '../models/PlayerGamePlayed';
 import { PlayerStatistic } from '../models/PlayerStatistic';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { PlayerStatistic } from '../models/PlayerStatistic';
 })
 export class PlayerStatisticService {
 
-    resource = '/rest/v1/player-statistic';
+    resource = '/rest/v1/';
     url = '';
 
     constructor(
@@ -28,6 +29,15 @@ export class PlayerStatisticService {
     public getPlayerStatistics(uuid: string): Observable<PlayerStatistic[]> {
         const params = new HttpParams()
             .set('uuid', uuid);
-        return this.http.get<PlayerStatistic[]>(this.url, { params });
+        return this.http.get<PlayerStatistic[]>(this.url.concat('player-statistic'), { params });
+    }
+
+    /**
+     * Get player games played from the database by player's uuid.
+     */
+    public getPlayerGamesPlayed(uuid: string): Observable<PlayerGamePlayed[]> {
+        const params = new HttpParams()
+            .set('uuid', uuid);
+        return this.http.get<PlayerGamePlayed[]>(this.url.concat('player-game-played'), { params });
     }
 }

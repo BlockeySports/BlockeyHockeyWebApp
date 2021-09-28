@@ -29,4 +29,5 @@ export class PlayerStatistic {
     league?: string;
     season?: string;
     tournament?: string;
+    isTesting?: boolean;
 }

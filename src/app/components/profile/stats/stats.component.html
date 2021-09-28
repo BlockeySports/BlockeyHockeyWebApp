@@ -59,7 +59,7 @@
         <div *ngIf="this.leagueTab && this.seasonTab"
              class="md:flex mt-7 flex-col hidden space-y-16 select-none">
             <div *ngFor="let seasonType of getSeasonTypes()">
-                <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b">{{ seasonType + ' Statistics' | capitalize }}</span>
+                <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b tracking-wide">{{ seasonType + ' Statistics' | capitalize }}</span>
                 <div class="lg:text-2xl gap-y-8 gap-x-28 grid grid-cols-4 mx-6 mt-8 text-lg">
                     <!-- START: Games Played -->
                     <div class="md:mx-0 table mx-auto space-x-3">

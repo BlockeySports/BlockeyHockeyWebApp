@@ -10,6 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { DateService } from 'src/app/services/date.service';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
+import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
 
 @Component({
     selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         username: ''
     };
     public playerStatistics: PlayerStatistic[] = [];
+    public playerGamesPlayed: PlayerGamePlayed[] = [];
 
     public isError = false;
     public errorMessage = '';
@@ -99,6 +101,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
             (playerStatistics: PlayerStatistic[]) => {
                 this.playerStatistics = playerStatistics;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
+            (playerGamesPlayed: PlayerGamePlayed[]) => {
+                this.playerGamesPlayed = playerGamesPlayed;
             },
             (error) => {
                 console.log(error);

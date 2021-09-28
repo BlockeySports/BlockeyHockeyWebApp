@@ -29,6 +29,8 @@ export class BoxScore {
     gameNumber?: number;                                // the number of the game in a series (i.e. Game 7)
     roundNumber?: number;                               // the number of the round in the playoffs (i.e. Round 2)
 
+    isTesting?: boolean;                                // true if the creating during testing
+
     awayPlayers?: BoxScorePlayer[];                     // players that played for the away team in the game
     awayDressed?: BoxScorePlayer[];                     // players that dressed for the away team (did not necessarily play)
     homePlayers?: BoxScorePlayer[];                     // players that played for the home team in the game

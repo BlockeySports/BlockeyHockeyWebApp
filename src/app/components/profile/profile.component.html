@@ -134,6 +134,7 @@
                 <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
                            [member]="this.member"
                            [stats]="this.playerStatistics"
+                           [gamesPlayed]="this.playerGamesPlayed"
                            [isError]="this.isError"
                            [statisticsText]="this.errorMessage"
                            class="w-full mt-10"></app-stats>
