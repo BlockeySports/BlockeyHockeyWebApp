@@ -1,6 +1,5 @@
 import { formatDate } from '@angular/common';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { NgxTippyService } from 'ngx-tippy-wrapper';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/models/Member';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { DateService } from 'src/app/services/date.service';
@@ -21,10 +20,7 @@ export class StatsComponent implements OnInit {
     public leagueTab = null;
     public seasonTab = null;
 
-    public seasonTypes = ['regular_season', 'postseason'];
-
     constructor(
-        private tippyService: NgxTippyService,
         private dateService: DateService
     ) { }
 
@@ -80,6 +76,8 @@ export class StatsComponent implements OnInit {
         if (this.leagueTab === null) { this.changeLeagueTab(leagues[0]); }
         // add arcade tab to beginning of the array
         leagues.unshift('arcade');
+        // if leagues list has no leagues, default to arcade tab
+        if (leagues.length <= 1) { this.changeLeagueTab('arcade'); }
         // return the leagues
         return leagues;
     }
