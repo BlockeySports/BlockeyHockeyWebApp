@@ -153,10 +153,8 @@
                     <!-- END: Average Time on Ice -->
 
                     <!-- START: Win-Lose Ratio -->
-                    <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">
-                            {{ this.calculateWinLoseRatio(getNumberOfWins(seasonType), getNumberOfLosses(seasonType)) || 0 | number: '1.2-2' }}
-                        </span>
+                    <div class="md:mx-0 whitespace-nowrap table mx-auto space-x-3">
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ this.calculateWinLoseRatio(seasonType) || 0 | number: '1.2-2' }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Win-Lose Ratio">WL</span>
                     </div>
