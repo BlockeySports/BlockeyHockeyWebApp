@@ -36,12 +36,35 @@ export class StatsComponent implements OnInit {
     public changeLeagueTab(tab: string): void {
         // reset season tab if tab is changing
         if (this.leagueTab !== tab) this.changeSeasonTab(null);
+        // if switching to arcade, set season to career
+        if (tab === 'arcade') { this.changeSeasonTab('career'); }
         // set the league tab
         this.leagueTab = tab || null;
     }
 
     public changeSeasonTab(tab: string): void {
         this.seasonTab = tab || null;
+    }
+
+    public getSeasonTypes(): string[] {
+        // if in arcade mode, return edge case array
+        if (this.leagueTab === 'arcade') return ['career_arcade'];
+        // define season types
+        const seasonTypes: string[] = [];
+        // true if getting career stats
+        const isCareerTab = this.seasonTab === 'career';
+        // get if stats (for current seasonTab) has any regular season stats
+        const hasRegularSeasonStats = this.stats
+            .filter(stat => stat.isRegularSeason && (stat.season === this.seasonTab || isCareerTab)).length > 0;
+        // if has regular season stats, add to season types
+        if (hasRegularSeasonStats) seasonTypes.push('regular_season');
+        // get if stats (for current seasonTab) has any postseason stats
+        const hasPostseasonStats = this.stats
+            .filter(stat => stat.isPostseason && (stat.season === this.seasonTab || isCareerTab)).length > 0;
+        // if has postseason stats, add to season types
+        if (hasPostseasonStats) seasonTypes.push('postseason');
+        // return season types
+        return seasonTypes;
     }
 
     /**
@@ -88,9 +111,7 @@ export class StatsComponent implements OnInit {
      */
     public getFirstSeenDate(): string {
         const date = this.dateService.getDate(this.member.dateJoined);
-        return date
-            ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US')
-            : 'N/A';
+        return date ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
     }
 
     /**
@@ -107,7 +128,9 @@ export class StatsComponent implements OnInit {
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // exclude duplicate box score id
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId) === i;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return isUniqueBoxScore && !stat.isLeaguePlay && !stat.isTournamentPlay;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
@@ -136,7 +159,9 @@ export class StatsComponent implements OnInit {
             const isOnWinningTeam = stat.team?.toLowerCase() === stat.winningTeam?.toLowerCase() && !!stat.winningTeam;
             // exclude duplicate box score id and team
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return isUniqueBoxScore && !stat.isLeaguePlay && !stat.isTournamentPlay && isOnWinningTeam;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
@@ -165,7 +190,9 @@ export class StatsComponent implements OnInit {
             const isOnLosingTeam = stat.team?.toLowerCase() !== stat.winningTeam?.toLowerCase() && !!stat.winningTeam;
             // exclude duplicate box score id and team
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === stat.boxScoreId && t.team === stat.team) === i;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return isUniqueBoxScore && !stat.isLeaguePlay && !stat.isTournamentPlay && isOnLosingTeam;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
@@ -204,7 +231,9 @@ export class StatsComponent implements OnInit {
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isGoalScorer = stat.goalScorer === this.member.uuid;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return !stat.isLeaguePlay && !stat.isTournamentPlay && isGoalScorer;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isGoalScorer;
             }
             else if (seasonType === 'postseason') {
@@ -240,7 +269,9 @@ export class StatsComponent implements OnInit {
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isAssistant = stat.primaryAssistant === this.member.uuid || stat.secondaryAssistant === this.member.uuid;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return !stat.isLeaguePlay && !stat.isTournamentPlay && isAssistant;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isAssistant;
             }
             else if (seasonType === 'postseason') {
@@ -277,7 +308,9 @@ export class StatsComponent implements OnInit {
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
             const isOvertimeGoalScorer = stat.goalScorer === this.member.uuid && stat.period > 3;
-            if (seasonType === 'regular_season') {
+            if (this.leagueTab === 'arcade') {
+                return !stat.isLeaguePlay && !stat.isTournamentPlay && isOvertimeGoalScorer;
+            } else if (seasonType === 'regular_season') {
                 return stat.isRegularSeason && isSameSeason && isSameLeague && isOvertimeGoalScorer;
             }
             else if (seasonType === 'postseason') {
