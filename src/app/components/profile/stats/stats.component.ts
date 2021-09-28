@@ -34,6 +34,9 @@ export class StatsComponent implements OnInit {
     }
 
     public changeLeagueTab(tab: string): void {
+        // reset season tab if tab is changing
+        if (this.leagueTab !== tab) this.changeSeasonTab(null);
+        // set the league tab
         this.leagueTab = tab || null;
     }
 
@@ -52,7 +55,7 @@ export class StatsComponent implements OnInit {
         leagues.sort();
         // if league tab is null, set league tab to first league
         if (this.leagueTab === null) { this.changeLeagueTab(leagues[0]); }
-        // add 'arcade' to beginning of the array
+        // add arcade tab to beginning of the array
         leagues.unshift('arcade');
         // return the leagues
         return leagues;
@@ -65,9 +68,12 @@ export class StatsComponent implements OnInit {
     public getSeasons(): string[] {
         // return unique stat seasons, and remove empty strings or nullish values
         const seasons: string[] =
-            [...new Set(this.stats.filter(stat => stat.league === this.leagueTab).map(stat => stat.season))].filter(season => season);
-        // sort seasons alphabetically
-        seasons.sort();
+            [...new Set(this.stats
+                .filter(stat => stat.league === this.leagueTab && stat.isLeaguePlay)
+                .map(stat => stat.season))]
+                .filter(season => season);
+        // sort seasons reverse alphabetically
+        seasons.sort((a, b) => b.localeCompare(a));
         // if season tab is null, set season tab to first season
         if (this.seasonTab === null) { this.changeSeasonTab(seasons[0]); }
         // add 'career' to end of array
@@ -96,7 +102,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfGamesPlayed(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // exclude duplicate box score id
@@ -123,7 +129,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfWins(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // is on winning team and game has a winner
@@ -152,7 +158,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfLosses(seasonType: string): number {
         return this.stats.filter((stat, i, arr) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // is on losing team and game has a winner
@@ -193,7 +199,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfGoals(seasonType: string): number {
         return this.stats.filter((stat) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
@@ -229,7 +235,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfAssists(seasonType: string): number {
         return this.stats.filter((stat) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
@@ -266,7 +272,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfOvertimeGoals(seasonType: string): number {
         return this.stats.filter((stat) => {
             // true if league is same as tab league
-            const isSameLeague = stat.league === this.leagueTab;
+            const isSameLeague = stat.league === this.leagueTab && stat.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
             const isSameSeason = stat.season === this.seasonTab || this.seasonTab === 'career';
             // unique box score
