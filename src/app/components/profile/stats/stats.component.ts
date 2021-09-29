@@ -4,6 +4,7 @@ import { Member } from 'src/app/models/Member';
 import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { DateService } from 'src/app/services/date.service';
+import dayjs from 'dayjs';
 
 @Component({
     selector: 'app-stats',
@@ -29,6 +30,19 @@ export class StatsComponent implements OnInit {
     ngOnInit(): void {
         // display loading text
         this.statisticsText = 'Hang tight while we load your statistics.';
+    }
+
+    /**
+     * Get the amount of hours played per day since joining the server.
+     * @returns the hours played per day
+     */
+    public getHoursPerDay(): number {
+        // get days since join date
+        const days = dayjs().diff(dayjs(this.member.dateJoined), 'day');
+        // convert time played to hours from milliseconds
+        const hours = this.member.timePlayed / (1000 * 60 * 60);
+        // return hours per day
+        return hours / days;
     }
 
     public changeLeagueTab(tab: string): void {

@@ -4,17 +4,22 @@
     <div *ngIf="!this.isLoading && !this.isError" id="general-stats"
          class="lg:text-xl flex flex-row justify-around">
         <div *ngIf="this.member?.dateJoined"
-             class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-64 text-center">
+             class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
             <span class="lg:text-4xl text-3xl font-semibold">{{ this.member.dateJoined | daysSince }}</span>
             <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                   [ngxTippy]="getFirstSeenDate()">days since first seen</span>
         </div>
-        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-64 text-center">
+        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
             <span class="lg:text-4xl text-3xl font-semibold">{{ this.member.timePlayed | hours | round : 1 }}</span>
             <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                   ngxTippy="Hours Played">hours played</span>
         </div>
-        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-64 text-center">
+        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
+            <span class="lg:text-4xl text-3xl font-semibold">{{ getHoursPerDay() | round : 1 }}</span>
+            <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
+                  ngxTippy="Average Hours per Day">hr/day</span>
+        </div>
+        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
             <span class="lg:text-4xl text-3xl font-semibold">{{ this.member.joinPosition ? this.member.joinPosition : 0 }}</span>
             <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                   ngxTippy="Join Position">join position</span>
