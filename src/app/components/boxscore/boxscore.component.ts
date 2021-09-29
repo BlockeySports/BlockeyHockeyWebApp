@@ -51,7 +51,6 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
                 } else {
                     document.title = 'Box Score Not Found';
                 }
-                console.log(this.boxScore);
             },
             (error) => {
                 // set tab title to error
