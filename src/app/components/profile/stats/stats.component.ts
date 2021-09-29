@@ -39,8 +39,12 @@ export class StatsComponent implements OnInit {
     public getHoursPerDay(): number {
         // get days since join date
         const days = dayjs().diff(dayjs(this.member.dateJoined), 'day');
+        // if zero days, return 0
+        if (days === 0) return 0;
         // convert time played to hours from milliseconds
         const hours = this.member.timePlayed / (1000 * 60 * 60);
+        // if less than 1 hour played, return 0
+        if (hours < 1) return 0;
         // return hours per day
         return hours / days;
     }
