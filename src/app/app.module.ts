@@ -51,6 +51,7 @@ import { SignedPipe } from './pipes/signed.pipe';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { GamesComponent } from './components/profile/games/games.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +83,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
         ScoresComponent,
         CapitalizePipe,
         SignedPipe,
-        TruncatePipe
+        TruncatePipe,
+        GamesComponent
     ],
     imports: [
         BrowserModule,

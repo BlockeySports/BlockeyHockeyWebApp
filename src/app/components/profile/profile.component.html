@@ -66,6 +66,18 @@
                 </div>
                 <!-- END: Stats Tab -->
 
+                <!-- START: Games Tab -->
+                <div id="game-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
+                     (click)="changeTab('games')"
+                     tabindex="0"
+                     [ngClass]="this.tab === 'games'
+                                ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
+                                : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
+                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
+                    <span>GAMES</span>
+                </div>
+                <!-- END: Games Tab -->
+
                 <!-- START: Awards Tab -->
                 <div id="awards-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
                      (click)="changeTab('awards')"
@@ -94,17 +106,22 @@
 
             <!-- START: Tabs Content -->
             <div class="md:flex hidden">
-                <app-stats [ngClass]="this.tab === 'stats' ? 'block' : 'hidden'"
+                <app-stats [class.hidden]="this.tab !== 'stats'"
                            [member]="this.member"
                            [stats]="this.playerStatistics"
                            [gamesPlayed]="this.playerGamesPlayed"
                            [isError]="this.isError"
                            [statisticsText]="this.errorMessage"
                            class="w-full mt-10"></app-stats>
-                <app-awards [ngClass]="this.tab === 'trophies' ? 'block' : 'hidden'"
+                <app-games [class.hidden]="this.tab !== 'games'"
+                           [member]="this.member"
+                           class="w-full mt-10">
+
+                </app-games>
+                <app-awards [class.hidden]="this.tab !== 'awards'"
                             [awards]="this.member"
                             class="w-full mt-10"></app-awards>
-                <app-infractions [ngClass]="this.tab === 'infractions' ? 'block' : 'hidden'"
+                <app-infractions [class.hidden]="this.tab !== 'infractions'"
                                  [member]="this.member"
                                  class="w-full mt-10"></app-infractions>
             </div>

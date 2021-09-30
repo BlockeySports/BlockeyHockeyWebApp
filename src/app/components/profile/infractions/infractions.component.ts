@@ -1,7 +1,5 @@
 import { formatDate } from '@angular/common';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import dayjs from 'dayjs';
-import updateLocale from 'dayjs/plugin/updateLocale';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/Member';
 import { Punishment } from 'src/app/models/Punishment';

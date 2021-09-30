@@ -1,5 +1,7 @@
 export class PlayerGamePlayed {
     boxScoreId?: string;
+    date?: Date;
+    duration?: number;
     player?: string;
     team?: string;
     winningTeam?: string;
