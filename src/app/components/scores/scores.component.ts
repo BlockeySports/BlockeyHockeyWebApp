@@ -16,16 +16,18 @@ export class ScoresComponent implements OnInit {
 
     constructor(
         private boxScoreService: BoxScoreService,
-        private colorService: ColorService,
-        private tippyService: NgxTippyService
+        private colorService: ColorService
     ) { }
 
     ngOnInit(): void {
+        // set tab title
+        document.title = 'Scores | Blockey Hockey Network';
         this.boxScoreService.getBoxScores().subscribe(
             (boxScores: BoxScore[]) => {
                 this.boxScores = boxScores;
             },
             (error) => {
+                document.title = 'Error Loading Scores | Blockey Hockey Network';
                 console.log(error);
             }
         );

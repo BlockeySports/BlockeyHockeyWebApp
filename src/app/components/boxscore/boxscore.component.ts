@@ -38,7 +38,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
         // if id is null, return
         if (!this.boxScore.id) { return; }
         // set temporary tab title
-        document.title = 'Loading Box Score...';
+        document.title = 'Loading Box Score... | Blockey Hockey Network';
         // subscribe to the box score data
         this.boxScoreSubscription = this.boxScoreService.getBoxScore(this.boxScore.id).subscribe(
             (data: BoxScore) => {
@@ -47,14 +47,16 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
                 this.pending = false;
                 // set tab title to team codes
                 if (data) {
-                    document.title = this.boxScore?.awayTeam?.code + ' @ ' + this.boxScore?.homeTeam?.code + ' | ' + this.getBoxScoreDate();
+                    document.title = this.boxScore?.awayTeam?.code + ' @ ' + this.boxScore?.homeTeam?.code
+                        + ' | ' + this.getBoxScoreDate()
+                        + ' | Blockey Hockey Network';
                 } else {
-                    document.title = 'Box Score Not Found';
+                    document.title = 'Box Score Not Found | Blockey Hockey Network';
                 }
             },
             (error) => {
                 // set tab title to error
-                document.title = 'Error Loading Box Score';
+                document.title = 'Error Loading Box Score | Blockey Hockey Network';
                 console.log(error);
             }
         );
