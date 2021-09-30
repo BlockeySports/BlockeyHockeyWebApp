@@ -10,61 +10,65 @@
         <div class="flex flex-col">
             <!-- START: Game Date -->
             <div class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Date of this game">DATE</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p class="px-3">{{ getBoxScoreDate() }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ getBoxScoreDate() }}</p>
                 </div>
             </div>
             <!-- END: Game Date -->
             <!-- START: Rink -->
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 pt-0.5 ml-auto"
                        ngxTippy="Rink or arena name">RINK</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p class="px-3">{{ this.boxScore?.rink }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden align-middle">{{ this.boxScore?.rink | truncate:[20] }}</p>
                 </div>
             </div>
             <!-- END: Rink -->
             <!-- START: League/Tournament -->
             <div *ngIf="this.boxScore?.isLeaguePlay || this.boxScore?.isTournamentPlay || this.pending"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending || !this.boxScore" class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending || !this.boxScore" class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="League name">LEAGUE</p>
-                    <p *ngIf="this.boxScore?.isTournamentPlay" class="w-max px-3 ml-auto"
+                    <p *ngIf="this.boxScore?.isTournamentPlay" class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Tournament name">TOURNEY</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending" class="px-3">{{ this.boxScore?.league }}</p>
-                    <p *ngIf="this.boxScore?.isTournamentPlay" class="px-3">{{ this.boxScore?.tournament }}</p>
+                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.league }}</p>
+                    <p *ngIf="this.boxScore?.isTournamentPlay"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.tournament }}</p>
                 </div>
             </div>
             <!-- END: League/Tournament -->
             <!-- START: Official -->
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Person who officiated this game">OFFICIAL</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="!this.pending && this.boxScore?.officials.length > 0" class="px-3">{{ this.boxScore?.officials[0] }}</p>
+                    <p *ngIf="!this.pending && this.boxScore?.officials.length > 0"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.officials[0] }}</p>
                 </div>
             </div>
             <!-- END: Official -->
             <!-- START: Series Round Number -->
             <div *ngIf="this.boxScore?.isSeries"
                  class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Series round number">ROUND NO.</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="!this.pending && this.boxScore?.roundNumber" class="px-3">{{ 'Round ' + this.boxScore?.roundNumber }}</p>
+                    <p *ngIf="!this.pending && this.boxScore?.roundNumber"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ 'Round ' + this.boxScore?.roundNumber }}</p>
                 </div>
             </div>
             <!-- END: Series Round Number -->
@@ -75,58 +79,60 @@
         <div class="flex flex-col">
             <!-- START: Game Time -->
             <div class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Time at which this game started">START TIME</p>
                 </div>
                 <div class="w-full">
-                    <p class="px-3">{{ getBoxScoreTime() }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ getBoxScoreTime() }}</p>
                 </div>
             </div>
             <!-- END: Game Time -->
             <!-- START: Duration -->
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Total length of game in minutes">DURATION</p>
                 </div>
                 <div class="w-full">
-                    <p class="px-3">{{ this.boxScore?.duration | minutes }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.duration | minutes }}</p>
                 </div>
             </div>
             <!-- END: Duration -->
             <!-- START: Season -->
             <div *ngIf="this.boxScore?.isLeaguePlay || this.boxScore?.isTournamentPlay || this.pending"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Season name or number">SEASON</p>
                 </div>
                 <div class="w-full">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending" class="px-3">{{ this.boxScore?.season }}</p>
+                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.season }}</p>
                 </div>
             </div>
             <!-- END: Season -->
             <!-- START: Scorer -->
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Person who filled out this box score">SCORER</p>
                 </div>
                 <div class="w-full">
-                    <p class="px-3">{{ this.boxScore?.scorer }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.scorer }}</p>
                 </div>
             </div>
             <!-- END: Scorer -->
             <!-- START: Game Number -->
             <div *ngIf="this.boxScore?.isSeries"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
-                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 w-7/12 font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto"
+                <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
+                    <p class="w-max px-3 ml-auto pt-0.5"
                        ngxTippy="Game number in series">GAME NO.</p>
                 </div>
                 <div class="w-full">
-                    <p *ngIf="!this.pending && this.boxScore?.gameNumber" class="px-3">{{ 'Game ' + this.boxScore?.gameNumber }}</p>
+                    <p *ngIf="!this.pending && this.boxScore?.gameNumber"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ 'Game ' + this.boxScore?.gameNumber }}</p>
                 </div>
             </div>
             <!-- END: Game Number -->

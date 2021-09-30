@@ -51,6 +51,7 @@ import { SignedPipe } from './pipes/signed.pipe';
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ico
     DurationPipe,
     ScoresComponent,
     CapitalizePipe,
-    SignedPipe
+    SignedPipe,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
