@@ -32,10 +32,18 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
-    public navigateToProfile(username: string): void {
+    public navigateToProfile(username: string, newTab: boolean): void {
         if (username) {
             this.isLoading = true;
-            window.location.href = `/u/${username}`;
+            const url = `${window.location.origin}/u/${username}`;
+            if (newTab) {
+                // open url in new tab
+                window.open(url, '_blank');
+                this.isLoading = false;
+            } else {
+                // open url in same tab
+                window.location.href = `/u/${username}`;
+            }
         }
     }
 }
