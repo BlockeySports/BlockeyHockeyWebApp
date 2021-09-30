@@ -7,7 +7,6 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPrettyCheckboxModule } from 'ngx-pretty-checkbox';
-import { FilterService, GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from 'headlessui-angular';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -54,58 +53,56 @@ import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ico
 import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProfileComponent,
-    HomeComponent,
-    TimeAgoPipe,
-    HeaderComponent,
-    FooterComponent,
-    StatsComponent,
-    InfractionsComponent,
-    AwardsComponent,
-    RoundPipe,
-    HoursPipe,
-    MinutesPipe,
-    DaysSincePipe,
-    UsernamePipe,
-    LengthPipe,
-    PunishmentTypePipe,
-    BoxScoreComponent,
-    RosterComponent,
-    TeamComponent,
-    RinkComponent,
-    InfractionsListComponent,
-    InformationComponent,
-    ScoringSummaryComponent,
-    GoalsComponent,
-    DurationPipe,
-    ScoresComponent,
-    CapitalizePipe,
-    SignedPipe,
-    TruncatePipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgxTippyModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MenuModule,
-    MatTabsModule,
-    NgxPrettyCheckboxModule,
-    GridAllModule,
-    ClipboardModule,
-    FontAwesomeModule
-  ],
-  providers: [CookieService, FilterService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ProfileComponent,
+        HomeComponent,
+        TimeAgoPipe,
+        HeaderComponent,
+        FooterComponent,
+        StatsComponent,
+        InfractionsComponent,
+        AwardsComponent,
+        RoundPipe,
+        HoursPipe,
+        MinutesPipe,
+        DaysSincePipe,
+        UsernamePipe,
+        LengthPipe,
+        PunishmentTypePipe,
+        BoxScoreComponent,
+        RosterComponent,
+        TeamComponent,
+        RinkComponent,
+        InfractionsListComponent,
+        InformationComponent,
+        ScoringSummaryComponent,
+        GoalsComponent,
+        DurationPipe,
+        ScoresComponent,
+        CapitalizePipe,
+        SignedPipe,
+        TruncatePipe
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgxTippyModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MenuModule,
+        MatTabsModule,
+        NgxPrettyCheckboxModule,
+        ClipboardModule,
+        FontAwesomeModule
+    ],
+    providers: [CookieService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  constructor(library: FaIconLibrary) {
-    library.addIcons(faYoutube, faExternalLinkAlt, faCaretRight);
-  }
-
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faYoutube, faExternalLinkAlt, faCaretRight);
+    }
 }
