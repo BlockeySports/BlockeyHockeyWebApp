@@ -11,6 +11,9 @@ export class RinkComponent implements OnInit {
     public yCoord;
     public zCoord;
 
+    public isFlipped = false;
+    public isBenchesFlipped = false;
+
     public rinkName: string;
     public homeTeam: string;
     public location: string;
@@ -24,8 +27,7 @@ export class RinkComponent implements OnInit {
         private clipboardService: ClipboardService
     ) { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     public copyXML(): void {
         const xmlText = this.xml.nativeElement.innerText;
