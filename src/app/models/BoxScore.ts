@@ -33,8 +33,10 @@ export class BoxScore {
 
     awayPlayers?: BoxScorePlayer[];                     // players that played for the away team in the game
     awayDressed?: BoxScorePlayer[];                     // players that dressed for the away team (did not necessarily play)
+    awayPlayerCount?: number;                           // the number of players on the away team
     homePlayers?: BoxScorePlayer[];                     // players that played for the home team in the game
     homeDressed?: BoxScorePlayer[];                     // players that dressed for the home team (did not necessarily play)
+    homePlayerCount?: number;                           // the number of players on the home team
 
     goals?: BoxScoreGoal[];                             // all goals scored during the game
     shootoutAttempts?: BoxScoreShootoutAttempt[];       // shootout attempts (empty if none)
