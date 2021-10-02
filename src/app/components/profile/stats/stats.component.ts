@@ -156,14 +156,18 @@ export class StatsComponent implements OnInit {
             const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
             const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            // true if game had enough players to be counted for stats
+            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
             // exclude duplicate box score id
             const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === gamePlayed.boxScoreId) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
                 return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
@@ -190,6 +194,8 @@ export class StatsComponent implements OnInit {
             const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
             const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            // true if game had enough players to be counted for stats
+            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
             // is on winning team and game has a winner
             const isOnWinningTeam = gamePlayed.team?.toLowerCase() === gamePlayed.winningTeam?.toLowerCase() && !!gamePlayed.winningTeam;
             // exclude duplicate box score id and team
@@ -197,9 +203,11 @@ export class StatsComponent implements OnInit {
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
                 return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
@@ -226,6 +234,8 @@ export class StatsComponent implements OnInit {
             const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
             const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            // true if game had enough players to be counted for stats
+            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
             // is on losing team and game has a winner
             const isOnLosingTeam = gamePlayed.team?.toLowerCase() !== gamePlayed.winningTeam?.toLowerCase() && !!gamePlayed.winningTeam;
             // exclude duplicate box score id and team
@@ -233,9 +243,11 @@ export class StatsComponent implements OnInit {
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam && !gamePlayed.isTournamentPlay && isUniqueBoxScore;
+                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam
+                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
                 return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;

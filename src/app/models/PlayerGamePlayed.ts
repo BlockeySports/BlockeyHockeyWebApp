@@ -5,6 +5,9 @@ export class PlayerGamePlayed {
     player?: string;
     team?: string;
     winningTeam?: string;
+    awayPlayerCount?: number;
+    homePlayerCount?: number;
+    totalPlayerCount?: number;
     isPlayed?: boolean;
     isPreseason?: boolean;
     isRegularSeason?: boolean;
