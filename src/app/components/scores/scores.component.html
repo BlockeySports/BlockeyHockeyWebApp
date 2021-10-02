@@ -10,7 +10,7 @@
             <!-- START: Mini Box Score -->
             <a *ngFor="let boxScore of this.boxScores"
                [href]="getBoxScoreLink(boxScore)" target="_blank"
-               class="border-black-800 dark:border-black-50 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content]">
+               class="border-black-800 dark:border-black-50 dark:hover:border-gray-100 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content] hover:ring-2 hover:ring-black dark:hover:ring-gray-100">
                 <!-- START: League, Date, Result -->
                 <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full bg-gray-300 border-b">
                     <p class="border-black-800 dark:border-black-50 w-[20%] text-center border-r p-0.5">{{ boxScore.league || 'Arcade' }}</p>
