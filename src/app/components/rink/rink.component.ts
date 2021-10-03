@@ -27,7 +27,10 @@ export class RinkComponent implements OnInit {
         private clipboardService: ClipboardService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        // set document title
+        document.title = 'Rink XML | Blockey Hockey Network';
+    }
 
     public copyXML(): void {
         const xmlText = this.xml.nativeElement.innerText;
