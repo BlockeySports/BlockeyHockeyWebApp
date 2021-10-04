@@ -16,9 +16,9 @@ export class StatsComponent implements OnInit {
     @Input() stats: PlayerStatistic[] = [];
     @Input() gamesPlayed: PlayerGamePlayed[] = [];
     @Input() isError;
-    @Input() statisticsText;
 
     public isLoading = false;
+    public loadingText = '';
 
     public leagueTab = null;
     public seasonTab = null;
@@ -28,8 +28,8 @@ export class StatsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // display loading text
-        this.statisticsText = 'Hang tight while we load your statistics.';
+        // set loading text
+        this.loadingText = 'You have no statistics yet. Join the server and play a game to view your statistics.';
     }
 
     /**

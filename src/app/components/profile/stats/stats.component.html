@@ -1,5 +1,4 @@
 <div class="flex flex-col space-y-8">
-
     <!-- START: General Stats -->
     <div *ngIf="!this.isLoading && !this.isError" id="general-stats"
          class="lg:text-xl flex flex-row justify-around">
@@ -43,6 +42,11 @@
             </div>
         </div>
         <!-- END: League Tabs -->
+
+        <span *ngIf="this.gamesPlayed && this.gamesPlayed.length < 1"
+              class="w-max mt-14 flex flex-row items-center mx-auto">
+            <span>{{ this.loadingText }}</span>
+        </span>
 
         <!-- START: Season Tabs -->
         <div *ngIf="getSeasons().length > 1"
