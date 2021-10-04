@@ -62,6 +62,10 @@ export class StatsComponent implements OnInit {
         this.seasonTab = tab || null;
     }
 
+    /**
+     * Get the season types to display statistics for under the league tab.
+     * @returns the season types
+     */
     public getSeasonTypes(): string[] {
         // define season types
         const seasonTypes: string[] = [];
@@ -70,11 +74,11 @@ export class StatsComponent implements OnInit {
         // if in arcade mode, return edge case array
         if (this.leagueTab === 'arcade') {
             // get if stats (for current seasonTab) has any non-testing games
-            const hasNonTestingGames = this.stats
-                .find(stat => !stat.isTesting && (stat.season === this.seasonTab || isCareerTab)) !== undefined;
+            const hasNonTestingGames = this.gamesPlayed
+                .find(game => !game.isTesting && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
             // get if stats (for current seasonTab) has any testing games
-            const hasTestingGames = this.stats
-                .find(stat => stat.isTesting && (stat.season === this.seasonTab || isCareerTab)) !== undefined;
+            const hasTestingGames = this.gamesPlayed
+                .find(game => game.isTesting && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
             // add beta arcade season type
             if (hasNonTestingGames) seasonTypes.push('career_arcade');
             if (hasTestingGames) seasonTypes.push('beta_arcade');
@@ -82,13 +86,13 @@ export class StatsComponent implements OnInit {
             return seasonTypes;
         }
         // get if stats (for current seasonTab) has any regular season stats
-        const hasRegularSeasonStats = this.stats
-            .filter(stat => stat.isRegularSeason && (stat.season === this.seasonTab || isCareerTab)).length > 0;
+        const hasRegularSeasonStats = this.gamesPlayed
+            .filter(game => game.isRegularSeason && (game.season === this.seasonTab && game.isPlayed || isCareerTab)).length > 0;
         // if has regular season stats, add to season types
         if (hasRegularSeasonStats) seasonTypes.push('regular_season');
         // get if stats (for current seasonTab) has any postseason stats
-        const hasPostseasonStats = this.stats
-            .filter(stat => stat.isPostseason && (stat.season === this.seasonTab || isCareerTab)).length > 0;
+        const hasPostseasonStats = this.gamesPlayed
+            .filter(game => game.isPostseason && (game.season === this.seasonTab && game.isPlayed || isCareerTab)).length > 0;
         // if has postseason stats, add to season types
         if (hasPostseasonStats) seasonTypes.push('postseason');
         // return season types
@@ -96,12 +100,15 @@ export class StatsComponent implements OnInit {
     }
 
     /**
-     * Get leagues.
+     * Get leagues that this member has played in.
      * @returns the leagues
      */
     public getLeagues(): string[] {
         // return unique stat leagues, and remove empty strings or nullish values
-        const leagues: string[] = [...new Set(this.stats.map(stat => stat.league))].filter(league => league);
+        const leagues: string[] = [...new Set(this.gamesPlayed
+            .filter(game => game.isPlayed)
+            .map(game => game.league))]
+            .filter(league => league);
         // sort leagues alphabetically
         leagues.sort();
         // if league tab is null, set league tab to first league
@@ -115,15 +122,15 @@ export class StatsComponent implements OnInit {
     }
 
     /**
-     * Get seasons for a league.
+     * Get seasons for a league where this member played in.
      * @returns the seasons for the league
      */
     public getSeasons(): string[] {
         // return unique stat seasons, and remove empty strings or nullish values
         const seasons: string[] =
-            [...new Set(this.stats
-                .filter(stat => stat.league === this.leagueTab && stat.isLeaguePlay)
-                .map(stat => stat.season))]
+            [...new Set(this.gamesPlayed
+                .filter(game => game.league === this.leagueTab && game.isLeaguePlay && game.isPlayed)
+                .map(game => game.season))]
                 .filter(season => season);
         // sort seasons reverse alphabetically
         seasons.sort((a, b) => b.localeCompare(a));
@@ -151,32 +158,34 @@ export class StatsComponent implements OnInit {
      * @returns the number of games played
      */
     public getNumberOfGamesPlayed(seasonType: string): number {
-        return this.gamesPlayed.filter((gamePlayed, i, arr) => {
+        return this.gamesPlayed.filter((game, i, arr) => {
+            // return false if the game is not played in
+            if (game.isPlayed === false) return false;
             // true if league is same as tab league
-            const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
+            const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
-            const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
             // true if game had enough players to be counted for stats
-            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
+            const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
             // exclude duplicate box score id
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === gamePlayed.boxScoreId) === i;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return !game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
-                return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
+                return game.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return gamePlayed.isPostseason && isSameSeason && isSameLeague && isUniqueBoxScore;
+                return game.isPostseason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return gamePlayed.isPreseason && isSameSeason && isSameLeague && isUniqueBoxScore;
+                return game.isPreseason && isSameSeason && isSameLeague && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -189,34 +198,36 @@ export class StatsComponent implements OnInit {
      * @returns the number of wins
      */
     public getNumberOfWins(seasonType: string): number {
-        return this.gamesPlayed.filter((gamePlayed, i, arr) => {
+        return this.gamesPlayed.filter((game, i, arr) => {
+            // return false if the game is not played in
+            if (game.isPlayed === false) return false;
             // true if league is same as tab league
-            const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
+            const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
-            const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
             // true if game had enough players to be counted for stats
-            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
+            const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
             // is on winning team and game has a winner
-            const isOnWinningTeam = gamePlayed.team?.toLowerCase() === gamePlayed.winningTeam?.toLowerCase() && !!gamePlayed.winningTeam;
+            const isOnWinningTeam = game.team?.toLowerCase() === game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === gamePlayed.boxScoreId && t.team === gamePlayed.team) === i;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return game.isTesting && !game.isLeaguePlay && isOnWinningTeam
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnWinningTeam
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return !game.isTesting && !game.isLeaguePlay && isOnWinningTeam
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
-                return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
+                return game.isRegularSeason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return gamePlayed.isPostseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
+                return game.isPostseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return gamePlayed.isPreseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
+                return game.isPreseason && isSameSeason && isSameLeague && isOnWinningTeam && isUniqueBoxScore;
             }
             return false;
         }).length;
@@ -229,34 +240,36 @@ export class StatsComponent implements OnInit {
      * @returns the number of losses
      */
     public getNumberOfLosses(seasonType: string): number {
-        return this.gamesPlayed.filter((gamePlayed, i, arr) => {
+        return this.gamesPlayed.filter((game, i, arr) => {
+            // return false if the game is not played in
+            if (game.isPlayed === false) return false;
             // true if league is same as tab league
-            const isSameLeague = gamePlayed.league === this.leagueTab && gamePlayed.isLeaguePlay;
+            const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
-            const isSameSeason = gamePlayed.season === this.seasonTab || this.seasonTab === 'career';
+            const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
             // true if game had enough players to be counted for stats
-            const hasEnoughPlayers = gamePlayed.awayPlayerCount >= 3 && gamePlayed.homePlayerCount >= 3 && gamePlayed.totalPlayerCount >= 6;
+            const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
             // is on losing team and game has a winner
-            const isOnLosingTeam = gamePlayed.team?.toLowerCase() !== gamePlayed.winningTeam?.toLowerCase() && !!gamePlayed.winningTeam;
+            const isOnLosingTeam = game.team?.toLowerCase() !== game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === gamePlayed.boxScoreId && t.team === gamePlayed.team) === i;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
-                    return gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return game.isTesting && !game.isLeaguePlay && isOnLosingTeam
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 } else {
-                    return !gamePlayed.isTesting && !gamePlayed.isLeaguePlay && isOnLosingTeam
-                        && !gamePlayed.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                    return !game.isTesting && !game.isLeaguePlay && isOnLosingTeam
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
                 }
             } else if (seasonType === 'regular_season') {
-                return gamePlayed.isRegularSeason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
+                return game.isRegularSeason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'postseason') {
-                return gamePlayed.isPostseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
+                return game.isPostseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             else if (seasonType === 'preseason') {
-                return gamePlayed.isPreseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
+                return game.isPreseason && isSameSeason && isSameLeague && isOnLosingTeam && isUniqueBoxScore;
             }
             return false;
         }).length;

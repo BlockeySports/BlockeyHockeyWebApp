@@ -98,6 +98,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Get the player statistics.
      */
     private getPlayerStatistics(): void {
+        // get player stats (i.e. goals, assists, etc.)
         this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
             (playerStatistics: PlayerStatistic[]) => {
                 this.playerStatistics = playerStatistics;
@@ -106,6 +107,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(error);
             }
         );
+        // get games played (i.e. games played, wins, losses, draws)
         this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
             (playerGamesPlayed: PlayerGamePlayed[]) => {
                 this.playerGamesPlayed = playerGamesPlayed;
