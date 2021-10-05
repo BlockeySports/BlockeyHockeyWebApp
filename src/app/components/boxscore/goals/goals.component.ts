@@ -16,7 +16,8 @@ export class GoalsComponent implements OnInit {
     @Input() pending: boolean;
 
     public MAX_VISIBLE_GOALS = 13;
-    private LINE_HEIGHT = 1.71875;
+    // private LINE_HEIGHT = 1.71875;
+    private LINE_HEIGHT = 1.625;
 
     constructor(
         private tippyService: NgxTippyService
@@ -119,7 +120,7 @@ export class GoalsComponent implements OnInit {
     }
 
     public getMaxGoalsHeight(): string {
-        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.isSeries ? this.LINE_HEIGHT : 0)}rem`;
+        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.isSeries ? this.LINE_HEIGHT : 0) + (2 / 16)}rem`;
     }
 
     public getProfileLink(member: Member): string {

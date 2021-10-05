@@ -16,7 +16,7 @@
         <th class="border-black-800 dark:border-black-50 w-[4.5rem] text-center"
             ngxTippy="The type of goal (i.e. power play)">TYPE</th>
     </thead>
-    <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
+    <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
            [style.max-height]="getMaxGoalsHeight()">
         <!-- START: Roster Players -->
         <tr *ngFor="let goal of getGoals(); let i = index"
