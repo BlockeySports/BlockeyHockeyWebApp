@@ -8,7 +8,8 @@
 
     <!-- START: Mini Box Scores -->
     <div class="layout mx-auto">
-        <div class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
+        <div *ngIf="getBoxScores() && getBoxScores().length > 0"
+             class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
             <!-- START: Mini Box Score -->
             <a *ngFor="let boxScore of getBoxScores()"
                [href]="getBoxScoreLink(boxScore)" target="_blank"
@@ -115,6 +116,81 @@
                 <!-- END: Stream Link -->
             </a>
             <!-- END: Mini Box Score -->
+        </div>
+        <div *ngIf="!getBoxScores() || getBoxScores().length === 0"
+             class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
+            <!-- START: Placeholder Box Score -->
+            <div *ngFor="let boxScore of [].constructor(10)"
+                 class="border-black-800 dark:border-black-50 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content]">
+                <!-- START: League, Date, Result -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full bg-gray-300 border-b">
+                    <p class="border-black-800 dark:border-black-50 w-[20%] text-center border-r p-0.5">&nbsp;</p>
+                    <p class="border-black-800 dark:border-black-50 w-[60%] text-center border-r font-semibold p-0.5">&nbsp;</p>
+                    <p class="w-[20%] text-center p-0.5">&nbsp;</p>
+                </div>
+                <!-- END: League, Date, Result -->
+
+                <!-- START: Team Names -->
+                <div class="border-black-800 dark:border-black-50 bg-gray-50 flex flex-row w-full font-semibold border-b">
+                    <p class="border-black-800 dark:border-black-50 w-full text-center dark:bg-black-200 border-r p-0.5 text-shadow-sm">&nbsp;</p>
+                    <p class="border-black-800 dark:border-black-50 dark:bg-black-400 dark:text-white w-[20%] flex text-center border-r p-0.5">
+                        <span class="mx-auto my-auto">&nbsp;</span>
+                    </p>
+                    <p class="border-black-800 dark:border-black-50 w-full text-center dark:bg-black-200 p-0.5 text-shadow-sm">&nbsp;</p>
+                </div>
+                <!-- END: Team Names -->
+
+                <!-- START: Scoring Summary Title -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full font-semibold bg-[#c0c4ca] border-b">
+                    <p class="border-black-800 dark:border-black-50 w-full text-center p-0.5 text-shadow-sm">&nbsp;</p>
+                </div>
+                <!-- END: Scoring Summary Title -->
+
+                <!-- START: Scoring Summary -->
+                <div class="border-black-800 dark:border-black-50 flex flex-row">
+                    <div class="w-[7%] sm:w-[20%] dark:bg-black-300"></div>
+                    <table class="border-black-800 dark:border-black-50 dark:text-white w-full border-l border-r table-fixed select-none">
+                        <tr>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-600 bg-gray-300 border-b border-r"
+                                ngxTippy="Teams that played this in game">&nbsp;</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="First period">&nbsp;</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Second period">&nbsp;</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Third period">&nbsp;</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                                ngxTippy="Overtime period(s)">&nbsp;</th>
+                            <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b"
+                                ngxTippy="Final score">&nbsp;</th>
+                        </tr>
+                        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
+                            <td class="border-black-800 dark:border-black-50 dark:bg-black-400 relative flex bg-gray-100 border-r">
+                                <p class="w-max text-shadow-sm mx-auto font-semibold">&nbsp;</p>
+                            </td>
+                            <td *ngFor="let i of [].constructor(4); let j = index"
+                                class="border-black-800 dark:border-black-50 text-center border-r">&nbsp;</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">&nbsp;</td>
+                        </tr>
+                        <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
+                            <td class="border-black-800 dark:border-black-50 dark:bg-black-400 relative flex bg-gray-100 border-r">
+                                <p class="w-max text-shadow-sm mx-auto font-semibold">&nbsp;</p>
+                            </td>
+                            <td *ngFor="let i of [].constructor(4); let j = index"
+                                class="border-black-800 dark:border-black-50 text-center border-r">&nbsp;</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">&nbsp;</td>
+                        </tr>
+                    </table>
+                    <div class="w-[7%] sm:w-[20%] dark:bg-black-300"></div>
+                </div>
+                <!-- END: Scoring Summary -->
+
+                <!-- START: Stream Link -->
+                <div class="border-black-800 dark:border-black-50 dark:bg-black-400 flex flex-row w-full text-sm bg-gray-100 border-t min-h-[25px]">
+                </div>
+                <!-- END: Stream Link -->
+            </div>
+            <!-- END: Placeholder Box Score -->
         </div>
     </div>
     <!-- END: Mini Box Scores -->
