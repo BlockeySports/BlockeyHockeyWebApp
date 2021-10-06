@@ -1,148 +1,134 @@
+<!-- START: Header -->
 <app-header></app-header>
-<div class="dark:bg-black-700 h-full">
-    <main>
-        <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 layout pt-5 mx-auto font-sans">
-            <!-- Player username -->
-            <div class="flex flex-row items-center space-x-4">
-                <h1 class="flex flex-row space-x-3 text-[2.625rem] items-center w-max font-semibold mx-auto md:mx-0 md:text-left"
-                    [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">
-                    <span>{{ this.member.username }}</span>
-                    <span class="dark:text-gray-100 text-[2.1rem] text-black-200">&vert;</span>
-                    <span class="dark:text-white text-[2.1rem] text-black font-mono">&#35;{{ this.member.number }}</span>
-                </h1>
-                <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+<!-- END: Header -->
+<main class="dark:bg-black-700 h-full">
+    <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 layout pt-5 mx-auto font-sans">
+        <!-- Player username -->
+        <div class="flex flex-row items-center space-x-4">
+            <h1 class="flex flex-row space-x-3 text-[2.625rem] items-center w-max font-semibold mx-auto md:mx-0 md:text-left"
+                [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">
+                <span>{{ this.member.username }}</span>
+                <span class="dark:text-gray-100 text-[2.1rem] text-black-200">&vert;</span>
+                <span class="dark:text-white text-[2.1rem] text-black font-mono">&#35;{{ this.member.number }}</span>
+            </h1>
+            <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
                     [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
-                <!-- OG Heart -->
-                <!-- <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
+            <!-- OG Heart -->
+            <!-- <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player">&#9829;</span>
                 </div> -->
+        </div>
+
+        <!-- START: Roles & Ranks Bar -->
+        <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
+            <!-- Roles -->
+            <div *ngFor="let role of this.member.roles"
+                 class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
+                 [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
+            <!-- OG Heart -->
+            <div *ngIf="this.member.isOg" class="flex my-auto text-xl text-red-600 select-none">
+                <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
             </div>
+        </div>
+        <!-- END: Roles & Ranks Bar -->
 
-            <!-- START: Roles & Ranks Bar -->
-            <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
-                <!-- Roles -->
-                <div *ngFor="let role of this.member.roles"
-                     class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
-                     [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
-                <!-- OG Heart -->
-                <div *ngIf="this.member.isOg" class="flex my-auto text-xl text-red-600 select-none">
-                    <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
-                </div>
-            </div>
-            <!-- END: Roles & Ranks Bar -->
+        <div class="md:flex-row flex flex-col justify-between">
 
-            <div class="md:flex-row flex flex-col justify-between">
+            <div class="flex flex-col">
+                <!-- START: Player Profile Picture (Minecraft Head) -->
+                <div class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none w-[16.25rem] h-[16.25rem] dark:bg-black-800 md:mx-0"
+                     [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
+                <!-- END: Player Profile Picture (Minecraft Head) -->
 
-                <div class="flex flex-col">
-                    <!-- START: Player Profile Picture (Minecraft Head) -->
-                    <div class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none w-[16.25rem] h-[16.25rem] dark:bg-black-800 md:mx-0"
-                         [ngStyle]="{'background-image': 'url(' + this.profilePicture + ')'}"></div>
-                    <!-- END: Player Profile Picture (Minecraft Head) -->
-
-                    <!-- START: Online Status -->
-                    <div class="whitespace-nowrap flex justify-center">
-                        <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
-                             ngxTippy
-                             tippyName="online-status"
-                             [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
-                        <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
-                        <span class="font-semibold cursor-default"
-                              ngxTippy
-                              tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.isOnline }}&nbsp;</span>
-                        <!-- <span>on&nbsp;</span>
+                <!-- START: Online Status -->
+                <div class="whitespace-nowrap flex justify-center">
+                    <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
+                         ngxTippy
+                         tippyName="online-status"
+                         [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
+                    <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                    <span class="font-semibold cursor-default"
+                          ngxTippy
+                          tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.isOnline }}&nbsp;</span>
+                    <!-- <span>on&nbsp;</span>
                         <span class="font-semibold">Server {{ this.server }}</span> -->
-                    </div>
-                    <!-- END: Online Status -->
                 </div>
+                <!-- END: Online Status -->
             </div>
+        </div>
 
-            <!-- START: Tabs -->
-            <div class="text-md md:flex border-black-300 dark:border-gray-100 mt-7 flex-row flex-wrap hidden border-b select-none">
-                <!-- START: Stats Tab -->
-                <div id="stat-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
-                     (click)="changeTab('')"
-                     tabindex="0"
-                     [ngClass]="this.tab === 'stats'
+        <!-- START: Tabs -->
+        <div class="text-md md:flex border-black-300 dark:border-gray-100 mt-7 flex-row flex-wrap hidden border-b select-none">
+            <!-- START: Stats Tab -->
+            <div id="stat-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
+                 (click)="changeTab('')"
+                 tabindex="0"
+                 [ngClass]="this.tab === 'stats'
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                    <span>STATISTICS</span>
-                </div>
-                <!-- END: Stats Tab -->
+                <span>STATISTICS</span>
+            </div>
+            <!-- END: Stats Tab -->
 
-                <!-- START: Games Tab -->
-                <div id="game-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
-                     (click)="changeTab('games')"
-                     tabindex="0"
-                     [ngClass]="this.tab === 'games'
+            <!-- START: Games Tab -->
+            <div id="game-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
+                 (click)="changeTab('games')"
+                 tabindex="0"
+                 [ngClass]="this.tab === 'games'
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                     focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                    <span>GAMES</span>
-                </div>
-                <!-- END: Games Tab -->
+                <span>GAMES</span>
+            </div>
+            <!-- END: Games Tab -->
 
-                <!-- START: Awards Tab -->
-                <div id="awards-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
-                     (click)="changeTab('awards')"
-                     tabindex="0"
-                     [ngClass]="this.tab === 'awards' 
+            <!-- START: Awards Tab -->
+            <div id="awards-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
+                 (click)="changeTab('awards')"
+                 tabindex="0"
+                 [ngClass]="this.tab === 'awards' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                    <span>AWARDS</span>
-                </div>
-                <!-- END: Awards Tab -->
+                <span>AWARDS</span>
+            </div>
+            <!-- END: Awards Tab -->
 
-                <!-- START: Infractions Tab -->
-                <div id="infractions-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
-                     (click)="changeTab('infractions')"
-                     tabindex="0"
-                     [ngClass]="this.tab === 'infractions' 
+            <!-- START: Infractions Tab -->
+            <div id="infractions-tab" class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
+                 (click)="changeTab('infractions')"
+                 tabindex="0"
+                 [ngClass]="this.tab === 'infractions' 
                                 ? 'border-b-2 dark:bg-black-100 bg-opacity-10 border-black-300 dark:border-gray-100 bg-black' 
                                 : 'hover:border-b-2 hover:bg-black dark:hover:bg-gray-100 dark:hover:bg-opacity-10 hover:bg-opacity-5 dark:border-gray-50 hover:border-black-200
                                    focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200' ">
-                    <span>INFRACTIONS</span>
-                </div>
-                <!-- END: Infractions Tab -->
+                <span>INFRACTIONS</span>
             </div>
-            <!-- END: Tabs -->
-
-            <!-- START: Tabs Content -->
-            <div class="md:flex hidden">
-                <app-stats [class.hidden]="this.tab !== 'stats'"
-                           [member]="this.member"
-                           [stats]="this.playerStatistics"
-                           [gamesPlayed]="this.playerGamesPlayed"
-                           [isError]="this.isError"
-                           class="w-full mt-10"></app-stats>
-                <app-games [class.hidden]="this.tab !== 'games'"
-                           [member]="this.member"
-                           class="w-full mt-10">
-
-                </app-games>
-                <app-awards [class.hidden]="this.tab !== 'awards'"
-                            [awards]="this.member"
-                            class="w-full mt-10"></app-awards>
-                <app-infractions [class.hidden]="this.tab !== 'infractions'"
-                                 [member]="this.member"
-                                 class="w-full mt-10"></app-infractions>
-            </div>
-            <!-- END: Tabs Content -->
+            <!-- END: Infractions Tab -->
         </div>
-    </main>
+        <!-- END: Tabs -->
 
-    <!-- START: Footer -->
-    <app-footer></app-footer>
-    <!-- END: Footer -->
-</div>
+        <!-- START: Tabs Content -->
+        <div class="md:flex hidden">
+            <app-stats [class.hidden]="this.tab !== 'stats'"
+                       [member]="this.member"
+                       [stats]="this.playerStatistics"
+                       [gamesPlayed]="this.playerGamesPlayed"
+                       [isError]="this.isError"
+                       class="w-full mt-10"></app-stats>
+            <app-games [class.hidden]="this.tab !== 'games'"
+                       [member]="this.member"
+                       class="w-full mt-10">
 
-<style>
-    main {
-        min-height: calc(100vh - 19.0625rem);
-    }
-
-    app-footer {
-        height: 19.0625rem;
-    }
-</style>
+            </app-games>
+            <app-awards [class.hidden]="this.tab !== 'awards'"
+                        [awards]="this.member"
+                        class="w-full mt-10"></app-awards>
+            <app-infractions [class.hidden]="this.tab !== 'infractions'"
+                             [member]="this.member"
+                             class="w-full mt-10"></app-infractions>
+        </div>
+        <!-- END: Tabs Content -->
+    </div>
+</main>
