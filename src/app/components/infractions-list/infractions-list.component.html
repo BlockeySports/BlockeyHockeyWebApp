@@ -1,114 +1,97 @@
-<div class="dark:bg-black-700 h-full">
-    <main>
-        <!-- START: Header -->
-        <app-header></app-header>
-        <!-- END: Header -->
+<!-- START: Header -->
+<app-header></app-header>
+<!-- END: Header -->
+<main class="dark:bg-black-700">
+    <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 sm:w-11/12 xl:w-7/12 md:px-0 w-full px-5 pt-10 mx-auto font-sans">
+        <!-- START: Title -->
+        <h1 class="w-max mx-auto text-4xl font-semibold">Infractions</h1>
+        <!-- END: Title -->
 
-        <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 sm:w-11/12 xl:w-7/12 md:px-0 w-full px-5 pt-10 mx-auto font-sans">
-            <!-- START: Title -->
-            <h1 class="w-max mx-auto text-4xl font-semibold">Infractions</h1>
-            <!-- END: Title -->
+        <!-- START: Loading Indicator -->
+        <span class="w-max flex flex-row items-center mx-auto space-x-3">
+            <svg *ngIf="this.isLoading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 mt-10 fill-current">
+                <g transform="translate(80 50)">
+                    <circle r="6">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.9408602150537634s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.9408602150537634s" />
+                    </circle>
+                </g>
+                <g transform="rotate(45 -50.355 121.569)">
+                    <circle r="6" fill-opacity=".875">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.8064516129032258s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.8064516129032258s" />
+                    </circle>
+                </g>
+                <g transform="rotate(90 -15 65)">
+                    <circle r="6" fill-opacity=".75">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.6720430107526881s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.6720430107526881s" />
+                    </circle>
+                </g>
+                <g transform="rotate(135 -.355 41.569)">
+                    <circle r="6" fill-opacity=".625">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.5376344086021505s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.5376344086021505s" />
+                    </circle>
+                </g>
+                <g transform="rotate(180 10 25)">
+                    <circle r="6" fill-opacity=".5">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.4032258064516129s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.4032258064516129s" />
+                    </circle>
+                </g>
+                <g transform="rotate(-135 20.355 8.431)">
+                    <circle r="6" fill-opacity=".375">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.26881720430107525s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.26881720430107525s" />
+                    </circle>
+                </g>
+                <g transform="rotate(-90 35 -15)">
+                    <circle r="6" fill-opacity=".25">
+                        <animateTransform attributeName="transform" type="scale" begin="-0.13440860215053763s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.13440860215053763s" />
+                    </circle>
+                </g>
+                <g transform="rotate(-45 70.355 -71.569)">
+                    <circle r="6" fill-opacity=".125">
+                        <animateTransform attributeName="transform" type="scale" begin="0s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
+                        <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="0s" />
+                    </circle>
+                </g>
+            </svg>
+            <span *ngIf="this.loadingMessage.length > 0" class="mt-10">{{ this.loadingMessage }}</span>
+        </span>
+        <!-- END: Loading Indicator -->
 
-            <!-- START: Loading Indicator -->
-            <span class="w-max flex flex-row items-center mx-auto space-x-3">
-                <svg *ngIf="this.isLoading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" display="block" class="h-8 mt-10 fill-current">
-                    <g transform="translate(80 50)">
-                        <circle r="6">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.9408602150537634s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.9408602150537634s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(45 -50.355 121.569)">
-                        <circle r="6" fill-opacity=".875">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.8064516129032258s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.8064516129032258s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(90 -15 65)">
-                        <circle r="6" fill-opacity=".75">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.6720430107526881s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.6720430107526881s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(135 -.355 41.569)">
-                        <circle r="6" fill-opacity=".625">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.5376344086021505s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.5376344086021505s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(180 10 25)">
-                        <circle r="6" fill-opacity=".5">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.4032258064516129s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.4032258064516129s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(-135 20.355 8.431)">
-                        <circle r="6" fill-opacity=".375">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.26881720430107525s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.26881720430107525s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(-90 35 -15)">
-                        <circle r="6" fill-opacity=".25">
-                            <animateTransform attributeName="transform" type="scale" begin="-0.13440860215053763s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="-0.13440860215053763s" />
-                        </circle>
-                    </g>
-                    <g transform="rotate(-45 70.355 -71.569)">
-                        <circle r="6" fill-opacity=".125">
-                            <animateTransform attributeName="transform" type="scale" begin="0s" values="1.5 1.5;1 1" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" />
-                            <animate attributeName="fill-opacity" keyTimes="0;1" dur="1.075268817204301s" repeatCount="indefinite" values="1;0" begin="0s" />
-                        </circle>
-                    </g>
-                </svg>
-                <span *ngIf="this.loadingMessage.length > 0" class="mt-10">{{ this.loadingMessage }}</span>
-            </span>
-            <!-- END: Loading Indicator -->
-
-            <!-- START: Table -->
-            <table *ngIf="this.punishments?.length > 0" class="w-full mt-8 shadow-md">
-                <thead>
-                    <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Player</th>
-                    <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Reason</th>
-                    <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Type</th>
-                    <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Length</th>
-                    <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Issued Date</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let punishment of this.punishments">
-                        <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                            style="width: 15%; max-width: 15%;"
-                            [ngStyle]="{ color: punishment.punished?.roles[0]?.background || 'currentColor' }">
-                            <span class="w-max hover:underline cursor-pointer"
-                                  (click)="navigateToProfile(punishment.punished.username)">{{ punishment.punished.username }}</span>
-                        </td>
-                        <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                            style="width: 41%; min-width: 35%;">{{ punishment.reason }}</td>
-                        <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 capitalize border"
-                            style="width: 15%;"
-                            [ngStyle]="{ color: getPunishmentColor(punishment.type) }">{{ punishment.type | punishmentType }}</td>
-                        <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                            style="width: 12%;">{{ punishment.length | length }}</td>
-                        <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                            style="width: 17%; min-width: 15%;">{{ getPunishmentDate(punishment) }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- END: Table -->
-        </div>
-
-    </main>
-    <!-- START: Footer -->
-    <app-footer></app-footer>
-    <!-- END: Footer -->
-</div>
-
-<style>
-    main {
-        min-height: calc(100vh - 19.0625rem);
-    }
-
-    app-footer {
-        height: 19.0625rem;
-    }
-</style>
+        <!-- START: Table -->
+        <table *ngIf="this.punishments?.length > 0" class="w-full mt-8 shadow-md">
+            <thead>
+                <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Player</th>
+                <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Reason</th>
+                <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Type</th>
+                <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Length</th>
+                <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Issued Date</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let punishment of this.punishments">
+                    <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                        style="width: 15%; max-width: 15%;"
+                        [ngStyle]="{ color: punishment.punished?.roles[0]?.background || 'currentColor' }">
+                        <span class="w-max hover:underline cursor-pointer"
+                              (click)="navigateToProfile(punishment.punished.username)">{{ punishment.punished.username }}</span>
+                    </td>
+                    <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                        style="width: 41%; min-width: 35%;">{{ punishment.reason }}</td>
+                    <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 capitalize border"
+                        style="width: 15%;"
+                        [ngStyle]="{ color: getPunishmentColor(punishment.type) }">{{ punishment.type | punishmentType }}</td>
+                    <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                        style="width: 12%;">{{ punishment.length | length }}</td>
+                    <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
+                        style="width: 17%; min-width: 15%;">{{ getPunishmentDate(punishment) }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- END: Table -->
+    </div>
+</main>
