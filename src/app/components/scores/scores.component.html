@@ -1,5 +1,7 @@
+<!-- START: Header -->
 <app-header></app-header>
-<main class="dark:bg-black-700">
+<!-- END: Header -->
+<main class="dark:bg-black-700 pb-20">
     <!-- START: Title -->
     <h1 class="w-max dark:text-white mx-auto my-8 text-4xl font-semibold">Recent Games</h1>
     <!-- END: Title -->
@@ -8,7 +10,7 @@
     <div class="layout mx-auto">
         <div class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
             <!-- START: Mini Box Score -->
-            <a *ngFor="let boxScore of this.boxScores"
+            <a *ngFor="let boxScore of getBoxScores()"
                [href]="getBoxScoreLink(boxScore)" target="_blank"
                class="border-black-800 dark:border-black-50 dark:hover:border-gray-100 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content] hover:ring-2 hover:ring-black dark:hover:ring-gray-100">
                 <!-- START: League, Date, Result -->
@@ -117,10 +119,3 @@
     </div>
     <!-- END: Mini Box Scores -->
 </main>
-
-<style>
-    main {
-        padding-top: 63px;
-        min-height: 100vh;
-    }
-</style>

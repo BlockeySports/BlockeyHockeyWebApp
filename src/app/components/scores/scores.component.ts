@@ -33,6 +33,13 @@ export class ScoresComponent implements OnInit {
     }
 
     /**
+     * Get a filtered list of valid box scores.
+     */
+    public getBoxScores(): BoxScore[] {
+        return this.boxScores.filter(boxScore => boxScore.awayPlayerCount >= 3 && boxScore.homePlayerCount >= 3 && boxScore.totalPlayerCount >= 6);
+    }
+
+    /**
      * Get the result of the game.
      */
     public getResult(boxScore: BoxScore): string {
