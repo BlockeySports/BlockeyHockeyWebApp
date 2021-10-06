@@ -4,14 +4,18 @@
         <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 layout pt-5 mx-auto font-sans">
             <!-- Player username -->
             <div class="flex flex-row items-center space-x-4">
-                <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left"
-                    [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">{{ this.member.username }}</h1>
+                <h1 class="flex flex-row space-x-3 text-[2.625rem] items-center w-max font-semibold mx-auto md:mx-0 md:text-left"
+                    [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">
+                    <span>{{ this.member.username }}</span>
+                    <span class="dark:text-gray-100 text-[2.1rem] text-black-200">&vert;</span>
+                    <span class="dark:text-white text-[2.1rem] text-black font-mono">&#35;{{ this.member.number }}</span>
+                </h1>
                 <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
                     [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
                 <!-- OG Heart -->
-                <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
+                <!-- <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player">&#9829;</span>
-                </div>
+                </div> -->
             </div>
 
             <!-- START: Roles & Ranks Bar -->
@@ -21,7 +25,7 @@
                      class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
                      [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
                 <!-- OG Heart -->
-                <div *ngIf="this.member.isOg && this.member.roles.length > 0" class="flex my-auto text-xl text-red-600 select-none">
+                <div *ngIf="this.member.isOg" class="flex my-auto text-xl text-red-600 select-none">
                     <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
                 </div>
             </div>
