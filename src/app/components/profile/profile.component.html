@@ -8,8 +8,10 @@
             <h1 class="flex flex-row space-x-3 text-[2.625rem] items-center w-max font-semibold mx-auto md:mx-0 md:text-left"
                 [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">
                 <span>{{ this.member.username }}</span>
-                <span class="dark:text-gray-100 text-[2.1rem] text-black-200">&vert;</span>
-                <span class="dark:text-white text-[2.1rem] text-black font-mono">&#35;{{ this.member.number }}</span>
+                <span *ngIf="this.member?.number" class="text-[2.1rem] flex flex-row space-x-3">
+                    <span class="dark:text-gray-100 text-black-200">&vert;</span>
+                    <span class="dark:text-white font-mono text-black">&#35;{{ this.member.number }}</span>
+                </span>
             </h1>
             <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
                     [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
