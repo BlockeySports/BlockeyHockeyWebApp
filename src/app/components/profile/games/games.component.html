@@ -53,21 +53,23 @@
 </span>
 <table *ngIf="this.games.length > 0" class="w-full shadow-md">
     <thead>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Box Score</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Date</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">League</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Season</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Duration</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Result</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border">No.</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">Box Score</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">Date</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">League</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">Season</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">Duration</th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border">Result</th>
     </thead>
-    <!-- TODO: Add scroll and only show 6 or so at a time -->
     <tbody>
-        <tr *ngFor="let game of getGames()"
-            class="group bg-gray-50 dark:bg-black-700 hover:bg-gray-100 dark:hover:bg-black-800">
+        <tr *ngFor="let game of getGames(); let i = index;"
+            class="group event:bg-gray-50 odd:bg-gray-100 dark:even:bg-black-500 dark:odd:bg-black-600 hover:bg-gray-200 dark:hover:bg-black-700">
+            <td class="dark:border-gray-300 border-black-400 p-2 text-center border"
+                style="width: 4%;">{{ getGames().length - i }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border"
                 style="width: 12%;">
                 <a [href]="getBoxScoreLink(game)" target="_blank"
-                   class="hover:underline hover:text-red-500">{{ game.boxScoreId }}</a>
+                   class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
             </td>
             <td class="dark:border-gray-300 border-black-400 p-2 border">{{ getDate(game) }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border">{{ game.league || 'Arcade' }}</td>
