@@ -75,8 +75,7 @@
             <tbody>
                 <tr *ngFor="let punishment of this.punishments">
                     <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
-                        style="width: 15%; max-width: 15%;"
-                        [ngStyle]="{ color: punishment.punished?.roles[0]?.background || 'currentColor' }">
+                        style="width: 15%; max-width: 15%;">
                         <span class="w-max hover:underline cursor-pointer"
                               (click)="navigateToProfile(punishment.punished.username)">{{ punishment.punished.username }}</span>
                     </td>
