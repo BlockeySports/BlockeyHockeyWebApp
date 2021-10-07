@@ -409,4 +409,78 @@ export class StatsComponent implements OnInit {
             return false;
         }).length;
     }
+
+    /**
+     * Get current win/loss streak.
+     */
+    public getCurrentStreak(seasonType: string): string {
+        const games: PlayerGamePlayed[] = this.gamesPlayed.filter((game, i, arr) => {
+            // return false if the game is not played in
+            if (game.isPlayed === false) return false;
+            // true if league is same as tab league
+            const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
+            // true if game played season is same as tab season or if getting career games played
+            const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
+            // true if game had enough players to be counted for stats
+            const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
+            // exclude duplicate box score id
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i;
+            if (this.leagueTab === 'arcade') {
+                // if game is a testing game
+                if (seasonType.includes('beta')) {
+                    return game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                } else {
+                    return !game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers && isUniqueBoxScore;
+                }
+            } else if (seasonType === 'regular_season') {
+                return game.isRegularSeason && isSameSeason && isSameLeague && isUniqueBoxScore;
+            }
+            else if (seasonType === 'postseason') {
+                return game.isPostseason && isSameSeason && isSameLeague && isUniqueBoxScore;
+            }
+            else if (seasonType === 'preseason') {
+                return game.isPreseason && isSameSeason && isSameLeague && isUniqueBoxScore;
+            }
+            return false;
+        }).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));   // sort game by date descending
+        // get the result of the most recent game played
+        const result = this.getResult(games[0]);    // win, loss, or draw
+        // define streak
+        let streak = 0;
+        // if game was a win
+        if (result === 'Win') {
+            for (const gamePlayed of games) {
+                if (this.getResult(gamePlayed) === 'Win') streak++;
+                else break;
+            }
+            return `W${streak}`;
+        } else if (result === 'Loss') {
+            for (const gamePlayed of games) {
+                if (this.getResult(gamePlayed) === 'Loss') streak++;
+                else break;
+            }
+            return `L${streak}`;
+        } else {
+            for (const gamePlayed of games) {
+                if (this.getResult(gamePlayed) === 'Draw') streak++;
+                else break;
+            }
+            return `D${streak}`;
+        }
+    }
+
+    /**
+     * Get the result of the game (win, less, or draw).
+     * @returns the result
+     */
+    public getResult(game: PlayerGamePlayed): string {
+        // if no winning team, game is draw
+        if (!game?.winningTeam) return 'Draw';
+        // if player on the winning team
+        if (game.team === game.winningTeam) return 'Win';
+        // otherwise, game is loss
+        else return 'Loss';
+    }
 }
