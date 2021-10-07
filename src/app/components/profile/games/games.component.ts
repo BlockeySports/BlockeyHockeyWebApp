@@ -76,6 +76,56 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         else return 'Loss';
     }
 
+    /**
+     * Get the color of the result text.
+     */
+    public getResultColor(game: PlayerGamePlayed): string {
+        if (this.getResult(game) === 'Loss') return 'text-red-500';
+        if (this.getResult(game) === 'Win') return 'text-green-500';
+        else return 'text-blue-500';
+    }
+
+    /**
+     * Get the winning or losing streak at this point in time.
+     */
+    public getStreak(game: PlayerGamePlayed): string {
+        if (!game || !game?.date) return '';
+        // get all games that come before this game and sort by date descending
+        const priorGames = this.getGames().filter(g => g.date <= game.date).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
+        // define count
+        let streak = 0;
+        // if game is a win
+        if (this.getResult(game) === 'Win') {
+            for (const priorGame of priorGames) {
+                // if game is a win, add to win streak
+                if (this.getResult(priorGame) === 'Win') streak++;
+                // if not a win, break
+                else break;
+            }
+            return `W${streak}`;
+        }
+        // if game is a loss
+        else if (this.getResult(game) === 'Loss') {
+            for (const priorGame of priorGames) {
+                // if game is a loss, add to loss streak
+                if (this.getResult(priorGame) === 'Loss') streak++;
+                // if not a loss, break
+                else break;
+            }
+            return `L${streak}`;
+        }
+        // if game is a draw
+        else {
+            for (const priorGame of priorGames) {
+                // if game is a draw, add to draw streak
+                if (this.getResult(priorGame) === 'Draw') streak++;
+                // if not a draw, break
+                else break;
+            }
+            return `D${streak}`;
+        }
+    }
+
     public getBoxScoreLink(game: PlayerGamePlayed): string {
         return `https://blockeyhockey.net/b/${game.boxScoreId}`;
     }
