@@ -52,23 +52,31 @@
     <span>{{ this.loadingText }}</span>
 </span>
 <table *ngIf="this.games.length > 0" class="w-max flex flex-col mx-auto shadow-md">
-    <thead class="w-max dark:border-gray-300 border-black-400 flex flex-row items-center border-2">
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.6rem]"
-            ngxTippy="Game Number">NO.</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[11rem]"
-            ngxTippy="Box Score Link">BOX SCORE</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[16rem]"
-            ngxTippy="Date of Game">DATE</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]"
-            ngxTippy="League Name">LEAGUE</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]"
-            ngxTippy="Season Number">SEASON</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[8rem]"
-            ngxTippy="Game Length">DURATION</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[5rem]"
-            ngxTippy="Time on Ice">TOI</th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 w-[5rem]"
-            ngxTippy="Win/Loss Streak">STREAK</th>
+    <thead class="w-max dark:border-gray-300 border-black-400 flex flex-row items-center border-2 select-none">
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.6rem]">
+            <span ngxTippy="Game Number" class="pt-3">NO.</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[11rem]">
+            <span ngxTippy="Box Score Link" class="pt-3">BOX SCORE</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[16rem]">
+            <span ngxTippy="Date & Time of Game" class="pt-3">DATE</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]">
+            <span ngxTippy="League Name" class="pt-3">LEAGUE</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]">
+            <span ngxTippy="Season Number" class="pt-3">SEASON</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[8rem]">
+            <span ngxTippy="Game Length" class="pt-3">DURATION</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[5rem]">
+            <span ngxTippy="Time on Ice" class="pt-3">TOI</span>
+        </th>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 w-[5rem]">
+            <span ngxTippy="Win/Loss Streak" class="pt-3">STREAK</span>
+        </th>
     </thead>
     <tbody class="scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin dark:border-gray-300 border-black-400 flex flex-col overflow-y-scroll border"
            [style.max-height]="'25rem'">
