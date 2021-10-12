@@ -7,4 +7,6 @@ export class BoxScorePlayer {
     team?: string;
     isPlayed?: boolean;
     position?: string;
+    number?: number;
+    timeOnIce?: number;
 }

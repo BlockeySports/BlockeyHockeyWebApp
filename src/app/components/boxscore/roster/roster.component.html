@@ -13,7 +13,7 @@
         <tr *ngFor="let player of getRoster(); let i = index"
             class="hover:bg-gray-200 dark:hover:bg-black-400 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ formatPosition(player.position) }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ player.member.number }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ player.number }}</td>
             <td class="w-[18rem] text-center hover:font-bold">
                 <a [href]="getProfileLink(player.member.username)" target="_blank">{{ player.member.username }}</a>
             </td>
