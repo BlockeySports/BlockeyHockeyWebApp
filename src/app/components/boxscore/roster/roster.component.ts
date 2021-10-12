@@ -42,8 +42,14 @@ export class RosterComponent implements OnInit {
                 rosterPlayers.set(player.member.uuid, player);
             }
         });
-        // sort rosterPlayers alphabetically by username
-        const sortedRosterPlayers = Array.from(rosterPlayers.values()).sort((a, b) => a.member.username.localeCompare(b.member.username));
+        // sort rosterPlayers by time on ice descending, then alphabetically
+        const sortedRosterPlayers = Array.from(rosterPlayers.values()).sort((a, b) => {
+            if (a.timeOnIce > b.timeOnIce) { return -1; }
+            if (a.timeOnIce < b.timeOnIce) { return 1; }
+            if (a.member.username < b.member.username) { return -1; }
+            if (a.member.username > b.member.username) { return 1; }
+            return 0;
+        });
         return new Set<BoxScorePlayer>(sortedRosterPlayers);
     }
 
