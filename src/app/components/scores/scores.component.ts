@@ -4,6 +4,7 @@ import { BoxScoreService } from 'src/app/services/boxscore.service';
 import { ColorService } from 'src/app/services/color.service';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
     selector: 'app-scores',
@@ -15,7 +16,8 @@ export class ScoresComponent implements OnInit {
 
     constructor(
         private boxScoreService: BoxScoreService,
-        private colorService: ColorService
+        private colorService: ColorService,
+        private dateService: DateService
     ) { }
 
     ngOnInit(): void {
@@ -112,8 +114,8 @@ export class ScoresComponent implements OnInit {
      */
     public getDate(boxScore: BoxScore): string {
         // format box score date as day of week, month day year, time am/pm
-        dayjs.extend(localizedFormat);
-        return dayjs(boxScore.date).format('dddd, MMMM D, YYYY, h:mm a');
+        // dayjs.extend(localizedFormat);
+        return dayjs(this.dateService.getDate(boxScore.date)).format('dddd, MMMM D, YYYY, h:mm a');
     }
 
     /**
