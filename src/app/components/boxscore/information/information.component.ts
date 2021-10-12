@@ -36,7 +36,6 @@ export class InformationComponent implements OnInit {
     public getBoxScoreDate(): string {
         // if pending box score information, return empty string
         if (this.pending || !this.boxScore?.date) { return ''; }
-        dayjs.extend(localizedFormat);
         return dayjs(this.getDate()).format('MMM D, YYYY');
     }
 
