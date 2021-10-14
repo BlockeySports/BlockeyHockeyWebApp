@@ -5,6 +5,7 @@ import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { BoxScoreService } from 'src/app/services/boxscore.service';
 
 @Component({
     selector: 'app-games',
@@ -22,7 +23,8 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
     private playerStatisticSubscription: Subscription;
 
     constructor(
-        private playerStatisticService: PlayerStatisticService
+        private playerStatisticService: PlayerStatisticService,
+        private boxScoreService: BoxScoreService
     ) { }
 
     ngOnInit(): void { }
@@ -126,8 +128,13 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    /**
+     * Get the link to the box score.
+     * @param game The game to get the box score link for.
+     * @returns the link to the box score
+     */
     public getBoxScoreLink(game: PlayerGamePlayed): string {
-        return `https://blockeyhockey.net/b/${game.boxScoreId}`;
+        return this.boxScoreService.getBoxScoreLink(game.boxScoreId);
     }
 
     ngOnDestroy(): void {

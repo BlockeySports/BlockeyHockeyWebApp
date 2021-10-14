@@ -36,4 +36,18 @@ export class BoxScoreService {
     public getBoxScores(): Observable<BoxScore[]> {
         return this.http.get<BoxScore[]>(this.url.concat('boxscores'));
     }
+
+    /**
+     * Get the link to a box score.
+     * Differentiates between localhost and production.
+     * @param id The unique id of the box score.
+     * @returns the link to the box score
+     */
+    public getBoxScoreLink(id: string): string {
+        if (location.origin.includes('localhost')) {
+            return `http://localhost:4200/b/${id}`;
+        } else {
+            return `https://blockeyhockey.net/b/${id}`;
+        }
+    }
 }
