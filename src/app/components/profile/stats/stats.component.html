@@ -1,9 +1,8 @@
-<div class="flex flex-col space-y-8">
+<div class="flex flex-col space-y-8 select-none">
     <!-- START: General Stats -->
     <div *ngIf="!this.isLoading && !this.isError" id="general-stats"
          class="lg:text-xl flex flex-row justify-around">
-        <div *ngIf="this.member?.dateJoined"
-             class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
+        <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
             <span class="lg:text-4xl text-3xl font-semibold">{{ this.member.dateJoined | daysSince }}</span>
             <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                   [ngxTippy]="getFirstSeenDate()">days since first seen</span>
@@ -29,7 +28,7 @@
     <!-- START: Specific Stats -->
     <div class="mx-auto w-[97%]">
         <!-- START: League Tabs -->
-        <div class="text-md md:flex border-black-300 dark:border-gray-100 flex-row flex-wrap hidden w-full border-b select-none">
+        <div class="text-md md:flex border-black-300 dark:border-gray-100 flex-row flex-wrap hidden w-full border-b">
             <div *ngFor="let league of getLeagues()"
                  (click)="changeLeagueTab(league)"
                  class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none"
@@ -50,7 +49,7 @@
 
         <!-- START: Season Tabs -->
         <div *ngIf="getSeasons().length > 1"
-             class="text-md md:flex border-black-300 dark:border-gray-100 flex-row flex-wrap hidden mx-auto mt-10 border-b select-none">
+             class="text-md md:flex border-black-300 dark:border-gray-100 flex-row flex-wrap hidden mx-auto mt-10 border-b">
             <div *ngFor="let season of getSeasons()"
                  (click)="changeSeasonTab(season)"
                  class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none last-of-type:ml-auto"
@@ -66,7 +65,7 @@
 
         <!-- START: Statistics -->
         <div *ngIf="this.leagueTab && this.seasonTab"
-             class="md:flex mt-7 flex-col hidden space-y-16 select-none">
+             class="md:flex mt-7 flex-col hidden space-y-16">
             <div *ngFor="let seasonType of getSeasonTypes()">
                 <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b tracking-wide">{{ seasonType + ' Statistics' | capitalize }}</span>
                 <div class="lg:text-2xl gap-y-8 gap-x-28 grid grid-cols-4 mx-6 mt-8 text-lg">
