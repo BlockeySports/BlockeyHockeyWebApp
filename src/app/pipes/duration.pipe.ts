@@ -8,6 +8,7 @@ import duration from 'dayjs/plugin/duration';
 export class DurationPipe implements PipeTransform {
 
   transform(milliseconds: number): string {
+    if (!milliseconds) return ' ';
     // extend the plugins for this to work
     dayjs.extend(duration);
     return dayjs.duration(milliseconds).format('m:ss');

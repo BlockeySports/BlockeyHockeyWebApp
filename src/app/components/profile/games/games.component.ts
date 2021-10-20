@@ -70,21 +70,27 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
      * @returns the result
      */
     public getResult(game: PlayerGamePlayed): string {
+        // if game does not meet player count requirements
+        if (game.awayPlayerCount < 3 || game.homePlayerCount < 3 || game.totalPlayerCount < 6) return 'None';
         // if no winning team, game is draw
         if (!game?.winningTeam) return 'Draw';
         // if player on the winning team
         if (game.team === game.winningTeam) return 'Win';
-        // otherwise, game is loss
-        else return 'Loss';
+        // if game is loss
+        else if (game.team !== game.winningTeam) return 'Loss';
+        // otherwise, game does not count to streak
+        else return 'None';
+
     }
 
     /**
      * Get the color of the result text.
      */
     public getResultColor(game: PlayerGamePlayed): string {
-        if (this.getResult(game) === 'Loss') return 'text-red-500';
         if (this.getResult(game) === 'Win') return 'text-green-500';
-        else return 'text-blue-500';
+        else if (this.getResult(game) === 'Loss') return 'text-red-500';
+        else if (this.getResult(game) === 'Draw') return 'text-blue-500';
+        else return 'text-black-50 dark:text-white/40';
     }
 
     /**
@@ -96,10 +102,16 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         const priorGames = this.getGames().filter(g => g.date <= game.date).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
         // define count
         let streak = 0;
+        // if game does not meet player count requirements
+        if (this.getResult(game) === 'None') {
+            return '-';
+        }
         // if game is a win
         if (this.getResult(game) === 'Win') {
             for (const priorGame of priorGames) {
-                // if game is a win, add to win streak
+                // if prior game should not be counted, continue
+                if (this.getResult(priorGame) === 'None') continue;
+                // if prior game is a win, add to win streak
                 if (this.getResult(priorGame) === 'Win') streak++;
                 // if not a win, break
                 else break;
@@ -109,7 +121,9 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         // if game is a loss
         else if (this.getResult(game) === 'Loss') {
             for (const priorGame of priorGames) {
-                // if game is a loss, add to loss streak
+                // if prior game should not be counted, continue
+                if (this.getResult(priorGame) === 'None') continue;
+                // if prior game is a loss, add to loss streak
                 if (this.getResult(priorGame) === 'Loss') streak++;
                 // if not a loss, break
                 else break;
@@ -119,13 +133,48 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         // if game is a draw
         else {
             for (const priorGame of priorGames) {
-                // if game is a draw, add to draw streak
+                // if prior game should not be counted, continue
+                if (this.getResult(priorGame) === 'None') continue;
+                // if prior game is a draw, add to draw streak
                 if (this.getResult(priorGame) === 'Draw') streak++;
                 // if not a draw, break
                 else break;
             }
             return `D${streak}`;
         }
+    }
+
+    /**
+     * Get the total time on ice for all games sharing the same box score id.
+     * This counts time on ice if the player played for both teams during the game.
+     */
+    public getTimeOnIce(game: PlayerGamePlayed): number {
+        if (!game) return 0;
+        let timeOnIce = 0;
+        this.games.forEach(g => {
+            if (g.boxScoreId === game.boxScoreId) {
+                timeOnIce += g.timeOnIce;
+            }
+        });
+        return timeOnIce;
+    }
+
+    public getScore(game: PlayerGamePlayed): string {
+        if (!game) return '';
+        return `${game.awayGoals} – ${game.homeGoals}`;
+    }
+
+    /**
+     * Get the tippy tooltip text for the streak.
+     */
+    public getStreakTooltip(game: PlayerGamePlayed): string {
+        if (!game) return '';
+        // get number only from string streak
+        const streak: number = +this.getStreak(game).replace(/[^0-9]/g, '');
+        if (this.getResult(game) === 'Win') return streak + (streak > 1 ? ' wins' : ' win') + ' in a row';
+        else if (this.getResult(game) === 'Loss') return streak + (streak > 1 ? ' losses' : ' loss') + ' in a row';
+        else if (this.getResult(game) === 'Draw') return streak + (streak > 1 ? ' draws' : ' draw') + ' in a row';
+        else return 'Stats not counted for this game';
     }
 
     /**
