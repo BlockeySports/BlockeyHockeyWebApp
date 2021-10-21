@@ -147,6 +147,7 @@ export class StatsComponent implements OnInit {
      * @returns the first join formatted date
      */
     public getFirstSeenDate(): string {
+        if (!this.member.dateJoined) return '';
         const date = this.dateService.getDate(this.member.dateJoined);
         return date ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
     }
