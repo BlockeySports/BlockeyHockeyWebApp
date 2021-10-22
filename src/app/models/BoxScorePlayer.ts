@@ -5,6 +5,7 @@ export class BoxScorePlayer {
     member?: Member;
     date?: Date;
     team?: string;
+    isPrimaryTeam?: boolean;
     isPlayed?: boolean;
     position?: string;
     number?: number;

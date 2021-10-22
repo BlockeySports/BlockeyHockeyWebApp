@@ -168,8 +168,9 @@ export class StatsComponent implements OnInit {
             const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
             // true if game had enough players to be counted for stats
             const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
-            // exclude duplicate box score id
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i;
+            // true if box score is not a duplicate (yet)
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i && game.isPrimaryTeam;
+            // if in arcade tab
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
@@ -211,7 +212,7 @@ export class StatsComponent implements OnInit {
             // is on winning team and game has a winner
             const isOnWinningTeam = game.team?.toLowerCase() === game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i && game.isPrimaryTeam;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
@@ -253,7 +254,7 @@ export class StatsComponent implements OnInit {
             // is on losing team and game has a winner
             const isOnLosingTeam = game.team?.toLowerCase() !== game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i && game.isPrimaryTeam;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {

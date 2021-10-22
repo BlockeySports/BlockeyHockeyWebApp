@@ -4,6 +4,7 @@ export class PlayerGamePlayed {
     duration?: number;
     player?: string;
     team?: string;
+    isPrimaryTeam?: boolean;
     timeOnIce?: number;
     winningTeam?: string;
     awayGoals?: number;

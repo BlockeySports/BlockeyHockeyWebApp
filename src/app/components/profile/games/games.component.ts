@@ -51,12 +51,15 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public getGames(): PlayerGamePlayed[] {
-        // return only unique box score by id
-        return this.games.filter((game, index, self) =>
-            index === self.findIndex((t) => (
-                t.boxScoreId === game.boxScoreId
-            ))
-        );
+        return this.games
+            // only include records in which primary team is true
+            .filter(game => game.isPrimaryTeam)
+            // filter out duplicate games (likely due to multiple hockey positions)
+            .filter((game, index, self) =>
+                index === self.findIndex((t) => (
+                    t.boxScoreId === game.boxScoreId
+                ))
+            );
     }
 
     public getDate(game: PlayerGamePlayed): string {
