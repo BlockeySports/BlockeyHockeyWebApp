@@ -5,7 +5,7 @@ export class BoxScoreGoal {
     boxScoreId?: string;
     sequence?: number;
     period?: number;
-    goalTime?: number;
+    periodTime?: number;
     team?: string;
     goalScorer?: Member;
     ownGoalScorer?: Member;

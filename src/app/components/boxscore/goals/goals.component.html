@@ -23,7 +23,7 @@
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ i + 1 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getGoalPeriod(goal) }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.goalTime | duration }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.periodTime | duration }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] text-center hover:font-semibold"
                 [class]="goal.goalScorer ? 'cursor-pointer' : 'cursor-default'">
                 <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal.goalScorer)" target="_blank">{{ goal?.goalScorer?.username }}</a>
