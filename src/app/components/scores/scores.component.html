@@ -8,10 +8,10 @@
 
     <!-- START: Mini Box Scores -->
     <div class="layout mx-auto">
-        <div *ngIf="getBoxScores() && getBoxScores().length > 0"
+        <div *ngIf="this.boxScores && this.boxScores.length > 0"
              class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
             <!-- START: Mini Box Score -->
-            <a *ngFor="let boxScore of getBoxScores()"
+            <a *ngFor="let boxScore of this.boxScores"
                [href]="getBoxScoreLink(boxScore)" target="_blank"
                class="border-black-800 dark:border-black-50 dark:hover:border-gray-100 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content] hover:ring-2 hover:ring-black dark:hover:ring-gray-100">
                 <!-- START: League, Date, Result -->
@@ -73,13 +73,13 @@
                                 [style.color]="getContrastingColor(this.boxScore?.awayTeam?.color) || 'black'"
                                 [ngxTippy]="setTeamNameTooltip(boxScore, true)">
                                 <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
-                                <fa-icon *ngIf="getNumberOfGoals(boxScore, true) > getNumberOfGoals(boxScore, false)"
+                                <fa-icon *ngIf="getTotalGoals(boxScore, 'away') > getTotalGoals(boxScore, 'home')"
                                          [icon]="['fas', 'caret-right']" size="lg"
                                          class="-left-4 absolute text-blue-600"></fa-icon>
                             </td>
                             <td *ngFor="let i of [].constructor(4); let j = index"
-                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(boxScore, true, j + 1) }}</td>
-                            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(boxScore, true) }}</td>
+                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getGoalsByPeriod(boxScore, 'away', j + 1) }}</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">{{ getTotalGoals(boxScore, 'away') }}</td>
                         </tr>
                         <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
                             <td class="border-black-800 dark:border-black-50 relative flex border-r"
@@ -87,13 +87,13 @@
                                 [style.color]="getContrastingColor(this.boxScore?.homeTeam?.color) || 'black'"
                                 [ngxTippy]="setTeamNameTooltip(boxScore, false)">
                                 <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
-                                <fa-icon *ngIf="getNumberOfGoals(boxScore, false) > getNumberOfGoals(boxScore, true)"
+                                <fa-icon *ngIf="getTotalGoals(boxScore, 'home') > getTotalGoals(boxScore, 'away')"
                                          [icon]="['fas', 'caret-right']" size="lg"
                                          class="-left-4 absolute text-blue-600"></fa-icon>
                             </td>
                             <td *ngFor="let i of [].constructor(4); let j = index"
-                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(boxScore, false, j + 1) }}</td>
-                            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(boxScore, false) }}</td>
+                                class="border-black-800 dark:border-black-50 text-center border-r">{{ getGoalsByPeriod(boxScore, 'home', j + 1) }}</td>
+                            <td class="border-black-800 dark:border-black-50 text-center">{{ getTotalGoals(boxScore, 'home') }}</td>
                         </tr>
                     </table>
                     <div class="w-[7%] sm:w-[20%] dark:bg-black-300"></div>
@@ -117,7 +117,7 @@
             </a>
             <!-- END: Mini Box Score -->
         </div>
-        <div *ngIf="!getBoxScores() || getBoxScores().length === 0"
+        <div *ngIf="!this.boxScores || this.boxScores.length === 0"
              class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
             <!-- START: Placeholder Box Score -->
             <div *ngFor="let boxScore of [].constructor(10)"

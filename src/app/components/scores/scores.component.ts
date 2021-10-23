@@ -5,6 +5,7 @@ import { ColorService } from 'src/app/services/color.service';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { DateService } from 'src/app/services/date.service';
+import { MiniBoxScore } from 'src/app/models/MiniBoxScore';
 
 @Component({
     selector: 'app-scores',
@@ -12,7 +13,7 @@ import { DateService } from 'src/app/services/date.service';
 })
 export class ScoresComponent implements OnInit {
 
-    public boxScores: BoxScore[] = [];
+    public boxScores: MiniBoxScore[] = [];
 
     constructor(
         private boxScoreService: BoxScoreService,
@@ -35,10 +36,38 @@ export class ScoresComponent implements OnInit {
     }
 
     /**
-     * Get a filtered list of valid box scores.
+     * Get the total number of goals scored by a team in the game.
+     * @param boxScore The box score.
+     * @param team The team to filter on.
      */
-    public getBoxScores(): BoxScore[] {
-        return this.boxScores.filter(boxScore => boxScore.awayPlayerCount >= 3 && boxScore.homePlayerCount >= 3 && boxScore.totalPlayerCount >= 6);
+    public getTotalGoals(boxScore: MiniBoxScore, team: string): number {
+        if (team === 'away') return boxScore.firstPeriodAwayGoals + boxScore.secondPeriodAwayGoals + boxScore.thirdPeriodAwayGoals + boxScore.overtimeAwayGoals;
+        else if (team === 'home') return boxScore.firstPeriodHomeGoals + boxScore.secondPeriodHomeGoals + boxScore.thirdPeriodHomeGoals + boxScore.overtimeHomeGoals;
+        else return 0;
+    }
+
+    /**
+     * Get the number of goals scored in a period.
+     * @param boxScore The box score.
+     * @param team The team to filter on.
+     * @param period The period.
+     */
+    public getGoalsByPeriod(boxScore: MiniBoxScore, team: string, period: number): number {
+        if (team === 'away') {
+            switch (period) {
+                case 1: return boxScore.firstPeriodAwayGoals;
+                case 2: return boxScore.secondPeriodAwayGoals;
+                case 3: return boxScore.thirdPeriodAwayGoals;
+                default: return boxScore.overtimeAwayGoals;
+            }
+        } else if (team === 'home') {
+            switch (period) {
+                case 1: return boxScore.firstPeriodHomeGoals;
+                case 2: return boxScore.secondPeriodHomeGoals;
+                case 3: return boxScore.thirdPeriodHomeGoals;
+                default: return boxScore.overtimeHomeGoals;
+            }
+        } else return 0;
     }
 
     /**
@@ -64,49 +93,6 @@ export class ScoresComponent implements OnInit {
     public getContrastingColor(backgroundColor: string): string {
         if (!backgroundColor) { return null; }
         return this.colorService.getContrast(backgroundColor);
-    }
-
-    /**
-     * Get the number of goals scored by a team.  Optionally, a period can be specified to filter number of goals by period.
-     * @param isAway True if the team is the away team; false if the team is the home team.
-     * @param period The period to filter goals by.
-     * @returns the number of goals scored by the team
-     */
-    public getNumberOfGoals(boxScore: BoxScore, isAway: boolean, period?: number): number {
-        // if period was specified
-        if (period != null) {
-            // if away team
-            if (isAway) {
-                if (period <= 3) {
-                    // return the number of goals for that period
-                    return boxScore?.goals?.filter(g => g.period === period && g.team === 'away').length;
-                } else {
-                    // return number of goals scored in any period above 3
-                    return boxScore?.goals?.filter(g => g.period > 3 && g.team === 'away').length;
-                }
-            }
-            // if home team
-            else {
-                if (period <= 3) {
-                    // return the number of goals for that period
-                    return boxScore?.goals?.filter(g => g.period === period && g.team === 'home').length;
-                } else {
-                    // return number of goals scored in any period above 3
-                    return boxScore?.goals?.filter(g => g.period > 3 && g.team === 'home').length;
-                }
-            }
-        } else {
-            // if away team
-            if (isAway) {
-                // return the number of goals for that period
-                return boxScore?.goals?.filter(g => g.team === 'away').length;
-            }
-            // if home team
-            else {
-                // return the number of goals for that period
-                return boxScore?.goals?.filter(g => g.team === 'home').length;
-            }
-        }
     }
 
     /**
