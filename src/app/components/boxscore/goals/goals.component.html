@@ -38,6 +38,7 @@
             </td>
             <td class="w-[4.5rem] text-center"
                 [ngClass]="{'text-black/25 dark:text-white/25 font-semibold': !getGoalType(goal)}"
+                [tippyName]="goal.id"
                 [ngxTippy]="getGoalTypeDescription(goal) || 'Even Strength Goal'">{{ getGoalType(goal) || '&ndash;' }}</td>
         </tr>
         <!-- END: Roster Players -->
