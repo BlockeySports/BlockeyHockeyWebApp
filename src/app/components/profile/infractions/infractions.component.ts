@@ -73,8 +73,8 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    public navigateToProfile(username: string): void {
-        window.location.href = '/u/' + username;
+    public getProfileLink(member: Member): string {
+        return window.location.origin + '/u/' + member.username;
     }
 
     ngOnDestroy(): void {

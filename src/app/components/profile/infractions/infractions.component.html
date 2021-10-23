@@ -63,8 +63,8 @@
         <tr *ngFor="let punishment of this.member.punishments">
             <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
                 style="width: 15%; max-width: 15%;">
-                <span class="w-max hover:underline cursor-pointer"
-                      (click)="navigateToProfile(punishment.punisher.username)">{{ punishment.punisher.username }}</span>
+                <a [href]="getProfileLink(punishment?.punisher)" target="_blank"
+                   class="w-max hover:underline cursor-pointer">{{ punishment?.punisher?.username }}</a>
             </td>
             <td class="dark:border-gray-300 border-black-400 bg-gray-50 dark:bg-black-700 p-2 border"
                 style="width: 41%; min-width: 35%;">{{ punishment.reason }}</td>
