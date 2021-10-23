@@ -47,7 +47,7 @@
                     <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
                          ngxTippy
                          tippyName="online-status"
-                         [ngClass]="this.member.isOnline ? 'bg-green-500' : 'bg-red-600'"></div>
+                         [ngClass]="this.member.isOnline ? 'bg-green-500 animate-pulse' : 'bg-red-600'"></div>
                     <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
                     <span class="font-semibold cursor-default"
                           ngxTippy
