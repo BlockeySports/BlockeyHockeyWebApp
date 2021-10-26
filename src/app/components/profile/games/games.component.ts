@@ -169,6 +169,10 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
      */
     public getScore(game: PlayerGamePlayed): string {
         if (!game) return '';
+        // if game went to overtime
+        if (game.lastPeriod > 3) {
+            return `${game.awayGoals} – ${game.homeGoals} / ${game.lastPeriod > 4 ? (game.lastPeriod - 3) : ''}OT`;
+        }
         return `${game.awayGoals} – ${game.homeGoals}`;
     }
 
