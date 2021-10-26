@@ -73,8 +73,6 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
      * @returns the result
      */
     public getResult(game: PlayerGamePlayed): string {
-        // if game does not meet player count requirements
-        if (game.awayPlayerCount < 3 || game.homePlayerCount < 3 || game.totalPlayerCount < 6) return 'None';
         // if no winning team, game is draw
         if (!game?.winningTeam) return 'Draw';
         // if player on the winning team
@@ -83,14 +81,19 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         else if (game.team !== game.winningTeam) return 'Loss';
         // otherwise, game does not count to streak
         else return 'None';
+    }
 
+    public didMeetRequirements(game: PlayerGamePlayed): boolean {
+        if (!game) return false;
+        return game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
     }
 
     /**
      * Get the color of the result text.
      */
     public getResultColor(game: PlayerGamePlayed): string {
-        if (this.getResult(game) === 'Win') return 'text-green-500';
+        if (!this.didMeetRequirements(game)) return 'text-black-50 dark:text-white/40';
+        else if (this.getResult(game) === 'Win') return 'text-green-500';
         else if (this.getResult(game) === 'Loss') return 'text-red-500';
         else if (this.getResult(game) === 'Draw') return 'text-blue-500';
         else return 'text-black-50 dark:text-white/40';
@@ -105,12 +108,9 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         const priorGames = this.getGames().filter(g => g.date <= game.date).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
         // define count
         let streak = 0;
-        // if game does not meet player count requirements
-        if (this.getResult(game) === 'None') {
-            return '-';
-        }
         // if game is a win
         if (this.getResult(game) === 'Win') {
+            if (!this.didMeetRequirements(game)) return 'W';
             for (const priorGame of priorGames) {
                 // if prior game should not be counted, continue
                 if (this.getResult(priorGame) === 'None') continue;
@@ -123,6 +123,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         }
         // if game is a loss
         else if (this.getResult(game) === 'Loss') {
+            if (!this.didMeetRequirements(game)) return 'L';
             for (const priorGame of priorGames) {
                 // if prior game should not be counted, continue
                 if (this.getResult(priorGame) === 'None') continue;
@@ -136,6 +137,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         // if game is a draw
         else {
             for (const priorGame of priorGames) {
+                if (!this.didMeetRequirements(game)) return 'D';
                 // if prior game should not be counted, continue
                 if (this.getResult(priorGame) === 'None') continue;
                 // if prior game is a draw, add to draw streak
@@ -162,6 +164,9 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         return timeOnIce;
     }
 
+    /**
+     * Get the score of the game.
+     */
     public getScore(game: PlayerGamePlayed): string {
         if (!game) return '';
         return `${game.awayGoals} – ${game.homeGoals}`;
@@ -174,7 +179,8 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         if (!game) return '';
         // get number only from string streak
         const streak: number = +this.getStreak(game).replace(/[^0-9]/g, '');
-        if (this.getResult(game) === 'Win') return streak + (streak > 1 ? ' wins' : ' win') + ' in a row';
+        if (!this.didMeetRequirements(game)) return 'Stats not counted for this game';
+        else if (this.getResult(game) === 'Win') return streak + (streak > 1 ? ' wins' : ' win') + ' in a row';
         else if (this.getResult(game) === 'Loss') return streak + (streak > 1 ? ' losses' : ' loss') + ' in a row';
         else if (this.getResult(game) === 'Draw') return streak + (streak > 1 ? ' draws' : ' draw') + ' in a row';
         else return 'Stats not counted for this game';
