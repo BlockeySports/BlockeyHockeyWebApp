@@ -9,6 +9,7 @@ export class PlayerGamePlayed {
     winningTeam?: string;
     awayGoals?: number;
     homeGoals?: number;
+    lastPeriod?: number;
     awayPlayerCount?: number;
     homePlayerCount?: number;
     totalPlayerCount?: number;

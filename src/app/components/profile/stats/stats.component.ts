@@ -239,12 +239,16 @@ export class StatsComponent implements OnInit {
      * Get the number of losses given a season type.
      * Also takes into account the season that is being viewed.
      * @param seasonType The season type.
+     * @param isOvertime True if only getting overtime losses; false if only getting regulation losses.
      * @returns the number of losses
      */
-    public getNumberOfLosses(seasonType: string): number {
+    public getNumberOfLosses(seasonType: string, isOvertime?: boolean): number {
         return this.gamesPlayed.filter((game, i, arr) => {
             // return false if the game is not played in
             if (game.isPlayed === false) return false;
+            // do not count overtime loss if only getting regulation losses
+            if (isOvertime && game.lastPeriod <= 3) return false;
+            else if (!isOvertime && game.lastPeriod > 3) return false;
             // true if league is same as tab league
             const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
@@ -275,18 +279,6 @@ export class StatsComponent implements OnInit {
             }
             return false;
         }).length;
-    }
-
-    /**
-     * Get the number of draws given a season type.
-     * Also takes into account the season that is being viewed.
-     * @param seasonType The season type.
-     * @returns the number of draws
-     */
-    public getNumberOfDraws(seasonType: string): number {
-        let draws = this.getNumberOfGamesPlayed(seasonType) - (this.getNumberOfWins(seasonType) + this.getNumberOfLosses(seasonType));
-        if (draws < 0) draws = 0;
-        return draws;
     }
 
     /**

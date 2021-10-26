@@ -87,7 +87,7 @@
 
                     <!-- START: Losses -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfLosses(seasonType) || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfLosses(seasonType, false) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               ngxTippy="Total Losses">losses</span>
                     </div>
@@ -95,9 +95,9 @@
 
                     <!-- START: Draws -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfDraws(seasonType) || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfLosses(seasonType, true) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
-                              ngxTippy="Total Draws">draws</span>
+                              ngxTippy="Total Overtime Losses">OT losses</span>
                     </div>
                     <!-- END: Draws -->
 

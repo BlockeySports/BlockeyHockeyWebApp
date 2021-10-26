@@ -53,19 +53,19 @@
 </span>
 <table *ngIf="this.games.length > 0" class="w-max flex flex-col mx-auto shadow-md">
     <thead class="w-max dark:border-gray-300 border-black-400 flex flex-row items-center border-2 select-none">
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.6rem]">
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.8rem]">
             <span ngxTippy="Game Number" class="pt-3">NO.</span>
         </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]">
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
             <span ngxTippy="Box Score Link" class="pt-3">BOX SCORE</span>
         </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[14rem]">
-            <span ngxTippy="Date & Time of Game" class="pt-3">DATE</span>
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[14rem]">
+            <span ngxTippy="Date & Time of Game" class="pt-3">DATE OF GAME</span>
         </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]">
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
             <span ngxTippy="League Name" class="pt-3">LEAGUE</span>
         </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-300 border-r-2 w-[10rem]">
+        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
             <span ngxTippy="Season Number" class="pt-3">SEASON</span>
         </th>
         <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[8rem]">
@@ -85,14 +85,14 @@
            [style.max-height]="'25rem'">
         <tr *ngFor="let game of getGames(); let i = index;"
             class="group event:bg-gray-50 odd:bg-gray-100 dark:even:bg-black-500 dark:odd:bg-black-600 hover:bg-gray-200 dark:hover:bg-black-700">
-            <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.6rem]">{{ getGames().length - i }}</td>
+            <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.8rem]">{{ getGames().length - i }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r w-[10rem]">
                 <a [href]="getBoxScoreLink(game)" target="_blank"
                    class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
             </td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r w-[14rem]">{{ getDate(game) }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r w-[10rem]">{{ game.league || 'Arcade' }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r w-[10rem]">{{ game.season }}</td>
+            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[14rem]">{{ getDate(game) }}</td>
+            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league || 'Arcade' }}</td>
+            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.season }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getScore(game) }}</td>
