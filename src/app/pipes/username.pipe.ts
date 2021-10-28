@@ -13,7 +13,6 @@ export class UsernamePipe implements PipeTransform {
   transform(uuid: string): string {
     this.playerService.getPlayerInfo(uuid).subscribe(
       (data) => {
-        console.log(data);
         return data.username;
       },
       (error) => {

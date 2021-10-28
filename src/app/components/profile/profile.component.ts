@@ -76,8 +76,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.setTippyOnlineStatus();
                 // get player statistics
                 this.getPlayerStatistics();
-                console.log(data);
-
             },
             (error) => {
                 this.isError = true;

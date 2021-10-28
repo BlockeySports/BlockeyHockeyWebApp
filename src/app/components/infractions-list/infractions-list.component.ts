@@ -41,7 +41,6 @@ export class InfractionsListComponent implements OnInit, OnDestroy {
             (data) => {
                 // set the punishments
                 this.punishments = data;
-                console.log(this.punishments);
                 // not loading anymore
                 this.isLoading = false;
                 // no loading text
