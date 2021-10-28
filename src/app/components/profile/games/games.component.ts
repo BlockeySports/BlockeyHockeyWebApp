@@ -116,7 +116,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
             if (!this.didMeetRequirements(game)) return 'W';
             for (const priorGame of priorGames) {
                 // if prior game should not be counted, continue
-                if (this.getResult(priorGame) === 'None') continue;
+                if (this.getResult(priorGame) === 'None' || !this.didMeetRequirements(priorGame)) continue;
                 // if prior game is a win, add to win streak
                 if (this.getResult(priorGame) === 'Win') streak++;
                 // if not a win, break
@@ -129,7 +129,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
             if (!this.didMeetRequirements(game)) return 'L';
             for (const priorGame of priorGames) {
                 // if prior game should not be counted, continue
-                if (this.getResult(priorGame) === 'None') continue;
+                if (this.getResult(priorGame) === 'None' || !this.didMeetRequirements(priorGame)) continue;
                 // if prior game is a loss, add to loss streak
                 if (this.getResult(priorGame) === 'Loss') streak++;
                 // if not a loss, break
@@ -142,7 +142,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
             for (const priorGame of priorGames) {
                 if (!this.didMeetRequirements(game)) return 'D';
                 // if prior game should not be counted, continue
-                if (this.getResult(priorGame) === 'None') continue;
+                if (this.getResult(priorGame) === 'None' || !this.didMeetRequirements(priorGame)) continue;
                 // if prior game is a draw, add to draw streak
                 if (this.getResult(priorGame) === 'Draw') streak++;
                 // if not a draw, break
