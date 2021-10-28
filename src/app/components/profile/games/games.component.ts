@@ -38,7 +38,6 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
                     this.games = data;
                     this.isLoading = false;
                     this.loadingText = '';
-                    // console.log(data);
                 },
                 (error) => {
                     // set loading message to error message
@@ -50,10 +49,14 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    /**
+     * Get the games that should be displayed publicly on the member's profile.
+     * Filter out games where the player only dressed or wasn't on the primary team.
+     */
     public getGames(): PlayerGamePlayed[] {
         return this.games
             // only include records in which primary team is true
-            .filter(game => game.isPrimaryTeam)
+            .filter(game => game.isPrimaryTeam && game.isPlayed)
             // filter out duplicate games (likely due to multiple hockey positions)
             .filter((game, index, self) =>
                 index === self.findIndex((t) => (

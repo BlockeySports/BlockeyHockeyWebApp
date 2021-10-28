@@ -161,7 +161,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfGamesPlayed(seasonType: string): number {
         return this.gamesPlayed.filter((game, i, arr) => {
             // return false if the game is not played in
-            if (game.isPlayed === false) return false;
+            if (!game.isPlayed || !game.isPrimaryTeam) return false;
             // true if league is same as tab league
             const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
@@ -169,7 +169,7 @@ export class StatsComponent implements OnInit {
             // true if game had enough players to be counted for stats
             const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
             // true if box score is not a duplicate (yet)
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i && game.isPrimaryTeam;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId) === i;
             // if in arcade tab
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
@@ -202,7 +202,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfWins(seasonType: string): number {
         return this.gamesPlayed.filter((game, i, arr) => {
             // return false if the game is not played in
-            if (game.isPlayed === false) return false;
+            if (!game.isPlayed || !game.isPrimaryTeam) return false;
             // true if league is same as tab league
             const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
             // true if game played season is same as tab season or if getting career games played
@@ -212,7 +212,7 @@ export class StatsComponent implements OnInit {
             // is on winning team and game has a winner
             const isOnWinningTeam = game.team?.toLowerCase() === game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i && game.isPrimaryTeam;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
@@ -245,7 +245,7 @@ export class StatsComponent implements OnInit {
     public getNumberOfLosses(seasonType: string, isOvertime?: boolean): number {
         return this.gamesPlayed.filter((game, i, arr) => {
             // return false if the game is not played in
-            if (game.isPlayed === false) return false;
+            if (!game.isPlayed || !game.isPrimaryTeam) return false;
             // do not count overtime loss if only getting regulation losses
             if (isOvertime && game.lastPeriod <= 3) return false;
             else if (!isOvertime && game.lastPeriod > 3) return false;
@@ -258,7 +258,7 @@ export class StatsComponent implements OnInit {
             // is on losing team and game has a winner
             const isOnLosingTeam = game.team?.toLowerCase() !== game.winningTeam?.toLowerCase() && !!game.winningTeam;
             // exclude duplicate box score id and team
-            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i && game.isPrimaryTeam;
+            const isUniqueBoxScore = arr.findIndex(t => t.boxScoreId === game.boxScoreId && t.team === game.team) === i;
             if (this.leagueTab === 'arcade') {
                 // if game is a testing game
                 if (seasonType.includes('beta')) {
