@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoxScoreComponent } from './components/boxscore/boxscore.component';
 import { HomeComponent } from './components/home/home.component';
 import { InfractionsListComponent } from './components/infractions-list/infractions-list.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RinkComponent } from './components/rink/rink.component';
 import { ScoresComponent } from './components/scores/scores.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'b/:uuid', component: BoxScoreComponent },
   { path: 'scores', component: ScoresComponent },
   { path: 'rink', component: RinkComponent },
+  { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'infractions', component: InfractionsListComponent },
   { path: 'punishments', component: InfractionsListComponent },
   { path: '', component: HomeComponent }

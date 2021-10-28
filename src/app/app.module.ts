@@ -52,6 +52,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { GamesComponent } from './components/profile/games/games.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
     declarations: [
@@ -84,7 +85,8 @@ import { GamesComponent } from './components/profile/games/games.component';
         CapitalizePipe,
         SignedPipe,
         TruncatePipe,
-        GamesComponent
+        GamesComponent,
+        LeaderboardComponent
     ],
     imports: [
         BrowserModule,

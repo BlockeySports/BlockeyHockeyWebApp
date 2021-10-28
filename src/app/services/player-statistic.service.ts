@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Member } from '../models/Member';
 import { PlayerGamePlayed } from '../models/PlayerGamePlayed';
+import { PlayerLeaderboard } from '../models/PlayerLeaderboard';
 import { PlayerStatistic } from '../models/PlayerStatistic';
 
 @Injectable({
@@ -39,5 +40,12 @@ export class PlayerStatisticService {
         const params = new HttpParams()
             .set('uuid', uuid);
         return this.http.get<PlayerGamePlayed[]>(this.url.concat('player-game-played'), { params });
+    }
+
+    /**
+     * Get player leaderboard.
+     */
+    public getLeaderboard(): Observable<PlayerLeaderboard[]> {
+        return this.http.get<PlayerLeaderboard[]>(this.url.concat('leaderboard'));
     }
 }
