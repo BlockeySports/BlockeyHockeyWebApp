@@ -96,10 +96,10 @@
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>
             <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[6.5rem]">{{ getScore(game) }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 w-[5rem] text-center font-semibold select-none">
-                <span class="px-1" [class]="getResultColor(game)"
-                      [ngxTippy]="getStreakTooltip(game)"
-                      [tippyProps]="{ placement: 'right' }">{{ getStreak(game) }}</span>
+            <td class="dark:border-gray-300 border-black-400 p-2 w-[5rem] text-center font-semibold select-none"
+                [ngxTippy]="getStreakTooltip(game)"
+                [tippyProps]="{ placement: 'right' }">
+                <span class="px-1" [class]="getResultColor(game)">{{ getStreak(game) }}</span>
             </td>
         </tr>
     </tbody>
