@@ -95,11 +95,11 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
      * Get the color of the result text.
      */
     public getResultColor(game: PlayerGamePlayed): string {
-        if (!this.didMeetRequirements(game)) return 'text-black-50 dark:text-white/40';
+        if (!this.didMeetRequirements(game)) return 'text-black-50 dark:text-white/60';
         else if (this.getResult(game) === 'Win') return 'text-green-500';
         else if (this.getResult(game) === 'Loss') return 'text-red-500';
         else if (this.getResult(game) === 'Draw') return 'text-blue-500';
-        else return 'text-black-50 dark:text-white/40';
+        else return 'text-black-50 dark:text-white/60';
     }
 
     /**
@@ -183,14 +183,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
      * Get the tippy tooltip text for the streak.
      */
     public getStreakTooltip(game: PlayerGamePlayed): string {
-        if (!game) return '';
-        // get number only from string streak
-        const streak: number = +this.getStreak(game).replace(/[^0-9]/g, '');
-        if (!this.didMeetRequirements(game)) return 'Stats not counted for this game';
-        else if (this.getResult(game) === 'Win') return streak + (streak > 1 ? ' wins' : ' win') + ' in a row';
-        else if (this.getResult(game) === 'Loss') return streak + (streak > 1 ? ' losses' : ' loss') + ' in a row';
-        else if (this.getResult(game) === 'Draw') return streak + (streak > 1 ? ' draws' : ' draw') + ' in a row';
-        else return 'Stats not counted for this game';
+        return this.didMeetRequirements(game) ? null : 'Stats not counted for this game';
     }
 
     /**

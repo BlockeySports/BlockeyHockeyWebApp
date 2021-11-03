@@ -51,56 +51,58 @@
     </svg>
     <span>{{ this.loadingText }}</span>
 </span>
-<table *ngIf="this.games.length > 0" class="w-max flex flex-col mx-auto shadow-md">
-    <thead class="w-max dark:border-gray-300 border-black-400 flex flex-row items-center border-2 select-none">
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.8rem]">
-            <span ngxTippy="Game Number" class="pt-3">NO.</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
-            <span ngxTippy="Box Score Link" class="pt-3">BOX SCORE</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[12rem]">
-            <span ngxTippy="Date & Time of Game" class="pt-3">DATE OF GAME</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
-            <span ngxTippy="League Name" class="pt-3">LEAGUE</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
-            <span ngxTippy="Season Number" class="pt-3">SEASON</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[8rem]">
-            <span ngxTippy="Game Length" class="pt-3">DURATION</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[5rem]">
-            <span ngxTippy="Time on Ice" class="pt-3">TOI</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[6.5rem]">
-            <span ngxTippy="Score of Game" class="pt-3">SCORE</span>
-        </th>
-        <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 w-[5rem]">
-            <span ngxTippy="Win/Loss Streak" class="pt-3">STREAK</span>
-        </th>
-    </thead>
-    <tbody class="scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin dark:border-gray-300 border-black-400 flex flex-col overflow-y-scroll border"
-           [style.max-height]="'25.1rem'">
-        <tr *ngFor="let game of getGames(); let i = index;"
-            class="group event:bg-gray-50 odd:bg-gray-100 dark:even:bg-black-500 dark:odd:bg-black-600 hover:bg-gray-200 dark:hover:bg-black-700">
-            <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.8rem]">{{ getGames().length - i }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[10rem]">
-                <a [href]="getBoxScoreLink(game)" target="_blank"
-                   class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
-            </td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[12rem]">{{ getDate(game) }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league || 'Arcade' }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.season }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[6.5rem]">{{ getScore(game) }}</td>
-            <td class="dark:border-gray-300 border-black-400 p-2 w-[5rem] text-center font-semibold select-none"
-                [ngxTippy]="getStreakTooltip(game)"
-                [tippyProps]="{ placement: 'right' }">
-                <span class="px-1" [class]="getResultColor(game)">{{ getStreak(game) }}</span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="w-full overflow-x-auto">
+    <table *ngIf="this.games.length > 0" class="w-max flex flex-col mx-auto shadow-md">
+        <thead class="w-max dark:border-gray-300 border-black-400 flex flex-row items-center border-2 select-none">
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[2.8rem]">
+                <span ngxTippy="Game Number" class="pt-3">NO.</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
+                <span ngxTippy="Box Score Link" class="pt-3">BOX SCORE</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[12rem]">
+                <span ngxTippy="Date & Time of Game" class="pt-3">DATE OF GAME</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
+                <span ngxTippy="League Name" class="pt-3">LEAGUE</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[10rem]">
+                <span ngxTippy="Season Number" class="pt-3">SEASON</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[8rem]">
+                <span ngxTippy="Game Length" class="pt-3">DURATION</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[5rem]">
+                <span ngxTippy="Time on Ice" class="pt-3">TOI</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 border-r-2 w-[6.5rem]">
+                <span ngxTippy="Score of Game" class="pt-3">SCORE</span>
+            </th>
+            <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-center bg-gray-300 w-[5rem]">
+                <span ngxTippy="Win/Loss Streak" class="pt-3">STREAK</span>
+            </th>
+        </thead>
+        <tbody class="scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin dark:border-gray-300 border-black-400 flex flex-col overflow-y-scroll border"
+               [style.max-height]="'25.1rem'">
+            <tr *ngFor="let game of getGames(); let i = index;"
+                class="group event:bg-gray-50 odd:bg-gray-100 dark:even:bg-black-500 dark:odd:bg-black-600 hover:bg-gray-200 dark:hover:bg-black-700">
+                <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.8rem]">{{ getGames().length - i }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[10rem]">
+                    <a [href]="getBoxScoreLink(game)" target="_blank"
+                       class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
+                </td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[12rem]">{{ getDate(game) }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league || 'Arcade' }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.season }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[6.5rem]">{{ getScore(game) }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 w-[5rem] text-center font-semibold select-none"
+                    [ngxTippy]="getStreakTooltip(game)"
+                    [tippyProps]="{ placement: 'right' }">
+                    <span class="px-1" [class]="getResultColor(game)">{{ getStreak(game) }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
