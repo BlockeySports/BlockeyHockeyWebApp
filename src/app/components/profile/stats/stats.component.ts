@@ -320,7 +320,7 @@ export class StatsComponent implements OnInit {
      */
     public calculateWinLoseRatio(seasonType: string): number {
         const wins = this.getNumberOfWins(seasonType);
-        const losses = this.getNumberOfLosses(seasonType);
+        const losses = this.getNumberOfLosses(seasonType) + this.getNumberOfLosses(seasonType, true);
         if (wins === undefined || losses === undefined) { return 0; }
         if (losses === 0) { return wins; }
         return wins / losses;
