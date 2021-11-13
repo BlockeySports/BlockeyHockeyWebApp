@@ -441,6 +441,8 @@ export class StatsComponent implements OnInit {
             }
             return false;
         }).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));   // sort game by date descending
+        // if no games played, return zero win streak
+        if (games.length === 0) { return 'W0'; }
         // get the result of the most recent game played
         const result = this.getResult(games[0]);    // win, loss, or draw
         // define streak
@@ -490,7 +492,6 @@ export class StatsComponent implements OnInit {
         this.onIcePlayers.filter((onIcePlayer) => {
             // skip if player position is a goaltender
             if (onIcePlayer.player.position.toLowerCase().includes('g')) return false;
-            console.log('not goaltender');
             // true if league is same as tab league
             const isSameLeague = onIcePlayer.boxScore.league === this.leagueTab && onIcePlayer.boxScore.isLeaguePlay;
             // true if stat season is same as tab season or if getting career stats
@@ -513,7 +514,8 @@ export class StatsComponent implements OnInit {
             }
             return false;
         }).forEach((onIcePlayer) => {
-            console.log(onIcePlayer);
+            // if goal is a power play or penalty shot goal, don't add to plus-minus
+            if (onIcePlayer.goal.isPowerPlay || onIcePlayer.goal.isPenaltyShot) return;
             // if player is on the scoring team, add to plus-minus
             if (onIcePlayer.player.team === onIcePlayer.goal.team) plusMinus++;
             // if player is on the non-scoring team, subtract from plus-minus
