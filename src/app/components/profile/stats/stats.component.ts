@@ -5,6 +5,7 @@ import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { DateService } from 'src/app/services/date.service';
 import dayjs from 'dayjs';
+import { BoxScoreOnIcePlayer } from 'src/app/models/BoxScoreOnIcePlayer';
 
 @Component({
     selector: 'app-stats',
@@ -15,6 +16,7 @@ export class StatsComponent implements OnInit {
     @Input() member: Member;
     @Input() stats: PlayerStatistic[] = [];
     @Input() gamesPlayed: PlayerGamePlayed[] = [];
+    @Input() onIcePlayers: BoxScoreOnIcePlayer[] = [];
     @Input() isError;
 
     public isLoading = false;
@@ -476,5 +478,48 @@ export class StatsComponent implements OnInit {
         if (game.team === game.winningTeam) return 'Win';
         // otherwise, game is loss
         else return 'Loss';
+    }
+
+    /**
+     * Calculate the player's plus-minus.
+     */
+    public getPlusMinus(seasonType: string): number {
+        // define plus-minus
+        let plusMinus = 0;
+        // for each on ice player
+        this.onIcePlayers.filter((onIcePlayer) => {
+            // skip if player position is a goaltender
+            if (onIcePlayer.player.position.toLowerCase().includes('g')) return false;
+            console.log('not goaltender');
+            // true if league is same as tab league
+            const isSameLeague = onIcePlayer.boxScore.league === this.leagueTab && onIcePlayer.boxScore.isLeaguePlay;
+            // true if stat season is same as tab season or if getting career stats
+            const isSameSeason = onIcePlayer.boxScore.season === this.seasonTab || this.seasonTab === 'career';
+            if (this.leagueTab === 'arcade') {
+                // if game is a testing game
+                if (seasonType.includes('beta')) {
+                    return onIcePlayer.boxScore.isTesting && !onIcePlayer.boxScore.isLeaguePlay && !onIcePlayer.boxScore.isTournamentPlay;
+                } else {
+                    return !onIcePlayer.boxScore.isTesting && !onIcePlayer.boxScore.isLeaguePlay && !onIcePlayer.boxScore.isTournamentPlay;
+                }
+            } else if (seasonType === 'regular_season') {
+                return onIcePlayer.boxScore.isRegularSeason && isSameSeason && isSameLeague;
+            }
+            else if (seasonType === 'postseason') {
+                return onIcePlayer.boxScore.isPostseason && isSameSeason && isSameLeague;
+            }
+            else if (seasonType === 'preseason') {
+                return onIcePlayer.boxScore.isPreseason && isSameSeason && isSameLeague;
+            }
+            return false;
+        }).forEach((onIcePlayer) => {
+            console.log(onIcePlayer);
+            // if player is on the scoring team, add to plus-minus
+            if (onIcePlayer.player.team === onIcePlayer.goal.team) plusMinus++;
+            // if player is on the non-scoring team, subtract from plus-minus
+            else plusMinus--;
+        });
+        // return the result
+        return plusMinus;
     }
 }

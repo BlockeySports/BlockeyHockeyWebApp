@@ -11,6 +11,7 @@ import { DateService } from 'src/app/services/date.service';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
+import { BoxScoreOnIcePlayer } from 'src/app/models/BoxScoreOnIcePlayer';
 
 @Component({
     selector: 'app-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     };
     public playerStatistics: PlayerStatistic[] = [];
     public playerGamesPlayed: PlayerGamePlayed[] = [];
+    public onIcePlayers: BoxScoreOnIcePlayer[] = [];
 
     public isError = false;
     public errorMessage = '';
@@ -109,6 +111,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
             (playerGamesPlayed: PlayerGamePlayed[]) => {
                 this.playerGamesPlayed = playerGamesPlayed;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        // get the on-ice player records for this player (used to calculate plus-minus)
+        this.playerStatisticService.getOnIcePlayers(this.member.uuid).subscribe(
+            (onIcePlayers: BoxScoreOnIcePlayer[]) => {
+                this.onIcePlayers = onIcePlayers;
             },
             (error) => {
                 console.log(error);
