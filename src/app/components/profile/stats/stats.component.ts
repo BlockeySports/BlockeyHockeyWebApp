@@ -442,7 +442,7 @@ export class StatsComponent implements OnInit {
             return false;
         }).sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));   // sort game by date descending
         // if no games played, return zero win streak
-        if (games.length === 0) { return 'W0'; }
+        if (games.length === 0) return 'W0';
         // get the result of the most recent game played
         const result = this.getResult(games[0]);    // win, loss, or draw
         // define streak
