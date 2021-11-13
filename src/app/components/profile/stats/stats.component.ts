@@ -77,10 +77,12 @@ export class StatsComponent implements OnInit {
         if (this.leagueTab === 'arcade') {
             // get if stats (for current seasonTab) has any non-testing games
             const hasNonTestingGames = this.gamesPlayed
-                .find(game => !game.isTesting && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
+                .find(game => !game.isTesting && !game.isLeaguePlay && !game.isTournamentPlay
+                    && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
             // get if stats (for current seasonTab) has any testing games
             const hasTestingGames = this.gamesPlayed
-                .find(game => game.isTesting && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
+                .find(game => game.isTesting && !game.isLeaguePlay && !game.isTournamentPlay
+                    && (game.season === this.seasonTab && game.isPlayed || isCareerTab)) !== undefined;
             // add beta arcade season type
             if (hasNonTestingGames) seasonTypes.push('career_arcade');
             if (hasTestingGames) seasonTypes.push('beta_arcade');
