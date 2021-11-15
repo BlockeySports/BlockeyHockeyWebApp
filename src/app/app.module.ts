@@ -33,6 +33,9 @@ import { InformationComponent } from './components/boxscore/information/informat
 import { ScoringSummaryComponent } from './components/boxscore/scoring-summary/scoring-summary.component';
 import { GoalsComponent } from './components/boxscore/goals/goals.component';
 import { ScoresComponent } from './components/scores/scores.component';
+import { GamesComponent } from './components/profile/games/games.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { BoxScoreStatsComponent } from './components/boxscore/stats/stats.component';
 
 // Pipes
 import { TimeAgoPipe } from './pipes/timeago.pipe';
@@ -46,13 +49,11 @@ import { PunishmentTypePipe } from './pipes/punishment-type.pipe';
 import { DurationPipe } from './pipes/duration.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { SignedPipe } from './pipes/signed.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 // Font Awesome Icons
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faCaretRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { TruncatePipe } from './pipes/truncate.pipe';
-import { GamesComponent } from './components/profile/games/games.component';
-import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
     declarations: [
@@ -86,7 +87,8 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
         SignedPipe,
         TruncatePipe,
         GamesComponent,
-        LeaderboardComponent
+        LeaderboardComponent,
+        BoxScoreStatsComponent
     ],
     imports: [
         BrowserModule,
