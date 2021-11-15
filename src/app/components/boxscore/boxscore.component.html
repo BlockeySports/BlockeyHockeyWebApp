@@ -55,5 +55,17 @@
             <!-- END: Home Team Goals -->
         </div>
         <!-- END: Box Score Bottom -->
+
+        <!-- START: Box Score Player Statistics -->
+        <div class="flex flex-row items-start justify-between gap-16">
+            <!-- START: Away Team Goals -->
+            <app-box-score-stats [pending]="this.pending" [playerStatistics]="this.boxScore?.awayPlayers" [isVisitor]="true"></app-box-score-stats>
+            <!-- END: Away Team Goals -->
+
+            <!-- START: Home Team Goals -->
+            <app-box-score-stats [pending]="this.pending" [playerStatistics]="this.boxScore?.homePlayers" [isVisitor]="false"></app-box-score-stats>
+            <!-- END: Home Team Goals -->
+        </div>
+        <!-- END: Box Score Player Statistics -->
     </div>
 </main>

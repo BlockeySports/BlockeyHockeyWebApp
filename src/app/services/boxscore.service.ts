@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoxScore } from '../models/BoxScore';
+import { PlayerStatistic } from '../models/PlayerStatistic';
 
 @Injectable({
     providedIn: 'root',
@@ -35,6 +36,12 @@ export class BoxScoreService {
      */
     public getBoxScores(): Observable<BoxScore[]> {
         return this.http.get<BoxScore[]>(this.url.concat('boxscores'));
+    }
+
+    public getBoxScorePlayerStats(id: string): Observable<PlayerStatistic[]> {
+        const params = new HttpParams()
+            .set('id', id);
+        return this.http.get<PlayerStatistic[]>(this.url.concat('box-score-player-statistics'), { params });
     }
 
     /**

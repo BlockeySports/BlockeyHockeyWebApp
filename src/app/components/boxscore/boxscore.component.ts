@@ -7,6 +7,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { TeamService } from 'src/app/services/team.service';
 import { HockeyTeam } from 'src/app/models/HockeyTeam';
 import { DateService } from 'src/app/services/date.service';
+import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 
 @Component({
     selector: 'app-boxscore',
@@ -21,6 +22,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
     };
 
     public teams: HockeyTeam[];
+    public playerStatistics: PlayerStatistic[] = [];
 
     // subs
     public boxScoreSubscription: Subscription;
@@ -64,6 +66,15 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
         this.teamSubscription = this.teamService.getHockeyTeams().subscribe(
             (data: HockeyTeam[]) => {
                 this.teams = data;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        // get the box score player statistics
+        this.boxScoreService.getBoxScorePlayerStats(this.boxScore.id).subscribe(
+            (data: PlayerStatistic[]) => {
+                this.playerStatistics = data;
             },
             (error) => {
                 console.log(error);
