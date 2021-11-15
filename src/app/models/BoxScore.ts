@@ -1,4 +1,5 @@
 import { BoxScoreGoal } from './BoxScoreGoal';
+import { BoxScoreParticipant } from './BoxScoreParticipant';
 import { BoxScorePlayer } from './BoxScorePlayer';
 import { BoxScoreShootoutAttempt } from './BoxScoreShootoutAttempt';
 import { HockeyTeam } from './HockeyTeam';
@@ -31,6 +32,7 @@ export class BoxScore {
 
     isTesting?: boolean;                                // true if the creating during testing
 
+    participants?: BoxScoreParticipant[];               // the player that spectated that game
     awayPlayers?: BoxScorePlayer[];                     // players that played for the away team in the game
     awayDressed?: BoxScorePlayer[];                     // players that dressed for the away team (did not necessarily play)
     awayPlayerCount?: number;                           // the number of players on the away team
