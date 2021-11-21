@@ -29,14 +29,24 @@
     <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
            [style.max-height]="getMaxStatsHeight()">
         <!-- START: Roster Players -->
-        <tr *ngFor="let player of this.players; let i = index"
+        <tr *ngFor="let player of getPlayers(); let i = index"
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem] text-center">{{ player?.member?.username }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getGoals(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getAssists(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPoints(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getShotsOnGoal(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getBlockedShots(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPlusMinus(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPenaltyMinutes(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getHits(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[4.24rem] text-center">{{ getShifts(player) || '-' }}</td>
+            <td class="w-[4.24rem] text-center">{{ getTimeOnIce(player) || 0 | duration }}</td>
         </tr>
         <!-- END: Roster Players -->
 
         <!-- START: Null Roster -->
-        <div *ngIf="this.players == null">
+        <div *ngIf="getPlayers() == null">
             <tr *ngFor="let i of [].constructor(getMaxVisibleStats()); let j = index"
                 class="odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
                 <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
@@ -55,10 +65,10 @@
         <!-- END: Null Roster -->
 
         <!-- START: Roster Filling -->
-        <div *ngIf="this.players != null && this.players.length < getMaxVisibleStats()">
-            <tr *ngFor="let i of [].constructor(getMaxVisibleStats() - this.players.length); let j = index"
+        <div *ngIf="getPlayers() != null && getPlayers().length < getMaxVisibleStats()">
+            <tr *ngFor="let i of [].constructor(getMaxVisibleStats() - getPlayers().length); let j = index"
                 class="flex flex-row"
-                [ngClass]="j%2 !== (this.players.length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+                [ngClass]="j%2 !== (getPlayers().length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
                 <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>

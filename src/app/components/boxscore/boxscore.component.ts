@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { HockeyTeam } from 'src/app/models/HockeyTeam';
 import { DateService } from 'src/app/services/date.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
+import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
 
 @Component({
     selector: 'app-boxscore',
@@ -23,6 +24,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
 
     public teams: HockeyTeam[];
     public playerStatistics: PlayerStatistic[] = [];
+    public playerStandings: PlayerLeaderboard[] = [];
 
     // subs
     public boxScoreSubscription: Subscription;
@@ -36,7 +38,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // get the username from the url
-        this.boxScore.id = this.getUuidFromAddress();
+        this.boxScore.id = this.getBoxScoreIdFromURL();
         // if id is null, return
         if (!this.boxScore.id) { return; }
         // set temporary tab title
@@ -66,6 +68,15 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
         this.teamSubscription = this.teamService.getHockeyTeams().subscribe(
             (data: HockeyTeam[]) => {
                 this.teams = data;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        // get player standings for this box score
+        this.boxScoreService.getPlayerStandings(this.boxScore.id).subscribe(
+            (data: PlayerLeaderboard[]) => {
+                this.playerStandings = data;
             },
             (error) => {
                 console.log(error);
@@ -103,7 +114,7 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
      * Get the box score uuid from the url address
      * occurring after the last slash and before an fragments.
      */
-    private getUuidFromAddress(): string {
+    private getBoxScoreIdFromURL(): string {
         // get the 13 character code after the word 'boxscore' or 'b' in the url
         const uuid = window.location.href?.split('b/')[1]?.split('#')[0];
         // if the uuid is not 13 characters, return null

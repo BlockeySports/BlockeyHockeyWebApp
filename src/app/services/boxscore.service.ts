@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoxScore } from '../models/BoxScore';
+import { PlayerLeaderboard } from '../models/PlayerLeaderboard';
 import { PlayerStatistic } from '../models/PlayerStatistic';
 
 @Injectable({
@@ -36,6 +37,15 @@ export class BoxScoreService {
      */
     public getBoxScores(): Observable<BoxScore[]> {
         return this.http.get<BoxScore[]>(this.url.concat('boxscores'));
+    }
+
+    /**
+     * Get all player leaderboard records for a box score.
+     */
+    public getPlayerStandings(id: string): Observable<PlayerLeaderboard[]> {
+        const params = new HttpParams()
+            .set('id', id);
+        return this.http.get<PlayerLeaderboard[]>(this.url.concat('box-score-player-standings'), { params });
     }
 
     public getBoxScorePlayerStats(id: string): Observable<PlayerStatistic[]> {
