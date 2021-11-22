@@ -141,14 +141,14 @@
                     </div>
                     <!-- END: Overtime Goals -->
 
-                    <!-- START: Shots on Goal Taken -->
+                    <!-- START: Shots on Goal -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getNumberOfShotsOnGoal(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + 's'"
-                              ngxTippy="Shots on Goal Taken">shots</span>
+                              ngxTippy="Total Shots on Goal">shots on goal</span>
                     </div>
-                    <!-- END: Shots on Goal Taken -->
+                    <!-- END: Shots on Goal -->
 
                     <!-- START: Plus-Minus -->
                     <div class="md:mx-0 table mx-auto space-x-3">
@@ -176,7 +176,7 @@
                         <span class="lg:text-4xl text-3xl font-semibold">{{ getCurrentStreak(seasonType) }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + 'wls'"
-                              ngxTippy="Current win/loss streak">streak</span>
+                              ngxTippy="Current Win/Loss Streak">streak</span>
                     </div>
                     <!-- END: Streak -->
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { BoxScore } from 'src/app/models/BoxScore';
+import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ColorService } from 'src/app/services/color.service';
 export class ScoringSummaryComponent implements OnInit {
 
     @Input() boxScore: BoxScore;
+    @Input() playerStandings: PlayerLeaderboard[] = [];
     @Input() pending: boolean;
 
     constructor(
@@ -95,5 +97,19 @@ export class ScoringSummaryComponent implements OnInit {
             // set the tooltip
             this.tippyService.setContent('home-team-tippy', homeTooltip);
         }, 1000);
+    }
+
+    public getShotsOnGoal(team: 'away' | 'home'): number {
+        if (this.pending) { return null; }
+        // if away team
+        if (team === 'away') {
+            // for each player standing, sum the shots on goal
+            return this.playerStandings.reduce((acc, curr) => acc + curr.shotsOnGoal, 0);
+        }
+        // if home team
+        else {
+            // return the number of shots on goal for that period
+            return this.playerStandings.reduce((acc, curr) => acc + curr.shotsOnGoal, 0);
+        }
     }
 }

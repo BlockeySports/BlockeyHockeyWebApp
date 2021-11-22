@@ -408,6 +408,43 @@ export class StatsComponent implements OnInit {
         }).length;
     }
 
+    public getNumberOfShotsOnGoal(seasonType: string): number {
+        const gamesPlayed = this.gamesPlayed.filter((game) => {
+            // return false if the game is not played in
+            if (!game.isPlayed) return false;
+            // true if league is same as tab league
+            const isSameLeague = game.league === this.leagueTab && game.isLeaguePlay;
+            // true if game played season is same as tab season or if getting career games played
+            const isSameSeason = game.season === this.seasonTab || this.seasonTab === 'career';
+            // true if game had enough players to be counted for stats
+            const hasEnoughPlayers = game.awayPlayerCount >= 3 && game.homePlayerCount >= 3 && game.totalPlayerCount >= 6;
+            // if in arcade tab
+            if (this.leagueTab === 'arcade') {
+                // if game is a testing game
+                if (seasonType.includes('beta')) {
+                    return game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers;
+                } else {
+                    return !game.isTesting && !game.isLeaguePlay
+                        && !game.isTournamentPlay && hasEnoughPlayers;
+                }
+            } else if (seasonType === 'regular_season') {
+                return game.isRegularSeason && isSameSeason && isSameLeague;
+            }
+            else if (seasonType === 'postseason') {
+                return game.isPostseason && isSameSeason && isSameLeague;
+            }
+            else if (seasonType === 'preseason') {
+                return game.isPreseason && isSameSeason && isSameLeague;
+            }
+            return false;
+        });
+        // return the summed up shots on goal from each game played
+        return gamesPlayed.reduce((acc, game) => {
+            return acc + game.shotsOnGoal;
+        }, 0);
+    }
+
     /**
      * Get current win/loss streak.
      */
