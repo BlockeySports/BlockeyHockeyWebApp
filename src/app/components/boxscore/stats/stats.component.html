@@ -31,13 +31,15 @@
         <!-- START: Roster Players -->
         <tr *ngFor="let player of getPlayers(); let i = index"
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
-            <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem] text-center">{{ player?.member?.username }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem] text-center hover:font-bold">
+                <a [href]="getProfileLink(player?.member?.username)" target="_blank">{{ player?.member?.username }}</a>
+            </td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getGoals(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getAssists(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPoints(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getShotsOnGoal(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getBlockedShots(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPlusMinus(player) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPlusMinus(player) || 0 | signed }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPenaltyMinutes(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getHits(player) || 0 }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[4.24rem] text-center">{{ getShifts(player) || '-' }}</td>

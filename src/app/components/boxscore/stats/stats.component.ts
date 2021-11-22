@@ -95,8 +95,8 @@ export class BoxScoreStatsComponent implements OnInit {
         return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT + (2 / 16)}rem`;
     }
 
-    public getProfileLink(member: Member): string {
-        return window.location.origin + '/u/' + member.username;
+    public getProfileLink(username: string): string {
+        return window.location.origin + '/u/' + username;
     }
 
     public getDescription(): string {
@@ -105,5 +105,4 @@ export class BoxScoreStatsComponent implements OnInit {
         }
         return 'Home team player statistics';
     }
-
 }
