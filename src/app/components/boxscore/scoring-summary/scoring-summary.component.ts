@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { BoxScore } from 'src/app/models/BoxScore';
+import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
 import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -11,6 +12,7 @@ import { ColorService } from 'src/app/services/color.service';
 export class ScoringSummaryComponent implements OnInit {
 
     @Input() boxScore: BoxScore;
+    @Input() players: BoxScorePlayer[] = [];
     @Input() playerStandings: PlayerLeaderboard[] = [];
     @Input() pending: boolean;
 
@@ -102,14 +104,11 @@ export class ScoringSummaryComponent implements OnInit {
     public getShotsOnGoal(team: 'away' | 'home'): number {
         if (this.pending) { return null; }
         // if away team
-        if (team === 'away') {
-            // for each player standing, sum the shots on goal
-            return this.playerStandings.reduce((acc, curr) => acc + curr.shotsOnGoal, 0);
-        }
-        // if home team
-        else {
-            // return the number of shots on goal for that period
-            return this.playerStandings.reduce((acc, curr) => acc + curr.shotsOnGoal, 0);
-        }
+        let shotsOnGoal = 0;
+        // for each box score player on the away team in players, get their total number of shots on goal from the matching player member uuid in player standings
+        this.players.forEach(p => {
+            shotsOnGoal += this.playerStandings.find(ps => p.team === team && ps.member.uuid === p.member.uuid)?.shotsOnGoal || 0;
+        });
+        return shotsOnGoal;
     }
 }

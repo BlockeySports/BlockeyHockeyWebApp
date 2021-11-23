@@ -9,6 +9,7 @@ import { HockeyTeam } from 'src/app/models/HockeyTeam';
 import { DateService } from 'src/app/services/date.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
+import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
 
 @Component({
     selector: 'app-boxscore',
@@ -121,6 +122,22 @@ export class BoxScoreComponent implements OnInit, OnDestroy {
         if (!uuid || uuid.length !== 13) { return null; }
         // return the uuid
         return uuid;
+    }
+
+    /**
+     * Get all box score players from both teams.
+     */
+    public getAllPlayers(): BoxScorePlayer[] {
+        // return empty if pending
+        if (this.pending) { return []; }
+        // get both away and home players combined with no duplicates
+        const players = this.boxScore.awayPlayers.concat(this.boxScore.homePlayers);
+        // filter out duplicates by member uuid
+        return players.filter((player, index, self) =>
+            index === self.findIndex((t) => (
+                t.member.uuid === player.member.uuid
+            ))
+        );
     }
 
     public ngOnDestroy(): void {

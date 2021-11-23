@@ -32,7 +32,8 @@
             </td>
             <td *ngFor="let i of [].constructor(4); let j = index"
                 class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(true, j + 1) }}</td>
-            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(true) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(true) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal('away') }}</td>
         </tr>
         <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
             <td class="border-black-800 dark:border-black-50 border-r"
@@ -44,7 +45,8 @@
             </td>
             <td *ngFor="let i of [].constructor(4); let j = index"
                 class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(false, j + 1) }}</td>
-            <td class="border-black-800 dark:border-black-50 text-center">{{ getNumberOfGoals(false) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(false) }}</td>
+            <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal('home') }}</td>
         </tr>
     </table>
     <!-- END: Details -->
