@@ -36,6 +36,9 @@ export class GoalsComponent implements OnInit {
      * @returns the goal type(s)
      */
     public getGoalType(goal: BoxScoreGoal): string {
+        // if goal is null, stop here
+        if (!goal) { return ''; }
+        // define the goal type as blank
         let goalType = '';
         if (goal.isOwnGoal) {
             goalType += 'OWN';
@@ -44,7 +47,7 @@ export class GoalsComponent implements OnInit {
             if (goal.isPowerPlay) {
                 if (goalType && goalType.length > 0) { goalType += '/'; }
                 goalType += 'PP';
-            } else if (goal.isExtraAttacker) {
+            } else if (this.isExtraAttackerGoal(goal)) {
                 if (goalType && goalType.length > 0) { goalType += '/'; }
                 goalType += 'EA';
             }
@@ -52,7 +55,7 @@ export class GoalsComponent implements OnInit {
             if (goal.isPenaltyKill) {
                 if (goalType && goalType.length > 0) { goalType += '/'; }
                 goalType += 'PK';
-            } else if (goal.isShortHanded) {
+            } else if (this.isShortHandedGoal(goal)) {
                 if (goalType && goalType.length > 0) { goalType += '/'; }
                 goalType += 'SH';
             }
@@ -110,6 +113,30 @@ export class GoalsComponent implements OnInit {
         if (goal.period < 4) { return goal.period.toString(); }
         if (goal.period === 4) { return 'OT'; }
         return (goal.period - 3) + 'OT';
+    }
+
+    /**
+     * Get the total number of players on the ice for a goal.
+     * @param goal The box score goal.
+     * @param team The to filer on.
+     * @returns the total number of players on the ice for a goal
+     */
+    public getTotalOnIcePlayers(goal: BoxScoreGoal, team: string): number {
+        return goal.onIcePlayers.filter(onIcePlayer => onIcePlayer.player.team.toLowerCase() === team.toLowerCase()).length;
+    }
+
+    /**
+     * Get if the goal is an extra attacker goal.
+     */
+    public isExtraAttackerGoal(goal: BoxScoreGoal): boolean {
+        return this.getTotalOnIcePlayers(goal, goal.team) > this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
+    }
+
+    /**
+     * Get if the goal is a short-handed goal.
+     */
+    public isShortHandedGoal(goal: BoxScoreGoal): boolean {
+        return this.getTotalOnIcePlayers(goal, goal.team) < this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
     }
 
     public getMaxVisibleGoals(): number {

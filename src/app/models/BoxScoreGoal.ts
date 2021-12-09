@@ -1,3 +1,5 @@
+import { BoxScoreOnIcePlayer } from './BoxScoreOnIcePlayer';
+import { BoxScorePlayer } from './BoxScorePlayer';
 import { Member } from './Member';
 
 export class BoxScoreGoal {
@@ -20,6 +22,5 @@ export class BoxScoreGoal {
     isPenaltyShot?: boolean;
     isOwnGoal?: boolean;
 
-    defendingPlayers?: Member[];
-    attackingPlayers?: Member[];
+    onIcePlayers?: BoxScoreOnIcePlayer[];
 }
