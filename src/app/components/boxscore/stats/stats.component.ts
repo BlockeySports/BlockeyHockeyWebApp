@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BoxScore } from 'src/app/models/BoxScore';
+import { BoxScoreGoal } from 'src/app/models/BoxScoreGoal';
 import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
 import { Member } from 'src/app/models/Member';
 import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
@@ -12,7 +14,7 @@ export class BoxScoreStatsComponent implements OnInit {
 
     @Input() isVisitor: boolean;
     @Input() pending: boolean;
-    @Input() players: BoxScorePlayer[] = [];
+    @Input() boxScore: BoxScore;
     @Input() playerStandings: PlayerLeaderboard[] = [];
 
     public MAX_VISIBLE_GOALS = 13;
@@ -23,13 +25,13 @@ export class BoxScoreStatsComponent implements OnInit {
     ngOnInit(): void { }
 
     public getPlayers(): BoxScorePlayer[] {
+        // get players depending on whether these stats are for the away or home team
+        const players = this.isVisitor ? this.boxScore.awayPlayers : this.boxScore.homePlayers;
         // if players is null, return
-        if (!this.players) { return []; }
+        if (!players) { return []; }
         // filter out duplicate players and sort by points descending
-        return this.players.filter((player, index, self) =>
-            index === self.findIndex((t) => (
-                t.member.uuid === player.member.uuid
-            ))
+        return players.filter((player, index, self) =>
+            index === self.findIndex(t => t.member.uuid === player.member.uuid)
         ).sort((a, b) => {
             if (this.getPoints(a) > this.getPoints(b)) { return -1; }
             if (this.getPoints(a) < this.getPoints(b)) { return 1; }
@@ -37,12 +39,12 @@ export class BoxScoreStatsComponent implements OnInit {
         });
     }
 
-    public getPlayerStandings(): PlayerLeaderboard[] {
-        // get all box score players on the away team
-        const awayPlayers = this.players.filter(player => player.team === 'away');
-        // get all player standings for the away players
-        return this.playerStandings.filter(player => awayPlayers.some(awayPlayer => awayPlayer.member.uuid === player.member.uuid));
-    }
+    // public getPlayerStandings(): PlayerLeaderboard[] {
+    //     // get all box score players on the away team
+    //     const awayPlayers = this.players.filter(player => player.team === 'away');
+    //     // get all player standings for the away players
+    //     return this.playerStandings.filter(player => awayPlayers.some(awayPlayer => awayPlayer.member.uuid === player.member.uuid));
+    // }
 
     public getGoals(player: BoxScorePlayer): number {
         // get goals from player standings where player id matched the box score player id
@@ -68,7 +70,19 @@ export class BoxScoreStatsComponent implements OnInit {
     }
 
     public getPlusMinus(player: BoxScorePlayer): number {
-        return this.playerStandings.find(playerStanding => playerStanding.member.uuid === player.member.uuid)?.plusMinus;
+        // loop over each box score goal
+        let plusMinus = 0;
+        this.boxScore.goals.forEach(goal => {
+            // loop over each on ice player for this goal
+            goal.onIcePlayers.forEach(onIcePlayer => {
+                // if the player uuid matches the box score player's member uuid
+                if (onIcePlayer.player.member.uuid === player.member.uuid) {
+                    if (goal.team === player.team) plusMinus++;
+                    else plusMinus--;
+                }
+            });
+        });
+        return plusMinus;
     }
 
     public getPenaltyMinutes(player: BoxScorePlayer): number {

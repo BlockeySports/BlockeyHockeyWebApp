@@ -60,7 +60,7 @@ export class GoalsComponent implements OnInit {
                 goalType += 'SH';
             }
 
-            if (goal.isEmptyNet) {
+            if (this.isEmptyNetGoal(goal)) {
                 if (goalType && goalType.length > 0) { goalType += '/'; }
                 goalType += 'EN';
             }
@@ -126,17 +126,25 @@ export class GoalsComponent implements OnInit {
     }
 
     /**
-     * Get if the goal is an extra attacker goal.
+     * Check if the goal is an extra attacker goal.
      */
     public isExtraAttackerGoal(goal: BoxScoreGoal): boolean {
         return this.getTotalOnIcePlayers(goal, goal.team) > this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
     }
 
     /**
-     * Get if the goal is a short-handed goal.
+     * Check if the goal is a short-handed goal.
      */
     public isShortHandedGoal(goal: BoxScoreGoal): boolean {
         return this.getTotalOnIcePlayers(goal, goal.team) < this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
+    }
+
+    /**
+     * Check if the goal is an empty net goal.
+     */
+    public isEmptyNetGoal(goal: BoxScoreGoal): boolean {
+        // search each on ice player in the goal for a player on the opposite team from the scoring team that is in the goaltender position
+        return !goal.onIcePlayers.some(onIcePlayer => onIcePlayer.player.team.toLowerCase() === (goal.team === 'home' ? 'away' : 'home') && onIcePlayer.player.position.toLowerCase() === 'g');
     }
 
     public getMaxVisibleGoals(): number {
