@@ -70,18 +70,25 @@ export class BoxScoreStatsComponent implements OnInit {
     }
 
     public getPlusMinus(player: BoxScorePlayer): number {
-        // loop over each box score goal
+        // start +/- at zero
         let plusMinus = 0;
+        // loop over each box score goal
         this.boxScore.goals.forEach(goal => {
             // loop over each on ice player for this goal
             goal.onIcePlayers.forEach(onIcePlayer => {
                 // if the player uuid matches the box score player's member uuid
                 if (onIcePlayer.player.member.uuid === player.member.uuid) {
-                    if (goal.team === player.team) plusMinus++;
-                    else plusMinus--;
+                    // if player is not a goaltender (because goaltender won't have +/- stat)
+                    if (onIcePlayer.player.position.toLowerCase() !== 'g') {
+                        // if the player is on the scoring team
+                        if (goal.team === player.team) plusMinus++;
+                        // if the player is on the team that was scored on
+                        else plusMinus--;
+                    }
                 }
             });
         });
+        // return the resulting +/-
         return plusMinus;
     }
 
@@ -98,7 +105,7 @@ export class BoxScoreStatsComponent implements OnInit {
     }
 
     public getTimeOnIce(player: BoxScorePlayer): number {
-        return this.playerStandings.find(playerStanding => playerStanding.member.uuid === player.member.uuid)?.timeOnIce;
+        return this.playerStandings.find(playerStanding => playerStanding.member.uuid === player.member.uuid && playerStanding)?.timeOnIce;
     }
 
     public getMaxVisibleStats(): number {

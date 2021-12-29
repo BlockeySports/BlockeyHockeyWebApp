@@ -2,6 +2,7 @@ import { BoxScoreGoal } from './BoxScoreGoal';
 import { BoxScoreParticipant } from './BoxScoreParticipant';
 import { BoxScorePlayer } from './BoxScorePlayer';
 import { BoxScoreShootoutAttempt } from './BoxScoreShootoutAttempt';
+import { HockeyLeague } from './HockeyLeague';
 import { HockeyTeam } from './HockeyTeam';
 
 export class BoxScore {
@@ -21,7 +22,7 @@ export class BoxScore {
 
     isLeaguePlay?: boolean;                             // true if the game is a league game
     isTournamentPlay?: boolean;                         // true if the game is a part of a tournament
-    league?: string;                                    // the name of the league the game is in
+    league?: HockeyLeague;                              // the name of the league the game is in
     season?: string;                                    // the name of the season the game is in
     tournament?: string;                                // the name of the tournament the game is in
 

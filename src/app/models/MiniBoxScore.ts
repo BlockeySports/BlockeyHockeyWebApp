@@ -1,3 +1,4 @@
+import { HockeyLeague } from './HockeyLeague';
 import { HockeyTeam } from './HockeyTeam';
 
 export class MiniBoxScore {
@@ -14,6 +15,6 @@ export class MiniBoxScore {
     secondPeriodHomeGoals?: number;
     thirdPeriodHomeGoals?: number;
     overtimeHomeGoals?: number;
-    league?: string;
+    league?: HockeyLeague;
     isTesting?: boolean;
 }
