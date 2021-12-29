@@ -111,4 +111,12 @@ export class ScoringSummaryComponent implements OnInit {
         });
         return shotsOnGoal;
     }
+
+    /**
+     * Get the number of periods played, excluding overtime periods past the first one.
+     */
+    public getNumberOfPeriods(): number {
+        if (this.boxScore?.goals?.some(goal => goal.period > 3)) return 4;
+        return 3;
+    }
 }

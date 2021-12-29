@@ -15,11 +15,11 @@
                 ngxTippy="Second Period">2</th>
             <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-300 border-b-2 border-r-2"
                 ngxTippy="Third Period">3</th>
-            <th class="border-black-800 dark:border-black-50 dark:text-black-800 bg-[#ef4444] border-b-2 border-r-2"
+            <th *ngIf="getNumberOfPeriods() > 3" class="border-black-800 dark:border-black-50 dark:text-black-800 bg-[#ef4444] border-b-2 border-r-2"
                 ngxTippy="Overtime Period(s)">OT</th>
             <th class="border-black-800 dark:border-black-50 dark:text-black-800 bg-[#6bd369] border-b-2 border-r-2"
                 ngxTippy="Final Score">FINAL</th>
-            <th class="border-black-800 dark:border-black-50 dark:text-black-800 bg-gray-300 border-b-2"
+            <th class="border-black-800 dark:border-black-50 dark:text-white dark:bg-black-600 bg-gray-400 border-b-2"
                 ngxTippy="Shots on Goal">SOG</th>
         </tr>
         <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
@@ -30,7 +30,7 @@
                 tippyName="away-team-tippy">
                 <p class="w-max mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
             </td>
-            <td *ngFor="let i of [].constructor(4); let j = index"
+            <td *ngFor="let i of [].constructor(getNumberOfPeriods()); let j = index"
                 class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(true, j + 1) }}</td>
             <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(true) }}</td>
             <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal('away') }}</td>
@@ -43,7 +43,7 @@
                 tippyName="home-team-tippy">
                 <p class="w-max mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
             </td>
-            <td *ngFor="let i of [].constructor(4); let j = index"
+            <td *ngFor="let i of [].constructor(getNumberOfPeriods()); let j = index"
                 class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(false, j + 1) }}</td>
             <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getNumberOfGoals(false) }}</td>
             <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal('home') }}</td>
