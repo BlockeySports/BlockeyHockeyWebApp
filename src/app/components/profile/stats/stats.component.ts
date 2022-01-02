@@ -111,7 +111,7 @@ export class StatsComponent implements OnInit {
         // return unique stat leagues, and remove empty strings or nullish values
         const leagues: string[] = [...new Set(this.gamesPlayed
             .filter(game => game.isPlayed)
-            .map(game => game.league))]
+            .map(game => game.league?.name))]
             .filter(league => league);
         // sort leagues alphabetically
         leagues.sort();

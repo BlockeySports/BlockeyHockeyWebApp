@@ -1,3 +1,5 @@
+import { HockeyLeague } from "./HockeyLeague";
+
 export class PlayerGamePlayed {
     boxScoreId?: string;
     date?: Date;
@@ -20,7 +22,7 @@ export class PlayerGamePlayed {
     isPostseason?: boolean;
     isLeaguePlay?: boolean;
     isTournamentPlay?: boolean;
-    league?: string;
+    league?: HockeyLeague;
     season?: string;
     tournament?: string;
     isTesting?: boolean;

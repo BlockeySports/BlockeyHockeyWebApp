@@ -92,7 +92,7 @@
                        class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
                 </td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[12rem]">{{ getDate(game) }}</td>
-                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league || 'Arcade' }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league?.name|| 'Arcade' }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.season }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>

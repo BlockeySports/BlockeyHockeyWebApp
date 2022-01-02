@@ -62,7 +62,9 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
                 index === self.findIndex((t) => (
                     t.boxScoreId === game.boxScoreId
                 ))
-            );
+            )
+            // only include 50 most recent games
+            .slice(0, 50);
     }
 
     public getDate(game: PlayerGamePlayed): string {
