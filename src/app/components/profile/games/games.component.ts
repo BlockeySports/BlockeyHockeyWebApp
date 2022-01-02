@@ -67,6 +67,24 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
             .slice(0, 50);
     }
 
+    /**
+     * Get the game number.
+     * @param game The game to get the number for.
+     * @returns the game number
+     */
+    public getGameNumber(game: PlayerGamePlayed): number {
+        const gamesPlayed: PlayerGamePlayed[] = this.games
+            // only include records in which primary team is true
+            .filter(g => g.isPrimaryTeam && g.isPlayed)
+            // filter out duplicate games (likely due to multiple hockey positions)
+            .filter((g, index, self) =>
+                index === self.findIndex((t) => (
+                    t.boxScoreId === g.boxScoreId
+                ))
+            );
+        return gamesPlayed.length - gamesPlayed.findIndex(g => g.boxScoreId === game.boxScoreId);
+    }
+
     public getDate(game: PlayerGamePlayed): string {
         if (!game?.date) return '';
         dayjs.extend(localizedFormat);

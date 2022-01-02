@@ -86,13 +86,13 @@
                [style.max-height]="'25.1rem'">
             <tr *ngFor="let game of getGames(); let i = index;"
                 class="group event:bg-gray-50 odd:bg-gray-100 dark:even:bg-black-500 dark:odd:bg-black-600 hover:bg-gray-200 dark:hover:bg-black-700">
-                <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.8rem]">{{ getGames().length - i }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[2.8rem]">{{ getGameNumber(game) }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 text-center border-r w-[10rem]">
                     <a [href]="getBoxScoreLink(game)" target="_blank"
                        class="group-hover:underline group-hover:text-red-500">{{ game.boxScoreId }}</a>
                 </td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[12rem]">{{ getDate(game) }}</td>
-                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.league?.name|| 'Arcade' }}</td>
+                <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.isTesting ? 'Arcade' : game.league?.name|| 'Arcade' }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[10rem]">{{ game.season }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[8rem]">{{ game.duration | minutes }}</td>
                 <td class="dark:border-gray-300 border-black-400 p-2 border-r text-center w-[5rem]">{{ getTimeOnIce(game) | duration }}</td>
