@@ -121,22 +121,25 @@ export class GoalsComponent implements OnInit {
      * @param team The to filer on.
      * @returns the total number of players on the ice for a goal
      */
-    public getTotalOnIcePlayers(goal: BoxScoreGoal, team: string): number {
-        return goal.onIcePlayers.filter(onIcePlayer => onIcePlayer.player.team.toLowerCase() === team.toLowerCase()).length;
+    public getTotalOnIcePlayers(goal: BoxScoreGoal, team: string, includeGoaltender: boolean): number {
+        return goal.onIcePlayers
+            .filter(onIcePlayer => onIcePlayer.player.team.toLowerCase() === team.toLowerCase())
+            .filter(onIcePlayer => includeGoaltender || onIcePlayer.player?.position?.toLowerCase() !== 'g')
+            .length;
     }
 
     /**
      * Check if the goal is an extra attacker goal.
      */
     public isExtraAttackerGoal(goal: BoxScoreGoal): boolean {
-        return this.getTotalOnIcePlayers(goal, goal.team) > this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
+        return this.getTotalOnIcePlayers(goal, goal.team, false) > this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home', false);
     }
 
     /**
      * Check if the goal is a short-handed goal.
      */
     public isShortHandedGoal(goal: BoxScoreGoal): boolean {
-        return this.getTotalOnIcePlayers(goal, goal.team) < this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home');
+        return this.getTotalOnIcePlayers(goal, goal.team, false) < this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home', false);
     }
 
     /**
