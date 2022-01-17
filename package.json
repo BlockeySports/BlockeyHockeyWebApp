@@ -51,7 +51,6 @@
     "codelyzer": "^6.0.2",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
-    "headlessui-angular": "^0.0.5",
     "jasmine-core": "~3.9.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.3.4",
