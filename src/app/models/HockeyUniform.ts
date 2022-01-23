@@ -1,10 +1,14 @@
+import { HockeyTeam } from './HockeyTeam';
+
 export class HockeyUniform {
-    teamId?: number;
+    id?: string;
+    team?: HockeyTeam;
     type?: string;
     description?: string;
-    helmetColor?: string;
-    jerseyColor?: string;
-    pantsColor?: string;
-    skatesColor?: string;
-    isActive?: boolean;
+    helmet?: string;
+    jersey?: string;
+    pants?: string;
+    skates?: string;
+    date?: Date;
+    isArchived?: boolean;
 }

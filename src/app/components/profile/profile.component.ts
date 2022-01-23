@@ -10,8 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { DateService } from 'src/app/services/date.service';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
-import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
-import { BoxScoreOnIcePlayer } from 'src/app/models/BoxScoreOnIcePlayer';
+import { HockeyPlayerStatistic } from 'src/app/models/HockeyPlayerStatistic';
 
 @Component({
     selector: 'app-profile',
@@ -22,9 +21,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public member: Member = {
         username: ''
     };
-    public playerStatistics: PlayerStatistic[] = [];
-    public playerGamesPlayed: PlayerGamePlayed[] = [];
-    public onIcePlayers: BoxScoreOnIcePlayer[] = [];
+    public playerStatistics: HockeyPlayerStatistic[] = [];
+    // public playerGamesPlayed: PlayerGamePlayed[] = [];
+    // public onIcePlayers: BoxScoreOnIcePlayer[] = [];
 
     public isError = false;
     public errorMessage = '';
@@ -99,8 +98,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
      */
     private getPlayerStatistics(): void {
         // get player stats (i.e. goals, assists, etc.)
-        this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
-            (playerStatistics: PlayerStatistic[]) => {
+        this.playerStatisticService.getPlayerStatistic(this.member.uuid).subscribe(
+            (playerStatistics: HockeyPlayerStatistic[]) => {
                 this.playerStatistics = playerStatistics;
             },
             (error) => {
@@ -108,23 +107,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }
         );
         // get games played (i.e. games played, wins, losses, draws)
-        this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
-            (playerGamesPlayed: PlayerGamePlayed[]) => {
-                this.playerGamesPlayed = playerGamesPlayed;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-        // get the on-ice player records for this player (used to calculate plus-minus)
-        this.playerStatisticService.getOnIcePlayers(this.member.uuid).subscribe(
-            (onIcePlayers: BoxScoreOnIcePlayer[]) => {
-                this.onIcePlayers = onIcePlayers;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        // this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
+        //     (playerGamesPlayed: PlayerGamePlayed[]) => {
+        //         this.playerGamesPlayed = playerGamesPlayed;
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     }
+        // );
+        // // get the on-ice player records for this player (used to calculate plus-minus)
+        // this.playerStatisticService.getOnIcePlayers(this.member.uuid).subscribe(
+        //     (onIcePlayers: BoxScoreOnIcePlayer[]) => {
+        //         this.onIcePlayers = onIcePlayers;
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     }
+        // );
     }
 
     /**

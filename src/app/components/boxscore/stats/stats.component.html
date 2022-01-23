@@ -1,7 +1,7 @@
 <table class="w-max dark:text-white flex flex-col my-5 shadow-md select-none">
     <div class="border-black-800 dark:border-black-50 font-semibold text-center border-2 border-b-0"
-         [class]="this.isVisitor ? 'bg-gray-300 dark:bg-white text-black-800' : 'bg-black-50 dark:bg-black-500 text-gray-50'"
-         [ngxTippy]="getDescription()">{{ this.isVisitor ? 'VISITING TEAM PLAYER STATISTICS' : 'HOME TEAM PLAYER STATISTICS' }}</div>
+         [class]="this.team === 'away' ? 'bg-gray-300 dark:bg-white text-black-800' : 'bg-black-50 dark:bg-black-500 text-gray-50'"
+         [ngxTippy]="getDescription()">{{ getDescription() | uppercase }}</div>
     <thead class="w-max dark:text-white border-black-800 dark:border-black-50 text-black-800 dark:bg-black-400 flex flex-row items-center font-bold bg-gray-100 border-2">
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[17.522rem] text-center"
             ngxTippy="The player">PLAYER</th>
@@ -29,26 +29,29 @@
     <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
            [style.max-height]="getMaxStatsHeight()">
         <!-- START: Roster Players -->
-        <tr *ngFor="let player of getPlayers(); let i = index"
+        <tr *ngFor="let stat of getStats(); let i = index"
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem] text-center hover:font-bold">
-                <a [href]="getProfileLink(player?.member?.username)" target="_blank">{{ player?.member?.username }}</a>
+                <a [href]="getProfileLink(stat?.member?.username)" target="_blank">{{ stat?.member?.username }}</a>
             </td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getGoals(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getAssists(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPoints(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getShotsOnGoal(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getBlockedShots(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPlusMinus(player) || 0 | signed }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPenaltyMinutes(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getHits(player) || 0 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[4.24rem] text-center">{{ getShifts(player) || '-' }}</td>
-            <td class="w-[4.24rem] text-center">{{ getTimeOnIce(player) || 0 | duration }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getGoals(stat) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getAssists(stat) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPoints(stat) || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.shotsOnGoal || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.blockedShots || 0 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ '-' }}</td>
+            <!-- <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.plusMinus || 0 | signed }}</td> -->
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ '-' || 0 }}</td>
+            <!-- <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.penaltyMinutes || 0 }}</td> -->
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ '-' || 0 }}</td>
+            <!-- <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.hits || 0 }}</td> -->
+            <td class="border-r border-black-800 dark:border-black-50 w-[4.24rem] text-center">{{ stat.shifts || 0 }}</td>
+            <td class="w-[4.24rem] text-center">{{ stat.timeOnIce || 0 | duration }}</td>
         </tr>
         <!-- END: Roster Players -->
 
         <!-- START: Null Roster -->
-        <div *ngIf="getPlayers() == null">
+        <div *ngIf="!getStats()">
             <tr *ngFor="let i of [].constructor(getMaxVisibleStats()); let j = index"
                 class="odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
                 <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
@@ -67,10 +70,10 @@
         <!-- END: Null Roster -->
 
         <!-- START: Roster Filling -->
-        <div *ngIf="getPlayers() != null && getPlayers().length < getMaxVisibleStats()">
-            <tr *ngFor="let i of [].constructor(getMaxVisibleStats() - getPlayers().length); let j = index"
+        <div *ngIf="getStats() && getStats().length < getMaxVisibleStats()">
+            <tr *ngFor="let i of [].constructor(getMaxVisibleStats() - getStats().length); let j = index"
                 class="flex flex-row"
-                [ngClass]="j%2 !== (getPlayers().length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
+                [ngClass]="j%2 !== (getStats().length%2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
                 <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
                 <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>

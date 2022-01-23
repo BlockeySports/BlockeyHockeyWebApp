@@ -1,47 +1,68 @@
-import { BoxScoreGoal } from './BoxScoreGoal';
-import { BoxScoreParticipant } from './BoxScoreParticipant';
+import { HockeySpectator } from 'HockeySpectator';
 import { BoxScorePlayer } from './BoxScorePlayer';
-import { BoxScoreShootoutAttempt } from './BoxScoreShootoutAttempt';
+import { DevelopmentPhase } from './DevelopmentPhase';
+import { HockeyCheck } from './HockeyCheck';
+import { HockeyFaceoff } from './HockeyFaceoff';
+import { HockeyFight } from './HockeyFight';
+import { HockeyGoal } from './HockeyGoal';
 import { HockeyLeague } from './HockeyLeague';
+import { HockeyPenalty } from './HockeyPenalty';
+import { HockeyPeriod } from './HockeyPeriod';
+import { HockeyPeriodSummary } from './HockeyPeriodSummary';
+import { HockeyPossessionTime } from './HockeyPossessionTime';
+import { HockeySeason } from './HockeySeason';
+import { HockeySeasonType } from './HockeySeasonType';
+import { HockeySeries } from './HockeySeries';
+import { HockeyShift } from './HockeyShift';
+import { HockeyShot } from './HockeyShot';
+import { HockeyStoppage } from './HockeyStoppage';
 import { HockeyTeam } from './HockeyTeam';
+import { HockeyTournament } from './HockeyTournament';
+import { HockeyTurnover } from './HockeyTurnover';
+import { HockeyUniform } from './HockeyUniform';
+import { IceTimeRecord } from './IceTimeRecord';
+import { ShootoutAttempt } from './ShootoutAttempt';
 
 export class BoxScore {
-    id?: string;                                        // the unique id for this box score
-    streamLink?: string;                                // link to the livestream of the game (null if not streamed)
-    date?: Date;                                        // start time of the game
-    rink?: string;                                      // the rink/arena the game was played at
-    scorer?: string;                                    // the member or AI that filled this box score out
-    officials?: string[];                               // the official(s) or AI that officiated the game
-    awayTeam?: HockeyTeam;                              // the visiting team in the game
-    homeTeam?: HockeyTeam;                              // the home team in the game
-    duration?: number;                                  // the duration of the game in milliseconds (from faceoff drop to end)
-
-    isPreseason?: boolean;                              // true if the game is a pre-season game
-    isRegularSeason?: boolean;                          // true if the game is a regular season game
-    isPostseason?: boolean;                             // true if the game is a post-season game
-
-    isLeaguePlay?: boolean;                             // true if the game is a league game
-    isTournamentPlay?: boolean;                         // true if the game is a part of a tournament
-    league?: HockeyLeague;                              // the name of the league the game is in
-    season?: string;                                    // the name of the season the game is in
-    tournament?: string;                                // the name of the tournament the game is in
-
-    isSeries?: boolean;                                 // true if this game is a part of a series
-    seriesID?: string;                                  // the id shared by all games in the same series
-    gameNumber?: number;                                // the number of the game in a series (i.e. Game 7)
-    roundNumber?: number;                               // the number of the round in the playoffs (i.e. Round 2)
-
-    isTesting?: boolean;                                // true if the creating during testing
-
-    participants?: BoxScoreParticipant[];               // the player that spectated that game
-    awayPlayers?: BoxScorePlayer[];                     // players that played for the away team in the game
-    awayDressed?: BoxScorePlayer[];                     // players that dressed for the away team (did not necessarily play)
-    awayPlayerCount?: number;                           // the number of players on the away team
-    homePlayers?: BoxScorePlayer[];                     // players that played for the home team in the game
-    homeDressed?: BoxScorePlayer[];                     // players that dressed for the home team (did not necessarily play)
-    homePlayerCount?: number;                           // the number of players on the home team
-    totalPlayerCount?: number;                          // the total number of players in the game
-
-    goals?: BoxScoreGoal[];                             // all goals scored during the game
-    shootoutAttempts?: BoxScoreShootoutAttempt[];       // shootout attempts (empty if none)
+    id?: string;
+    date?: Date;
+    awayTeam?: HockeyTeam;
+    homeTeam?: HockeyTeam;
+    winningTeam?: string;
+    awayUniform?: HockeyUniform;
+    homeUniform?: HockeyUniform;
+    awayCount?: number;
+    homeCount?: number;
+    totalCount?: number;
+    duration?: number;
+    league?: HockeyLeague;
+    season?: HockeySeason;
+    seasonType?: HockeySeasonType;
+    tournament?: HockeyTournament;
+    series?: HockeySeries;
+    gameNumber?: number;
+    scorer?: string;
+    official?: string;
+    venue?: string;
+    center?: string;
+    stream?: string;
+    isArcade?: boolean;
+    developmentPhase?: DevelopmentPhase;
+    isArchived?: boolean;
+    players?: BoxScorePlayer[];
+    shifts?: HockeyShift[];
+    iceTimeRecords?: IceTimeRecord[];
+    spectators?: HockeySpectator[];
+    periods?: HockeyPeriod[];
+    goals?: HockeyGoal[];
+    shots?: HockeyShot[];
+    faceoffs?: HockeyFaceoff[];
+    penalties?: HockeyPenalty[];
+    stoppages?: HockeyStoppage[];
+    turnovers?: HockeyTurnover[];
+    checks?: HockeyCheck[];
+    fights?: HockeyFight[];
+    shootoutAttempts?: ShootoutAttempt[];
+    periodSummaries?: HockeyPeriodSummary[];
+    possessionTimes?: HockeyPossessionTime[];
 }

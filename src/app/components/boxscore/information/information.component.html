@@ -12,6 +12,7 @@
             <div class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="date"
                        ngxTippy="Date of this game">DATE</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
@@ -23,27 +24,30 @@
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 pt-0.5 ml-auto"
-                       ngxTippy="Rink or arena name">RINK</p>
+                       tippyName="venue"
+                       ngxTippy="Venue/arena name">VENUE</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden align-middle">{{ this.boxScore?.rink | truncate:[20] }}</p>
+                    <p class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden align-middle">{{ this.boxScore?.venue | truncate:[20] }}</p>
                 </div>
             </div>
             <!-- END: Rink -->
             <!-- START: League/Tournament -->
-            <div *ngIf="this.boxScore?.isLeaguePlay || this.boxScore?.isTournamentPlay || this.pending"
+            <div *ngIf="this.boxScore?.league || this.boxScore?.tournament || this.pending"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending || !this.boxScore" class="w-max px-3 ml-auto pt-0.5"
+                    <p *ngIf="this.boxScore?.league || this.pending || !this.boxScore" class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="league"
                        ngxTippy="League name">LEAGUE</p>
-                    <p *ngIf="this.boxScore?.isTournamentPlay" class="w-max px-3 ml-auto pt-0.5"
+                    <p *ngIf="this.boxScore?.tournament" class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="tournament"
                        ngxTippy="Tournament name">TOURNEY</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending"
-                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.league }}</p>
-                    <p *ngIf="this.boxScore?.isTournamentPlay"
-                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.tournament }}</p>
+                    <p *ngIf="this.boxScore?.league || this.pending"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.isArcade ? 'Arcade' : this.boxScore?.league?.name }}</p>
+                    <p *ngIf="this.boxScore?.tournament"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.tournament?.name }}</p>
                 </div>
             </div>
             <!-- END: League/Tournament -->
@@ -51,24 +55,26 @@
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="official"
                        ngxTippy="Person who officiated this game">OFFICIAL</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="!this.pending && this.boxScore?.officials.length > 0"
-                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.officials[0] }}</p>
+                    <p *ngIf="!this.pending"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.official }}</p>
                 </div>
             </div>
             <!-- END: Official -->
             <!-- START: Series Round Number -->
-            <div *ngIf="this.boxScore?.isSeries"
+            <div *ngIf="this.boxScore?.series"
                  class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="round"
                        ngxTippy="Series round number">ROUND NO.</p>
                 </div>
                 <div class="border-black-800 dark:border-black-50 w-full border-r">
-                    <p *ngIf="!this.pending && this.boxScore?.roundNumber"
-                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ 'Round ' + this.boxScore?.roundNumber }}</p>
+                    <p *ngIf="!this.pending && this.boxScore?.series?.round"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ 'Round ' + this.boxScore?.series.round }}</p>
                 </div>
             </div>
             <!-- END: Series Round Number -->
@@ -81,6 +87,7 @@
             <div class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="startTime"
                        ngxTippy="Time at which this game started">START TIME</p>
                 </div>
                 <div class="w-full">
@@ -92,6 +99,7 @@
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="duration"
                        ngxTippy="Total length of game in minutes">DURATION</p>
                 </div>
                 <div class="w-full">
@@ -100,15 +108,19 @@
             </div>
             <!-- END: Duration -->
             <!-- START: Season -->
-            <div *ngIf="this.boxScore?.isLeaguePlay || this.boxScore?.isTournamentPlay || this.pending"
+            <div *ngIf="this.boxScore?.league || this.boxScore?.tournament || this.pending"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
-                    <p class="w-max px-3 ml-auto pt-0.5"
+                    <p *ngIf="!this.boxScore?.isArcade" class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="season"
                        ngxTippy="Season name or number">SEASON</p>
+                    <p *ngIf="this.boxScore?.isArcade" class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="phase"
+                       ngxTippy="Game development phase">PHASE</p>
                 </div>
                 <div class="w-full">
-                    <p *ngIf="this.boxScore?.isLeaguePlay || this.pending"
-                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.season }}</p>
+                    <p *ngIf="this.boxScore?.league || this.pending"
+                       class="whitespace-nowrap pl-3 pt-0.5 overflow-hidden">{{ this.boxScore?.isArcade ? this.boxScore?.developmentPhase?.name : this.boxScore?.season?.name }}</p>
                 </div>
             </div>
             <!-- END: Season -->
@@ -116,6 +128,7 @@
             <div class="dark:odd:bg-black-200 dark:even:bg-black-300 odd:bg-gray-50 even:bg-gray-100 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="scorer"
                        ngxTippy="Person who filled out this box score">SCORER</p>
                 </div>
                 <div class="w-full">
@@ -124,10 +137,11 @@
             </div>
             <!-- END: Scorer -->
             <!-- START: Game Number -->
-            <div *ngIf="this.boxScore?.isSeries"
+            <div *ngIf="this.boxScore?.series"
                  class="odd:bg-gray-50 even:bg-gray-100 dark:odd:bg-black-200 dark:even:bg-black-300 flex flex-row">
                 <div class="border-black-800 dark:border-black-50 text-black-200 dark:text-gray-200 min-w-[37%] font-semibold text-right border-r select-none">
                     <p class="w-max px-3 ml-auto pt-0.5"
+                       tippyName="gameNumber"
                        ngxTippy="Game number in series">GAME NO.</p>
                 </div>
                 <div class="w-full">
@@ -142,7 +156,7 @@
     <!-- END: Details -->
 
     <!-- START: Broadcast Link -->
-    <div *ngIf="!this.pending && this.boxScore?.streamLink" class="relative border-black-800 dark:border-black-50 w-full mx-auto bg-gray-100 dark:bg-black-300 border-t min-h-[25px] items-center">
+    <div *ngIf="!this.pending && this.boxScore?.stream" class="relative border-black-800 dark:border-black-50 w-full mx-auto bg-gray-100 dark:bg-black-300 border-t min-h-[25px] items-center">
         <!-- START: Copy Link Button -->
         <button id="copy-link" (click)="copyLink()"
                 class="right-2 top-1 text-black-200 dark:text-gray-200 hover:text-yellow-500 dark:hover:text-yellow-500 dark:bg-black-300 absolute duration-300"
@@ -156,10 +170,10 @@
         <!-- START: Stream Link -->
         <a [href]="getBoxScoreStreamLink()" target="_blank"
            class="group w-max flex flex-row items-center mx-auto space-x-1">
-            <fa-icon *ngIf="this.boxScore?.streamLink.includes('youtube')" [icon]="['fab', 'youtube']"
+            <fa-icon *ngIf="this.boxScore?.stream.includes('youtube')" [icon]="['fab', 'youtube']"
                      class="group-hover:text-red-700 flex my-auto text-red-600"></fa-icon>
             <p class="group-hover:underline text-red-500/80 group-hover:text-red-700 flex flex-row items-start space-x-1">
-                <span>{{ this.pending ? '' : this.boxScore?.streamLink }}</span>
+                <span>{{ this.pending ? '' : this.boxScore?.stream }}</span>
                 <fa-icon [icon]="['fas', 'external-link-alt']" size="xs"
                          class="text-red-500/50 mb-auto text-sm"></fa-icon>
             </p>

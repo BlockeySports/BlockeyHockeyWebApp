@@ -1,19 +1,26 @@
 <table class="w-max dark:text-white flex flex-col my-5 shadow-md select-none">
     <div class="border-black-800 dark:border-black-50 font-semibold text-center border-2 border-b-0"
          [class]="this.isVisitor ? 'bg-gray-300 dark:bg-white text-black-800' : 'bg-black-50 dark:bg-black-500 text-gray-50'"
+         [tippyName]="this.isVisitor + 'title'"
          [ngxTippy]="getDescription()">{{ this.isVisitor ? 'VISITING TEAM GOALS' : 'HOME TEAM GOALS' }}</div>
     <thead class="w-max dark:text-white border-black-800 dark:border-black-50 text-black-800 dark:bg-black-400 flex flex-row items-center font-bold bg-gray-100 border-2">
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
+            [tippyName]="this.isVisitor + 'goalSequence'"
             ngxTippy="The goal sequence">#</th>
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.5rem] text-center"
+            [tippyName]="this.isVisitor + 'goalPeriod'"
             ngxTippy="Period in which the goal was scored">PER</th>
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[4.5rem] text-center"
+            [tippyName]="this.isVisitor + 'goalTime'"
             ngxTippy="Time into the period when the goal was scored">TIME</th>
         <th class="border-r-2 border-black-800 dark:border-black-50 w-[12rem] text-center"
+            [tippyName]="this.isVisitor + 'goalScorer'"
             ngxTippy="The player credited for the goal">SCORER</th>
         <th colspan="2" class="border-r-2 border-black-800 dark:border-black-50 w-[24rem] text-center"
+            [tippyName]="this.isVisitor + 'goalAssistants'"
             ngxTippy="Player(s) that assisted the goal scorer">ASSISTANT(S)</th>
         <th class="border-black-800 dark:border-black-50 w-[4.5rem] text-center"
+            [tippyName]="this.isVisitor + 'goalType'"
             ngxTippy="The type of goal (i.e. power play)">TYPE</th>
     </thead>
     <tbody class="border-black-800 dark:border-black-50 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 scrollbar-track-gray-300 dark:scrollbar-thumb-black dark:scrollbar-track-black-800 dark:hover:scrollbar-thumb-black-900 scrollbar-thin flex flex-col overflow-y-scroll border-b-2 border-l-2 border-r-2"
@@ -22,23 +29,23 @@
         <tr *ngFor="let goal of getGoals(); let i = index"
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
             <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ i + 1 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getGoalPeriod(goal) }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getPeriod(goal) }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.periodTime | duration }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] text-center hover:font-semibold"
                 [class]="goal.goalScorer ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal.goalScorer)" target="_blank">{{ goal?.goalScorer?.username }}</a>
+                <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal?.goalScorer?.player?.member)" target="_blank">{{ goal?.goalScorer?.player?.member?.username }}</a>
             </td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
                 [class]="goal.primaryAssistant ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.primaryAssistant" [href]="getProfileLink(goal.primaryAssistant)" target="_blank">{{ goal?.primaryAssistant?.username }}</a>
+                <a *ngIf="goal.primaryAssistant" [href]="getProfileLink(goal.primaryAssistant)" target="_blank">{{ goal?.primaryAssistant?.player?.member?.username }}</a>
             </td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
                 [class]="goal.secondaryAssistant ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.secondaryAssistant" [href]="getProfileLink(goal.secondaryAssistant)" target="_blank">{{ goal?.secondaryAssistant?.username }}</a>
+                <a *ngIf="goal.secondaryAssistant" [href]="getProfileLink(goal.secondaryAssistant)" target="_blank">{{ goal?.secondaryAssistant?.player?.member?.username }}</a>
             </td>
-            <td class="w-[4.5rem] text-center"
+            <td class="w-[4.5rem] text-center my-auto"
                 [ngClass]="{'text-black/25 dark:text-white/25 font-semibold': !getGoalType(goal)}"
-                [tippyName]="goal.id"
+                [tippyName]="goal.id + 'goal'"
                 [ngxTippy]="getGoalTypeDescription(goal) || 'Even Strength Goal'">{{ getGoalType(goal) || '&ndash;' }}</td>
         </tr>
         <!-- END: Roster Players -->

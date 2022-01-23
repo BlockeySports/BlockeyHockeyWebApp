@@ -1,5 +1,5 @@
 // tslint:disable: variable-name
-export class Player {
+export class MinecraftPlayer {
     uuid?: string;
     username?: string;
     username_history?: {

@@ -10,22 +10,21 @@
                 <!-- END: Away Team Name -->
 
                 <!-- START: Visitor Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore?.awayPlayers"></app-roster>
+                <app-roster [boxScore]="this.boxScore" [players]="getPlayers('away')"></app-roster>
                 <!-- END: Visitor Players -->
             </div>
             <!-- END: Away Team & Roster -->
 
             <!-- START: Information and Scoring Summary -->
-            <div class="mx-36 flex flex-col w-full mt-3"
-                 [class]="this.boxScore?.isSeries ? 'h-[21.8rem]' : 'h-[20.25rem]'">
+            <div class="mx-36 flex flex-col w-full mt-[0.22rem]"
+                 [class]="this.boxScore?.series ? 'h-[21.8rem]' : 'h-[20.25rem]'">
                 <!-- START: Box Score Information -->
                 <app-information [pending]="this.pending" [boxScore]="this.boxScore"
                                  class="w-full"></app-information>
                 <!-- END: Box Score Information -->
 
                 <!-- START: Scoring Summary -->
-                <app-scoring-summary [pending]="this.pending" [boxScore]="this.boxScore" [players]="getAllPlayers()" [playerStandings]="this.playerStandings"
-                                     class="w-full mt-auto"></app-scoring-summary>
+                <app-scoring-summary [pending]="this.pending" [boxScore]="this.boxScore" class="w-full mt-auto"></app-scoring-summary>
                 <!-- END: Scoring Summary -->
             </div>
             <!-- END: Information and Scoring Summary -->
@@ -37,7 +36,7 @@
                 <!-- END: Home Team Name -->
 
                 <!-- START: Home Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="this.boxScore?.homePlayers"></app-roster>
+                <app-roster [boxScore]="this.boxScore" [players]="getPlayers('home')"></app-roster>
                 <!-- END: Home Players -->
             </div>
             <!-- END: Home Team & Roster -->
@@ -59,11 +58,11 @@
         <!-- START: Box Score Player Statistics -->
         <div class="flex flex-row items-start justify-between gap-16">
             <!-- START: Away Team Goals -->
-            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [playerStandings]="this.playerStandings" [isVisitor]="true"></app-box-score-stats>
+            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="away"></app-box-score-stats>
             <!-- END: Away Team Goals -->
 
             <!-- START: Home Team Goals -->
-            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [playerStandings]="this.playerStandings" [isVisitor]="false"></app-box-score-stats>
+            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="home"></app-box-score-stats>
             <!-- END: Home Team Goals -->
         </div>
         <!-- END: Box Score Player Statistics -->
