@@ -51,7 +51,7 @@
     </svg>
     <span>{{ this.punishmentText }}</span>
 </span>
-<table *ngIf="this.member.punishments?.length > 0" class="w-full shadow-md">
+<table *ngIf="this.member?.punishments?.length > 0" class="w-full shadow-md">
     <thead>
         <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Issued By</th>
         <th class="dark:border-gray-300 border-black-400 dark:bg-black-800 p-2 text-left bg-gray-100 border">Reason</th>

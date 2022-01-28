@@ -28,10 +28,10 @@ export class PlayerStatisticService {
      * Get player statistic from the database by player's uuid.
      * @param uuid The player's uuid.
      */
-    public getPlayerStatistic(uuid: string): Observable<HockeyPlayerStatistic[]> {
+    public getPlayerStatisticsOnProfile(uuid: string): Observable<HockeyPlayerStatistic[]> {
         const params = new HttpParams()
             .set('uuid', uuid);
-        return this.http.get<HockeyPlayerStatistic[]>(this.url.concat('player-statistic'), { params });
+        return this.http.get<HockeyPlayerStatistic[]>(this.url.concat('player-statistics'), { params });
     }
 
     /**

@@ -7,10 +7,10 @@
         <div class="flex flex-row items-center space-x-4">
             <h1 class="flex flex-row space-x-3 text-[2.625rem] items-center w-max font-semibold mx-auto md:mx-0 md:text-left"
                 [ngStyle]="{'color' : this.usernameColor || 'currentColor' }">
-                <span>{{ this.member.username }}</span>
+                <span>{{ this.member?.username || 'Player Not Found' }}</span>
                 <span *ngIf="this.member?.number" class="text-[2.1rem] flex flex-row space-x-3">
                     <span class="dark:text-gray-100 text-black-200">&vert;</span>
-                    <span class="dark:text-white font-mono text-black">&#35;{{ this.member.number }}</span>
+                    <span class="dark:text-white font-mono text-black">&#35;{{ this.member?.number }}</span>
                 </span>
             </h1>
             <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
@@ -24,11 +24,11 @@
         <!-- START: Roles & Ranks Bar -->
         <div class="flex flex-row flex-wrap items-start justify-center mb-1.5 md:justify-start whitespace-nowrap">
             <!-- Roles -->
-            <div *ngFor="let role of this.member.roles"
+            <div *ngFor="let role of this.member?.roles"
                  class="flex-initial px-2 mt-1 mr-2.5 text-base rounded shadow-sm select-none w-max"
                  [ngStyle]="{'background-color': role?.background || '#FFFFFF', 'color': role?.color || '#000000'}">{{ role.name }}</div>
             <!-- OG Heart -->
-            <div *ngIf="this.member.isOg" class="flex my-auto text-xl text-red-600 select-none">
+            <div *ngIf="this.member?.isOg" class="flex my-auto text-xl text-red-600 select-none">
                 <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
             </div>
         </div>
@@ -45,13 +45,13 @@
                 <!-- START: Online Status -->
                 <div class="whitespace-nowrap flex justify-center">
                     <div class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
-                         ngxTippy
+                         [ngxTippy]="getTippyOnlineStatus()"
                          tippyName="online-status"
-                         [ngClass]="this.member.isOnline ? 'bg-green-500 animate-pulse' : 'bg-red-600'"></div>
-                    <span>{{ this.member.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
+                         [ngClass]="this.member?.isOnline ? 'bg-green-500 animate-pulse' : 'bg-red-600'"></div>
+                    <span>{{ this.member?.isOnline ? 'Online for' : 'Last seen' }}&nbsp;</span>
                     <span class="font-semibold cursor-default"
-                          ngxTippy
-                          tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member.isOnline }}&nbsp;</span>
+                          [ngxTippy]="getTippyLastOnlineDate()"
+                          tippyName="last-online-date">{{ getLastOnlineDate() | timeago : this.member?.isOnline }}&nbsp;</span>
                     <!-- <span>on&nbsp;</span>
                         <span class="font-semibold">Server {{ this.server }}</span> -->
                 </div>
@@ -115,6 +115,7 @@
         <div class="md:flex hidden">
             <app-stats [class.hidden]="this.tab !== 'stats'"
                        [member]="this.member"
+                       [playerStatistics]="this.playerStatistics"
                        [isError]="this.isError"
                        class="w-full mt-10"></app-stats>
             <app-games [class.hidden]="this.tab !== 'games'"

@@ -28,7 +28,7 @@ export class InfractionsComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit(): void { }
 
     ngOnChanges(): void {
-        if (this.member.uuid) {
+        if (this.member?.uuid) {
             this.isLoading = true;
             this.punishmentText = 'Loading punishments. The longer this takes, the worse you\'ve been!';
             this.punishmentSub = this.punishmentService.getMemberPunishments(this.member.uuid).subscribe(
