@@ -28,25 +28,32 @@
         <!-- START: Roster Players -->
         <tr *ngFor="let goal of getGoals(); let i = index"
             class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ i + 1 }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center">{{ getPeriod(goal) }}</td>
-            <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center">{{ goal?.periodTime | duration }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center"
+                [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ i + 1 }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center"
+                [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ getPeriod(goal) }}</td>
+            <td class="border-r border-black-800 dark:border-black-50 w-[4.5rem] text-center"
+                [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ goal?.periodTime | duration }}</td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] text-center hover:font-semibold"
                 [class]="goal.goalScorer ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal?.goalScorer?.player?.member)" target="_blank">{{ goal?.goalScorer?.player?.member?.username }}</a>
+                <a *ngIf="goal.goalScorer" [href]="getProfileLink(goal?.goalScorer?.player?.member)" target="_blank"
+                   [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ goal?.goalScorer?.player?.member?.username }}</a>
             </td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
                 [class]="goal.primaryAssistant ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.primaryAssistant" [href]="getProfileLink(goal.primaryAssistant)" target="_blank">{{ goal?.primaryAssistant?.player?.member?.username }}</a>
+                <a *ngIf="goal.primaryAssistant" [href]="getProfileLink(goal.primaryAssistant)" target="_blank"
+                   [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ goal?.primaryAssistant?.player?.member?.username }}</a>
             </td>
             <td class="border-r border-black-800 dark:border-black-50 w-[12rem] hover:font-semibold text-center"
                 [class]="goal.secondaryAssistant ? 'cursor-pointer' : 'cursor-default'">
-                <a *ngIf="goal.secondaryAssistant" [href]="getProfileLink(goal.secondaryAssistant)" target="_blank">{{ goal?.secondaryAssistant?.player?.member?.username }}</a>
+                <a *ngIf="goal.secondaryAssistant" [href]="getProfileLink(goal.secondaryAssistant)" target="_blank"
+                   [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ goal?.secondaryAssistant?.player?.member?.username }}</a>
             </td>
             <td class="w-[4.5rem] text-center my-auto"
                 [ngClass]="{'text-black/25 dark:text-white/25 font-semibold': !getGoalType(goal)}"
                 [tippyName]="goal.id + 'goal'"
-                [ngxTippy]="getGoalTypeDescription(goal) || 'Even Strength Goal'">{{ getGoalType(goal) || '&ndash;' }}</td>
+                [ngxTippy]="getGoalTypeDescription(goal) || 'Even Strength Goal'"
+                [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''">{{ getGoalType(goal) || '&ndash;' }}</td>
         </tr>
         <!-- END: Roster Players -->
 

@@ -39,6 +39,7 @@ export class GoalsComponent implements OnInit {
         if (!goal) { return ''; }
         // define the goal type as blank
         let goalType = '';
+        if (goal?.isDisallowed) return 'WAVED';
         if (goal?.ownGoalScorer) {
             goalType += 'OWN';
             if (!goal?.goaltender) { goalType += '/EN'; }
@@ -74,7 +75,7 @@ export class GoalsComponent implements OnInit {
      * @returns the description of the goal type(s)
      */
     public getGoalTypeDescription(goal: HockeyGoal): string {
-        let goalTypeDescription = '';
+        let goalTypeDescription = goal?.isDisallowed ? 'Disallowed Goal' : '';
         if (goal?.goalType?.abbreviation === 'PP') {
             if (goalTypeDescription?.length > 0) { goalTypeDescription += '/'; }
             goalTypeDescription += 'Power Play Goal';
