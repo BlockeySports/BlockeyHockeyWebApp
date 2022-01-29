@@ -22,19 +22,21 @@ export class BoxScoreStatsComponent implements OnInit {
 
     ngOnInit(): void { }
 
-    public getPlayers(team: string = 'away' || 'home'): BoxScorePlayer[] {
+    public getPlayers(): BoxScorePlayer[] {
         // if box score is not loaded, return empty array
         if (!this.boxScore?.players) { return []; }
         // return the players for the specified team
         return this.boxScore?.players
-            .filter(player => player.shifts.flatMap(shift => shift.team.toLowerCase()).includes(team.toLowerCase()));
+            .filter(player => player.shifts.flatMap(shift => shift.team.toLowerCase()).includes(this.team.toLowerCase()));
     }
 
     public getStats(): HockeyPlayerStatistic[] {
         // get box score players for the correct team
-        const boxScorePlayers = this.getPlayers(this.team);
+        const boxScorePlayers = this.getPlayers();
         // return stats that have the same member as the box score player's member
-        return this.stats.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid));
+        return this.stats
+            ?.filter(stat => stat?.filter?.teamType.toLowerCase() === this.team?.toLowerCase())
+            ?.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid));
     }
 
     public getGoals(stat: HockeyPlayerStatistic): number {
