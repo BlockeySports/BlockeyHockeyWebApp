@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
 import { HockeyGoal } from 'src/app/models/HockeyGoal';
-import { HockeyPeriodSummary } from 'src/app/models/HockeyPeriodSummary';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
