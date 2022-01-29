@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
+import { HockeyGoal } from 'src/app/models/HockeyGoal';
 import { HockeyPeriodSummary } from 'src/app/models/HockeyPeriodSummary';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -29,9 +30,10 @@ export class ScoringSummaryComponent implements OnInit {
         if (!this.boxScore?.shots) return 0;
         // return number of goals in box score for a team and period
         return this.boxScore?.goals
+            ?.filter(goal => !goal.isDisallowed)
             ?.filter(goal => goal.team.toLowerCase() === team)
-            .filter(goal => !period || goal.period === period)
-            .length;
+            ?.filter(goal => !period || goal.period === period)
+            ?.length;
     }
 
     /**
@@ -45,10 +47,25 @@ export class ScoringSummaryComponent implements OnInit {
         if (!this.boxScore?.shots) return 0;
         // return number of shots on goal in box score for a team and period
         return this.boxScore?.shots
+            // filter by team
             ?.filter(shot => shot?.team?.toLowerCase() === team)
-            .filter(shot => !period || shot?.period === period)
-            .filter(shot => !shot?.shotBlocker?.id)
-            .length;
+            // filter by period if specified
+            ?.filter(shot => !period || shot?.period === period)
+            // filter out shots that were blocked
+            ?.filter(shot => !shot?.shotBlocker?.id)
+            // filter out shots that were taken on a disallowed goal
+            ?.filter(shot => !this.getGoal(shot?.goal?.id)?.isDisallowed)
+            // get number of shots on goal
+            ?.length;
+    }
+
+    /**
+     * Get a hockey goal by its id.
+     * @param id The id of the goal.
+     * @returns the hockey goal
+     */
+    public getGoal(id: string): HockeyGoal {
+        return this.boxScore?.goals?.find(goal => goal?.id === id);
     }
 
     /**
@@ -74,7 +91,7 @@ export class ScoringSummaryComponent implements OnInit {
         // if box score not loaded yet, return 0
         if (!this.boxScore?.periods) return 3;
         // if an overtime goal exits, return 4; otherwise, return 3
-        return this.boxScore?.goals.find(goal => goal.period > 3) ? 4 : 3;
+        return this.boxScore?.goals?.find(goal => goal.period > 3) ? 4 : 3;
     }
 
     /**
