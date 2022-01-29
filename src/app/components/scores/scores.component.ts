@@ -40,40 +40,56 @@ export class ScoresComponent implements OnInit {
     }
 
     public getLeagueCode(boxScore: MiniBoxScore): string {
-        return (boxScore.developmentPhase.value !== 3 ? boxScore.developmentPhase.name : boxScore?.league?.code).toUpperCase();
+        return (boxScore.developmentPhase.value !== 3 ? boxScore?.developmentPhase?.name : boxScore?.league?.code).toUpperCase();
     }
-
-    /**
-     * Get the total number of goals scored by a team in the game.
-     * @param boxScore The box score.
-     * @param team The team to filter on.
-     */
-    // public getTotalGoals(boxScore: MiniBoxScore, team: string): number {
-    //     if (team === 'away') return boxScore.firstPeriodAwayGoals + boxScore.secondPeriodAwayGoals + boxScore.thirdPeriodAwayGoals + boxScore.overtimeAwayGoals;
-    //     else if (team === 'home') return boxScore.firstPeriodHomeGoals + boxScore.secondPeriodHomeGoals + boxScore.thirdPeriodHomeGoals + boxScore.overtimeHomeGoals;
-    //     else return 0;
-    // }
 
     /**
      * Get the number of goals scored in a period.
      * @param boxScore The box score.
      * @param team The team to filter on.
      * @param period The period.
+     * @returns the number of goals scored
      */
-    public getScore(boxScore: MiniBoxScore, team: string = 'away' || 'home', period?: number): number {
-        return boxScore.periodSummaries
-            .filter(periodSummary => !period || periodSummary.period === period)
-            .filter(periodSummary => team === 'away' ? periodSummary.awayGoals : periodSummary.homeGoals)
-            .length;
+    public getScore(boxScore: MiniBoxScore, team: 'away' | 'home', period?: number): number {
+        return boxScore?.periodSummaries
+            ?.filter(periodSummary => !period || periodSummary?.period === period)
+            ?.reduce((acc, periodSummary) => {
+                return acc + (team === 'away' ? periodSummary?.awayGoals : periodSummary?.homeGoals);
+            }, 0);
+    }
+
+    /**
+     * Get the number of shots on goal for a team.
+     * @param boxScore The box score.
+     * @param team The team to filter on.
+     * @returns the number of shots on goal
+     */
+    public getShotsOnGoal(boxScore: MiniBoxScore, team: 'away' | 'home'): number {
+        return boxScore?.periodSummaries
+            ?.reduce((acc, periodSummary) => {
+                return acc + (team === 'away' ? periodSummary?.awayShotsOnGoal : periodSummary?.homeShotsOnGoal);
+            }, 0);
+    }
+
+    /**
+     * Check if the game went to overtime.
+     * @param boxScore The box score.
+     * @returns true if the game went to overtime, false otherwise
+     */
+    public isGameOvertime(boxScore: MiniBoxScore): boolean {
+        return boxScore?.periodSummaries?.length > 3;
     }
 
     /**
      * Get the result of the game.
-     * TODO: Must know how many overtimes were played
+     * @param boxScore The box score.
+     * @returns the result of the game
      */
     public getResult(boxScore: MiniBoxScore): string {
+        // get last period number
+        const lastPeriod = boxScore?.periodSummaries[boxScore?.periodSummaries?.length - 1]?.period;
         // if a fourth period exists, then it must have ended in overtime
-        if (boxScore.periodSummaries.length === 4) return 'FINAL / OT';
+        if (boxScore.periodSummaries.length === 4) return `FINAL / ${lastPeriod > 4 ? lastPeriod - 3 : ''}OT`;
         return 'FINAL';
     }
 
