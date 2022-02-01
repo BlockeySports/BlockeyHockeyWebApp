@@ -36,7 +36,19 @@ export class BoxScoreStatsComponent implements OnInit {
         // return stats that have the same member as the box score player's member
         return this.stats
             ?.filter(stat => stat?.filter?.teamType.toLowerCase() === this.team?.toLowerCase())
-            ?.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid));
+            ?.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid))
+            // sorted by points, then goals, then assists, then least time played
+            .sort((a, b) => {
+                const points = this.getPoints(b) - this.getPoints(a);
+                if (points !== 0) return points;
+                const goals = this.getGoals(b) - this.getGoals(a);
+                if (goals !== 0) return goals;
+                const assists = this.getAssists(b) - this.getAssists(a);
+                if (assists !== 0) return assists;
+                const time = b.timeOnIce - a.timeOnIce;
+                if (time !== 0) return time;
+                return 0;
+            });
     }
 
     public getGoals(stat: HockeyPlayerStatistic): number {
