@@ -122,7 +122,7 @@
 
                     <!-- START: Assists -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getAssists(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'a'"
                               ngxTippy="Total Assists">assists</span>
@@ -131,7 +131,7 @@
 
                     <!-- START: Points -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getPoints(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'p'"
                               ngxTippy="Total Points">points</span>
@@ -140,7 +140,7 @@
 
                     <!-- START: Overtime Goals -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getOTGoals(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'otg'"
                               ngxTippy="Total Overtime Goals">OT goals</span>
@@ -149,7 +149,7 @@
 
                     <!-- START: Shots on Goal -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getShotsOnGoal(seasonType) || 0 | number }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 's'"
                               ngxTippy="Total Shots on Goal">shots on goal</span>
@@ -158,7 +158,7 @@
 
                     <!-- START: Plus-Minus -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | signed }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getPlusMinus(seasonType) || 0 | signed }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'pm'"
                               ngxTippy="Total Plus-Minus">+/-</span>
@@ -188,7 +188,7 @@
 
                     <!-- START: Win-Lose Ratio -->
                     <div class="md:mx-0 whitespace-nowrap table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 || 0 | number: '1.2-2' }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getWinLossRatio(seasonType) || 0 | number: '1.2-2' }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'wlr'"
                               ngxTippy="Win-Lose Ratio">WL</span>

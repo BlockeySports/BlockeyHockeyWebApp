@@ -153,6 +153,14 @@ export class StatsComponent implements OnInit, OnChanges {
         return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsOnGoal, 0);
     }
 
+    public getPlusMinus(seasonType: HockeySeasonType): number {
+        return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.plusMinus, 0);
+    }
+
+    public getWinLossRatio(seasonType: HockeySeasonType): number {
+        return this.getWins(seasonType) / this.getLosses(seasonType);
+    }
+
     /**
      * Get unique elements from an array by a given property of the element.
      */
