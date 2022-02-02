@@ -179,7 +179,7 @@
 
                     <!-- START: Streak -->
                     <div class="md:mx-0 table mx-auto space-x-3">
-                        <span class="lg:text-4xl text-3xl font-semibold">{{ 0 }}</span>
+                        <span class="lg:text-4xl text-3xl font-semibold">{{ getStreak(seasonType) }}</span>
                         <span class="dark:text-gray-300 whitespace-nowrap text-gray-400"
                               [tippyName]="seasonType + ' ' + i + 'wls'"
                               ngxTippy="Current Win/Loss Streak">streak</span>

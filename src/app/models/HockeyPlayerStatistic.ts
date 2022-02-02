@@ -1,7 +1,8 @@
 import { HockeyPointsStatistic } from './HockeyPointsStatistic';
 import { HockeyStatisticFilter } from './HockeyStatisticFilter';
-import { HockeyStreakType } from './HockeyStreakType';
+import { HockeyStreak } from './HockeyStreak';
 import { HockeyTurnover } from './HockeyTurnover';
+import { HockeyTurnoversStatistic } from './HockeyTurnoversStatistic';
 import { Member } from './Member';
 
 export class HockeyPlayerStatistic {
@@ -19,8 +20,7 @@ export class HockeyPlayerStatistic {
     plusMinus?: number;
     penaltyMinutes?: number;
     penaltyMinutesDrawn?: number;
-    streak?: number;
-    streakType?: HockeyStreakType;
+    streak?: HockeyStreak;
     timeOnIce?: number;
     shifts?: number;
     shotsOnGoal?: number;
@@ -28,7 +28,7 @@ export class HockeyPlayerStatistic {
     attemptsBlocked?: number;
     blockedShots?: number;
     saves?: number;
-    turnovers?: HockeyTurnover[];
+    turnovers?: HockeyTurnoversStatistic[];
     hits?: number;
     hitsTaken?: number;
     faceoffsTaken?: number;

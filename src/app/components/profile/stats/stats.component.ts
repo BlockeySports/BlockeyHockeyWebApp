@@ -41,6 +41,7 @@ export class StatsComponent implements OnInit, OnChanges {
             if (this.leagues?.length > 0) {
                 this.changeLeagueTab(this.getLeagues()[0]);
                 this.isLoading = false;
+                console.log(this.playerStatistics);
             }
             else if (this.isError) this.loadingText = 'An unexpected error occurred while loading your statistics.';
             else this.loadingText = 'You have no statistics yet. Join the server and play a game.';
@@ -155,6 +156,13 @@ export class StatsComponent implements OnInit, OnChanges {
 
     public getPlusMinus(seasonType: HockeySeasonType): number {
         return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.plusMinus, 0);
+    }
+
+    public getStreak(seasonType: HockeySeasonType): string {
+        const count = this.getPlayerStatistics(seasonType)[0]?.streak?.count;
+        const type = this.getPlayerStatistics(seasonType)[0]?.streak?.type?.name;
+        // return streak first character to uppercase and count
+        return `${type.charAt(0).toUpperCase()}${count}`;
     }
 
     public getWinLossRatio(seasonType: HockeySeasonType): number {
