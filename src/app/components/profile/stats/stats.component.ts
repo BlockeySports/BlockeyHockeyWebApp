@@ -20,7 +20,7 @@ export class StatsComponent implements OnInit, OnChanges {
   @Input() isError;
 
   public isLoading = true;
-  public loadingText = '';
+  public loadingText = 'Loading your statistics... Please wait a moment.';
 
   private leagues: HockeyLeague[] = [];
   private seasons: HockeySeason[] = [];
@@ -38,14 +38,14 @@ export class StatsComponent implements OnInit, OnChanges {
       if (this.leagues?.length > 0) {
         this.changeLeagueTab(this.getLeagues()[0]);
         this.isLoading = false;
-        console.log(this.playerStatistics);
+        // console.log(this.playerStatistics);
       } else if (this.isError)
         this.loadingText =
           'An unexpected error occurred while loading your statistics.';
       else
         this.loadingText =
           'You have no statistics yet. Join the server and play a game.';
-    }, 1);
+    }, 6000);
   }
 
   public getLeagues(): HockeyLeague[] {
