@@ -46,7 +46,7 @@ export class GoalsComponent implements OnInit {
     let goalType = '';
     if (goal?.isDisallowed) return 'WAVED';
     if (goal?.ownGoalScorer) {
-      goalType += `OWN (${goal?.ownGoalScorer?.player?.member?.username})`;
+      goalType += 'OWN';
       if (!goal?.goaltender) {
         goalType += '/EN';
       }
@@ -125,7 +125,7 @@ export class GoalsComponent implements OnInit {
       if (goalTypeDescription?.length > 0) {
         goalTypeDescription += '/';
       }
-      goalTypeDescription += 'Own Goal';
+      goalTypeDescription += `Own Goal (${goal?.ownGoalScorer?.player?.member?.username})`;
     }
     return goalTypeDescription;
   }
