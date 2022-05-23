@@ -10,8 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { DateService } from 'src/app/services/date.service';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
-import { PlayerGamePlayed } from 'src/app/models/PlayerGamePlayed';
-import { BoxScoreOnIcePlayer } from 'src/app/models/BoxScoreOnIcePlayer';
+import { HockeyPlayerStatistic } from 'src/app/models/HockeyPlayerStatistic';
 
 @Component({
     selector: 'app-profile',
@@ -22,9 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public member: Member = {
         username: ''
     };
-    public playerStatistics: PlayerStatistic[] = [];
-    public playerGamesPlayed: PlayerGamePlayed[] = [];
-    public onIcePlayers: BoxScoreOnIcePlayer[] = [];
+    public playerStatistics: HockeyPlayerStatistic[] = [];
 
     public isError = false;
     public errorMessage = '';
@@ -67,29 +64,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 // set the member
                 this.member = data;
                 // set the username color
-                this.usernameColor = this.member.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
+                this.usernameColor = this.member?.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
                 // set member profile picture from uuid
-                this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.uuid}`;
+                this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member?.uuid || '13'}`;
                 // set the browser tab title
-                this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
+                this.titleService.setTitle(this.member?.username || 'Player Not Found' + ' \u007c Blockey Hockey Network');
                 // change the tab to the fragment in the url
                 this.changeTab(this.tab !== 'stats' ? this.tab : '');
-                // set the last online tooltip date
-                this.setTippyOnlineStatus();
                 // get player statistics
                 this.getPlayerStatistics();
             },
             (error) => {
                 this.isError = true;
-                if (!error.ok) {
-                    // set statistics error message when failed to get profile.
-                    this.errorMessage = 'There was an error loading your statistics. Try again later.';
-                }
                 // set the username color
                 this.usernameColor = 'currentColor';
-                // set the last online tooltip date
-                this.setTippyOnlineStatus();
-                console.log(error);
+                // console.log(error);
             }
         );
     }
@@ -99,30 +88,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
      */
     private getPlayerStatistics(): void {
         // get player stats (i.e. goals, assists, etc.)
-        this.playerStatisticService.getPlayerStatistics(this.member.uuid).subscribe(
-            (playerStatistics: PlayerStatistic[]) => {
+        if (this.member?.uuid) this.playerStatisticService.getPlayerStatisticsOnProfile(this.member.uuid).subscribe(
+            (playerStatistics: HockeyPlayerStatistic[]) => {
                 this.playerStatistics = playerStatistics;
+                // console.log(this.playerStatistics);
             },
             (error) => {
-                console.log(error);
-            }
-        );
-        // get games played (i.e. games played, wins, losses, draws)
-        this.playerStatisticService.getPlayerGamesPlayed(this.member.uuid).subscribe(
-            (playerGamesPlayed: PlayerGamePlayed[]) => {
-                this.playerGamesPlayed = playerGamesPlayed;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-        // get the on-ice player records for this player (used to calculate plus-minus)
-        this.playerStatisticService.getOnIcePlayers(this.member.uuid).subscribe(
-            (onIcePlayers: BoxScoreOnIcePlayer[]) => {
-                this.onIcePlayers = onIcePlayers;
-            },
-            (error) => {
-                console.log(error);
+                // console.log(error);
             }
         );
     }
@@ -134,12 +106,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
      */
     public changeTab(tab: string): void {
         this.tab = tab || 'stats';      // default tab is stats
-        this.router.navigate(
-            [`/u/${this.member.username}`],
-            {
-                relativeTo: this.route,
-                fragment: tab || null
-            });
+        if (this.member?.username) {
+            this.router.navigate(
+                [`/u/${this.member.username}`],
+                {
+                    relativeTo: this.route,
+                    fragment: tab || null
+                });
+        }
     }
 
     /**
@@ -147,19 +121,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * @param lastOnline the date that this member was last online
      */
     public getLastOnlineDate(): Date {
-        return this.dateService.getDate(this.member.lastOnline);
+        return this.member?.lastOnline ? this.dateService.getDate(this.member.lastOnline) : null;
     }
 
     /**
      * Set the tooltips for the online/offline indicator and the last seen date
      */
-    private setTippyOnlineStatus(): void {
+    public getTippyOnlineStatus(): string {
+        return this.member?.isOnline ? 'Online' : 'Offline';
+    }
+
+    public getTippyLastOnlineDate(): string {
         // get date using date service
         const date = this.getLastOnlineDate();
         // get formatted date as string
-        const formattedDate = date ? formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
-        this.tippyService.setContent('last-online-date', formattedDate);
-        this.tippyService.setContent('online-status', this.member.isOnline ? 'Online' : 'Offline');
+        return date ? formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
     }
 
     /**

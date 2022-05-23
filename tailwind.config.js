@@ -3,7 +3,7 @@ const mode = process.env.TAILWIND_MODE ? 'jit' : 'aot';
 module.exports = {
     mode: mode,
     prefix: '',
-    purge: ['./src/**/*.{html,ts}'],
+    content: ['./src/**/*.{html,ts}'],
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {

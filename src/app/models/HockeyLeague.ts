@@ -1,6 +1,12 @@
+import { HockeySeason } from './HockeySeason';
+
 export class HockeyLeague {
-    id?: number;
+    id?: string;
     name?: string;
+    code?: string;
+    description?: string;
     date?: Date;
-    isActive?: boolean;
+    isArcade?: boolean;
+    isArchived?: boolean;
+    seasons?: HockeySeason[];
 }

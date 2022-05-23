@@ -29,14 +29,14 @@ export class BoxScoreService {
     public getBoxScore(id: string): Observable<BoxScore> {
         const params = new HttpParams()
             .set('id', id);
-        return this.http.get<BoxScore>(this.url.concat('boxscore'), { params });
+        return this.http.get<BoxScore>(this.url.concat('box-score'), { params });
     }
 
     /**
      * Get all box score records from the database.
      */
     public getBoxScores(): Observable<BoxScore[]> {
-        return this.http.get<BoxScore[]>(this.url.concat('boxscores'));
+        return this.http.get<BoxScore[]>(this.url.concat('box-scores'));
     }
 
     /**

@@ -1,39 +1,43 @@
 <div class="dark:text-white flex flex-row items-end space-x-3">
-    <p class="mb-2 text-lg">{{ this.isVisitor ? 'AWAY' : 'HOME' }}</p>
-    <div hlMenu>
-        <button hlMenuButton [disabled]="this.isReadOnly"
-                class="focus:outline-none relative flex items-center min-w-[21.7rem] w-max h-12 border-b-2 border-black-800 dark:border-black-50"
-                [class]="this.isReadOnly ? 'cursor-default' : 'cursor-pointer'">
-            <p class="text-shadow-md font-medium text-[1.9rem] whitespace-nowrap pr-8">
-                <span *ngIf="this.team?.location !== null"
-                      [style.color]="getTeamColor()">{{ this.team.location }}</span>
-                <span *ngIf="this.team?.location !== null && this.team?.name !== null">&nbsp;</span>
-                <span *ngIf="this.team?.name !== null"
-                      [style.color]="getTeamColor()">{{ this.team.name }}</span>
-            </p>
-            <svg *ngIf="!this.isReadOnly" class="text-black-600 dark:text-white/70 absolute right-0.5 w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </button>
+  <p class="mb-2 text-lg">{{ this.isVisitor ? 'AWAY' : 'HOME' }}</p>
+  <div hlMenu>
+    <button
+      hlMenuButton
+      [disabled]="this.isReadOnly"
+      class="focus:outline-none relative flex items-center min-w-[21.7rem] w-max h-12 border-b-2 border-black-800 dark:border-black-50"
+      [class]="this.isReadOnly ? 'cursor-default' : 'cursor-pointer'">
+      <p class="text-shadow-md font-medium text-[1.9rem] whitespace-nowrap pr-8">
+        <span *ngIf="this.team?.location !== null" [style.color]="getTeamColor()">{{ this.team.location }}</span>
+        <span *ngIf="this.team?.location !== null && this.team?.name !== null">&nbsp;</span>
+        <span *ngIf="this.team?.name !== null" [style.color]="getTeamColor()">{{ this.team.name }}</span>
+      </p>
+      <svg *ngIf="!this.isReadOnly" class="text-black-600 dark:text-white/70 absolute right-0.5 w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
 
-        <div *ngIf="!this.isReadOnly" class="w-full mt-2 font-medium">
-            <ul *hlMenuItems @toggleAnimation
-                class="border-black-700 dark:border-black-50/60 absolute shadow-lg min-w-[21.7rem] w-max bg-white border rounded-sm items-end">
-                <li *ngFor="let team of this.teams; let i = index">
-                    <div *hlMenuItem="let item"
-                         [class.!bg-gray-200]="item.active"
-                         [class.bg-gray-50]="!item.active"
-                         [class.dark:!bg-black-400]="item.active"
-                         [class.dark:bg-black-200]="!item.active"
-                         [ngClass]="{'!bg-gray-100 dark:!bg-black-300' : (i%2 !== 0 && !item.active)}"
-                         class="whitespace-nowrap text-black-300 dark:text-gray-50 dark:bg-black-200 px-4 py-2 tracking-wider text-left capitalize cursor-pointer"
-                         (click)="setTeam(team)">
-                        {{ team.location + ' ' + team.name }}
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <div *ngIf="!this.isReadOnly" class="w-full mt-2 font-medium">
+      <ul
+        *hlMenuItems
+        @toggleAnimation
+        class="border-black-700 dark:border-black-50/60 absolute shadow-lg min-w-[21.7rem] w-max bg-white border rounded-sm items-end">
+        <li *ngFor="let team of this.teams; let i = index">
+          <div
+            *hlMenuItem="let item"
+            [class.!bg-gray-200]="item.active"
+            [class.bg-gray-50]="!item.active"
+            [class.dark:!bg-black-400]="item.active"
+            [class.dark:bg-black-200]="!item.active"
+            [ngClass]="{ '!bg-gray-100 dark:!bg-black-300': i % 2 !== 0 && !item.active }"
+            class="whitespace-nowrap text-black-300 dark:text-gray-50 dark:bg-black-200 px-4 py-2 tracking-wider text-left capitalize cursor-pointer"
+            (click)="setTeam(team)">
+            {{ team.location + ' ' + team.name }}
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 </div>

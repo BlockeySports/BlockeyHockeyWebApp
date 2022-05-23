@@ -52,13 +52,13 @@ export class InformationComponent implements OnInit {
     }
 
     public getBoxScoreStreamLink(): string {
-        if (this.pending || this.boxScore?.streamLink === undefined) { return ''; }
-        return this.boxScore.streamLink;
+        if (this.pending || !this.boxScore?.stream) { return ''; }
+        return this.boxScore.stream;
     }
 
     public copyLink(): void {
         // copy link to clipboard
-        this.clipboardService.copyFromContent(this.boxScore.streamLink);
+        this.clipboardService.copyFromContent(this.boxScore.stream);
         // turn copy link button green
         document.getElementById('copy-link').classList.add('!text-green-500');
         document.getElementById('copy-link').classList.remove('hover:!text-yellow-500');

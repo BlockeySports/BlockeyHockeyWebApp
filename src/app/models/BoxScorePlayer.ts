@@ -1,13 +1,16 @@
+import { BoxScore } from './BoxScore';
+import { BrokenStick } from './BrokenStick';
+import { HockeyShift } from './HockeyShift';
 import { Member } from './Member';
 
 export class BoxScorePlayer {
-    boxScoreId?: string;
+    id?: string;
+    boxScore?: BoxScore;
     member?: Member;
-    date?: Date;
-    team?: string;
-    isPrimaryTeam?: boolean;
-    isPlayed?: boolean;
-    position?: string;
     number?: number;
-    timeOnIce?: number;
+    date?: Date;
+    dateUpdated?: Date;
+    isPlayed?: boolean;
+    shifts?: HockeyShift[];
+    brokenSticks?: BrokenStick[];
 }

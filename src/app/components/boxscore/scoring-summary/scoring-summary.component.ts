@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { BoxScore } from 'src/app/models/BoxScore';
-import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
-import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
+import { HockeyGoal } from 'src/app/models/HockeyGoal';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -11,19 +9,88 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ScoringSummaryComponent implements OnInit {
 
-    @Input() boxScore: BoxScore;
-    @Input() players: BoxScorePlayer[] = [];
-    @Input() playerStandings: PlayerLeaderboard[] = [];
-    @Input() pending: boolean;
+    @Input() boxScore = new BoxScore();
+    @Input() pending = true;
 
     constructor(
-        private tippyService: NgxTippyService,
         private colorService: ColorService
     ) { }
 
-    ngOnInit(): void {
-        // set the tooltips
-        this.setTeamNameTooltip();
+    ngOnInit(): void { }
+
+    /**
+     * Get the number of goals scored by a team.  Optionally, a period can be specified to filter number of goals by period.
+     * @param team The team to get goals for.
+     * @param period The period to filter goals by (null if all periods).
+     * @returns the number of goals scored by the team
+     */
+    public getNumberOfGoals(team: 'away' | 'home', period?: number): number {
+        // if box score not loaded yet, return 0
+        if (!this.boxScore?.shots) return 0;
+        // return number of goals in box score for a team and period
+        return this.boxScore?.goals
+            ?.filter(goal => !goal.isDisallowed)
+            ?.filter(goal => goal.team.toLowerCase() === team)
+            ?.filter(goal => !period || goal.period === period)
+            ?.length;
+    }
+
+    /**
+     * Get the number of shots on goal for a team in a period.
+     * @param team The team to get shots on goal for.
+     * @param period The period to get shots on goal for (null if all periods).
+     * @returns the number of shots on goal
+     */
+    public getShotsOnGoal(team: 'away' | 'home', period?: number): number {
+        // if box score not loaded yet, return 0
+        if (!this.boxScore?.shots) return 0;
+        // return number of shots on goal in box score for a team and period
+        return this.boxScore?.shots
+            // filter by team
+            ?.filter(shot => shot?.team?.toLowerCase() === team)
+            // filter by period if specified
+            ?.filter(shot => !period || shot?.period === period)
+            // filter out shots that were blocked
+            ?.filter(shot => !shot?.shotBlocker?.id)
+            // filter out shots that were taken on a disallowed goal
+            ?.filter(shot => !this.getGoal(shot?.goal?.id)?.isDisallowed)
+            // get number of shots on goal
+            ?.length;
+    }
+
+    /**
+     * Get a hockey goal by its id.
+     * @param id The id of the goal.
+     * @returns the hockey goal
+     */
+    public getGoal(id: string): HockeyGoal {
+        return this.boxScore?.goals?.find(goal => goal?.id === id);
+    }
+
+    /**
+     * Get the tippy tooltip text for a team in the period summary.
+     * @param team The team to get the tooltip for.
+     * @returns the tooltip text
+     */
+    public getTeamNameTooltip(team: 'away' | 'home'): string {
+        // if away team but no team set yet, return 'Away Team'
+        if (team === 'away' && !this.boxScore?.awayTeam) return 'Away Team';
+        // if away team set, return away team's full name
+        if (team === 'away') return (this.boxScore?.awayTeam?.location || '') + ' ' + (this.boxScore?.awayTeam?.name || '');
+        // if home team but no team set yet, return 'Home Team'
+        if (!this.boxScore?.homeTeam) return 'Home Team';
+        // if home team set, return home team's full name
+        return (this.boxScore?.homeTeam?.location || '') + ' ' + (this.boxScore?.homeTeam?.name || '');
+    }
+
+    /**
+     * Get the number of periods played, excluding overtime periods past the first one.
+     */
+    public getNumberOfPeriods(): number {
+        // if box score not loaded yet, return 0
+        if (!this.boxScore?.periods) return 3;
+        // if an overtime goal exits, return 4; otherwise, return 3
+        return this.boxScore?.goals?.find(goal => goal.period > 3) ? 4 : 3;
     }
 
     /**
@@ -32,91 +99,6 @@ export class ScoringSummaryComponent implements OnInit {
      * @returns the contrast color
      */
     public getContrastingColor(backgroundColor: string): string {
-        if (!backgroundColor) { return null; }
         return this.colorService.getContrast(backgroundColor);
-    }
-
-    /**
-     * Get the number of goals scored by a team.  Optionally, a period can be specified to filter number of goals by period.
-     * @param isAway True if the team is the away team; false if the team is the home team.
-     * @param period The period to filter goals by.
-     * @returns the number of goals scored by the team
-     */
-    public getNumberOfGoals(isAway: boolean, period?: number): number {
-        // if pending still, return null
-        if (this.pending) { return null; }
-        // if period was specified
-        if (period != null) {
-            // if away team
-            if (isAway) {
-                if (period <= 3) {
-                    // return the number of goals for that period
-                    return this.boxScore?.goals?.filter(g => g.period === period && g.team === 'away').length;
-                } else {
-                    // return number of goals scored in any period above 3
-                    return this.boxScore?.goals?.filter(g => g.period > 3 && g.team === 'away').length;
-                }
-            }
-            // if home team
-            else {
-                if (period <= 3) {
-                    // return the number of goals for that period
-                    return this.boxScore?.goals?.filter(g => g.period === period && g.team === 'home').length;
-                } else {
-                    // return number of goals scored in any period above 3
-                    return this.boxScore?.goals?.filter(g => g.period > 3 && g.team === 'home').length;
-                }
-            }
-        } else {
-            // if away team
-            if (isAway) {
-                // return the number of goals for that period
-                return this.boxScore?.goals?.filter(g => g.team === 'away').length;
-            }
-            // if home team
-            else {
-                // return the number of goals for that period
-                return this.boxScore?.goals?.filter(g => g.team === 'home').length;
-            }
-        }
-    }
-
-    /**
-     * Get the full name of a team.
-     */
-    public setTeamNameTooltip(): void {
-        setInterval(() => {
-            // create the full name of the away team
-            let awayTooltip = (this.boxScore?.awayTeam?.location || '') + ' ' + (this.boxScore?.awayTeam?.name || '');
-            // if tooltip is empty, set to away team
-            if (!awayTooltip.replace(' ', '')) { awayTooltip = 'Away Team'; }
-            // set the tooltip
-            this.tippyService.setContent('away-team-tippy', awayTooltip);
-            // create the full name of the home team
-            let homeTooltip = (this.boxScore?.homeTeam?.location || '') + ' ' + (this.boxScore?.homeTeam?.name || '');
-            // if tooltip is empty, set to home team
-            if (!homeTooltip.replace(' ', '')) { homeTooltip = 'Home Team'; }
-            // set the tooltip
-            this.tippyService.setContent('home-team-tippy', homeTooltip);
-        }, 1000);
-    }
-
-    public getShotsOnGoal(team: 'away' | 'home'): number {
-        if (this.pending) { return null; }
-        // if away team
-        let shotsOnGoal = 0;
-        // for each box score player on the away team in players, get their total number of shots on goal from the matching player member uuid in player standings
-        this.players.forEach(p => {
-            shotsOnGoal += this.playerStandings.find(ps => p.team === team && ps.member.uuid === p.member.uuid)?.shotsOnGoal || 0;
-        });
-        return shotsOnGoal;
-    }
-
-    /**
-     * Get the number of periods played, excluding overtime periods past the first one.
-     */
-    public getNumberOfPeriods(): number {
-        if (this.boxScore?.goals?.some(goal => goal.period > 3)) return 4;
-        return 3;
     }
 }

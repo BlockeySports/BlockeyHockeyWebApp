@@ -1,171 +1,192 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
-import { BoxScoreGoal } from 'src/app/models/BoxScoreGoal';
-import { NgxTippyService } from 'ngx-tippy-wrapper';
-import { BoxScorePlayer } from 'src/app/models/BoxScorePlayer';
+import { HockeyGoal } from 'src/app/models/HockeyGoal';
+import { IceTimeRecord } from 'src/app/models/IceTimeRecord';
 import { Member } from 'src/app/models/Member';
 
 @Component({
-    selector: 'app-goals',
-    templateUrl: './goals.component.html'
+  selector: 'app-goals',
+  templateUrl: './goals.component.html',
 })
 export class GoalsComponent implements OnInit {
+  @Input() boxScore: BoxScore;
+  @Input() isVisitor: boolean;
+  @Input() pending: boolean;
 
-    @Input() boxScore: BoxScore;
-    @Input() isVisitor: boolean;
-    @Input() pending: boolean;
+  public MAX_VISIBLE_GOALS = 13;
+  private LINE_HEIGHT = 1.625;
 
-    public MAX_VISIBLE_GOALS = 13;
-    private LINE_HEIGHT = 1.625;
+  constructor() {}
 
-    constructor() { }
+  ngOnInit(): void {}
 
-    ngOnInit(): void { }
+  /**
+   * Get all goals scored for the team.
+   * @returns all goals scored for the team
+   */
+  public getGoals(): HockeyGoal[] {
+    return this.boxScore?.goals?.filter((g) =>
+      this.isVisitor
+        ? g.team.toLowerCase() === 'away'
+        : g.team.toLowerCase() === 'home'
+    );
+  }
 
-    /**
-     * Get all goals scored for the team.
-     * @returns all goals scored for the team
-     */
-    public getGoals(): BoxScoreGoal[] {
-        return this.boxScore?.goals?.filter(g => this.isVisitor ? g.team === 'away' : g.team === 'home');
+  /**
+   * Return the goal sequence scored by the team excluding disallowed goals.
+   * @param goal The goal to get the sequence for.
+   * @returns the goal sequence
+   */
+  public getGoalNumber(goal: HockeyGoal): number {
+    // if this goal is disallowed
+    if (goal.isDisallowed)
+      return (
+        this.getGoals()
+          // filter out disallowed except this one
+          .filter((g) => !g.isDisallowed || g.id === goal.id)
+          .indexOf(goal) + 1
+      );
+    // return this goal's index in the list of goals (excluding disallowed goals)
+    return (
+      this.getGoals()
+        .filter((g) => !g.isDisallowed)
+        .indexOf(goal) + 1
+    );
+  }
+
+  /**
+   * Get goal type(s) for the goal.
+   * @param goal The goal to get the type(s) for.
+   * @returns the goal type(s)
+   */
+  public getGoalType(goal: HockeyGoal): string {
+    // if goal is null, stop here
+    if (!goal) {
+      return '';
     }
-
-    /**
-     * Get goal type(s) for the goal.
-     * @param goal The goal to get the type(s) for.
-     * @returns the goal type(s)
-     */
-    public getGoalType(goal: BoxScoreGoal): string {
-        // if goal is null, stop here
-        if (!goal) { return ''; }
-        // define the goal type as blank
-        let goalType = '';
-        if (goal.isOwnGoal) {
-            goalType += 'OWN';
-            if (goal.isEmptyNet) { goalType += '/EN'; }
-        } else {
-            if (goal.isPowerPlay) {
-                if (goalType && goalType.length > 0) { goalType += '/'; }
-                goalType += 'PP';
-            } else if (this.isExtraAttackerGoal(goal)) {
-                if (goalType && goalType.length > 0) { goalType += '/'; }
-                goalType += 'EA';
-            }
-
-            if (goal.isPenaltyKill) {
-                if (goalType && goalType.length > 0) { goalType += '/'; }
-                goalType += 'PK';
-            } else if (this.isShortHandedGoal(goal)) {
-                if (goalType && goalType.length > 0) { goalType += '/'; }
-                goalType += 'SH';
-            }
-
-            if (this.isEmptyNetGoal(goal)) {
-                if (goalType && goalType.length > 0) { goalType += '/'; }
-                goalType += 'EN';
-            }
+    // define the goal type as blank
+    let goalType = '';
+    if (goal?.isDisallowed) return 'WAVED';
+    if (goal?.ownGoalScorer) {
+      goalType += 'OWN';
+      if (!goal?.goaltender) {
+        goalType += '/EN';
+      }
+    } else {
+      if (goal?.goalType?.abbreviation === 'PP') {
+        if (goalType?.length > 0) {
+          goalType += '/';
         }
-        return goalType;
-    }
-
-    /**
-     * Get the description of the goal type(s).
-     * Used to display the tooltip.
-     * @param goal The goal to get the description for.
-     * @returns the description of the goal type(s)
-     */
-    public getGoalTypeDescription(goal: BoxScoreGoal): string {
-        let goalTypeDescription = '';
-        if (goal.isPowerPlay) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Power Play Goal';
-        } else if (goal.isExtraAttacker) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Extra Attacker Goal';
+        goalType += 'PP';
+      } else if (HockeyGoal.isExtraAttacker(goal)) {
+        if (goalType?.length > 0) {
+          goalType += '/';
         }
+        goalType += 'EA';
+      }
 
-        if (goal.isPenaltyKill) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Penalty Kill Goal';
-        } else if (goal.isShortHanded) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Short Handed Goal';
+      if (goal?.goalType?.abbreviation === 'PK') {
+        if (goalType?.length > 0) {
+          goalType += '/';
         }
-
-        if (goal.isEmptyNet) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Empty Net Goal';
+        goalType += 'PK';
+      } else if (HockeyGoal.isShortHanded(goal)) {
+        if (goalType?.length > 0) {
+          goalType += '/';
         }
+        goalType += 'SH';
+      }
 
-        if (goal.isOwnGoal) {
-            if (goalTypeDescription && goalTypeDescription.length > 0) { goalTypeDescription += '/'; }
-            goalTypeDescription += 'Own Goal';
+      if (!goal?.goaltender) {
+        if (goalType?.length > 0) {
+          goalType += '/';
         }
-        return goalTypeDescription;
+        goalType += 'EN';
+      }
     }
+    return goalType;
+  }
 
-    /**
-     * Get the period of the goal and convert overtime periods.
-     * @param goal The goal to get the period for.
-     * @returns the period of the goal
-     */
-    public getGoalPeriod(goal: BoxScoreGoal): string {
-        if (goal.period < 4) { return goal.period.toString(); }
-        if (goal.period === 4) { return 'OT'; }
-        return (goal.period - 3) + 'OT';
+  /**
+   * Get the description of the goal type(s).
+   * Used to display the tooltip.
+   * @param goal The goal to get the description for.
+   * @returns the description of the goal type(s)
+   */
+  public getGoalTypeDescription(goal: HockeyGoal): string {
+    let goalTypeDescription = goal?.isDisallowed ? 'Disallowed Goal' : '';
+    if (goal?.goalType?.abbreviation === 'PP') {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += 'Power Play Goal';
+    } else if (HockeyGoal.isExtraAttacker(goal)) {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += 'Extra Attacker Goal';
     }
+    if (goal?.goalType?.abbreviation === 'PK') {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += 'Penalty Kill Goal';
+    } else if (HockeyGoal.isShortHanded(goal)) {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += 'Short Handed Goal';
+    }
+    if (!goal.goaltender) {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += 'Empty Net Goal';
+    }
+    if (goal.ownGoalScorer) {
+      if (goalTypeDescription?.length > 0) {
+        goalTypeDescription += '/';
+      }
+      goalTypeDescription += `Own Goal (${goal?.ownGoalScorer?.player?.member?.username})`;
+    }
+    return goalTypeDescription;
+  }
 
-    /**
-     * Get the total number of players on the ice for a goal.
-     * @param goal The box score goal.
-     * @param team The to filer on.
-     * @returns the total number of players on the ice for a goal
-     */
-    public getTotalOnIcePlayers(goal: BoxScoreGoal, team: string, includeGoaltender: boolean): number {
-        return goal.onIcePlayers
-            .filter(onIcePlayer => onIcePlayer.player.team.toLowerCase() === team.toLowerCase())
-            .filter(onIcePlayer => includeGoaltender || onIcePlayer.player?.position?.toLowerCase() !== 'g')
-            .length;
+  /**
+   * Get the period of the goal and convert overtime periods.
+   * @param goal The goal to get the period for.
+   * @returns the period of the goal
+   */
+  public getPeriod(goal: HockeyGoal): string {
+    if (goal.period < 4) {
+      return goal.period.toString();
     }
+    if (goal.period === 4) {
+      return 'OT';
+    }
+    return goal.period - 3 + 'OT';
+  }
 
-    /**
-     * Check if the goal is an extra attacker goal.
-     */
-    public isExtraAttackerGoal(goal: BoxScoreGoal): boolean {
-        return this.getTotalOnIcePlayers(goal, goal.team, false) > this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home', false);
-    }
+  public getMaxVisibleGoals(): number {
+    return this.MAX_VISIBLE_GOALS - (this.boxScore?.series ? 1 : 0);
+  }
 
-    /**
-     * Check if the goal is a short-handed goal.
-     */
-    public isShortHandedGoal(goal: BoxScoreGoal): boolean {
-        return this.getTotalOnIcePlayers(goal, goal.team, false) < this.getTotalOnIcePlayers(goal, goal.team === 'home' ? 'away' : 'home', false);
-    }
+  public getMaxGoalsHeight(): string {
+    return `${
+      this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT -
+      (this.boxScore?.series ? this.LINE_HEIGHT : 0) +
+      2 / 16
+    }rem`;
+  }
 
-    /**
-     * Check if the goal is an empty net goal.
-     */
-    public isEmptyNetGoal(goal: BoxScoreGoal): boolean {
-        // search each on ice player in the goal for a player on the opposite team from the scoring team that is in the goaltender position
-        return !goal.onIcePlayers.some(onIcePlayer => onIcePlayer.player.team.toLowerCase() === (goal.team === 'home' ? 'away' : 'home') && onIcePlayer.player.position.toLowerCase() === 'g');
-    }
+  public getProfileLink(member: Member): string {
+    return window.location.origin + '/u/' + member.username;
+  }
 
-    public getMaxVisibleGoals(): number {
-        return this.MAX_VISIBLE_GOALS - (this.boxScore?.isSeries ? 1 : 0);
+  public getDescription(): string {
+    if (this.isVisitor) {
+      return 'Goals scored by the visiting team';
     }
-
-    public getMaxGoalsHeight(): string {
-        return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.isSeries ? this.LINE_HEIGHT : 0) + (2 / 16)}rem`;
-    }
-
-    public getProfileLink(member: Member): string {
-        return window.location.origin + '/u/' + member.username;
-    }
-
-    public getDescription(): string {
-        if (this.isVisitor) {
-            return 'Goals scored by the visiting team';
-        }
-        return 'Goals scored by the home team';
-    }
+    return 'Goals scored by the home team';
+  }
 }

@@ -45,8 +45,7 @@ export class TeamComponent implements OnInit {
      * @returns the team color
      */
     public getTeamColor(): string {
-        if (this.team.color === '#FFFFFF') { return '#000000'; }
-        return this.team.color;
+        if (this.team.primaryColor === '#FFFFFF') { return '#000000'; }
+        return this.team.primaryColor;
     }
-
 }
