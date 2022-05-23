@@ -33,6 +33,28 @@ export class GoalsComponent implements OnInit {
   }
 
   /**
+   * Return the goal sequence scored by the team excluding disallowed goals.
+   * @param goal The goal to get the sequence for.
+   * @returns the goal sequence
+   */
+  public getGoalNumber(goal: HockeyGoal): number {
+    // if this goal is disallowed
+    if (goal.isDisallowed)
+      return (
+        this.getGoals()
+          // filter out disallowed except this one
+          .filter((g) => !g.isDisallowed || g.id === goal.id)
+          .indexOf(goal) + 1
+      );
+    // return this goal's index in the list of goals (excluding disallowed goals)
+    return (
+      this.getGoals()
+        .filter((g) => !g.isDisallowed)
+        .indexOf(goal) + 1
+    );
+  }
+
+  /**
    * Get goal type(s) for the goal.
    * @param goal The goal to get the type(s) for.
    * @returns the goal type(s)

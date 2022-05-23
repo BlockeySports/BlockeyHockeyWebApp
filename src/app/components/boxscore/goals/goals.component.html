@@ -71,7 +71,7 @@
         class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center"
         [ngClass]="goal.isDisallowed ? 'text-opacity-80 text-red-500' : ''"
       >
-        {{ i + 1 }}
+        {{ getGoalNumber(goal) }}
       </td>
       <td
         class="border-r border-black-800 dark:border-black-50 w-[3.5rem] text-center"
