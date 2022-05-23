@@ -1,70 +1,68 @@
 <app-header class="fixed z-50 w-full"></app-header>
 <main class="dark:bg-black-700 min-h-screen pt-12">
-    <div class="dark:bg-black-700 flex flex-col px-20 h-fit space-y-2.5 w-fit">
-        <!-- START: Box Score Top -->
-        <div class="flex flex-row items-start justify-between mt-16">
-            <!-- START: Away Team & Roster -->
-            <div class="flex flex-col space-y-5">
-                <!-- START: Away Team Name -->
-                <app-team [isVisitor]="true" [team]="this.boxScore?.awayTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
-                <!-- END: Away Team Name -->
+  <div class="dark:bg-black-700 flex flex-col px-20 h-fit space-y-2.5 w-fit">
+    <!-- START: Box Score Top -->
+    <div class="flex flex-row items-start justify-between mt-16">
+      <!-- START: Away Team & Roster -->
+      <div class="flex flex-col space-y-5">
+        <!-- START: Away Team Name -->
+        <app-team [isVisitor]="true" [team]="this.boxScore?.awayTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
+        <!-- END: Away Team Name -->
 
-                <!-- START: Visitor Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="getPlayers('away')"></app-roster>
-                <!-- END: Visitor Players -->
-            </div>
-            <!-- END: Away Team & Roster -->
+        <!-- START: Visitor Players -->
+        <app-roster [boxScore]="this.boxScore" [players]="getPlayers('away')"></app-roster>
+        <!-- END: Visitor Players -->
+      </div>
+      <!-- END: Away Team & Roster -->
 
-            <!-- START: Information and Scoring Summary -->
-            <div class="mx-36 flex flex-col w-full mt-[0.22rem]"
-                 [class]="this.boxScore?.series ? 'h-[21.8rem]' : 'h-[20.25rem]'">
-                <!-- START: Box Score Information -->
-                <app-information [pending]="this.pending" [boxScore]="this.boxScore"
-                                 class="w-full"></app-information>
-                <!-- END: Box Score Information -->
+      <!-- START: Information and Scoring Summary -->
+      <div class="mx-36 flex flex-col w-full mt-[0.22rem]" [class]="this.boxScore?.series ? 'h-[21.8rem]' : 'h-[20.25rem]'">
+        <!-- START: Box Score Information -->
+        <app-information [pending]="this.pending" [boxScore]="this.boxScore" class="w-full"></app-information>
+        <!-- END: Box Score Information -->
 
-                <!-- START: Scoring Summary -->
-                <app-scoring-summary [pending]="this.pending" [boxScore]="this.boxScore" class="w-full mt-auto"></app-scoring-summary>
-                <!-- END: Scoring Summary -->
-            </div>
-            <!-- END: Information and Scoring Summary -->
+        <!-- START: Scoring Summary -->
+        <app-scoring-summary [pending]="this.pending" [boxScore]="this.boxScore" class="w-full mt-auto"></app-scoring-summary>
+        <!-- END: Scoring Summary -->
+      </div>
+      <!-- END: Information and Scoring Summary -->
 
-            <!-- START: Home Team & Roster -->
-            <div class="flex flex-col space-y-5">
-                <!-- START: Home Team Name -->
-                <app-team [isVisitor]="false" [team]="this.boxScore?.homeTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
-                <!-- END: Home Team Name -->
+      <!-- START: Home Team & Roster -->
+      <div class="flex flex-col space-y-5">
+        <!-- START: Home Team Name -->
+        <app-team [isVisitor]="false" [team]="this.boxScore?.homeTeam" [teams]="this.teams" [isReadOnly]="this.isReadOnly"></app-team>
+        <!-- END: Home Team Name -->
 
-                <!-- START: Home Players -->
-                <app-roster [boxScore]="this.boxScore" [players]="getPlayers('home')"></app-roster>
-                <!-- END: Home Players -->
-            </div>
-            <!-- END: Home Team & Roster -->
-        </div>
-        <!-- END: Box Score Top -->
-
-        <!-- START: Box Score Bottom -->
-        <div class="flex flex-row items-start justify-between gap-16">
-            <!-- START: Away Team Goals -->
-            <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="true"></app-goals>
-            <!-- END: Away Team Goals -->
-
-            <!-- START: Home Team Goals -->
-            <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="false"></app-goals>
-            <!-- END: Home Team Goals -->
-        </div>
-        <!-- END: Box Score Bottom -->
-
-        <!-- START: Box Score Player Statistics -->
-        <div class="flex flex-row items-start justify-between gap-16">
-            <!-- START: Away Team Stats -->
-            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="away"></app-box-score-stats>
-            <!-- END: Away Team Stats -->
-
-            <!-- START: Home Team Stats -->
-            <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="home"></app-box-score-stats>
-            <!-- END: Home Team Stats -->
-        </div>
-        <!-- END: Box Score Player Statistics -->
+        <!-- START: Home Players -->
+        <app-roster [boxScore]="this.boxScore" [players]="getPlayers('home')"></app-roster>
+        <!-- END: Home Players -->
+      </div>
+      <!-- END: Home Team & Roster -->
     </div>
+    <!-- END: Box Score Top -->
+
+    <!-- START: Box Score Bottom -->
+    <div class="flex flex-row items-start justify-between gap-16">
+      <!-- START: Away Team Goals -->
+      <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="true"></app-goals>
+      <!-- END: Away Team Goals -->
+
+      <!-- START: Home Team Goals -->
+      <app-goals [pending]="this.pending" [boxScore]="this.boxScore" [isVisitor]="false"></app-goals>
+      <!-- END: Home Team Goals -->
+    </div>
+    <!-- END: Box Score Bottom -->
+
+    <!-- START: Box Score Player Statistics -->
+    <div class="flex flex-row items-start justify-between gap-16">
+      <!-- START: Away Team Stats -->
+      <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="away"></app-box-score-stats>
+      <!-- END: Away Team Stats -->
+
+      <!-- START: Home Team Stats -->
+      <app-box-score-stats [pending]="this.pending" [boxScore]="this.boxScore" [stats]="this.playerStatistics" team="home"></app-box-score-stats>
+      <!-- END: Home Team Stats -->
+    </div>
+    <!-- END: Box Score Player Statistics -->
+  </div>
 </main>

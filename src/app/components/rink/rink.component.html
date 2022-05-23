@@ -1,340 +1,622 @@
 <app-header class="fixed z-50 w-full"></app-header>
 <main class="dark:bg-black-700 min-h-full">
-    <!-- START: Faceoff Dot Input -->
-    <h1 class="dark:text-white text-black-800 flex justify-center mt-10 text-4xl font-semibold">Center Ice Faceoff Dot</h1>
-    <div class="w-max relative flex flex-row justify-center mx-auto mt-5 space-x-5">
-        <input type="number" placeholder="x-coordinate"
-               [(ngModel)]="this.xCoord"
-               class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        <input type="number" placeholder="y-coordinate"
-               [(ngModel)]="this.yCoord"
-               class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        <input type="number" placeholder="z-coordinate"
-               [(ngModel)]="this.zCoord"
-               class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        <div class="-right-36 -bottom-1 absolute flex flex-col my-auto">
-            <div class="w-max flex flex-row items-center space-x-2"
-                 ngxTippy="Flip across x-axis"
-                 data-tippy-placement="right">
-                <label for="invert" class="dark:text-gray-200">Invert</label>
-                <input type="checkbox" name="invert" id="invert"
-                       class="focus:!ring-0"
-                       style="margin-right: 0.25rem;"
-                       [(ngModel)]="this.isFlipped">
-            </div>
-            <div class="w-max flex flex-row items-center space-x-2"
-                 ngxTippy="Flip across y-axis"
-                 data-tippy-placement="right">
-                <label for="flip-benches" class="dark:text-gray-200">Swap Benches</label>
-                <input type="checkbox" name="flip-benches" id="flip-benches"
-                       class="focus:!ring-0"
-                       style="margin-right: 0.25rem;"
-                       [(ngModel)]="this.isBenchesFlipped">
-            </div>
-        </div>
+  <!-- START: Faceoff Dot Input -->
+  <h1 class="dark:text-white text-black-800 flex justify-center mt-10 text-4xl font-semibold">Center Ice Faceoff Dot</h1>
+  <div class="w-max relative flex flex-row justify-center mx-auto mt-5 space-x-5">
+    <input
+      type="number"
+      placeholder="x-coordinate"
+      [(ngModel)]="this.xCoord"
+      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    <input
+      type="number"
+      placeholder="y-coordinate"
+      [(ngModel)]="this.yCoord"
+      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    <input
+      type="number"
+      placeholder="z-coordinate"
+      [(ngModel)]="this.zCoord"
+      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    <div class="-right-36 -bottom-1 absolute flex flex-col my-auto">
+      <div class="w-max flex flex-row items-center space-x-2" ngxTippy="Flip across x-axis" data-tippy-placement="right">
+        <label for="invert" class="dark:text-gray-200">Invert</label>
+        <input type="checkbox" name="invert" id="invert" class="focus:!ring-0" style="margin-right: 0.25rem" [(ngModel)]="this.isFlipped" />
+      </div>
+      <div class="w-max flex flex-row items-center space-x-2" ngxTippy="Flip across y-axis" data-tippy-placement="right">
+        <label for="flip-benches" class="dark:text-gray-200">Swap Benches</label>
+        <input
+          type="checkbox"
+          name="flip-benches"
+          id="flip-benches"
+          class="focus:!ring-0"
+          style="margin-right: 0.25rem"
+          [(ngModel)]="this.isBenchesFlipped" />
+      </div>
     </div>
-    <!-- END: Faceoff Dot Input -->
+  </div>
+  <!-- END: Faceoff Dot Input -->
 
-    <!-- START: Rink Info Inputs -->
-    <div class="flex flex-row justify-center mt-5 space-x-5">
-        <div class="flex flex-col">
-            <label for="rink-name" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="The rink or arena's name">Rink Name</label>
-            <input id="rink-name" type="text" placeholder="Staples Center"
-                   [(ngModel)]="this.rinkName"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        </div>
-        <div class="flex flex-col">
-            <label for="rink-team" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="The team that calls this rink home">Home Team</label>
-            <input id="rink-team" type="text" placeholder="Los Angeles Kings"
-                   [(ngModel)]="this.homeTeam"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        </div>
-        <div class="flex flex-col">
-            <label for="rink-location" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="The specific location of the rink">Location</label>
-            <input id="rink-location" type="text" placeholder="Los Angeles, California"
-                   [(ngModel)]="this.location"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        </div>
-        <div class="flex flex-col">
-            <label for="rink-color" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="The primary color of the rink">Primary Color</label>
-            <input id="rink-color" type="text" placeholder="#FFFFFF"
-                   [(ngModel)]="this.color"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        </div>
-        <div class="flex flex-col">
-            <label for="rink-icon" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="Minecraft item displayed in rinks menu">Rink Icon</label>
-            <input id="rink-icon" type="text" placeholder="blue_concrete"
-                   [(ngModel)]="this.icon"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md">
-        </div>
+  <!-- START: Rink Info Inputs -->
+  <div class="flex flex-row justify-center mt-5 space-x-5">
+    <div class="flex flex-col">
+      <label for="rink-name" class="dark:text-gray-200 w-max ml-1" ngxTippy="The rink or arena's name">Rink Name</label>
+      <input
+        id="rink-name"
+        type="text"
+        placeholder="Staples Center"
+        [(ngModel)]="this.rinkName"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
     </div>
-    <div class="flex flex-row justify-center mt-5 space-x-5">
-        <div class="flex flex-col">
-            <label for="rink-description" class="dark:text-gray-200 w-max ml-1"
-                   ngxTippy="Brief description of the rink">Rink Description</label>
-            <input type="text" id="rink-description" placeholder="This rink is the home arena for the Los Angeles Kings"
-                   [(ngModel)]="this.description"
-                   class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 w-[60rem] bg-gray-100 rounded shadow-md">
-        </div>
+    <div class="flex flex-col">
+      <label for="rink-team" class="dark:text-gray-200 w-max ml-1" ngxTippy="The team that calls this rink home">Home Team</label>
+      <input
+        id="rink-team"
+        type="text"
+        placeholder="Los Angeles Kings"
+        [(ngModel)]="this.homeTeam"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
     </div>
-    <!-- END: Rink Info Inputs -->
+    <div class="flex flex-col">
+      <label for="rink-location" class="dark:text-gray-200 w-max ml-1" ngxTippy="The specific location of the rink">Location</label>
+      <input
+        id="rink-location"
+        type="text"
+        placeholder="Los Angeles, California"
+        [(ngModel)]="this.location"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    </div>
+    <div class="flex flex-col">
+      <label for="rink-color" class="dark:text-gray-200 w-max ml-1" ngxTippy="The primary color of the rink">Primary Color</label>
+      <input
+        id="rink-color"
+        type="text"
+        placeholder="#FFFFFF"
+        [(ngModel)]="this.color"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    </div>
+    <div class="flex flex-col">
+      <label for="rink-icon" class="dark:text-gray-200 w-max ml-1" ngxTippy="Minecraft item displayed in rinks menu">Rink Icon</label>
+      <input
+        id="rink-icon"
+        type="text"
+        placeholder="blue_concrete"
+        [(ngModel)]="this.icon"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+    </div>
+  </div>
+  <div class="flex flex-row justify-center mt-5 space-x-5">
+    <div class="flex flex-col">
+      <label for="rink-description" class="dark:text-gray-200 w-max ml-1" ngxTippy="Brief description of the rink">Rink Description</label>
+      <input
+        type="text"
+        id="rink-description"
+        placeholder="This rink is the home arena for the Los Angeles Kings"
+        [(ngModel)]="this.description"
+        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 w-[60rem] bg-gray-100 rounded shadow-md" />
+    </div>
+  </div>
+  <!-- END: Rink Info Inputs -->
 
-    <p *ngIf="!this.xCoord || !this.yCoord || !this.zCoord"
-       class="dark:text-white text-black-800 flex justify-center mt-24 text-lg font-light">Enter the rink's coordinates to generate the XML.</p>
+  <p *ngIf="!this.xCoord || !this.yCoord || !this.zCoord" class="dark:text-white text-black-800 flex justify-center mt-24 text-lg font-light"
+    >Enter the rink's coordinates to generate the XML.</p
+  >
 
-    <!-- START: XML Output -->
-    <section *ngIf="this.xCoord && this.yCoord && this.zCoord">
-        <p class="dark:text-white text-black-800 flex justify-center mt-16 text-4xl font-semibold">Rink XML</p>
-        <code #xml type="text" class="dark:bg-black-400 dark:text-white text-black-800 relative flex flex-col p-5 mx-auto w-[71.5rem] mt-5 text-left bg-gray-200 border-2 border-gray-200 rounded-lg shadow-md">
-                <button id="copy-xml" (click)="copyXML()"
-                        class="right-4 top-4 text-black-200 hover:bg-gray-400 absolute p-2 dark:text-gray-100 transition-[background-color] duration-300 dark:bg-black-200 dark:hover:bg-black-500 bg-gray-300 rounded-md shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                    </svg>
-                </button>
-                <span>&lt;rink min="{{ xCoord - 35 }},{{ yCoord - 2 }},{{ zCoord - 19 }}" max="{{ xCoord + 35 }},{{ yCoord + 5 }},{{ zCoord + 19 }}"&gt;</span>
-                <!-- START: Rink Info -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;{{ this.rinkName }}&lt;/name&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;{{ this.description }}&lt;/description&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;team&gt;{{ this.homeTeam }}&lt;/team&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;location&gt;{{ this.location }}&lt;/location&gt;</span>
-                <!-- END: Rink Info -->
-                <span>&nbsp;</span>
-                <!-- START: Icon -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;color&gt;{{ this.color }}&lt;/color&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;icon&gt;{{ this.icon }}&lt;/icon&gt;</span>
-                <!-- END: Icon -->
-                <span>&nbsp;</span>
-                <!-- START: Authors -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;authors&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;author uuid="" contribution="" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/authors&gt;</span>
-                <!-- END: Authors -->
-                <span>&nbsp;</span>
-                <!-- START: Contributors -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributors&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor uuid="" contribution="" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/contributors&gt;</span>
-                <!-- END: Contributors -->
-                <span>&nbsp;</span>
-                <!-- START: Settings -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;settings&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;offside&gt;delayed&lt;/offside&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;stoppage-music&gt;enabled&lt;/stoppage-music&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-horn&gt;home&lt;/goal-horn&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;overtime&gt;enabled&lt;/overtime&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;crowd&gt;enabled&lt;/crowd&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;game-style&gt;arcade&lt;/game-style&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/settings&gt;</span>
-                <!-- END: Settings -->
-                <span>&nbsp;</span>
-                <!-- START: Periods -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;periods&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pregame length="5m" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;regulation length="5m" count="3" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;overtime length="5m" count="oo" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;intermission regulation="1m" first-overtime="1m30s" overtime="1m" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/periods&gt;</span>
-                <!-- END: Periods -->
-                <span>&nbsp;</span>
-                <!-- START: Spawns -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;spawns&gt;</span>
-                <span *ngIf="!this.isFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;spectator loc="{{ xCoord }},{{ yCoord + 14 }},{{ zCoord }}" yaw="180" pitch="90" /&gt;</span>
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0" /&gt;</span>
-                    </span>
-                </span>
-                <span *ngIf="this.isFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;spectator loc="{{ xCoord }},{{ yCoord + 14 }},{{ zCoord }}" yaw="0" pitch="90" /&gt;</span>
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0" /&gt;</span>
-                    </span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/spawns&gt;</span>
-                <!-- END: Spawns -->
-                <span>&nbsp;</span>
-                <!-- START: Faceoffs -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoffs&gt;</span>
-                <span *ngIf="!this.isFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{ this.isBenchesFlipped ? 'home' : 'away' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{ this.isBenchesFlipped ? 'away' : 'home' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{ this.isBenchesFlipped ? 'home' : 'away' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord -7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{ this.isBenchesFlipped ? 'away' : 'home' }}" /&gt;</span>
-                </span>
-                <span *ngIf="this.isFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{ this.isBenchesFlipped ? 'away' : 'home' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord -7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{ this.isBenchesFlipped ? 'home' : 'away' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{ this.isBenchesFlipped ? 'away' : 'home' }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{ this.isBenchesFlipped ? 'home' : 'away' }}" /&gt;</span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/faceoffs&gt;</span>
-                <!-- END: Faceoffs -->
-                <span>&nbsp;</span>
-                <!-- START: Nets -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;nets&gt;</span>
-                <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{ xCoord + 29 }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{ xCoord - 29 }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span>
-                </span>
-                <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="west" min="{{ xCoord - 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{ xCoord - 29 }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="east" min="{{ xCoord + 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{ xCoord + 29 }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/nets&gt;</span>
-                <!-- END: Nets -->
-                <span>&nbsp;</span>
-                <!-- START: Goal Lights -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-lights&gt;</span>
-                <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/away&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/home&gt;</span>
-                </span>
-                <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/away&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord - 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{ zCoord + 2 }}" height="3" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/home&gt;</span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goal-lights&gt;</span>
-                <!-- END: Goal Lights -->
-                <span>&nbsp;</span>
-                <!-- START: Zones -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;zones&gt;<span class="text-gray-500">&nbsp;&lt;!-- Include the blue line in regions --&gt;</span></span>
-                <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 33 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                </span>
-                <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 33 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;neutral side="neutral" min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/zones&gt;</span>
-                <!-- END: Zones -->
-                <span>&nbsp;</span>
-                <!-- START: Lines -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lines&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;red min="{{ xCoord + 0 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 0 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-blue min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-goal min="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-blue min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-goal min="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span>
-                </span>
-                <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-blue min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-goal min="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-blue min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-goal min="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/lines&gt;</span>
-                <!-- END: Lines -->
-                <span>&nbsp;</span>
-                <!-- START: Benches -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;benches&gt;</span>
-                <span *ngIf="!this.isFlipped" class="flex flex-col">
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="south" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{ xCoord + 13 }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="south" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{ xCoord - 3 }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="south" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{ xCoord - 3 }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="south" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{ xCoord + 13 }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span>
-                    </span>
-                </span>
-                <span *ngIf="this.isFlipped" class="flex flex-col">
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="north" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{ xCoord + 13 }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="north" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{ xCoord - 3 }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="north" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{ xCoord - 3 }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="north" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{ xCoord + 13 }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span>
-                    </span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/benches&gt;</span>
-                <!-- END: Benches -->
-                <span>&nbsp;</span>
-                <!-- START: Penalty Boxes -->
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;penalty-boxes&gt;</span>
-                <span *ngIf="!this.isFlipped" class="flex flex-col">
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord + 9 }},{{ yCoord }},{{ zCoord - 15 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord - 4 }},{{ yCoord }},{{ zCoord - 15 }}" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord - 4 }},{{ yCoord }},{{ zCoord - 15 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord + 9 }},{{ yCoord }},{{ zCoord - 15 }}" /&gt;</span>
-                    </span>
-                </span>
-                <span *ngIf="this.isFlipped" class="flex flex-col">
-                    <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord + 9 }},{{ yCoord }},{{ zCoord + 15 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord - 4 }},{{ yCoord }},{{ zCoord + 15 }}" /&gt;</span>
-                    </span>
-                    <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord - 4 }},{{ yCoord }},{{ zCoord + 15 }}" /&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord + 9 }},{{ yCoord }},{{ zCoord + 15 }}" /&gt;</span>
-                    </span>
-                </span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/penalty-boxes&gt;</span>
-                <!-- END: Penalty Boxes -->
-    
-                <span>&lt;/rink&gt;</span>
-            </code>
-    </section>
-    <!-- END: XML Output -->
+  <!-- START: XML Output -->
+  <section *ngIf="this.xCoord && this.yCoord && this.zCoord">
+    <p class="dark:text-white text-black-800 flex justify-center mt-16 text-4xl font-semibold">Rink XML</p>
+    <code
+      #xml
+      type="text"
+      class="dark:bg-black-400 dark:text-white text-black-800 relative flex flex-col p-5 mx-auto w-[71.5rem] mt-5 text-left bg-gray-200 border-2 border-gray-200 rounded-lg shadow-md">
+      <button
+        id="copy-xml"
+        (click)="copyXML()"
+        class="right-4 top-4 text-black-200 hover:bg-gray-400 absolute p-2 dark:text-gray-100 transition-[background-color] duration-300 dark:bg-black-200 dark:hover:bg-black-500 bg-gray-300 rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+          <path
+            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+          <path
+            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+        </svg>
+      </button>
+      <span>&lt;rink min="{{ xCoord - 35 }},{{ yCoord - 2 }},{{ zCoord - 19 }}" max="{{ xCoord + 35 }},{{ yCoord + 5 }},{{ zCoord + 19 }}"&gt;</span>
+      <!-- START: Rink Info -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;{{ this.rinkName }}&lt;/name&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;{{ this.description }}&lt;/description&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;team&gt;{{ this.homeTeam }}&lt;/team&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;location&gt;{{ this.location }}&lt;/location&gt;</span>
+      <!-- END: Rink Info -->
+      <span>&nbsp;</span>
+      <!-- START: Icon -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;color&gt;{{ this.color }}&lt;/color&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;icon&gt;{{ this.icon }}&lt;/icon&gt;</span>
+      <!-- END: Icon -->
+      <span>&nbsp;</span>
+      <!-- START: Authors -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;authors&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;author uuid="" contribution="" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/authors&gt;</span>
+      <!-- END: Authors -->
+      <span>&nbsp;</span>
+      <!-- START: Contributors -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributors&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor uuid="" contribution="" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/contributors&gt;</span>
+      <!-- END: Contributors -->
+      <span>&nbsp;</span>
+      <!-- START: Settings -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;settings&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;offside&gt;delayed&lt;/offside&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;stoppage-music&gt;enabled&lt;/stoppage-music&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-horn&gt;home&lt;/goal-horn&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;overtime&gt;enabled&lt;/overtime&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;crowd&gt;enabled&lt;/crowd&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;game-style&gt;arcade&lt;/game-style&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/settings&gt;</span>
+      <!-- END: Settings -->
+      <span>&nbsp;</span>
+      <!-- START: Periods -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;periods&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pregame length="5m" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;regulation length="5m" count="3" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;overtime length="5m" count="oo" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;intermission regulation="1m" first-overtime="1m30s" overtime="1m" /&gt;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/periods&gt;</span>
+      <!-- END: Periods -->
+      <span>&nbsp;</span>
+      <!-- START: Spawns -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;spawns&gt;</span>
+      <span *ngIf="!this.isFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;spectator loc="{{ xCoord }},{{ yCoord + 14 }},{{ zCoord }}" yaw="180" pitch="90"
+          /&gt;</span
+        >
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0"
+            /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0"
+            /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0"
+            /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord + 16 }}" yaw="180" pitch="0"
+            /&gt;</span
+          >
+        </span>
+      </span>
+      <span *ngIf="this.isFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;spectator loc="{{ xCoord }},{{ yCoord + 14 }},{{ zCoord }}" yaw="0" pitch="90"
+          /&gt;</span
+        >
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0"
+            /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0"
+            /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away loc="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0"
+            /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home loc="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 16 }}" yaw="0" pitch="0"
+            /&gt;</span
+          >
+        </span>
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/spawns&gt;</span>
+      <!-- END: Spawns -->
+      <span>&nbsp;</span>
+      <!-- START: Faceoffs -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoffs&gt;</span>
+      <span *ngIf="!this.isFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{
+            this.isBenchesFlipped ? 'home' : 'away'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{
+            this.isBenchesFlipped ? 'away' : 'home'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{
+            this.isBenchesFlipped ? 'home' : 'away'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{
+            this.isBenchesFlipped ? 'away' : 'home'
+          }}" /&gt;</span
+        >
+      </span>
+      <span *ngIf="this.isFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="center" loc="{{ xCoord }},{{ yCoord }},{{ zCoord }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="2" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{
+            this.isBenchesFlipped ? 'away' : 'home'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="3" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="4" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord - 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="5" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord - 8 }}" zone="{{
+            this.isBenchesFlipped ? 'home' : 'away'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="6" loc="{{ xCoord - 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{
+            this.isBenchesFlipped ? 'away' : 'home'
+          }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="7" loc="{{ xCoord - 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="8" loc="{{ xCoord + 7 }},{{ yCoord }},{{ zCoord + 8 }}" zone="neutral"
+          /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;faceoff dot="9" loc="{{ xCoord + 21 }},{{ yCoord }},{{ zCoord + 8 }}" zone="{{
+            this.isBenchesFlipped ? 'home' : 'away'
+          }}" /&gt;</span
+        >
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/faceoffs&gt;</span>
+      <!-- END: Faceoffs -->
+      <span>&nbsp;</span>
+      <!-- START: Nets -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;nets&gt;</span>
+      <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{
+            xCoord + 29
+          }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{
+            xCoord - 29
+          }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span
+        >
+      </span>
+      <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="west" min="{{ xCoord - 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{
+            xCoord - 29
+          }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="east" min="{{ xCoord + 29 }},{{ yCoord }},{{ zCoord - 1 }}" max="{{
+            xCoord + 29
+          }},{{ yCoord + 1 }},{{ zCoord + 1 }}" /&gt;</span
+        >
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/nets&gt;</span>
+      <!-- END: Nets -->
+      <span>&nbsp;</span>
+      <!-- START: Goal Lights -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-lights&gt;</span>
+      <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away&gt;</span>
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{
+            zCoord - 2
+          }}" height="3" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{
+            zCoord + 2
+          }}" height="3" /&gt;</span
+        >
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/away&gt;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home&gt;</span>
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{
+            zCoord - 2
+          }}" height="3" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{
+            zCoord + 2
+          }}" height="3" /&gt;</span
+        >
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/home&gt;</span>
+      </span>
+      <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away&gt;</span>
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{
+            zCoord - 2
+          }}" height="3" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord - 34 }},{{ yCoord + 1 }},{{
+            zCoord + 2
+          }}" height="3" /&gt;</span
+        >
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/away&gt;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home&gt;</span>
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{
+            zCoord - 2
+          }}" height="3" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal-light min="{{ xCoord + 34 }},{{ yCoord + 1 }},{{
+            zCoord + 2
+          }}" height="3" /&gt;</span
+        >
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/home&gt;</span>
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goal-lights&gt;</span>
+      <!-- END: Goal Lights -->
+      <span>&nbsp;</span>
+      <!-- START: Zones -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;zones&gt;<span class="text-gray-500">&nbsp;&lt;!-- Include the blue line in regions --&gt;</span></span>
+      <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord + 33
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord - 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+      </span>
+      <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="west" min="{{ xCoord - 33 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord - 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="east" min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord + 33
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+      </span>
+      <span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;neutral side="neutral" min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+          xCoord + 10
+        }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+      >
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/zones&gt;</span>
+      <!-- END: Zones -->
+      <span>&nbsp;</span>
+      <!-- START: Lines -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lines&gt;</span>
+      <span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;red min="{{ xCoord + 0 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{ xCoord + 0 }},{{
+          yCoord
+        }},{{ zCoord + 13 }}" /&gt;</span
+      >
+      <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-blue min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord + 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-goal min="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{
+            xCoord + 28
+          }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-blue min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord - 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-goal min="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{
+            xCoord - 28
+          }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span
+        >
+      </span>
+      <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-blue min="{{ xCoord - 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord - 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away-goal min="{{ xCoord - 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{
+            xCoord - 28
+          }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-blue min="{{ xCoord + 10 }},{{ yCoord }},{{ zCoord - 13 }}" max="{{
+            xCoord + 10
+          }},{{ yCoord }},{{ zCoord + 13 }}" /&gt;</span
+        >
+        <span
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home-goal min="{{ xCoord + 28 }},{{ yCoord }},{{ zCoord - 12 }}" max="{{
+            xCoord + 28
+          }},{{ yCoord }},{{ zCoord + 12 }}" /&gt;</span
+        >
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/lines&gt;</span>
+      <!-- END: Lines -->
+      <span>&nbsp;</span>
+      <!-- START: Benches -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;benches&gt;</span>
+      <span *ngIf="!this.isFlipped" class="flex flex-col">
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="south" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{
+              xCoord + 13
+            }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="south" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{
+              xCoord - 3
+            }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="south" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{
+              xCoord - 3
+            }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="south" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord + 15 }}" max="{{
+              xCoord + 13
+            }},{{ yCoord + 3 }},{{ zCoord + 17 }}" /&gt;</span
+          >
+        </span>
+      </span>
+      <span *ngIf="this.isFlipped" class="flex flex-col">
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="north" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{
+              xCoord + 13
+            }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="north" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{
+              xCoord - 3
+            }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away side="north" min="{{ xCoord - 13 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{
+              xCoord - 3
+            }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home side="north" min="{{ xCoord + 3 }},{{ yCoord }},{{ zCoord - 15 }}" max="{{
+              xCoord + 13
+            }},{{ yCoord + 3 }},{{ zCoord - 17 }}" /&gt;</span
+          >
+        </span>
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/benches&gt;</span>
+      <!-- END: Benches -->
+      <span>&nbsp;</span>
+      <!-- START: Penalty Boxes -->
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;penalty-boxes&gt;</span>
+      <span *ngIf="!this.isFlipped" class="flex flex-col">
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord + 9 }},{{
+              yCoord
+            }},{{ zCoord - 15 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord - 4 }},{{
+              yCoord
+            }},{{ zCoord - 15 }}" /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord - 4 }},{{
+              yCoord
+            }},{{ zCoord - 15 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord - 17 }}" max="{{ xCoord + 9 }},{{
+              yCoord
+            }},{{ zCoord - 15 }}" /&gt;</span
+          >
+        </span>
+      </span>
+      <span *ngIf="this.isFlipped" class="flex flex-col">
+        <span *ngIf="!this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord + 9 }},{{
+              yCoord
+            }},{{ zCoord + 15 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord - 4 }},{{
+              yCoord
+            }},{{ zCoord + 15 }}" /&gt;</span
+          >
+        </span>
+        <span *ngIf="this.isBenchesFlipped" class="flex flex-col">
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;away min="{{ xCoord - 9 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord - 4 }},{{
+              yCoord
+            }},{{ zCoord + 15 }}" /&gt;</span
+          >
+          <span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;home min="{{ xCoord + 4 }},{{ yCoord }},{{ zCoord + 17 }}" max="{{ xCoord + 9 }},{{
+              yCoord
+            }},{{ zCoord + 15 }}" /&gt;</span
+          >
+        </span>
+      </span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/penalty-boxes&gt;</span>
+      <!-- END: Penalty Boxes -->
+
+      <span>&lt;/rink&gt;</span>
+    </code>
+  </section>
+  <!-- END: XML Output -->
 </main>
 
 <style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 
-    main {
-        padding-top: 63px;
-        min-height: 100vh;
-    }
+  main {
+    padding-top: 63px;
+    min-height: 100vh;
+  }
 </style>
