@@ -39,26 +39,19 @@ export class StatsComponent implements OnInit, OnChanges {
         this.changeLeagueTab(this.getLeagues()[0]);
         this.isLoading = false;
         // console.log(this.playerStatistics);
-      } else if (this.isError)
-        this.loadingText =
-          'An unexpected error occurred while loading your statistics.';
-      else
-        this.loadingText =
-          'You have no statistics yet. Join the server and play a game.';
+      } else if (this.isError) this.loadingText = 'An unexpected error occurred while loading your statistics.';
+      else this.loadingText = 'You have no statistics yet. Join the server and play a game.';
     }, 6000);
   }
 
   public getLeagues(): HockeyLeague[] {
     // if leagues are already set, return them
-    if (this.leagues.filter((league) => league.code !== 'arcade').length > 0)
-      return this.leagues;
+    if (this.leagues.filter(league => league.code !== 'arcade').length > 0) return this.leagues;
     // get all leagues
-    const leagues = this.playerStatistics?.map((stat) => stat?.filter?.league);
+    const leagues = this.playerStatistics?.map(stat => stat?.filter?.league);
     // console.log(leagues);
     // set leagues with arcade first
-    this.leagues = this.getUniqueValues(leagues, 'id').sort((a, b) =>
-      a.code === 'arcade' ? -1 : 1
-    );
+    this.leagues = this.getUniqueValues(leagues, 'id').sort((a, b) => (a.code === 'arcade' ? -1 : 1));
     // return leagues
     return this.leagues;
   }
@@ -68,9 +61,7 @@ export class StatsComponent implements OnInit, OnChanges {
    */
   public getSeasons(): HockeySeason[] {
     // get all seasons for the current league
-    const seasons = this.playerStatistics
-      ?.filter((stat) => stat?.filter.league?.id === this.leagueTab?.id)
-      ?.map((stat) => stat?.filter?.season);
+    const seasons = this.playerStatistics?.filter(stat => stat?.filter.league?.id === this.leagueTab?.id)?.map(stat => stat?.filter?.season);
     // add 'career' season
     if (seasons.length > 0)
       seasons?.push({
@@ -80,9 +71,7 @@ export class StatsComponent implements OnInit, OnChanges {
         league: this.leagueTab,
       });
     // get unique seasons sorted by season value
-    return this.getUniqueValues(seasons, 'id').sort(
-      (a, b) => a.value - b.value
-    );
+    return this.getUniqueValues(seasons, 'id').sort((a, b) => a.value - b.value);
   }
 
   /**
@@ -91,33 +80,21 @@ export class StatsComponent implements OnInit, OnChanges {
   public getSeasonTypes(): HockeySeasonType[] {
     // get all season types for the current league and season
     const seasonTypes = this.playerStatistics
-      ?.filter((stat) => stat?.filter.league?.id === this.leagueTab?.id)
-      ?.filter(
-        (stat) =>
-          this.seasonTab.id === 'career' ||
-          stat?.filter.season?.id === this.seasonTab?.id
-      )
-      ?.map((stat) => stat?.filter?.seasonType);
-    return this.getUniqueValues(seasonTypes, 'value')?.sort(
-      (a, b) => a.value - b.value
-    );
+      ?.filter(stat => stat?.filter.league?.id === this.leagueTab?.id)
+      ?.filter(stat => this.seasonTab.id === 'career' || stat?.filter.season?.id === this.seasonTab?.id)
+      ?.map(stat => stat?.filter?.seasonType);
+    return this.getUniqueValues(seasonTypes, 'value')?.sort((a, b) => a.value - b.value);
   }
 
   /**
    * Get the player statistic for the current league, season, and season type.
    */
-  public getPlayerStatistics(
-    seasonType: HockeySeasonType
-  ): HockeyPlayerStatistic[] {
+  public getPlayerStatistics(seasonType: HockeySeasonType): HockeyPlayerStatistic[] {
     // get the player statistic for the current league, season, and season type
     return this.playerStatistics
-      ?.filter((stat) => stat?.filter.league?.id === this.leagueTab?.id)
-      ?.filter(
-        (stat) =>
-          this.seasonTab.id === 'career' ||
-          stat?.filter.season?.id === this.seasonTab?.id
-      )
-      ?.filter((stat) => stat?.filter.seasonType?.value === seasonType.value);
+      ?.filter(stat => stat?.filter.league?.id === this.leagueTab?.id)
+      ?.filter(stat => this.seasonTab.id === 'career' || stat?.filter.season?.id === this.seasonTab?.id)
+      ?.filter(stat => stat?.filter.seasonType?.value === seasonType.value);
   }
 
   /**
@@ -125,68 +102,51 @@ export class StatsComponent implements OnInit, OnChanges {
    */
   public getGamesPlayed(seasonType: HockeySeasonType): number {
     // get number of games played filtered by league tab, season tab, and season type
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.gamesPlayed,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.gamesPlayed, 0);
   }
 
   public getWins(seasonType: HockeySeasonType): number {
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.wins,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.wins, 0);
+  }
+
+  public getOTWins(seasonType: HockeySeasonType): number {
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.overtimeWins, 0);
+  }
+
+  public getTotalWins(seasonType: HockeySeasonType): number {
+    return this.getWins(seasonType) + this.getOTWins(seasonType);
   }
 
   public getLosses(seasonType: HockeySeasonType): number {
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.losses,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.losses, 0);
   }
 
   public getOTLosses(seasonType: HockeySeasonType): number {
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.overtimeLosses,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.overtimeLosses, 0);
   }
 
   public getTotalLosses(seasonType: HockeySeasonType): number {
     return this.getLosses(seasonType) + this.getOTLosses(seasonType);
   }
 
-  private getPointsStats(
-    seasonType: HockeySeasonType
-  ): HockeyPointsStatistic[] {
-    return this.getPlayerStatistics(seasonType)?.flatMap((stat) => stat.points);
+  private getPointsStats(seasonType: HockeySeasonType): HockeyPointsStatistic[] {
+    return this.getPlayerStatistics(seasonType)?.flatMap(stat => stat.points);
   }
 
   public getGoals(seasonType: HockeySeasonType): number {
-    return this.getPointsStats(seasonType)?.reduce(
-      (acc, stat) => acc + stat.goals,
-      0
-    );
+    return this.getPointsStats(seasonType)?.reduce((acc, stat) => acc + stat.goals, 0);
   }
 
   public getPrimaryAssists(seasonType: HockeySeasonType): number {
-    return this.getPointsStats(seasonType)?.reduce(
-      (acc, stat) => acc + stat.primaryAssists,
-      0
-    );
+    return this.getPointsStats(seasonType)?.reduce((acc, stat) => acc + stat.primaryAssists, 0);
   }
 
   public getSecondaryAssists(seasonType: HockeySeasonType): number {
-    return this.getPointsStats(seasonType)?.reduce(
-      (acc, stat) => acc + stat.secondaryAssists,
-      0
-    );
+    return this.getPointsStats(seasonType)?.reduce((acc, stat) => acc + stat.secondaryAssists, 0);
   }
 
   public getAssists(seasonType: HockeySeasonType): number {
-    return (
-      this.getPrimaryAssists(seasonType) + this.getSecondaryAssists(seasonType)
-    );
+    return this.getPrimaryAssists(seasonType) + this.getSecondaryAssists(seasonType);
   }
 
   public getPoints(seasonType: HockeySeasonType): number {
@@ -194,24 +154,15 @@ export class StatsComponent implements OnInit, OnChanges {
   }
 
   public getOTGoals(seasonType: HockeySeasonType): number {
-    return this.getPointsStats(seasonType)?.reduce(
-      (acc, stat) => acc + stat.overtimeGoals,
-      0
-    );
+    return this.getPointsStats(seasonType)?.reduce((acc, stat) => acc + stat.overtimeGoals, 0);
   }
 
   public getShotsOnGoal(seasonType: HockeySeasonType): number {
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.shotsOnGoal,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsOnGoal, 0);
   }
 
   public getPlusMinus(seasonType: HockeySeasonType): number {
-    return this.getPlayerStatistics(seasonType)?.reduce(
-      (acc, stat) => acc + stat.plusMinus,
-      0
-    );
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.plusMinus, 0);
   }
 
   public getStreak(seasonType: HockeySeasonType): string {
@@ -231,10 +182,7 @@ export class StatsComponent implements OnInit, OnChanges {
    * Get unique elements from an array by a given property of the element.
    */
   private getUniqueValues(data: any[], key: string): any[] {
-    return data?.filter(
-      (value, index, self) =>
-        self.map((v) => v[key]).indexOf(value[key]) === index
-    );
+    return data?.filter((value, index, self) => self.map(v => v[key]).indexOf(value[key]) === index);
   }
 
   /**
@@ -261,9 +209,7 @@ export class StatsComponent implements OnInit, OnChanges {
     // set the league tab
     this.leagueTab = league;
     // get seasons (excluding career)
-    const seasons = this.getSeasons().filter(
-      (season) => season.id !== 'career'
-    );
+    const seasons = this.getSeasons().filter(season => season.id !== 'career');
     // set season tab to the last season in that league
     this.seasonTab = seasons[seasons.length - 1];
   }
@@ -283,8 +229,6 @@ export class StatsComponent implements OnInit, OnChanges {
   public getFirstSeenDate(): string {
     if (!this.member?.dateJoined) return null;
     const date = this.dateService.getDate(this.member.dateJoined);
-    return date
-      ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US')
-      : 'N/A';
+    return date ? 'First seen on ' + formatDate(date, 'MMM d, y, h:mm a', 'en-US') : 'N/A';
   }
 }
