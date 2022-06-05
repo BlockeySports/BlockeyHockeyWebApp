@@ -25,11 +25,7 @@ export class GoalsComponent implements OnInit {
    * @returns all goals scored for the team
    */
   public getGoals(): HockeyGoal[] {
-    return this.boxScore?.goals?.filter((g) =>
-      this.isVisitor
-        ? g.team.toLowerCase() === 'away'
-        : g.team.toLowerCase() === 'home'
-    );
+    return this.boxScore?.goals?.filter(g => (this.isVisitor ? g.team.toLowerCase() === 'away' : g.team.toLowerCase() === 'home'));
   }
 
   /**
@@ -43,13 +39,13 @@ export class GoalsComponent implements OnInit {
       return (
         this.getGoals()
           // filter out disallowed except this one
-          .filter((g) => !g.isDisallowed || g.id === goal.id)
+          .filter(g => !g.isDisallowed || g.id === goal.id)
           .indexOf(goal) + 1
       );
     // return this goal's index in the list of goals (excluding disallowed goals)
     return (
       this.getGoals()
-        .filter((g) => !g.isDisallowed)
+        .filter(g => !g.isDisallowed)
         .indexOf(goal) + 1
     );
   }
@@ -66,7 +62,7 @@ export class GoalsComponent implements OnInit {
     }
     // define the goal type as blank
     let goalType = '';
-    if (goal?.isDisallowed) return 'WAVED';
+    if (goal?.isDisallowed) return 'WAIVED';
     if (goal?.ownGoalScorer) {
       goalType += 'OWN';
       if (!goal?.goaltender) {
@@ -172,11 +168,7 @@ export class GoalsComponent implements OnInit {
   }
 
   public getMaxGoalsHeight(): string {
-    return `${
-      this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT -
-      (this.boxScore?.series ? this.LINE_HEIGHT : 0) +
-      2 / 16
-    }rem`;
+    return `${this.MAX_VISIBLE_GOALS * this.LINE_HEIGHT - (this.boxScore?.series ? this.LINE_HEIGHT : 0) + 2 / 16}rem`;
   }
 
   public getProfileLink(member: Member): string {
