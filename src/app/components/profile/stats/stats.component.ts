@@ -83,7 +83,12 @@ export class StatsComponent implements OnInit, OnChanges {
       ?.filter(stat => stat?.filter.league?.id === this.leagueTab?.id)
       ?.filter(stat => this.seasonTab.id === 'career' || stat?.filter.season?.id === this.seasonTab?.id)
       ?.map(stat => stat?.filter?.seasonType);
-    return this.getUniqueValues(seasonTypes, 'value')?.sort((a, b) => a.value - b.value);
+    // get unique season types sorted by season type value
+    let types: HockeySeasonType[] = this.getUniqueValues(seasonTypes, 'value')?.sort((a, b) => a.value - b.value);
+    // if first season type is preseason, move it to the end of the array
+    if (types?.length > 0 && types[0].value === 2) types = [types[1], types[0]].concat(types.slice(2));
+    // return unique season types
+    return types;
   }
 
   /**
