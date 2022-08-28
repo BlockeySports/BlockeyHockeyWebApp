@@ -202,7 +202,7 @@ export class StatsComponent implements OnInit, OnChanges {
   public getWinLossRatio(seasonType: HockeySeasonType): number {
     // get total losses
     const totalLosses = this.getTotalLosses(seasonType);
-    return this.getWins(seasonType) / (totalLosses > 1 ? totalLosses : 1);
+    return (this.getWins(seasonType) + this.getOTWins(seasonType)) / (totalLosses > 1 ? totalLosses : 1);
   }
 
   /**
