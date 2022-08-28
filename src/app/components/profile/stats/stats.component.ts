@@ -28,6 +28,8 @@ export class StatsComponent implements OnInit, OnChanges {
   public leagueTab: HockeyLeague = null;
   public seasonTab: HockeySeason = null;
 
+  public isSkaterStats = true;
+
   constructor(private dateService: DateService) {}
 
   ngOnInit(): void {}
@@ -164,6 +166,22 @@ export class StatsComponent implements OnInit, OnChanges {
 
   public getShotsOnGoal(seasonType: HockeySeasonType): number {
     return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsOnGoal, 0);
+  }
+
+  public getShotsAgainst(seasonType: HockeySeasonType): number {
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsAgainst, 0);
+  }
+
+  public getSaves(seasonType: HockeySeasonType): number {
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.saves, 0);
+  }
+
+  public getSavePercentage(seasonType: HockeySeasonType): number {
+    return this.getSaves(seasonType) / this.getShotsAgainst(seasonType);
+  }
+
+  public getGoalsAgainst(seasonType: HockeySeasonType): number {
+    return this.getShotsAgainst(seasonType) - this.getSaves(seasonType);
   }
 
   public getPlusMinus(seasonType: HockeySeasonType): number {

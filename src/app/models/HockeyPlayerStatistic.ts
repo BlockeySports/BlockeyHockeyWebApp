@@ -39,4 +39,5 @@ export class HockeyPlayerStatistic {
     fights?: number;
     fightsWon?: number;
     fightsLost?: number;
+  shotsAgainst?: number;
 }

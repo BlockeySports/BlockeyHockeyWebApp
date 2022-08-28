@@ -120,7 +120,7 @@
           <!-- END: Overtime Losses -->
 
           <!-- START: Goals -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getGoals(seasonType) || 0 | number }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'g'" ngxTippy="Total Goals"
               >goals</span
@@ -129,7 +129,7 @@
           <!-- END: Goals -->
 
           <!-- START: Assists -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getAssists(seasonType) || 0 | number }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'a'" ngxTippy="Total Assists"
               >assists</span
@@ -138,7 +138,7 @@
           <!-- END: Assists -->
 
           <!-- START: Points -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getPoints(seasonType) || 0 | number }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'p'" ngxTippy="Total Points"
               >points</span
@@ -147,7 +147,7 @@
           <!-- END: Points -->
 
           <!-- START: Overtime Goals -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getOTGoals(seasonType) || 0 | number }}</span>
             <span
               class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
@@ -159,7 +159,7 @@
           <!-- END: Overtime Goals -->
 
           <!-- START: Shots on Goal -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getShotsOnGoal(seasonType) || 0 | number }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 's'" ngxTippy="Total Shots on Goal"
               >shots on goal</span
@@ -168,7 +168,7 @@
           <!-- END: Shots on Goal -->
 
           <!-- START: Plus-Minus -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getPlusMinus(seasonType) || 0 | signed }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'pm'" ngxTippy="Total Plus-Minus"
               >+/-</span
@@ -187,6 +187,63 @@
                               ngxTippy="Average Time on Ice (minutes)">TOI</span>
                     </div> -->
           <!-- END: Average Time on Ice -->
+
+          <!-- START: Shots Against -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getShotsAgainst(seasonType) || 0 | number }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'sa'" ngxTippy="Shots Against"
+              >shots against</span
+            >
+          </div>
+          <!-- END: Shots Against -->
+
+          <!-- START: Saves Made -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getSaves(seasonType) || 0 | number }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'svm'" ngxTippy="Saves Made"
+              >saves</span
+            >
+          </div>
+          <!-- END: Saves Made -->
+
+          <!-- START: Save Percentage -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getSavePercentage(seasonType) || 0 | number: '1.3-3' }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'svp'" ngxTippy="Save Percentage"
+              >SV%</span
+            >
+          </div>
+          <!-- END: Save Percentage -->
+
+          <!-- START: Shutouts -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ '-' }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'so'" ngxTippy="Shutouts"
+              >shutouts</span
+            >
+          </div>
+          <!-- END: Shutouts -->
+
+          <!-- START: Goals Against -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getGoalsAgainst(seasonType) || 0 | number }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [tippyName]="seasonType + ' ' + i + 'ga'" ngxTippy="Goals Against"
+              >goals against</span
+            >
+          </div>
+          <!-- END: Goals Against -->
+
+          <!-- START: Goal Against Average -->
+          <div *ngIf="!this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ '-' }}</span>
+            <span
+              class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
+              [tippyName]="seasonType + ' ' + i + 'gaa'"
+              ngxTippy="Goal Against Average"
+              >GAA</span
+            >
+          </div>
+          <!-- END: Goal Against Average -->
 
           <!-- START: Streak -->
           <div class="table mx-auto space-x-3 md:mx-0">
