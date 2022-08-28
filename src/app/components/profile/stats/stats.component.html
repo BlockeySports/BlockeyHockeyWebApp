@@ -74,6 +74,11 @@
         <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b tracking-wide">{{
           seasonType.name + ' Statistics' | capitalize
         }}</span>
+        <button
+          class="pt-0.5 px-2 dark:hover:bg-white/50 my-auto text-sm uppercase rounded-sm dark:bg-white/25 hover:bg-black/25 bg-black/10 font-semibold tracking-wider"
+          (click)="this.isSkaterStats = !this.isSkaterStats"
+          >{{ this.isSkaterStats ? 'skater' : 'goaltender' }}</button
+        >
         <div class="grid grid-cols-4 mx-6 mt-8 text-lg lg:text-2xl gap-y-8 gap-x-28">
           <!-- START: Games Played -->
           <div class="table mx-auto space-x-3 md:mx-0">
