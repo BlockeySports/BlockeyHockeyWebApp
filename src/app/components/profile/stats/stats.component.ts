@@ -35,14 +35,18 @@ export class StatsComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
+    this.changeLeagueTab(this.getLeagues()[0]);
+    if (this.leagues?.length > 0) {
+      this.isLoading = false;
+    }
     // default the league tab to the arcade league
     setTimeout(() => {
       if (this.leagues?.length > 0) {
-        this.changeLeagueTab(this.getLeagues()[0]);
+        // this.changeLeagueTab(this.getLeagues()[0]);
         this.isLoading = false;
         // console.log(this.playerStatistics);
       } else if (this.isError) this.loadingText = 'An unexpected error occurred while loading your statistics.';
-      else this.loadingText = 'You have no statistics yet. Join the server and play a game.';
+      else this.loadingText = 'No cached statistics found. Please wait while updated statistics are fetched.';
     }, 6000);
   }
 
