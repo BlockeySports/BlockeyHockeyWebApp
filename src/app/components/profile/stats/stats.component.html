@@ -53,7 +53,7 @@
       *ngIf="getSeasons().length > 0"
       class="flex-row flex-wrap hidden mx-auto mt-10 border-b text-md md:flex border-black-300 dark:border-gray-100">
       <div
-        *ngFor="let season of getSeasons()"
+        *ngFor="let season of getSeasons(); let i = index"
         (click)="changeSeasonTab(season)"
         class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none last-of-type:ml-auto"
         tabindex="0"
@@ -71,7 +71,8 @@
     <!-- START: Statistics -->
     <div *ngIf="this.leagueTab && this.seasonTab" class="flex-col hidden space-y-16 md:flex mt-7">
       <div *ngFor="let seasonType of getSeasonTypes(); let i = index">
-        <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b tracking-wide">{{
+        <div class="flex flex-row items-center"></div>
+        <span class="border-black-50 lg:text-[2rem] w-max pb-1.5 pr-0.5 text-3xl font-semibold border-b tracking-wide mr-5">{{
           seasonType.name + ' Statistics' | capitalize
         }}</span>
         <button

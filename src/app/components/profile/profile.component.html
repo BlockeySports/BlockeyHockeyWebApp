@@ -1,8 +1,8 @@
 <!-- START: Header -->
 <app-header class="fixed z-50 w-full"></app-header>
 <!-- END: Header -->
-<main class="dark:bg-black-700 pb-20">
-  <div class="text-black-700 dark:text-gray-50 dark:bg-black-700 layout pt-5 mx-auto font-sans">
+<main class="pb-20 dark:bg-black-700">
+  <div class="pt-5 mx-auto font-sans text-black-700 dark:text-gray-50 dark:bg-black-700 layout">
     <!-- Player username -->
     <div class="flex flex-row items-center space-x-4">
       <h1
@@ -11,7 +11,7 @@
         <span>{{ this.member?.username || 'Player Not Found' }}</span>
         <span *ngIf="this.member?.number" class="text-[2.1rem] flex flex-row space-x-3">
           <span class="dark:text-gray-100 text-black-200">&vert;</span>
-          <span class="dark:text-white font-mono text-black">&#35;{{ this.member?.number }}</span>
+          <span class="font-mono text-black dark:text-white">&#35;{{ this.member?.number }}</span>
         </span>
       </h1>
       <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
@@ -38,7 +38,7 @@
     </div>
     <!-- END: Roles & Ranks Bar -->
 
-    <div class="md:flex-row flex flex-col justify-between">
+    <div class="flex flex-col justify-between md:flex-row">
       <div class="flex flex-col">
         <!-- START: Player Profile Picture (Minecraft Head) -->
         <div
@@ -47,7 +47,7 @@
         <!-- END: Player Profile Picture (Minecraft Head) -->
 
         <!-- START: Online Status -->
-        <div class="whitespace-nowrap flex justify-center">
+        <div class="flex justify-center whitespace-nowrap">
           <div
             class="w-2.5 h-2.5 my-auto mr-1.5 rounded-full shadow-md"
             [ngxTippy]="getTippyOnlineStatus()"
@@ -65,7 +65,7 @@
     </div>
 
     <!-- START: Tabs -->
-    <div class="text-md md:flex border-black-300 dark:border-gray-100 mt-7 flex-row flex-wrap hidden border-b select-none">
+    <div class="flex-row flex-wrap hidden border-b select-none text-md md:flex border-black-300 dark:border-gray-100 mt-7">
       <!-- START: Stats Tab -->
       <div
         id="stat-tab"
@@ -133,14 +133,14 @@
     <!-- END: Tabs -->
 
     <!-- START: Tabs Content -->
-    <div class="md:flex hidden">
+    <div class="hidden md:flex">
       <app-stats
         [class.hidden]="this.tab !== 'stats'"
         [member]="this.member"
         [playerStatistics]="this.playerStatistics"
         [isError]="this.isError"
         class="w-full mt-10"></app-stats>
-      <app-games [class.hidden]="this.tab !== 'games'" [member]="this.member" class="w-full mt-10"> </app-games>
+      <!-- <app-games [class.hidden]="this.tab !== 'games'" [member]="this.member" class="w-full mt-10"> </app-games> -->
       <app-awards [class.hidden]="this.tab !== 'awards'" [awards]="this.member" class="w-full mt-10"></app-awards>
       <app-infractions [class.hidden]="this.tab !== 'infractions'" [member]="this.member" class="w-full mt-10"></app-infractions>
     </div>
