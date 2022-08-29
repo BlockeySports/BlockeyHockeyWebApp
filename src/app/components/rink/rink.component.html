@@ -1,34 +1,49 @@
 <app-header class="fixed z-50 w-full"></app-header>
-<main class="dark:bg-black-700 min-h-full">
+<main class="min-h-full dark:bg-black-700">
   <!-- START: Faceoff Dot Input -->
-  <h1 class="dark:text-white text-black-800 flex justify-center mt-10 text-4xl font-semibold">Center Ice Faceoff Dot</h1>
-  <div class="w-max relative flex flex-row justify-center mx-auto mt-5 space-x-5">
-    <input
-      type="number"
-      placeholder="x-coordinate"
-      [(ngModel)]="this.xCoord"
-      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
-    <input
-      type="number"
-      placeholder="y-coordinate"
-      [(ngModel)]="this.yCoord"
-      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
-    <input
-      type="number"
-      placeholder="z-coordinate"
-      [(ngModel)]="this.zCoord"
-      class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
-    <div class="-right-36 -bottom-1 absolute flex flex-col my-auto">
-      <div class="w-max flex flex-row items-center space-x-2" ngxTippy="Flip across x-axis" data-tippy-placement="right">
-        <label for="invert" class="dark:text-gray-200">Invert</label>
+  <h1 class="flex justify-center mt-10 text-4xl font-semibold dark:text-white text-black-800">Center Ice Faceoff Dot</h1>
+  <div class="relative flex flex-row justify-center mx-auto mt-5 space-x-5 w-max">
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The center ice x-coordinate">X-Coordinate</label>
+      <input
+        type="number"
+        name="x-coord"
+        id="x-coord"
+        placeholder="x-coordinate"
+        [(ngModel)]="this.xCoord"
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+    </div>
+    <div class="flex flex-col">
+      <label for="y-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The center ice y-coordinate">Y-Coordinate</label>
+      <input
+        type="number"
+        name="y-coord"
+        id="y-coord"
+        placeholder="y-coordinate"
+        [(ngModel)]="this.yCoord"
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+    </div>
+    <div class="flex flex-col">
+      <label for="z-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The center ice z-coordinate">Z-Coordinate</label>
+      <input
+        type="number"
+        name="z-coord"
+        id="z-coord"
+        placeholder="z-coordinate"
+        [(ngModel)]="this.zCoord"
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+    </div>
+    <div class="absolute flex flex-col my-auto -right-44 -bottom-1">
+      <div class="flex flex-row items-center space-x-2 w-max" ngxTippy="Switch penalty boxes and benches" data-tippy-placement="right">
+        <label for="invert" class="dark:text-gray-200">Flip across x-axis</label>
         <input type="checkbox" name="invert" id="invert" class="focus:!ring-0" style="margin-right: 0.25rem" [(ngModel)]="this.isFlipped" />
       </div>
-      <div class="w-max flex flex-row items-center space-x-2" ngxTippy="Flip across y-axis" data-tippy-placement="right">
-        <label for="flip-benches" class="dark:text-gray-200">Swap Benches</label>
+      <div class="flex flex-row items-center space-x-2 w-max" ngxTippy="Switch home and away benches" data-tippy-placement="right">
+        <label for="switch-benches" class="dark:text-gray-200">Flip across z-axis</label>
         <input
           type="checkbox"
-          name="flip-benches"
-          id="flip-benches"
+          name="switch-benches"
+          id="switch-benches"
           class="focus:!ring-0"
           style="margin-right: 0.25rem"
           [(ngModel)]="this.isBenchesFlipped" />
@@ -40,54 +55,54 @@
   <!-- START: Rink Info Inputs -->
   <div class="flex flex-row justify-center mt-5 space-x-5">
     <div class="flex flex-col">
-      <label for="rink-name" class="dark:text-gray-200 w-max ml-1" ngxTippy="The rink or arena's name">Rink Name</label>
+      <label for="rink-name" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The rink or arena's name">Rink Name</label>
       <input
         id="rink-name"
         type="text"
         placeholder="Staples Center"
         [(ngModel)]="this.rinkName"
-        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
     </div>
     <div class="flex flex-col">
-      <label for="rink-team" class="dark:text-gray-200 w-max ml-1" ngxTippy="The team that calls this rink home">Home Team</label>
+      <label for="rink-team" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The team that calls this rink home">Home Team</label>
       <input
         id="rink-team"
         type="text"
         placeholder="Los Angeles Kings"
         [(ngModel)]="this.homeTeam"
-        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
     </div>
     <div class="flex flex-col">
-      <label for="rink-location" class="dark:text-gray-200 w-max ml-1" ngxTippy="The specific location of the rink">Location</label>
+      <label for="rink-location" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The specific location of the rink">Location</label>
       <input
         id="rink-location"
         type="text"
         placeholder="Los Angeles, California"
         [(ngModel)]="this.location"
-        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
     </div>
     <div class="flex flex-col">
-      <label for="rink-color" class="dark:text-gray-200 w-max ml-1" ngxTippy="The primary color of the rink">Primary Color</label>
+      <label for="rink-color" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The primary color of the rink">Primary Color</label>
       <input
         id="rink-color"
         type="text"
         placeholder="#FFFFFF"
         [(ngModel)]="this.color"
-        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
     </div>
     <div class="flex flex-col">
-      <label for="rink-icon" class="dark:text-gray-200 w-max ml-1" ngxTippy="Minecraft item displayed in rinks menu">Rink Icon</label>
+      <label for="rink-icon" class="ml-1 dark:text-gray-200 w-max" ngxTippy="Minecraft item displayed in rinks menu">Rink Icon</label>
       <input
         id="rink-icon"
         type="text"
         placeholder="blue_concrete"
         [(ngModel)]="this.icon"
-        class="dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50 bg-gray-100 rounded shadow-md" />
+        class="bg-gray-100 rounded shadow-md dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
     </div>
   </div>
   <div class="flex flex-row justify-center mt-5 space-x-5">
     <div class="flex flex-col">
-      <label for="rink-description" class="dark:text-gray-200 w-max ml-1" ngxTippy="Brief description of the rink">Rink Description</label>
+      <label for="rink-description" class="ml-1 dark:text-gray-200 w-max" ngxTippy="Brief description of the rink">Rink Description</label>
       <input
         type="text"
         id="rink-description"
@@ -98,13 +113,13 @@
   </div>
   <!-- END: Rink Info Inputs -->
 
-  <p *ngIf="!this.xCoord || !this.yCoord || !this.zCoord" class="dark:text-white text-black-800 flex justify-center mt-24 text-lg font-light"
+  <p *ngIf="!this.xCoord || !this.yCoord || !this.zCoord" class="flex justify-center mt-24 text-lg font-light dark:text-white text-black-800"
     >Enter the rink's coordinates to generate the XML.</p
   >
 
   <!-- START: XML Output -->
   <section *ngIf="this.xCoord && this.yCoord && this.zCoord">
-    <p class="dark:text-white text-black-800 flex justify-center mt-16 text-4xl font-semibold">Rink XML</p>
+    <p class="flex justify-center mt-16 text-4xl font-semibold dark:text-white text-black-800">Rink XML</p>
     <code
       #xml
       type="text"
