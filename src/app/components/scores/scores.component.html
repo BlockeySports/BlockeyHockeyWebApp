@@ -32,7 +32,7 @@
             class="border-black-800 dark:border-black-50 w-full text-center border-r p-0.5 text-shadow-sm"
             [style.background]="this.boxScore?.awayTeam?.primaryColor || 'white'"
             [style.color]="getContrastingColor(this.boxScore?.awayTeam?.primaryColor) || 'black'">
-            {{ boxScore?.awayTeam?.location + ' ' + boxScore?.awayTeam?.name }}
+            {{ boxScore?.awayTeam?.location ?? '' + ' ' + boxScore?.awayTeam?.name ?? '' }}
           </p>
           <p class="border-black-800 dark:border-black-50 dark:bg-black-400 dark:text-white w-[20%] flex text-center border-r p-0.5">
             <span class="mx-auto my-auto">&#64;</span>
@@ -41,7 +41,7 @@
             class="border-black-800 dark:border-black-50 w-full text-center bg-[#6a7287] p-0.5 text-shadow-sm"
             [style.background]="this.boxScore?.homeTeam?.primaryColor || 'white'"
             [style.color]="getContrastingColor(this.boxScore?.homeTeam?.primaryColor) || 'black'">
-            {{ boxScore?.homeTeam?.location + ' ' + boxScore?.homeTeam?.name }}
+            {{ boxScore?.homeTeam?.location ?? '' + ' ' + boxScore?.homeTeam?.name ?? '' }}
           </p>
         </div>
         <!-- END: Team Names -->
