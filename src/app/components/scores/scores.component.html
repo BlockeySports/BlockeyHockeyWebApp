@@ -1,14 +1,14 @@
 <!-- START: Header -->
 <app-header class="fixed z-50 w-full"></app-header>
 <!-- END: Header -->
-<main class="dark:bg-black-700 pb-20">
+<main class="pb-20 dark:bg-black-700">
   <!-- START: Title -->
-  <h1 class="w-max dark:text-white mx-auto my-8 text-4xl font-semibold">Recent Games</h1>
+  <h1 class="mx-auto my-8 text-4xl font-semibold w-max dark:text-white">Recent Games</h1>
   <!-- END: Title -->
 
   <!-- START: Mini Box Scores -->
-  <div class="layout mx-auto">
-    <div *ngIf="this.boxScores && this.boxScores.length > 0" class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
+  <div class="mx-auto layout">
+    <div *ngIf="this.boxScores && this.boxScores.length > 0" class="grid grid-cols-1 gap-6 mb-10 lg:grid-cols-2 sm:gap-12">
       <!-- START: Mini Box Score -->
       <a
         *ngFor="let boxScore of this.boxScores; let i = index"
@@ -16,7 +16,7 @@
         target="_blank"
         class="border-black-800 dark:border-black-50 dark:hover:border-gray-100 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content] hover:ring-2 hover:ring-black dark:hover:ring-gray-100">
         <!-- START: League, Date, Result -->
-        <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full bg-gray-300 border-b">
+        <div class="flex flex-row w-full bg-gray-300 border-b border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white">
           <p class="border-black-800 dark:border-black-50 w-[20%] text-center border-r p-0.5">{{ getLeagueCode(boxScore) }}</p>
           <p class="border-black-800 dark:border-black-50 w-[60%] text-center border-r font-semibold p-0.5">
             {{ getDate(boxScore) }}
@@ -27,7 +27,7 @@
         <!-- END: League, Date, Result -->
 
         <!-- START: Team Names -->
-        <div class="border-black-800 dark:border-black-50 bg-gray-50 flex flex-row w-full font-semibold border-b">
+        <div class="flex flex-row w-full font-semibold border-b border-black-800 dark:border-black-50 bg-gray-50">
           <p
             class="border-black-800 dark:border-black-50 w-full text-center border-r p-0.5 text-shadow-sm"
             [style.background]="this.boxScore?.awayTeam?.primaryColor || 'white'"
@@ -53,30 +53,30 @@
         <!-- END: Scoring Summary Title -->
 
         <!-- START: Scoring Summary -->
-        <div class="border-black-800 dark:border-black-50 flex flex-row">
+        <div class="flex flex-row border-black-800 dark:border-black-50">
           <div class="w-[7%] sm:w-[12%] dark:bg-black-300"></div>
-          <table class="border-black-800 dark:border-black-50 dark:text-white w-full border-l border-r table-fixed select-none">
+          <table class="w-full border-l border-r table-fixed select-none border-black-800 dark:border-black-50 dark:text-white">
             <tr>
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-600 bg-gray-300 border-b border-r"
+                class="bg-gray-300 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-600"
                 [tippyName]="i + 'teams'"
                 ngxTippy="Teams that played this in game"
                 >TEAMS</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + '1p'"
                 ngxTippy="First period"
                 >1</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + '2p'"
                 ngxTippy="Second period"
                 >2</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + '3p'"
                 ngxTippy="Third period"
                 >3</th
@@ -94,53 +94,53 @@
                 ngxTippy="Final score"
                 >FINAL</th
               >
-              <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b" [tippyName]="i + 'sog'" ngxTippy="Final score"
+              <th class="bg-gray-200 border-b border-black-800 dark:border-black-50 dark:bg-black-500" [tippyName]="i + 'sog'" ngxTippy="Final score"
                 >SOG</th
               >
             </tr>
             <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
               <td
-                class="border-black-800 dark:border-black-50 relative flex border-r"
+                class="relative flex border-r border-black-800 dark:border-black-50"
                 [style.background]="this.boxScore?.awayTeam?.primaryColor || 'white'"
                 [style.color]="getContrastingColor(this.boxScore?.awayTeam?.primaryColor) || 'black'"
                 [tippyName]="i + 'awayTeamCode'"
                 [ngxTippy]="setTeamNameTooltip(boxScore, true)">
-                <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
+                <p class="mx-auto font-semibold w-max text-shadow-sm">{{ this.boxScore?.awayTeam?.code || 'AWAY' }}</p>
                 <fa-icon
                   *ngIf="getScore(boxScore, 'away') > getScore(boxScore, 'home')"
                   [icon]="['fas', 'caret-right']"
                   size="lg"
-                  class="-left-4 absolute text-blue-600"></fa-icon>
+                  class="absolute text-blue-600 -left-4"></fa-icon>
               </td>
               <td
                 *ngFor="let i of [].constructor(isGameOvertime(boxScore) ? 4 : 3); let j = index"
-                class="border-black-800 dark:border-black-50 text-center border-r"
+                class="text-center border-r border-black-800 dark:border-black-50"
                 >{{ getScore(boxScore, 'away', j + 1) }}</td
               >
-              <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getScore(boxScore, 'away', null) }}</td>
-              <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal(boxScore, 'away') }}</td>
+              <td class="text-center border-r border-black-800 dark:border-black-50">{{ getScore(boxScore, 'away', null) }}</td>
+              <td class="text-center border-black-800 dark:border-black-50">{{ getShotsOnGoal(boxScore, 'away') }}</td>
             </tr>
             <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
               <td
-                class="border-black-800 dark:border-black-50 relative flex border-r"
+                class="relative flex border-r border-black-800 dark:border-black-50"
                 [style.background]="this.boxScore?.homeTeam?.primaryColor || 'white'"
                 [style.color]="getContrastingColor(this.boxScore?.homeTeam?.primaryColor) || 'black'"
                 [tippyName]="i + 'homeTeamCode'"
                 [ngxTippy]="setTeamNameTooltip(boxScore, false)">
-                <p class="w-max text-shadow-sm mx-auto font-semibold">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
+                <p class="mx-auto font-semibold w-max text-shadow-sm">{{ this.boxScore?.homeTeam?.code || 'HOME' }}</p>
                 <fa-icon
                   *ngIf="getScore(boxScore, 'home') > getScore(boxScore, 'away')"
                   [icon]="['fas', 'caret-right']"
                   size="lg"
-                  class="-left-4 absolute text-blue-600"></fa-icon>
+                  class="absolute text-blue-600 -left-4"></fa-icon>
               </td>
               <td
                 *ngFor="let i of [].constructor(isGameOvertime(boxScore) ? 4 : 3); let j = index"
-                class="border-black-800 dark:border-black-50 text-center border-r"
+                class="text-center border-r border-black-800 dark:border-black-50"
                 >{{ getScore(boxScore, 'home', j + 1) }}</td
               >
-              <td class="border-black-800 dark:border-black-50 text-center border-r">{{ getScore(boxScore, 'home', null) }}</td>
-              <td class="border-black-800 dark:border-black-50 text-center">{{ getShotsOnGoal(boxScore, 'home') }}</td>
+              <td class="text-center border-r border-black-800 dark:border-black-50">{{ getScore(boxScore, 'home', null) }}</td>
+              <td class="text-center border-black-800 dark:border-black-50">{{ getShotsOnGoal(boxScore, 'home') }}</td>
             </tr>
           </table>
           <div class="w-[7%] sm:w-[12%] dark:bg-black-300"></div>
@@ -150,10 +150,10 @@
         <!-- START: Stream Link -->
         <div class="border-black-800 dark:border-black-50 dark:bg-black-400 flex flex-row w-full text-sm bg-gray-100 border-t min-h-[25px]">
           <a *ngIf="boxScore.stream" [href]="boxScore.stream" target="_blank" class="group w-max flex flex-row items-center mx-auto space-x-1 p-0.5">
-            <fa-icon [icon]="['fab', 'youtube']" class="group-hover:text-red-700 sm:flex hidden my-auto text-red-600"></fa-icon>
-            <p class="group-hover:underline text-red-500/80 group-hover:text-red-700 flex flex-row items-start space-x-1">
+            <fa-icon [icon]="['fab', 'youtube']" class="hidden my-auto text-red-600 group-hover:text-red-700 sm:flex"></fa-icon>
+            <p class="flex flex-row items-start space-x-1 group-hover:underline text-red-500/80 group-hover:text-red-700">
               <span>{{ boxScore.stream }}</span>
-              <fa-icon [icon]="['fas', 'external-link-alt']" size="xs" class="sm:flex text-red-500/50 sm:text-sm hidden mb-auto text-xs"></fa-icon>
+              <fa-icon [icon]="['fas', 'external-link-alt']" size="xs" class="hidden mb-auto text-xs sm:flex text-red-500/50 sm:text-sm"></fa-icon>
             </p>
           </a>
         </div>
@@ -161,13 +161,13 @@
       </a>
       <!-- END: Mini Box Score -->
     </div>
-    <div *ngIf="!this.boxScores || this.boxScores.length === 0" class="lg:grid-cols-2 sm:gap-12 grid grid-cols-1 gap-6 mb-10">
+    <div *ngIf="!this.boxScores || this.boxScores.length === 0" class="grid grid-cols-1 gap-6 mb-10 lg:grid-cols-2 sm:gap-12">
       <!-- START: Placeholder Box Score -->
       <div
         *ngFor="let boxScore of [].constructor(10); let i = index"
         class="border-black-800 dark:border-black-50 flex flex-col border-2 w-min-[25rem] w-full mx-auto h-[min-content]">
         <!-- START: League, Date, Result -->
-        <div class="border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white flex flex-row w-full bg-gray-300 border-b">
+        <div class="flex flex-row w-full bg-gray-300 border-b border-black-800 dark:border-black-50 dark:bg-black-600 dark:text-white">
           <p class="border-black-800 dark:border-black-50 w-[20%] text-center border-r p-0.5">&nbsp;</p>
           <p class="border-black-800 dark:border-black-50 w-[60%] text-center border-r font-semibold p-0.5">&nbsp;</p>
           <p class="w-[20%] text-center p-0.5">&nbsp;</p>
@@ -175,7 +175,7 @@
         <!-- END: League, Date, Result -->
 
         <!-- START: Team Names -->
-        <div class="border-black-800 dark:border-black-50 bg-gray-50 flex flex-row w-full font-semibold border-b">
+        <div class="flex flex-row w-full font-semibold border-b border-black-800 dark:border-black-50 bg-gray-50">
           <p class="border-black-800 dark:border-black-50 w-full text-center dark:bg-black-200 border-r p-0.5 text-shadow-sm">&nbsp;</p>
           <p class="border-black-800 dark:border-black-50 dark:bg-black-400 dark:text-white w-[20%] flex text-center border-r p-0.5">
             <span class="mx-auto my-auto">&nbsp;</span>
@@ -191,53 +191,53 @@
         <!-- END: Scoring Summary Title -->
 
         <!-- START: Scoring Summary -->
-        <div class="border-black-800 dark:border-black-50 flex flex-row">
+        <div class="flex flex-row border-black-800 dark:border-black-50">
           <div class="w-[7%] sm:w-[12%] dark:bg-black-300"></div>
-          <table class="border-black-800 dark:border-black-50 dark:text-white w-full border-l border-r table-fixed select-none">
+          <table class="w-full border-l border-r table-fixed select-none border-black-800 dark:border-black-50 dark:text-white">
             <tr>
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-600 bg-gray-300 border-b border-r"
+                class="bg-gray-300 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-600"
                 [tippyName]="i + 'b_teams'"
                 ngxTippy="Teams that played this in game"
                 >&nbsp;</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + 'b_1p'"
                 ngxTippy="First period"
                 >&nbsp;</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + 'b_2p'"
                 ngxTippy="Second period"
                 >&nbsp;</th
               >
               <th
-                class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+                class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                 [tippyName]="i + 'b_3p'"
                 ngxTippy="Third period"
                 >&nbsp;</th
               >
-              <!-- <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b border-r"
+              <!-- <th class="bg-gray-200 border-b border-r border-black-800 dark:border-black-50 dark:bg-black-500"
                                 [tippyName]="i + 'b_4p'" ngxTippy="Overtime period(s)">&nbsp;</th> -->
-              <th class="border-black-800 dark:border-black-50 dark:bg-black-500 bg-gray-200 border-b" [tippyName]="i + 'b_5p'" ngxTippy="Final score"
+              <th class="bg-gray-200 border-b border-black-800 dark:border-black-50 dark:bg-black-500" [tippyName]="i + 'b_5p'" ngxTippy="Final score"
                 >&nbsp;</th
               >
             </tr>
             <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
-              <td class="border-black-800 dark:border-black-50 dark:bg-black-400 relative flex bg-gray-100 border-r">
-                <p class="w-max text-shadow-sm mx-auto font-semibold">&nbsp;</p>
+              <td class="relative flex bg-gray-100 border-r border-black-800 dark:border-black-50 dark:bg-black-400">
+                <p class="mx-auto font-semibold w-max text-shadow-sm">&nbsp;</p>
               </td>
-              <td *ngFor="let i of [].constructor(3); let j = index" class="border-black-800 dark:border-black-50 text-center border-r">&nbsp;</td>
-              <td class="border-black-800 dark:border-black-50 text-center">&nbsp;</td>
+              <td *ngFor="let i of [].constructor(3); let j = index" class="text-center border-r border-black-800 dark:border-black-50">&nbsp;</td>
+              <td class="text-center border-black-800 dark:border-black-50">&nbsp;</td>
             </tr>
             <tr class="even:bg-gray-50 dark:even:bg-black-200 odd:bg-gray-100 dark:odd:bg-black-300">
-              <td class="border-black-800 dark:border-black-50 dark:bg-black-400 relative flex bg-gray-100 border-r">
-                <p class="w-max text-shadow-sm mx-auto font-semibold">&nbsp;</p>
+              <td class="relative flex bg-gray-100 border-r border-black-800 dark:border-black-50 dark:bg-black-400">
+                <p class="mx-auto font-semibold w-max text-shadow-sm">&nbsp;</p>
               </td>
-              <td *ngFor="let i of [].constructor(3); let j = index" class="border-black-800 dark:border-black-50 text-center border-r">&nbsp;</td>
-              <td class="border-black-800 dark:border-black-50 text-center">&nbsp;</td>
+              <td *ngFor="let i of [].constructor(3); let j = index" class="text-center border-r border-black-800 dark:border-black-50">&nbsp;</td>
+              <td class="text-center border-black-800 dark:border-black-50">&nbsp;</td>
             </tr>
           </table>
           <div class="w-[7%] sm:w-[12%] dark:bg-black-300"></div>
