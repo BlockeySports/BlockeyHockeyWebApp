@@ -13,7 +13,7 @@ export class GoalsComponent implements OnInit {
   @Input() isVisitor: boolean;
   @Input() pending: boolean;
 
-  public MAX_VISIBLE_GOALS = 13;
+  public MAX_VISIBLE_GOALS = 7;
   private LINE_HEIGHT = 1.625;
 
   constructor() {}
