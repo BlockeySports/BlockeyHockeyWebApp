@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoxScore } from 'src/app/models/BoxScore';
 import { HockeyGoal } from 'src/app/models/HockeyGoal';
-import { IceTimeRecord } from 'src/app/models/IceTimeRecord';
 import { Member } from 'src/app/models/Member';
 
 @Component({
@@ -15,8 +14,6 @@ export class GoalsComponent implements OnInit {
 
   public MAX_VISIBLE_GOALS = 7;
   private LINE_HEIGHT = 1.625;
-
-  constructor() {}
 
   ngOnInit(): void {}
 
