@@ -30,7 +30,7 @@ export class ScoringSummaryComponent implements OnInit {
     return this.boxScore?.goals
       ?.filter(goal => !goal.isDisallowed)
       ?.filter(goal => goal.team.toLowerCase() === team)
-      ?.filter(goal => (!period || isOT ? goal.period > 3 : goal.period === period))?.length;
+      ?.filter(goal => !period || (isOT ? goal?.period > 3 : goal?.period === period))?.length;
   }
 
   /**
