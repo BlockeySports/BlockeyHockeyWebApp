@@ -260,6 +260,9 @@ MIT
 ngx-clipboard
 MIT
 
+ngx-color-picker
+MIT
+
 ngx-cookie-service
 MIT
 
