@@ -54,7 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // get the username from the url
     this.member.username = this.getUsernameFromAddress();
     // set initial profile picture from username search for (may be changed in subscribe success)
-    this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.username}`;
+    // this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member.username}`;
+    this.profilePicture = `https://mineskin.eu/helm/${this.member.username}/400.png`;
     // set the initial tab title
     this.titleService.setTitle(this.member.username + ' \u007c Blockey Hockey Network');
     // subscribe to member data
@@ -65,7 +66,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         // set the username color
         this.usernameColor = this.member?.roles?.length > 0 ? this.member.roles[0].background : 'currentColor';
         // set member profile picture from uuid
-        this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member?.uuid || '13'}`;
+        // this.profilePicture = `https://api.ashcon.app/mojang/v2/avatar/${this.member?.uuid || '13'}`;
+        this.profilePicture = `https://mineskin.eu/helm/${this.member?.uuid || '13'}/400.png`;
         // set the browser tab title
         this.titleService.setTitle(this.member?.username || 'Player Not Found' + ' \u007c Blockey Hockey Network');
         // change the tab to the fragment in the url
