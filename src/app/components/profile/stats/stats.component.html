@@ -6,11 +6,11 @@
       <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" [ngxTippy]="getFirstSeenDate()">days since first seen</span>
     </div>
     <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
-      <span class="text-3xl font-semibold lg:text-4xl">{{ this.member?.timePlayed | hours | round: 1 }}</span>
+      <span class="text-3xl font-semibold lg:text-4xl">{{ this.member?.timePlayed | hours | round : 1 }}</span>
       <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Hours Played">hours played</span>
     </div>
     <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
-      <span class="text-3xl font-semibold lg:text-4xl">{{ getHoursPerDay() | round: 2 }}</span>
+      <span class="text-3xl font-semibold lg:text-4xl">{{ getHoursPerDay() | round : 2 }}</span>
       <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Average Hours per Day">hr/day</span>
     </div>
     <div class="mx-auto space-x-1.5 md:space-x-3 md:mx-0 w-max text-center">
@@ -158,7 +158,7 @@
                             <span class="text-xl lg:text-2xl">m</span>
                         </span>
                         <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap"
-                        [tippyName]="seasonType + ' ' + i + 'toi'"
+                        [tippyName]="seasonType?.value + ' ' + i + 'toi'"
                               ngxTippy="Average Time on Ice (minutes)">TOI</span>
                     </div> -->
           <!-- END: Average Time on Ice -->
@@ -206,11 +206,18 @@
           <!-- END: Goal Against Average -->
 
           <!-- START: Streak -->
-          <div class="table mx-auto space-x-3 md:mx-0">
+          <!-- <div class="table mx-auto space-x-3 md:mx-0">
             <span class="text-3xl font-semibold lg:text-4xl">{{ getStreak(seasonType) }}</span>
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Current Win/Loss Streak">streak</span>
-          </div>
+          </div> -->
           <!-- END: Streak -->
+
+          <!-- START: Blocked Shots -->
+          <div class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getBlockedShots(seasonType) }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Blocked Shots">blocked shots</span>
+          </div>
+          <!-- END: Blocked Shots -->
 
           <!-- START: Win-Lose Ratio -->
           <div class="table mx-auto space-x-3 md:mx-0 whitespace-nowrap">

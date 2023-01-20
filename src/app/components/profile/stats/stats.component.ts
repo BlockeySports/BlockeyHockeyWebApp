@@ -172,6 +172,10 @@ export class StatsComponent implements OnInit, OnChanges {
     return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsOnGoal, 0);
   }
 
+  public getBlockedShots(seasonType: HockeySeasonType): number {
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.blockedShots, 0);
+  }
+
   public getShotsAgainst(seasonType: HockeySeasonType): number {
     return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.shotsAgainst, 0);
   }
