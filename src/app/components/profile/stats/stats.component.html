@@ -52,7 +52,7 @@
     <div
       *ngIf="getSeasons().length > 0"
       class="flex-row flex-wrap hidden mx-auto mt-10 border-b text-md md:flex border-black-300 dark:border-gray-100">
-      <div
+      <button
         *ngFor="let season of getSeasons(); let i = index"
         (click)="changeSeasonTab(season)"
         class="px-5 py-1 text-center rounded-t-lg cursor-pointer min-w-[9rem] focus:outline-none last-of-type:ml-auto"
@@ -64,7 +64,7 @@
                                            focus:border-b-2 focus:bg-black dark:focus:bg-gray-100 dark:focus:bg-opacity-10 focus:bg-opacity-5 focus:border-black-200'
         ">
         <span>{{ season.name | uppercase }}</span>
-      </div>
+      </button>
     </div>
     <!-- END: Season Tabs -->
 
