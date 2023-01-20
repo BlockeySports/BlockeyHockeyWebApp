@@ -1,0 +1,207 @@
+<app-header class="fixed z-50 w-full"></app-header>
+<main class="min-h-full dark:bg-black-700">
+  <!-- START: Faceoff Dot Input -->
+  <h1 class="flex justify-center mt-10 text-4xl font-semibold dark:text-white text-black-800">Uniform Creator</h1>
+  <!-- START: Uniform Colors  -->
+  <div class="relative flex flex-row justify-center mx-auto mt-5 space-x-7 w-max">
+    <!-- START: Helmet Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey helmet">Helmet Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.helmetColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.helmetColor"
+          [style.background]="this.helmetColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Helmet Color -->
+    <!-- START: Jersey Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey jersey">Jersey Color</label>
+      <div class="flex flex-row space-x-2 mb-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.jerseyColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.jerseyColor"
+          [style.background]="this.jerseyColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey jersey">Jersey Design</label>
+      <input
+        type=""
+        name="x-coord"
+        id="x-coord"
+        placeholder="0"
+        [(ngModel)]="this.jerseyColor"
+        pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+        class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+    </div>
+    <!-- END: Jersey Color -->
+    <!-- START: Pants Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey pants">Pants Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.pantsColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.pantsColor"
+          [style.background]="this.pantsColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Pants Color -->
+    <!-- START: Socks Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey socks">Socks Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.socksColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.socksColor"
+          [style.background]="this.socksColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Socks Color -->
+  </div>
+  <!-- END: Uniform Colors  -->
+
+  <!-- START: Uniform Colors  -->
+  <div class="relative flex flex-row justify-center mx-auto mt-5 space-x-5 w-max">
+    <!-- START: Helmet Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey helmet">Helmet Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.helmetColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.helmetColor"
+          [style.background]="this.helmetColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Helmet Color -->
+    <!-- START: Jersey Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey jersey">Jersey Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.jerseyColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.jerseyColor"
+          [style.background]="this.jerseyColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Jersey Color -->
+    <!-- START: Pants Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey pants">Pants Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.pantsColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.pantsColor"
+          [style.background]="this.pantsColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Pants Color -->
+    <!-- START: Socks Color -->
+    <div class="flex flex-col">
+      <label for="x-coord" class="ml-1 dark:text-gray-200 w-max" ngxTippy="The color of the hockey socks">Socks Color</label>
+      <div class="flex flex-row space-x-2">
+        <input
+          type="text"
+          name="x-coord"
+          id="x-coord"
+          placeholder="#FFFFFF"
+          [(ngModel)]="this.socksColor"
+          pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          class="bg-gray-100 uppercase rounded shadow-md invalid:border-red-500 dark:bg-black-100 focus:border-1 focus:border-black dark:focus:border-gray-100 focus:ring-0 dark:text-white text-black-800 placeholder-black/60 dark:placeholder-white/50" />
+        <input
+          [(colorPicker)]="this.socksColor"
+          [style.background]="this.socksColor"
+          [cpFallbackColor]="'#FFFFFF'"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [cpPosition]="'bottom'"
+          class="w-6 rounded-sm h-6 my-auto border-black border-2 cursor-pointer caret-transparent" />
+      </div>
+    </div>
+    <!-- END: Socks Color -->
+  </div>
+  <!-- END: Uniform Colors  -->
+</main>

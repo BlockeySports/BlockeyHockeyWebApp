@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.member?.uuid)
       this.playerStatisticService.getPlayerStatisticsOnProfile(this.member.uuid).subscribe(
         (playerStatistics: HockeyPlayerStatistic[]) => {
-          this.playerStatistics = playerStatistics;
+          this.playerStatistics = this.sortBySeasonType(playerStatistics);
           // console.log(this.playerStatistics);
         },
         error => {
@@ -162,6 +162,47 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   search(name: string): void {
     this.router.navigate([`/u/${name}`]);
+  }
+
+  /**
+   * Sort the player statistics by season type.
+   */
+  private sortBySeasonType(playerStatistics: HockeyPlayerStatistic[]): HockeyPlayerStatistic[] {
+    // Use a custom comparator function to specify the sort order
+    return playerStatistics.sort((o1: HockeyPlayerStatistic, o2: HockeyPlayerStatistic) => {
+      // regular season first
+      if (o1?.filter?.seasonType?.value === 3 && o2?.filter?.seasonType?.value !== 3) {
+        return -1;
+      } else if (o1?.filter?.seasonType?.value !== 3 && o2?.filter?.seasonType?.value === 3) {
+        return 1;
+      }
+      // postseason next
+      if (o1?.filter?.seasonType?.value === 4 && o2?.filter?.seasonType?.value !== 4) {
+        return -1;
+      } else if (o1?.filter?.seasonType?.value !== 4 && o2?.filter?.seasonType?.value === 4) {
+        return 1;
+      }
+      // all-star next
+      if (o1?.filter?.seasonType?.value === 5 && o2?.filter?.seasonType?.value !== 5) {
+        return -1;
+      } else if (o1?.filter?.seasonType?.value !== 5 && o2?.filter?.seasonType?.value === 5) {
+        return 1;
+      }
+      // preseason next
+      if (o1?.filter?.seasonType?.value === 2 && o2?.filter?.seasonType?.value !== 2) {
+        return -1;
+      } else if (o1?.filter?.seasonType?.value !== 2 && o2?.filter?.seasonType?.value === 2) {
+        return 1;
+      }
+      // exhibition last
+      if (o1?.filter?.seasonType?.value === 1 && o2?.filter?.seasonType?.value !== 1) {
+        return 1;
+      } else if (o1?.filter?.seasonType?.value !== 1 && o2?.filter?.seasonType?.value === 1) {
+        return -1;
+      }
+      // otherwise, leave the order unchanged
+      return 0;
+    });
   }
 
   ngOnDestroy(): void {

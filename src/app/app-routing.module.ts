@@ -7,6 +7,7 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
 import { ProfileComponent } from './components/profile/profile.component';
 import { RinkComponent } from './components/rink/rink.component';
 import { ScoresComponent } from './components/scores/scores.component';
+import { UniformComponent } from './uniform/uniform.component';
 
 const routes: Routes = [
   { path: 'user/:username', component: ProfileComponent },
@@ -16,14 +17,15 @@ const routes: Routes = [
   { path: 'b/:uuid', component: BoxScoreComponent },
   { path: 'scores', component: ScoresComponent },
   { path: 'rink', component: RinkComponent },
+  { path: 'uniform', component: UniformComponent },
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'infractions', component: InfractionsListComponent },
   { path: 'punishments', component: InfractionsListComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
