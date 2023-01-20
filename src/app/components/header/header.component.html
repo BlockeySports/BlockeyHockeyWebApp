@@ -2,7 +2,7 @@
 <div class="dark:bg-black-800 dark:text-gray-50 top-1 absolute w-full bg-gray-100 shadow-lg">
   <div class="layout py-2 mx-auto">
     <div class="relative flex flex-row flex-wrap items-center justify-between">
-      <div class="flex flex-row cursor-pointer" (click)="navigateHome()">
+      <button class="flex flex-row cursor-pointer" (click)="navigateHome()">
         <!-- START: Logo -->
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="dark:inline inline w-8 h-8 my-auto mr-3 fill-current">
@@ -17,7 +17,7 @@
         <!-- START: Title -->
         <span class="sm:flex md:overflow-hidden md:text-2xl whitespace-nowrap hidden my-auto text-lg font-semibold"> Blockey Hockey Network </span>
         <!-- END: Title -->
-      </div>
+      </button>
 
       <!-- START: Search Player Box -->
       <style>
@@ -43,13 +43,13 @@
 
         <!-- START: Search Icon -->
         <button
-          class="right-3 hover:text-red-500 focus:text-red-500 focus:outline-none focus:ring-0 absolute w-4 h-4 transition-colors duration-100 cursor-pointer">
+          class="right-3 hover:text-red-500 focus:text-red-500 focus:outline-none focus:ring-0 absolute w-4 h-4 transition-colors duration-100 cursor-pointer"
+          (click)="navigateToProfile(playerSearch.value, false)">
           <svg
             *ngIf="!this.isLoading"
             tabindex="0"
             (keyup.enter)="navigateToProfile(playerSearch.value, false)"
             (keyup.control.enter)="navigateToProfile(playerSearch.value, true)"
-            (click)="navigateToProfile(playerSearch.value, false)"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 118.783 118.783">
             <path
@@ -218,7 +218,7 @@
       <!-- END: Search Player Box -->
 
       <!-- START: Dark Mode Toggle Button -->
-      <div
+      <button
         class="top-1.5 w-7 h-7 hover:text-purple-600 dark:hover:text-yellow-300 absolute right-0 inline my-auto transition-colors duration-100 cursor-pointer select-none fill-current"
         (click)="toggleDarkMode()">
         <svg
@@ -233,7 +233,7 @@
           <path
             d="M29.567 29.934c-7.237 0-13.104-5.938-13.104-13.26 0-5.835 3.73-10.779 8.905-12.553-1.51-.458-3.109-.707-4.767-.707-9.142 0-16.552 7.498-16.552 16.75s7.41 16.75 16.552 16.75c5.999 0 11.254-3.231 14.156-8.066-1.592.697-3.346 1.086-5.191 1.086z" />
         </svg>
-      </div>
+      </button>
       <!-- END: Dark Mode Toggle Button -->
     </div>
   </div>
