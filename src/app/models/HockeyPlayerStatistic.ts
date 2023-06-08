@@ -28,6 +28,7 @@ export class HockeyPlayerStatistic {
   attemptsBlocked?: number;
   blockedShots?: number;
   shotsAgainst?: number;
+  goalsAgainst?: number;
   saves?: number;
   turnovers?: HockeyTurnoversStatistic[];
   hits?: number;

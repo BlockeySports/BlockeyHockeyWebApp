@@ -185,7 +185,7 @@ export class StatsComponent implements OnInit, OnChanges {
   }
 
   public getGoalsAgainst(seasonType: HockeySeasonType): number {
-    return this.getShotsAgainst(seasonType) - this.getSaves(seasonType);
+    return this.getPlayerStatistics(seasonType)?.reduce((acc, stat) => acc + stat.goalsAgainst, 0);
   }
 
   public getPlusMinus(seasonType: HockeySeasonType): number {
