@@ -38,6 +38,7 @@ export class HockeyPlayerStatistic {
   faceoffsLost?: number;
   puckPossessionTime?: number;
   puckTouches?: number;
+  shotsAllowed?: number;
   fights?: number;
   fightsWon?: number;
   fightsLost?: number;

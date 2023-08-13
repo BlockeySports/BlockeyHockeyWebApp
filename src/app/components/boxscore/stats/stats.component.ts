@@ -5,78 +5,80 @@ import { HockeyPlayerStatistic } from 'src/app/models/HockeyPlayerStatistic';
 import { PlayerLeaderboard } from 'src/app/models/PlayerLeaderboard';
 
 @Component({
-    selector: 'app-box-score-stats',
-    templateUrl: './stats.component.html'
+  selector: 'app-box-score-stats',
+  templateUrl: './stats.component.html',
 })
 export class BoxScoreStatsComponent implements OnInit {
+  @Input() team: string;
+  @Input() pending: boolean;
+  @Input() boxScore: BoxScore;
+  @Input() stats: HockeyPlayerStatistic[];
 
-    @Input() team: string;
-    @Input() pending: boolean;
-    @Input() boxScore: BoxScore;
-    @Input() stats: HockeyPlayerStatistic[];
+  public MAX_VISIBLE_PLAYERS = 7;
+  private LINE_HEIGHT = 1.625;
 
-    public MAX_VISIBLE_PLAYERS = 7;
-    private LINE_HEIGHT = 1.625;
+  constructor() {}
 
-    constructor() { }
+  ngOnInit(): void { }
 
-    ngOnInit(): void { }
-
-    public getPlayers(): BoxScorePlayer[] {
-        // if box score is not loaded, return empty array
-        if (!this.boxScore?.players) { return []; }
-        // return the players for the specified team
-        return this.boxScore?.players
-            .filter(player => player.shifts.flatMap(shift => shift.team.toLowerCase()).includes(this.team.toLowerCase()));
+  public getPlayers(): BoxScorePlayer[] {
+    // if box score is not loaded, return empty array
+    if (!this.boxScore?.players) {
+      return [];
     }
+    // return the players for the specified team
+    return this.boxScore?.players.filter(player => player.shifts.flatMap(shift => shift.team.toLowerCase()).includes(this.team.toLowerCase()));
+  }
 
-    public getStats(): HockeyPlayerStatistic[] {
-        // get box score players for the correct team
-        const boxScorePlayers = this.getPlayers();
-        // return stats that have the same member as the box score player's member
-        return this.stats
-            ?.filter(stat => stat?.filter?.teamType.toLowerCase() === this.team?.toLowerCase())
-            ?.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid))
-            // sorted by points, then goals, then assists, then least time played
-            .sort((a, b) => {
-                const points = this.getPoints(b) - this.getPoints(a);
-                if (points !== 0) return points;
-                const goals = this.getGoals(b) - this.getGoals(a);
-                if (goals !== 0) return goals;
-                const assists = this.getAssists(b) - this.getAssists(a);
-                if (assists !== 0) return assists;
-                const time = b.timeOnIce - a.timeOnIce;
-                if (time !== 0) return time;
-                return 0;
-            });
-    }
+  public getStats(): HockeyPlayerStatistic[] {
+    // get box score players for the correct team
+    const boxScorePlayers = this.getPlayers();
+    // return stats that have the same member as the box score player's member
+    return (
+      this.stats
+        ?.filter(stat => stat?.filter?.teamType.toLowerCase() === this.team?.toLowerCase())
+        ?.filter(stat => boxScorePlayers.find(player => player?.member?.uuid === stat?.member?.uuid))
+        // sorted by points, then goals, then assists, then least time played
+        .sort((a, b) => {
+          const points = this.getPoints(b) - this.getPoints(a);
+          if (points !== 0) return points;
+          const goals = this.getGoals(b) - this.getGoals(a);
+          if (goals !== 0) return goals;
+          const assists = this.getAssists(b) - this.getAssists(a);
+          if (assists !== 0) return assists;
+          const time = b.timeOnIce - a.timeOnIce;
+          if (time !== 0) return time;
+          return 0;
+        })
+    );
+  }
 
-    public getGoals(stat: HockeyPlayerStatistic): number {
-        return stat.points.map(pointsStat => pointsStat.goals).reduce((a, b) => a + b);
-    }
+  public getGoals(stat: HockeyPlayerStatistic): number {
+    return stat.points.map(pointsStat => pointsStat.goals).reduce((a, b) => a + b);
+  }
 
-    public getAssists(stat: HockeyPlayerStatistic): number {
-        return stat.points.map(pointsStat => pointsStat.primaryAssists + pointsStat.secondaryAssists).reduce((a, b) => a + b);
-    }
+  public getAssists(stat: HockeyPlayerStatistic): number {
+    return stat.points.map(pointsStat => pointsStat.primaryAssists + pointsStat.secondaryAssists).reduce((a, b) => a + b);
+  }
 
-    public getPoints(stat: HockeyPlayerStatistic): number {
-        return this.getGoals(stat) + this.getAssists(stat);
-    }
+  public getPoints(stat: HockeyPlayerStatistic): number {
+    return this.getGoals(stat) + this.getAssists(stat);
+  }
 
-    public getMaxVisibleStats(): number {
-        return this.MAX_VISIBLE_PLAYERS;
-    }
+  public getMaxVisibleStats(): number {
+    return this.MAX_VISIBLE_PLAYERS;
+  }
 
-    public getMaxStatsHeight(): string {
-        return `${this.MAX_VISIBLE_PLAYERS * this.LINE_HEIGHT + (2 / 16)}rem`;
-    }
+  public getMaxStatsHeight(): string {
+    return `${this.MAX_VISIBLE_PLAYERS * this.LINE_HEIGHT + 2 / 16}rem`;
+  }
 
-    public getProfileLink(username: string): string {
-        return window.location.origin + '/u/' + username;
-    }
+  public getProfileLink(username: string): string {
+    return window.location.origin + '/u/' + username;
+  }
 
-    public getDescription(): string {
-        if (this.team === 'away') return 'Visiting team player statistics';
-        return 'Home team player statistics';
-    }
+  public getDescription(): string {
+    if (this.team === 'away') return 'Visiting team player statistics';
+    return 'Home team player statistics';
+  }
 }

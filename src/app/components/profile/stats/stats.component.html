@@ -144,13 +144,6 @@
           </div>
           <!-- END: Shots on Goal -->
 
-          <!-- START: Plus-Minus -->
-          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
-            <span class="text-3xl font-semibold lg:text-4xl">{{ getPlusMinus(seasonType) || 0 | signed }}</span>
-            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Total Plus-Minus">+/-</span>
-          </div>
-          <!-- END: Plus-Minus -->
-
           <!-- START: Average Time on Ice -->
           <!-- <div class="table mx-auto space-x-3 md:mx-0">
                         <span class="lg:text-4xl items-end space-x-0.5 text-3xl font-semibold">
@@ -218,6 +211,13 @@
             <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Blocked Shots">blocked shots</span>
           </div>
           <!-- END: Blocked Shots -->
+
+          <!-- START: Plus-Minus -->
+          <div *ngIf="this.isSkaterStats" class="table mx-auto space-x-3 md:mx-0">
+            <span class="text-3xl font-semibold lg:text-4xl">{{ getPlusMinus(seasonType) || 0 | signed }}</span>
+            <span class="text-gray-400 dark:text-gray-300 whitespace-nowrap" ngxTippy="Total Plus-Minus">+/-</span>
+          </div>
+          <!-- END: Plus-Minus -->
 
           <!-- START: Win-Lose Ratio -->
           <div class="table mx-auto space-x-3 md:mx-0 whitespace-nowrap">

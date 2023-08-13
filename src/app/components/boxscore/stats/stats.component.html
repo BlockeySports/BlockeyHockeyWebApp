@@ -7,15 +7,18 @@
   >
   <thead
     class="w-max dark:text-white border-black-800 dark:border-black-50 text-black-800 dark:bg-black-400 flex flex-row items-center font-bold bg-gray-100 border-2">
-    <th class="border-r-2 border-black-800 dark:border-black-50 w-[17.522rem] text-center" ngxTippy="The player">PLAYER</th>
+    <th class="border-r-2 border-black-800 dark:border-black-50 w-[14.272rem] text-center" ngxTippy="The player">PLAYER</th>
     <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Goals">G</th>
     <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Assists">A</th>
     <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Points">PTS</th>
     <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Shots on Goal">SOG</th>
     <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Blocked shots">BS</th>
+    <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Shots allowed (since S4)">SA</th>
     <th colspan="2" class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Plus-Minus">+/-</th>
-    <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Penalty minutes">PIM</th>
-    <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Hits">HITS</th>
+    <!-- <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Penalty minutes">PIM</th> -->
+    <!-- <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Hits">HITS</th> -->
+    <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Faceoff wins">FOW</th>
+    <th class="border-r-2 border-black-800 dark:border-black-50 w-[3.25rem] text-center" ngxTippy="Faceoff losses">FOL</th>
     <th colspan="2" class="border-r-2 border-black-800 dark:border-black-50 w-[4.24rem] text-center" ngxTippy="Shifts">SHFT</th>
     <th class="border-black-800 dark:border-black-50 w-[4.24rem] text-center" ngxTippy="Time on Ice">TOI</th>
   </thead>
@@ -26,7 +29,7 @@
     <tr
       *ngFor="let stat of getStats(); let i = index"
       class="hover:bg-gray-200 odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
-      <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem] text-center hover:font-bold">
+      <td class="border-r border-black-800 dark:border-black-50 w-[14.272rem] text-center hover:font-bold">
         <a [href]="getProfileLink(stat?.member?.username)" target="_blank">{{ stat?.member?.username }}</a>
       </td>
       <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getGoals(stat) || 0 }}</td>
@@ -34,10 +37,13 @@
       <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ getPoints(stat) || 0 }}</td>
       <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.shotsOnGoal || 0 }}</td>
       <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.blockedShots || 0 }}</td>
+      <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">
+        {{ boxScore?.season?.value < 4 ? '-' : stat.shotsAllowed || 0 }}
+      </td>
       <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.plusMinus || 0 | signed }}</td>
-      <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ '-' || 0 }}</td>
+      <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.faceoffsWon || 0 }}</td>
       <!-- <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.penaltyMinutes || 0 }}</td> -->
-      <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ '-' || 0 }}</td>
+      <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.faceoffsLost || 0 }}</td>
       <!-- <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem] text-center">{{ stat.hits || 0 }}</td> -->
       <td class="border-r border-black-800 dark:border-black-50 w-[4.24rem] text-center">{{ stat.shifts || 0 }}</td>
       <td class="w-[4.24rem] text-center">{{ stat.timeOnIce || 0 | duration }}</td>
@@ -49,7 +55,8 @@
       <tr
         *ngFor="let i of [].constructor(getMaxVisibleStats()); let j = index"
         class="odd:bg-gray-50 dark:odd:bg-black-200 even:bg-gray-100 dark:even:bg-black-300 flex flex-row">
-        <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
+        <td class="border-r border-black-800 dark:border-black-50 w-[14.272rem]">&nbsp;</td>
+        <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
@@ -70,7 +77,8 @@
         *ngFor="let i of [].constructor(getMaxVisibleStats() - getStats().length); let j = index"
         class="flex flex-row"
         [ngClass]="j % 2 !== (getStats().length % 2 == 0 ? 1 : 0) ? 'bg-gray-50 dark:bg-black-200' : 'bg-gray-100 dark:bg-black-300'">
-        <td class="border-r border-black-800 dark:border-black-50 w-[17.5rem]">&nbsp;</td>
+        <td class="border-r border-black-800 dark:border-black-50 w-[14.272rem]">&nbsp;</td>
+        <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
         <td class="border-r border-black-800 dark:border-black-50 w-[3.25rem]">&nbsp;</td>
