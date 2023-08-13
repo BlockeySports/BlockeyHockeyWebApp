@@ -14,12 +14,6 @@
           <span class="font-mono text-black dark:text-white">&#35;{{ this.member?.number }}</span>
         </span>
       </h1>
-      <!-- <h1 class="text-[2.625rem] w-max font-semibold mx-auto md:mx-0 md:text-left bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
-                    [ngStyle]="{'color' : !this.member?.roles[0]?.color || ''}">{{ this.member.username }}</h1> -->
-      <!-- OG Heart -->
-      <!-- <div *ngIf="this.member.isOg && this.member.roles.length === 0" class="flex text-xl text-red-600 select-none">
-                    <span ngxTippy="OG Player">&#9829;</span>
-                </div> -->
     </div>
 
     <!-- START: Roles & Ranks Bar -->
@@ -35,6 +29,19 @@
       <div *ngIf="this.member?.isOg" class="flex my-auto text-xl text-red-600 select-none">
         <span ngxTippy="OG Player" class="my-auto">&#9829;</span>
       </div>
+      <!-- Verified -->
+      <div *ngIf="this.member?.verified" class="flex my-auto select-none h-6 translate-y-[1px] saturate-[0.8]">
+        <img
+          *ngIf="!this.isDarkMode()"
+          src="./../../../assets/img/verified_light.png"
+          alt="verified"
+          [ngxTippy]="'Verified on ' + this.getVerifiedDate()" />
+        <img
+          *ngIf="this.isDarkMode()"
+          src="./../../../assets/img/verified_dark.png"
+          alt="verified"
+          [ngxTippy]="'Verified on ' + this.getVerifiedDate()" />
+      </div>
     </div>
     <!-- END: Roles & Ranks Bar -->
 
@@ -45,9 +52,6 @@
           class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none w-[16.25rem] h-[16.25rem] dark:bg-black-800 md:mx-0"
           [src]="this.profilePicture"
           alt="" />
-        <!-- <div
-          class="flex flex-none mx-auto my-3 bg-gray-100 bg-no-repeat rounded-lg shadow-lg select-none w-[16.25rem] h-[16.25rem] dark:bg-black-800 md:mx-0"
-          [ngStyle]="{ 'background-image': 'url(' + this.profilePicture + ')' }"></div> -->
         <!-- END: Player Profile Picture (Minecraft Head) -->
 
         <!-- START: Online Status -->

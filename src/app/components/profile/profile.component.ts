@@ -11,6 +11,7 @@ import { DateService } from 'src/app/services/date.service';
 import { PlayerStatisticService } from 'src/app/services/player-statistic.service';
 import { PlayerStatistic } from 'src/app/models/PlayerStatistic';
 import { HockeyPlayerStatistic } from 'src/app/models/HockeyPlayerStatistic';
+import { DarkModeService } from 'src/app/services/dark-mode.service';
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private memberSub: Subscription;
   private titleSub: Subscription;
   private tippySub: Subscription;
+  private darkModeSub: Subscription;
 
   constructor(
     private router: Router,
@@ -45,7 +47,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private memberService: MemberService,
     private playerStatisticService: PlayerStatisticService,
     private titleService: Title,
-    private dateService: DateService
+    private dateService: DateService,
+    private darkModeService: DarkModeService
   ) {}
 
   ngOnInit(): void {
@@ -207,6 +210,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Get formatted verified date.
+   */
+  public getVerifiedDate(): string {
+    return this.member?.verified ? formatDate(this.member.verified, 'd MMM y', 'en-US') : 'N/A';
+  }
+
+  /**
+   * Get if page is in dark mode.
+   */
+  public isDarkMode(): boolean {
+    return this.darkModeService.get();
+  }
+
   ngOnDestroy(): void {
     if (this.memberSub) {
       this.memberSub.unsubscribe();
@@ -219,6 +236,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     if (this.tippySub) {
       this.tippySub.unsubscribe();
+    }
+    if (this.darkModeSub) {
+      this.darkModeSub.unsubscribe();
     }
   }
 }
